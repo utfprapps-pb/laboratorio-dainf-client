@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
 import {Grupo} from "./grupo";
+import {GrupoService} from "./grupo.service";
 
 @Component({
   selector: 'app-list-grupo',
@@ -8,23 +10,46 @@ import {Grupo} from "./grupo";
 })
 export class GrupoListComponent implements OnInit {
 
-  cols: any[];
+  displayedColumns: string[] = ['id', 'descricao'];
+  dataSource: MatTableDataSource<Grupo>;
   grupos: Grupo[];
 
-  constructor() { }
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  ngOnInit() {
-    this.cols = [
-      { field: 'id', header: 'Código' },
-      { field: 'descricao', header: 'Descrição' },
-    ];
-
-    let grupo = new Grupo();
-    grupo.id = 1;
-    grupo.descricao = "teste";
-
-    this.grupos = new Array();
-    this.grupos.push(grupo);
+  constructor(private grupoService: GrupoService) {
+    // const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
+    // this.dataSource = new MatTableDataSource(users);
   }
 
+  ngOnInit() {
+    this.findAll();
+    if (this.grupos != null && this.grupos.length > 0) {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  findAll() {
+    this.grupoService.findAll().subscribe(e => {
+      this.grupos = e;
+      this.dataSource = new MatTableDataSource(e);
+    });
+  }
+
+}
+
+function createNewUser(id: number): Grupo {
+  return {
+    idGrupo: id,
+    descricao: 'Grupo ' + id.toString(),
+  };
 }

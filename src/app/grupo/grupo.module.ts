@@ -2,12 +2,16 @@ import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {GrupoListComponent} from "./grupo.list.component";
 import {GrupoFormComponent} from "./grupo.form.component";
-import {TableModule} from "primeng";
+import {MatFormFieldModule, MatInputModule, MatPaginatorModule, MatTableModule} from "@angular/material";
+import {GrupoService} from "./grupo.service";
 
 @NgModule({
   imports: [
     CommonModule,
-    TableModule
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   declarations: [
     GrupoListComponent,
@@ -18,7 +22,7 @@ import {TableModule} from "primeng";
     GrupoFormComponent
   ],
   providers: [
-
+    GrupoService
   ]
 })
 export class GrupoModule {
