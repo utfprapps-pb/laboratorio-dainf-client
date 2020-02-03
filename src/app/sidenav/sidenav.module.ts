@@ -1,12 +1,17 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {SidenavComponent} from './sidenav.component';
-import {MatSidenavModule} from '@angular/material';
+import {SidebarModule} from "primeng";
+import {MatIconModule, MatListModule} from "@angular/material";
+import {RouterModule} from "@angular/router";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   imports: [
     CommonModule,
-    MatSidenavModule
+    SidebarModule,
+    MatListModule,
+    MatIconModule,
+    RouterModule
   ],
   exports: [
     SidenavComponent

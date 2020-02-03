@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidenavComponent implements OnInit {
 
+  display = false;
+  showSubMenuCadastro = false;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  openSidenav() {
+    this.display = true;
+  }
+
+  toggleSubMenuCadastro() {
+    this.showSubMenuCadastro = !this.showSubMenuCadastro;
+  }
 }

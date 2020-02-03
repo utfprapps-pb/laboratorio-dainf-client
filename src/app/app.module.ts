@@ -8,6 +8,8 @@ import {HomeModule} from './home/home.module';
 import {ToolbarModule} from './toolbar/toolbar.module';
 import {HttpClientModule} from '@angular/common/http';
 import {SidenavModule} from './sidenav/sidenav.module';
+import {GrupoModule} from "./grupo/grupo.module";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -15,12 +17,14 @@ import {SidenavModule} from './sidenav/sidenav.module';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HomeModule,
     ToolbarModule,
     HttpClientModule,
-    SidenavModule
+    SidenavModule,
+    GrupoModule
   ],
   providers: [],
   bootstrap: [AppComponent]

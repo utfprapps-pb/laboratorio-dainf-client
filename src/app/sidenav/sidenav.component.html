@@ -1,3 +1,58 @@
-<mat-sidenav-container>
+<p-sidebar [(visible)]="display" [baseZIndex]="1000" [showCloseIcon]="false">
 
-</mat-sidenav-container>
+  <mat-nav-list>
+    <a mat-list-item routerLink="/" routerLinkActive="active" (click)="display = false">
+      <mat-icon mat-list-icon>home</mat-icon>
+      Home
+    </a>
+    <a mat-list-item routerLink="/" routerLinkActive="active" (click)="display = false">
+      <mat-icon mat-list-icon>business</mat-icon>
+      Empréstimo
+    </a>
+    <a mat-list-item routerLink="/" routerLinkActive="active" (click)="display = false">
+      <mat-icon mat-list-icon>business</mat-icon>
+      Saída
+    </a>
+    <a mat-list-item routerLink="/" routerLinkActive="active" (click)="display = false">
+      <mat-icon mat-list-icon>business</mat-icon>
+      Entrada
+    </a>
+    <a mat-list-item routerLink="/" routerLinkActive="active" (click)="display = false">
+      <mat-icon mat-list-icon>equalizer</mat-icon>
+      Relatórios
+    </a>
+    <a mat-list-item routerLink="/grupo" routerLinkActive="active" (click)="display = false">
+      <mat-icon mat-list-icon>view_compact</mat-icon>
+      Grupo</a>
+
+    <a mat-list-item (click)="toggleSubMenuCadastro()">
+      <mat-icon mat-list-icon>business</mat-icon>
+      Cadastros
+      <mat-icon *ngIf="!showSubMenuCadastro">chevron_right</mat-icon>
+      <mat-icon *ngIf="showSubMenuCadastro">expand_more</mat-icon>
+    </a>
+    <mat-nav-list class="sidenav-submenu" *ngIf="showSubMenuCadastro" style="margin-left: 25px !important;">
+      <a mat-list-item (click)="display = false">
+        <mat-icon mat-list-icon>business</mat-icon>
+        Item
+      </a>
+      <a mat-list-item (click)="display = false">
+        <mat-icon mat-list-icon>business</mat-icon>
+        Grupo
+      </a>
+      <a mat-list-item (click)="display = false">
+        <mat-icon mat-list-icon>work</mat-icon>
+        Fornecedor
+      </a>
+      <a mat-list-item (click)="display = false">
+        <mat-icon mat-list-icon>person</mat-icon>
+        Usuário
+      </a>
+    </mat-nav-list>
+  </mat-nav-list>
+
+</p-sidebar>
+
+<button class="btn-icon" (click)="openSidenav()">
+  <i class="fa fa-2x fa-bars white-text"></i>
+</button>
