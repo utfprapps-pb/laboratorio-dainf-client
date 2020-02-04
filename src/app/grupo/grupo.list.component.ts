@@ -1,7 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
-import {Grupo} from "./grupo";
-import {GrupoService} from "./grupo.service";
+import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {Grupo} from './grupo';
+import {GrupoService} from './grupo.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-list-grupo',
@@ -17,9 +18,8 @@ export class GrupoListComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private grupoService: GrupoService) {
-    // const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
-    // this.dataSource = new MatTableDataSource(users);
+  constructor(private grupoService: GrupoService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -45,11 +45,7 @@ export class GrupoListComponent implements OnInit {
     });
   }
 
-}
-
-function createNewUser(id: number): Grupo {
-  return {
-    idGrupo: id,
-    descricao: 'Grupo ' + id.toString(),
-  };
+  openForm() {
+    this.router.navigate(['form']);
+  }
 }

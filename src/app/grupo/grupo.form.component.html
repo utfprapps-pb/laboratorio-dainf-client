@@ -1,1 +1,46 @@
-<p>grupo works!</p>
+<div class="container-fluid">
+  <mat-card>
+    <mat-card-title>
+      <button type="button"
+              class="btn btn-primary"
+              mat-icon-button="arrow_back_ios">
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+      Cadastro de Grupo
+    </mat-card-title>
+    <mat-card-content>
+      <form #form="ngForm"></form>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="id">Código</label>
+            <input type="text"
+                   id="id"
+                   disabled
+                   class="form-control"
+                   [(ngModel)]="grupo.idGrupo"
+                   pInputText>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="descricao">Descrição</label>
+            <input type="text"
+                   id="descricao"
+                   class="form-control"
+                   [(ngModel)]="grupo.descricao"
+                   matInput>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-footer>
+      <button type="button"
+              class="btn btn-primary"
+              (click)="save()">
+        Salvar
+      </button>
+    </mat-card-footer>
+  </mat-card>
+</div>

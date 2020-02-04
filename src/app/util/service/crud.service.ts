@@ -1,5 +1,5 @@
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 export abstract class CrudService<T, ID> {
 
@@ -15,7 +15,7 @@ export abstract class CrudService<T, ID> {
   }
 
   findOne(id: ID): Observable<T> {
-    return this.http.get<T>(this.getUrl() + `find-one/${id}`);
+    return this.http.get<T>(this.getUrl() + id);
   }
 
   save(t: T): Observable<T> {
