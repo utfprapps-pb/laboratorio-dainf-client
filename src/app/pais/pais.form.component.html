@@ -7,7 +7,7 @@
                 mat-icon-button>
           <mat-icon>arrow_back_ios</mat-icon>
         </button>
-        <h4 class="m-0">Cadastro de Grupo</h4>
+        <h4 class="m-0">Cadastro de País</h4>
       </div>
     </mat-card-title>
     <mat-card-content>
@@ -21,19 +21,31 @@
                      name="id"
                      disabled
                      class="form-control"
-                     [(ngModel)]="grupo.idGrupo"
+                     [(ngModel)]="pais.id"
                      pInputText>
             </div>
           </div>
 
-          <div class="col-md-10">
+          <div class="col-md-9">
             <div class="form-group">
-              <label for="descricao">Descrição</label>
+              <label for="nome">Nome</label>
               <input type="text"
-                     id="descricao"
-                     name="descricao"
+                     id="nome"
+                     name="nome"
                      class="form-control"
-                     [(ngModel)]="grupo.descricao"
+                     [(ngModel)]="pais.nome"
+                     pInputText>
+            </div>
+          </div>
+
+          <div class="col-md-1">
+            <div class="form-group">
+              <label for="sigla">Sigla</label>
+              <input type="text"
+                     id="sigla"
+                     name="sigla"
+                     class="form-control"
+                     [(ngModel)]="pais.sigla"
                      pInputText>
             </div>
           </div>

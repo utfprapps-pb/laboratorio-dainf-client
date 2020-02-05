@@ -12,7 +12,7 @@ import {
   MatTableModule
 } from '@angular/material';
 import {GrupoService} from './grupo.service';
-import {InputTextModule} from 'primeng';
+import {InputTextModule, TooltipModule} from 'primeng';
 import {FormsModule} from '@angular/forms';
 
 @NgModule({
@@ -26,7 +26,8 @@ import {FormsModule} from '@angular/forms';
     MatIconModule,
     MatCardModule,
     MatButtonModule,
-    InputTextModule
+    InputTextModule,
+    TooltipModule
   ],
   declarations: [
     GrupoListComponent,

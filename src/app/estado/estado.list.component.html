@@ -24,9 +24,19 @@
             <td mat-cell *matCellDef="let row">{{row.idGrupo}}</td>
           </ng-container>
 
-          <ng-container matColumnDef="descricao">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Descrição</th>
-            <td mat-cell *matCellDef="let row">{{row.descricao}}</td>
+          <ng-container matColumnDef="nome">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+            <td mat-cell *matCellDef="let row">{{row.nome}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="uf">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>UF</th>
+            <td mat-cell *matCellDef="let row">{{row.uf}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="pais">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>País</th>
+            <td mat-cell *matCellDef="let row">{{row.pais.nome}}</td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

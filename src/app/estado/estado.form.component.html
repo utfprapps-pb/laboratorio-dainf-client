@@ -7,13 +7,13 @@
                 mat-icon-button>
           <mat-icon>arrow_back_ios</mat-icon>
         </button>
-        <h4 class="m-0">Cadastro de Grupo</h4>
+        <h4 class="m-0">Cadastro de Estado</h4>
       </div>
     </mat-card-title>
     <mat-card-content>
       <form #form="ngForm">
         <div class="row">
-          <div class="col-md-2">
+          <div class="col-md-3">
             <div class="form-group">
               <label for="id">Código</label>
               <input type="text"
@@ -21,20 +21,44 @@
                      name="id"
                      disabled
                      class="form-control"
-                     [(ngModel)]="grupo.idGrupo"
+                     [(ngModel)]="estado.id"
                      pInputText>
             </div>
           </div>
 
-          <div class="col-md-10">
+          <div class="col-md-3">
             <div class="form-group">
-              <label for="descricao">Descrição</label>
+              <label for="nome">Nome</label>
               <input type="text"
-                     id="descricao"
-                     name="descricao"
+                     id="nome"
+                     name="nome"
                      class="form-control"
-                     [(ngModel)]="grupo.descricao"
+                     [(ngModel)]="estado.nome"
                      pInputText>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="uf">UF</label>
+              <input type="text"
+                     id="uf"
+                     name="uf"
+                     class="form-control"
+                     [(ngModel)]="estado.uf"
+                     pInputText>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="pais">País</label>
+              <p-autoComplete id="pais"
+                              name="pais"
+                              inputStyleClass="form-control"
+                              [suggestions]="paisList"
+                              (completeMethod)="findPaises($event)">
+              </p-autoComplete>
             </div>
           </div>
         </div>

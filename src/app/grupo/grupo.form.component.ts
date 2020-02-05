@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Grupo} from './grupo';
 import {GrupoService} from './grupo.service';
 import {NgForm} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-form-grupo',
@@ -12,10 +12,11 @@ import {ActivatedRoute} from '@angular/router';
 export class GrupoFormComponent implements OnInit {
 
   grupo: Grupo;
-  @ViewChild('form') form: NgForm;
+  @ViewChild('form', null) form: NgForm;
 
   constructor(private grupoService: GrupoService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -40,8 +41,7 @@ export class GrupoFormComponent implements OnInit {
   }
 
   back() {
-    window.history.back();
+    this.router.navigate(['/grupo']);
   }
-
 
 }

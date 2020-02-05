@@ -46,6 +46,6 @@ export class GrupoListComponent implements OnInit {
   }
 
   openForm() {
-    this.router.navigate(['form']);
+    this.router.navigate(['grupo/form']);
   }
 }

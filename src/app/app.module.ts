@@ -10,6 +10,10 @@ import {HttpClientModule} from '@angular/common/http';
 import {SidenavModule} from './sidenav/sidenav.module';
 import {GrupoModule} from "./grupo/grupo.module";
 import {CommonModule} from "@angular/common";
+import {UsuarioModule} from "./usuario/usuario.module";
+import {FornecedorModule} from "./fornecedor/fornecedor.module";
+import {EstadoModule} from "./estado/estado.module";
+import {PaisModule} from "./pais/pais.module";
 
 @NgModule({
   declarations: [
@@ -24,7 +28,11 @@ import {CommonModule} from "@angular/common";
     ToolbarModule,
     HttpClientModule,
     SidenavModule,
-    GrupoModule
+    GrupoModule,
+    UsuarioModule,
+    FornecedorModule,
+    EstadoModule,
+    PaisModule
   ],
   providers: [],
   bootstrap: [AppComponent]
