@@ -7,13 +7,13 @@
                 mat-icon-button>
           <mat-icon>arrow_back_ios</mat-icon>
         </button>
-        <h4 class="m-0">Cadastro de País</h4>
+        <h4 class="m-0">Cadastro de Cidade</h4>
       </div>
     </mat-card-title>
     <mat-card-content>
       <form #form="ngForm">
         <div class="row">
-          <div class="col-md-2">
+          <div class="col-md-3">
             <div class="form-group">
               <label for="id">Código</label>
               <input type="text"
@@ -26,7 +26,7 @@
             </div>
           </div>
 
-          <div class="col-md-9">
+          <div class="col-md-6">
             <div class="form-group">
               <label for="nome">Nome</label>
               <input type="text"
@@ -38,15 +38,15 @@
             </div>
           </div>
 
-          <div class="col-md-1">
+          <div class="col-md-3">
             <div class="form-group">
-              <label for="sigla">Sigla</label>
-              <input type="text"
-                     id="sigla"
-                     name="sigla"
-                     class="form-control"
-                     [(ngModel)]="object.sigla"
-                     pInputText>
+              <label for="estado">Estado</label>
+              <p-autoComplete id="estado"
+                              name="estado"
+                              inputStyleClass="form-control"
+                              [suggestions]="estadosList"
+                              (completeMethod)="findEstados($event)">
+              </p-autoComplete>
             </div>
           </div>
         </div>
@@ -73,3 +73,4 @@
     </mat-card-content>
   </mat-card>
 </div>
+

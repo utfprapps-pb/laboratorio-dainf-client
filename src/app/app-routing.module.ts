@@ -11,6 +11,11 @@ import {EstadoListComponent} from "./estado/estado.list.component";
 import {EstadoFormComponent} from "./estado/estado.form.component";
 import {PaisListComponent} from "./pais/pais.list.component";
 import {PaisFormComponent} from "./pais/pais.form.component";
+import {CidadeListComponent} from "./cidade/cidade.list.component";
+import {CidadeFormComponent} from "./cidade/cidade.form.component";
+import {ItemListComponent} from "./item/item.list.component";
+import {ItemFormComponent} from "./item/item.form.component";
+import {PageNotFoundComponent} from "./pageNotFound/pageNotFound.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -28,7 +33,14 @@ const routes: Routes = [
   {path: 'estado/form/:id', component: EstadoFormComponent},
   {path: 'pais', component: PaisListComponent},
   {path: 'pais/form', component: PaisFormComponent},
-  {path: 'pais/form/:id', component: PaisFormComponent}
+  {path: 'pais/form/:id', component: PaisFormComponent},
+  {path: 'cidade', component: CidadeListComponent},
+  {path: 'cidade/form', component: CidadeFormComponent},
+  {path: 'cidade/form/:id', component: CidadeFormComponent},
+  {path: 'item', component: ItemListComponent},
+  {path: 'item/form', component: ItemFormComponent},
+  {path: 'item/form/:id', component: ItemFormComponent},
+  {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({
