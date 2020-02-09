@@ -1,4 +1,4 @@
-import {Pais} from "../pais/pais";
+import {Pais} from '../pais/pais';
 
 export class Estado {
   id: number;

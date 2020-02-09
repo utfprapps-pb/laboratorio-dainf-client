@@ -1,8 +1,8 @@
-import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
-import {PaisFormComponent} from "./pais.form.component";
-import {PaisListComponent} from "./pais.list.component";
-import {FormsModule} from "@angular/forms";
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {PaisFormComponent} from './pais.form.component';
+import {PaisListComponent} from './pais.list.component';
+import {FormsModule} from '@angular/forms';
 import {
   MatButtonModule,
   MatCardModule,
@@ -11,9 +11,9 @@ import {
   MatInputModule,
   MatPaginatorModule,
   MatTableModule
-} from "@angular/material";
-import {InputTextModule, TooltipModule} from "primeng";
-import {PaisService} from "./pais.service";
+} from '@angular/material';
+import {InputTextModule, TooltipModule} from 'primeng';
+import {PaisService} from './pais.service';
 
 @NgModule({
   imports: [

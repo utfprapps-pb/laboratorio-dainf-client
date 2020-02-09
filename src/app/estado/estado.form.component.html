@@ -21,7 +21,7 @@
                      name="id"
                      disabled
                      class="form-control"
-                     [(ngModel)]="estado.id"
+                     [(ngModel)]="object.id"
                      pInputText>
             </div>
           </div>
@@ -33,7 +33,7 @@
                      id="nome"
                      name="nome"
                      class="form-control"
-                     [(ngModel)]="estado.nome"
+                     [(ngModel)]="object.nome"
                      pInputText>
             </div>
           </div>
@@ -45,7 +45,7 @@
                      id="uf"
                      name="uf"
                      class="form-control"
-                     [(ngModel)]="estado.uf"
+                     [(ngModel)]="object.uf"
                      pInputText>
             </div>
           </div>
@@ -55,8 +55,13 @@
               <label for="pais">País</label>
               <p-autoComplete id="pais"
                               name="pais"
+                              appendTo="body"
+                              field="nome"
                               inputStyleClass="form-control"
+                              [dropdown]="true"
                               [suggestions]="paisList"
+                              [(ngModel)]="object.pais"
+                              (onClear)="object.pais = null"
                               (completeMethod)="findPaises($event)">
               </p-autoComplete>
             </div>

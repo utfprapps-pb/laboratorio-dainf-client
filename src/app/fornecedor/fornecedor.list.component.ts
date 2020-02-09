@@ -1,35 +1,17 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
-import {Grupo} from "../grupo/grupo";
-import {Router} from "@angular/router";
+import {Component, Injector} from '@angular/core';
+import {CrudListComponent} from '../util/component/crud.list.component';
+import {Fornecedor} from './fornecedor';
+import {FornecedorService} from './fornecedor.service';
 
 @Component({
   selector: 'app-list-fornecedor',
   templateUrl: './fornecedor.list.component.html',
   styleUrls: ['./fornecedor.list.component.css']
 })
-export class FornecedorListComponent implements OnInit {
+export class FornecedorListComponent extends CrudListComponent<Fornecedor, number> {
 
-  displayedColumns: string[] = ['id', 'descricao'];
-  dataSource: MatTableDataSource<Grupo>;
-
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-
-  constructor(private router: Router) { }
-
-  ngOnInit() {
-  }
-
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
-  openForm() {
-    this.router.navigate(['fornecedor/form']);
+  constructor(protected fornecedorService: FornecedorService,
+              protected injector: Injector) {
+    super(fornecedorService, injector, ['id', 'descricao'], 'fornecedor/form');
   }
 }

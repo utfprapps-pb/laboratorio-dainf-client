@@ -1,48 +1,17 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
-import {Item} from "./item";
-import {Router} from "@angular/router";
-import {ItemService} from "./item.service";
+import {Component, Injector} from '@angular/core';
+import {Item} from './item';
+import {ItemService} from './item.service';
+import {CrudListComponent} from '../util/component/crud.list.component';
 
 @Component({
   selector: 'app-list-item',
   templateUrl: './item.list.component.html',
   styleUrls: ['./item.list.component.css']
 })
-export class ItemListComponent implements OnInit {
+export class ItemListComponent extends CrudListComponent<Item, number> {
 
-  displayedColumns: string[] = ['id', 'nome'];
-  dataSource: MatTableDataSource<Item>;
-  itens: Item[];
-
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-
-  constructor(private router: Router,
-              private itemService: ItemService) {
+  constructor(protected itemService: ItemService,
+              protected injector: Injector) {
+    super(itemService, injector, ['id', 'nome'], 'item/form');
   }
-
-  ngOnInit() {
-    this.findAll();
-  }
-
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
-  findAll() {
-    this.itemService.findAll()
-      .subscribe(e => {
-        this.itens = e;
-    })
-  }
-
-  openForm() {
-    this.router.navigate(['item/form']);
-  }
-
 }

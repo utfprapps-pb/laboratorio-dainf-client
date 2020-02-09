@@ -1,4 +1,4 @@
-import {Estado} from "../estado/estado";
+import {Estado} from '../estado/estado';
 
 export class Cidade {
   id: number;

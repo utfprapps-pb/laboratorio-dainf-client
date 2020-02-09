@@ -1,6 +1,6 @@
-import {ActivatedRoute, Router} from "@angular/router";
-import {CrudService} from "../service/crud.service";
-import {Injector, OnInit} from "@angular/core";
+import {ActivatedRoute, Router} from '@angular/router';
+import {CrudService} from '../service/crud.service';
+import {Injector, OnInit} from '@angular/core';
 
 export abstract class CrudFormComponent<T, ID> implements OnInit {
 
@@ -10,15 +10,17 @@ export abstract class CrudFormComponent<T, ID> implements OnInit {
 
   constructor(protected service: CrudService<T, ID>,
               protected injector: Injector,
-              protected urlList: string) {
+              protected urlList: string,
+              private type?: new () => T) {
     this.router = this.injector.get(Router);
     this.route = this.injector.get(ActivatedRoute);
   }
 
   ngOnInit(): void {
+    this.newInstance();
     this.route.params.subscribe(params => {
-      if (params['id']) {
-        this.edit(params['id']);
+      if (params.id) {
+        this.edit(params.id);
       }
     });
   }
@@ -41,4 +43,13 @@ export abstract class CrudFormComponent<T, ID> implements OnInit {
   back() {
     this.router.navigate([this.urlList]);
   }
+
+  protected newInstance(): void {
+    if (this.type) {
+      this.object = new this.type();
+    } else {
+      this.object = {} as T;
+    }
+  }
+
 }

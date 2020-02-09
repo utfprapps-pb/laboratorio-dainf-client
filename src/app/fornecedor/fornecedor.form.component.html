@@ -21,7 +21,7 @@
                      name="id"
                      disabled
                      class="form-control"
-                     [(ngModel)]="fornecedor.id"
+                     [(ngModel)]="object.id"
                      pInputText>
             </div>
           </div>
@@ -33,6 +33,7 @@
                      id="razaoSocial"
                      name="razaoSocial"
                      class="form-control"
+                     [(ngModel)]="object.razaoSocial"
                      pInputText>
             </div>
           </div>
@@ -46,6 +47,7 @@
                      id="nomeFantasia"
                      name="nomeFantasia"
                      class="form-control"
+                     [(ngModel)]="object.nomeFantasia"
                      pInputText>
             </div>
           </div>
@@ -57,6 +59,7 @@
                      id="cnpj"
                      name="cnpj"
                      class="form-control"
+                     [(ngModel)]="object.cnpj"
                      pInputText>
             </div>
           </div>
@@ -68,6 +71,7 @@
                      id="ie"
                      name="ie"
                      class="form-control"
+                     [(ngModel)]="object.ie"
                      pInputText>
             </div>
           </div>
@@ -81,30 +85,39 @@
                      id="endereco"
                      name="endereco"
                      class="form-control"
+                     [(ngModel)]="object.endereco"
                      pInputText>
             </div>
           </div>
 
           <div class="col-md-4">
-            <div class="form-group">
+            <div class="form-group d-flex flex-column">
               <label for="cidade">Cidade</label>
               <p-autoComplete id="cidade"
                               name="cidade"
+                              field="nome"
                               inputStyleClass="form-control"
-                              [suggestions]="fornecedoresList"
-                              (completeMethod)="findFornecedores($event)">
+                              [suggestions]="cidadeList"
+                              [(ngModel)]="object.cidade"
+                              (onClear)="object.cidade = null"
+                              (completeMethod)="findCidades($event)">
               </p-autoComplete>
             </div>
           </div>
 
           <div class="col-md-4">
-            <div class="form-group">
-              <label for="descricao">Estado</label>
-              <input type="text"
-                     id="descricao"
-                     name="descricao"
-                     class="form-control"
-                     pInputText>
+            <div class="form-group d-flex flex-column">
+              <label for="estado">Estado</label>
+              <p-autoComplete id="estado"
+                              name="estado"
+                              appendTo="body"
+                              field="nome"
+                              inputStyleClass="form-control"
+                              [suggestions]="estadoList"
+                              [(ngModel)]="object.estado"
+                              (onClear)="object.estado = null"
+                              (completeMethod)="findEstados($event)">
+              </p-autoComplete>
             </div>
           </div>
         </div>

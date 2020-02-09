@@ -1,13 +1,18 @@
-import {Injectable} from "@angular/core";
-import {CrudService} from "../util/service/crud.service";
-import {Pais} from "./pais";
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../environments/environment";
+import {Injectable} from '@angular/core';
+import {CrudService} from '../util/service/crud.service';
+import {Pais} from './pais';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../environments/environment';
+import {Observable} from 'rxjs';
 
 @Injectable()
-export class PaisService extends CrudService<Pais, number>{
+export class PaisService extends CrudService<Pais, number> {
 
   constructor(http: HttpClient) {
     super(`${environment.api_url}pais/`, http);
+  }
+
+  complete(query: string): Observable<Pais[]> {
+    return this.http.get<Pais[]>(`${this.url}complete?query=${query}`);
   }
 }

@@ -43,8 +43,13 @@
               <label for="estado">Estado</label>
               <p-autoComplete id="estado"
                               name="estado"
+                              appendTo="body"
+                              field="nome"
                               inputStyleClass="form-control"
+                              [dropdown]="true"
+                              [(ngModel)]="object.estado"
                               [suggestions]="estadosList"
+                              (onClear)="object.estado = null"
                               (completeMethod)="findEstados($event)">
               </p-autoComplete>
             </div>

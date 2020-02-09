@@ -1,6 +1,6 @@
-import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
-import {FormsModule} from "@angular/forms";
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 import {
   MatButtonModule,
   MatCardModule,
@@ -9,11 +9,11 @@ import {
   MatInputModule,
   MatPaginatorModule,
   MatTableModule
-} from "@angular/material";
-import {AutoCompleteModule, InputTextModule, TooltipModule} from "primeng";
-import {CidadeFormComponent} from "./cidade.form.component";
-import {CidadeListComponent} from "./cidade.list.component";
-import {CidadeService} from "./cidade.service";
+} from '@angular/material';
+import {AutoCompleteModule, InputTextModule, TooltipModule} from 'primeng';
+import {CidadeFormComponent} from './cidade.form.component';
+import {CidadeListComponent} from './cidade.list.component';
+import {CidadeService} from './cidade.service';
 
 @NgModule({
   imports: [

@@ -1,6 +1,6 @@
-import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
-import {FormsModule} from "@angular/forms";
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 import {
   MatButtonModule,
   MatCardModule,
@@ -9,11 +9,11 @@ import {
   MatInputModule,
   MatPaginatorModule,
   MatTableModule
-} from "@angular/material";
-import {AutoCompleteModule, InputTextModule, TooltipModule} from "primeng";
-import {ItemFormComponent} from "./item.form.component";
-import {ItemListComponent} from "./item.list.component";
-import {ItemService} from "./item.service";
+} from '@angular/material';
+import {AutoCompleteModule, InputTextModule, TooltipModule} from 'primeng';
+import {ItemFormComponent} from './item.form.component';
+import {ItemListComponent} from './item.list.component';
+import {ItemService} from './item.service';
 
 @NgModule({
   imports: [

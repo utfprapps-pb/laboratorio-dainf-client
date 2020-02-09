@@ -9,6 +9,7 @@ export class SidenavComponent implements OnInit {
 
   display = false;
   showSubMenuCadastro = false;
+  showSubMenuGerais = false;
 
   constructor() { }
 
@@ -16,10 +17,19 @@ export class SidenavComponent implements OnInit {
   }
 
   openSidenav() {
+    if (!this.display) {
+      this.showSubMenuGerais = false;
+      this.showSubMenuCadastro = false;
+    }
     this.display = true;
   }
 
   toggleSubMenuCadastro() {
     this.showSubMenuCadastro = !this.showSubMenuCadastro;
   }
+
+  toggleSubMenuGerais() {
+    this.showSubMenuGerais = !this.showSubMenuGerais;
+  }
+
 }

@@ -2,7 +2,7 @@
   <mat-card>
     <mat-card-title>
       <div class="d-flex align-items-center justify-content-between">
-        <h4 class="m-0">Grupo</h4>
+        <h4 class="m-0">Estado</h4>
         <button type="button"
                 (click)="openForm()"
                 pTooltip="Inserir Novo Registro"
@@ -21,7 +21,7 @@
 
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Código</th>
-            <td mat-cell *matCellDef="let row">{{row.idGrupo}}</td>
+            <td mat-cell *matCellDef="let row">{{row.id}}</td>
           </ng-container>
 
           <ng-container matColumnDef="nome">

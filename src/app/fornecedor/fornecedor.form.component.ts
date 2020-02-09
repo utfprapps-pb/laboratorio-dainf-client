@@ -1,34 +1,44 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {Fornecedor} from "./fornecedor";
+import {Component, Injector, ViewChild} from '@angular/core';
+import {Fornecedor} from './fornecedor';
+import {CrudFormComponent} from '../util/component/crud.form.component';
+import {FornecedorService} from './fornecedor.service';
+import {NgForm} from '@angular/forms';
+import {Estado} from '../estado/estado';
+import {CidadeService} from '../cidade/cidade.service';
+import {EstadoService} from '../estado/estado.service';
+import {Cidade} from '../cidade/cidade';
 
 @Component({
   selector: 'app-form-fornecedor',
   templateUrl: './fornecedor.form.component.html',
   styleUrls: ['./fornecedor.form.component.css']
 })
-export class FornecedorFormComponent implements OnInit {
+export class FornecedorFormComponent extends CrudFormComponent<Fornecedor, number> {
 
-  fornecedor: Fornecedor;
-  fornecedoresList: Fornecedor[];
+  cidadeList: Cidade[];
+  estadoList: Estado[];
 
-  constructor(private router: Router,
-              private route: ActivatedRoute) {
+  @ViewChild('form', {static: true}) form: NgForm;
+
+  constructor(protected fornecedorService: FornecedorService,
+              protected injector: Injector,
+              private cidadeService: CidadeService,
+              private estadoService: EstadoService) {
+    super(fornecedorService, injector, 'fornecedor');
   }
 
-  ngOnInit() {
-    this.fornecedor = new Fornecedor();
-    this.route.params.subscribe()
+  findCidades($event) {
+    this.cidadeService.complete($event.query)
+      .subscribe(e => {
+        this.cidadeList = e;
+      });
   }
 
-  back() {
-    this.router.navigate(['fornecedor']);
-  }
-
-  save() {}
-
-  findFornecedores($event) {
-
+  findEstados($event) {
+    this.estadoService.complete($event.query)
+      .subscribe(e => {
+        this.estadoList = e;
+      });
   }
 
 }

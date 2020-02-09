@@ -1,8 +1,8 @@
-import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
-import {EstadoFormComponent} from "./estado.form.component";
-import {EstadoListComponent} from "./estado.list.component";
-import {FormsModule} from "@angular/forms";
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {EstadoFormComponent} from './estado.form.component';
+import {EstadoListComponent} from './estado.list.component';
+import {FormsModule} from '@angular/forms';
 import {
   MatButtonModule,
   MatCardModule,
@@ -11,9 +11,9 @@ import {
   MatInputModule,
   MatPaginatorModule,
   MatTableModule
-} from "@angular/material";
-import {AutoCompleteModule, InputTextModule, TooltipModule} from "primeng";
-import {EstadoService} from "./estado.service";
+} from '@angular/material';
+import {AutoCompleteModule, InputTextModule, TooltipModule} from 'primeng';
+import {EstadoService} from './estado.service';
 
 @NgModule({
   imports: [

@@ -1,47 +1,17 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {Router} from "@angular/router";
-import {MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
-import {Estado} from "./estado";
-import {EstadoService} from "./estado.service";
+import {Component, Injector} from '@angular/core';
+import {Estado} from './estado';
+import {EstadoService} from './estado.service';
+import {CrudListComponent} from '../util/component/crud.list.component';
 
 @Component({
   selector: 'app-list-estado',
   templateUrl: './estado.list.component.html',
   styleUrls: ['./estado.list.component.css']
 })
-export class EstadoListComponent implements OnInit {
+export class EstadoListComponent extends CrudListComponent<Estado, number> {
 
-  estados: Estado[];
-  displayedColumns: string[] = ['id', 'nome', 'uf', 'pais'];
-  dataSource: MatTableDataSource<Estado>;
-
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-
-  constructor(private router: Router,
-              private estadoService: EstadoService) {
-  }
-
-  ngOnInit() {
-    this.findAll();
-  }
-
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
-  findAll() {
-    this.estadoService.findAll()
-      .subscribe(e => {
-        this.estados = e;
-      });
-  }
-
-  openForm() {
-    this.router.navigate(['estado/form']);
+  constructor(protected estadoService: EstadoService,
+              protected injector: Injector) {
+    super(estadoService, injector, ['id', 'nome', 'uf', 'pais'], 'estado/form');
   }
 }
