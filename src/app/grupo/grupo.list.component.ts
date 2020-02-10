@@ -12,6 +12,6 @@ export class GrupoListComponent extends CrudListComponent<Grupo, number> {
 
   constructor(protected grupoService: GrupoService,
               protected injector: Injector) {
-    super(grupoService, injector, ['id', 'descricao'], 'grupo/form');
+    super(grupoService, injector, ['id', 'descricao', 'actions'], 'grupo/form');
   }
 }

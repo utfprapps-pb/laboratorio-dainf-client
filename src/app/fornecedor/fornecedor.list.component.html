@@ -21,12 +21,22 @@
 
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Código</th>
-            <td mat-cell *matCellDef="let row">{{row.idGrupo}}</td>
+            <td mat-cell *matCellDef="let row">{{row.id}}</td>
           </ng-container>
 
-          <ng-container matColumnDef="descricao">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Descrição</th>
-            <td mat-cell *matCellDef="let row">{{row.descricao}}</td>
+          <ng-container matColumnDef="razaoSocial">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Razão Social</th>
+            <td mat-cell *matCellDef="let row">{{row.razaoSocial}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="nomeFantasia">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome Fantasia</th>
+            <td mat-cell *matCellDef="let row">{{row.nomeFantasia}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="cnpj">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>CNPJ</th>
+            <td mat-cell *matCellDef="let row">{{row.cnpj}}</td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

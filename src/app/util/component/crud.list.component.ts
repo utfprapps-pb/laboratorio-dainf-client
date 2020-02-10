@@ -2,10 +2,12 @@ import {Injector, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {CrudService} from '../service/crud.service';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MessageService} from 'primeng';
 
 export abstract class CrudListComponent<T, ID> implements OnInit {
 
   protected router: Router;
+  protected messageService: MessageService;
   protected displayedColumns: string[] = this.columnsTable;
   protected dataSource: MatTableDataSource<T>;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -21,6 +23,7 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
               protected columnsTable: string[],
               protected urlForm: string) {
     this.router = this.injector.get(Router);
+    this.messageService = this.injector.get(MessageService);
   }
 
   applyFilter(filterValue: string) {
@@ -41,6 +44,22 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
           this.dataSource.sort = this.sort;
         }
       });
+  }
+
+  edit(id: number) {
+    this.router.navigate([this.urlForm, id]);
+  }
+
+  delete(id: any) {
+    this.service.delete(id)
+      .subscribe(e => {
+        this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registro excluído com sucesso!'});
+        this.findAll();
+      }, error => {
+        this.messageService.add({severity: 'error', summary: 'Atenção', detail: 'Ocorreu um erro ao remover o registro!'});
+        console.log(error);
+      });
+
   }
 
   openForm() {

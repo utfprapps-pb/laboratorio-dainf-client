@@ -1,10 +1,12 @@
 import {ActivatedRoute, Router} from '@angular/router';
 import {CrudService} from '../service/crud.service';
 import {Injector, OnInit} from '@angular/core';
+import {MessageService} from 'primeng';
 
 export abstract class CrudFormComponent<T, ID> implements OnInit {
 
   protected router: Router;
+  protected messageService: MessageService;
   protected route: ActivatedRoute;
   object: T;
 
@@ -14,6 +16,7 @@ export abstract class CrudFormComponent<T, ID> implements OnInit {
               private type?: new () => T) {
     this.router = this.injector.get(Router);
     this.route = this.injector.get(ActivatedRoute);
+    this.messageService = this.injector.get(MessageService);
   }
 
   ngOnInit(): void {
@@ -28,8 +31,12 @@ export abstract class CrudFormComponent<T, ID> implements OnInit {
   save() {
     this.service.save(this.object)
       .subscribe(e => {
+        this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registro salvo com sucesso!'});
         this.object = e;
         this.back();
+      }, error => {
+        this.messageService.add({severity: 'error', summary: 'Atenção', detail: 'Ocorreu um erro ao salvar o registro!'});
+        console.log(error);
       });
   }
 

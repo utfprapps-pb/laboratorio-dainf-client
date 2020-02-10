@@ -18,6 +18,7 @@ import {CidadeModule} from './cidade/cidade.module';
 import {ItemModule} from './item/item.module';
 import {PageNotFoundModule} from './pageNotFound/pageNotFound.module';
 import {NotAuthorizedModule} from './notAuthorized/notAuthorized.module';
+import {MessageService, ToastModule} from 'primeng';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {NotAuthorizedModule} from './notAuthorized/notAuthorized.module';
     HomeModule,
     ToolbarModule,
     HttpClientModule,
+    ToastModule,
     SidenavModule,
     GrupoModule,
     UsuarioModule,
@@ -40,9 +42,11 @@ import {NotAuthorizedModule} from './notAuthorized/notAuthorized.module';
     CidadeModule,
     ItemModule,
     PageNotFoundModule,
-    NotAuthorizedModule
+    NotAuthorizedModule,
   ],
-  providers: [],
+  providers: [
+    MessageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

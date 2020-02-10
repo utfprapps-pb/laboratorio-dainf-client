@@ -12,6 +12,6 @@ export class FornecedorListComponent extends CrudListComponent<Fornecedor, numbe
 
   constructor(protected fornecedorService: FornecedorService,
               protected injector: Injector) {
-    super(fornecedorService, injector, ['id', 'descricao'], 'fornecedor/form');
+    super(fornecedorService, injector, ['id', 'razaoSocial', 'nomeFantasia', 'cnpj'], 'fornecedor/form');
   }
 }

@@ -19,7 +19,7 @@ export class EstadoFormComponent extends CrudFormComponent<Estado, number> {
   constructor(protected estadoService: EstadoService,
               protected injector: Injector,
               private paisService: PaisService) {
-    super(estadoService, injector, 'estado/form');
+    super(estadoService, injector, '/estado');
   }
 
   findPaises($event) {

@@ -27,7 +27,7 @@ import {FormsModule} from '@angular/forms';
     MatCardModule,
     MatButtonModule,
     InputTextModule,
-    TooltipModule
+    TooltipModule,
   ],
   declarations: [
     GrupoListComponent,

@@ -39,14 +39,13 @@
           </div>
 
           <div class="col-md-3">
-            <div class="form-group">
+            <div class="form-group d-flex flex-column">
               <label for="estado">Estado</label>
               <p-autoComplete id="estado"
                               name="estado"
                               appendTo="body"
                               field="nome"
                               inputStyleClass="form-control"
-                              [dropdown]="true"
                               [(ngModel)]="object.estado"
                               [suggestions]="estadosList"
                               (onClear)="object.estado = null"
