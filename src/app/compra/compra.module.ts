@@ -1,7 +1,8 @@
 import {NgModule} from '@angular/core';
-import {UsuarioFormComponent} from './usuario.form.component';
-import {UsuarioListComponent} from './usuario.list.component';
 import {CommonModule} from '@angular/common';
+import {CompraService} from './compra.service';
+import {CompraFormComponent} from './compra.form.component';
+import {CompraListComponent} from './compra.list.component';
 import {FormsModule} from '@angular/forms';
 import {
   MatButtonModule,
@@ -12,8 +13,7 @@ import {
   MatPaginatorModule,
   MatTableModule
 } from '@angular/material';
-import {DropdownModule, InputTextModule, TooltipModule} from 'primeng';
-import {UsuarioService} from './usuario.service';
+import {AutoCompleteModule, InputTextModule, TooltipModule} from 'primeng';
 
 @NgModule({
   imports: [
@@ -28,20 +28,20 @@ import {UsuarioService} from './usuario.service';
     MatButtonModule,
     InputTextModule,
     TooltipModule,
-    DropdownModule
+    AutoCompleteModule
   ],
   declarations: [
-    UsuarioFormComponent,
-    UsuarioListComponent
+    CompraFormComponent,
+    CompraListComponent
   ],
   exports: [
-    UsuarioFormComponent,
-    UsuarioListComponent
+    CompraFormComponent,
+    CompraListComponent
   ],
   providers: [
-    UsuarioService
+    CompraService
   ]
 })
-export class UsuarioModule {
+export class CompraModule {
 
 }

@@ -1,4 +1,4 @@
-<p-sidebar [(visible)]="display" [baseZIndex]="1000" [showCloseIcon]="false">
+<p-sidebar [(visible)]="display" [baseZIndex]="1000" [showCloseIcon]="false" [style]="{overflowY: 'auto'}">
 
   <mat-nav-list>
     <a mat-list-item routerLink="/" routerLinkActive="active" (click)="display = false">
@@ -19,6 +19,11 @@
     <a mat-list-item routerLink="/entrada" routerLinkActive="active" (click)="display = false">
       <mat-icon mat-list-icon>arrow_upward</mat-icon>
       Entrada
+    </a>
+    <mat-divider></mat-divider>
+    <a mat-list-item routerLink="/compra" routerLinkActive="active" (click)="display = false">
+      <mat-icon mat-list-icon>money</mat-icon>
+      Compra
     </a>
     <mat-divider></mat-divider>
     <a mat-list-item routerLink="/relatorios" routerLinkActive="active" (click)="display = false">

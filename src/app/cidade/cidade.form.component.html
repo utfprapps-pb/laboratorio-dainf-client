@@ -46,6 +46,7 @@
                               appendTo="body"
                               field="nome"
                               inputStyleClass="form-control"
+                              [style]="{width: '100%'}"
                               [(ngModel)]="object.estado"
                               [suggestions]="estadosList"
                               (onClear)="object.estado = null"

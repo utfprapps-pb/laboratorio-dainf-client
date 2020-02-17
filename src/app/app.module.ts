@@ -19,6 +19,7 @@ import {ItemModule} from './item/item.module';
 import {PageNotFoundModule} from './pageNotFound/pageNotFound.module';
 import {NotAuthorizedModule} from './notAuthorized/notAuthorized.module';
 import {MessageService, ToastModule} from 'primeng';
+import {CompraModule} from './compra/compra.module';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import {MessageService, ToastModule} from 'primeng';
     PaisModule,
     CidadeModule,
     ItemModule,
+    CompraModule,
     PageNotFoundModule,
     NotAuthorizedModule,
   ],

@@ -78,15 +78,13 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="grupo">Grupo de Acesso</label>
-              <select name="grupo"
-                      id="grupo"
-                      class="form-control">
-                <option value="">Selecione</option>
-                <option value="A">Administrador</option>
-                <option value="L">Laboratorista</option>
-                <option value="P">Professor</option>
-                <option value="S">Aluno</option>
-              </select>
+              <p-dropdown [options]="grupoAcessoDropdown"
+                          [(ngModel)]="object.grupo"
+                          [style]="{width: '100%'}"
+                          id="grupo"
+                          name="grupo"
+                          optionLabel="label">
+              </p-dropdown>
             </div>
           </div>
         </div>

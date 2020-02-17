@@ -10,7 +10,7 @@ import {
   MatPaginatorModule,
   MatTableModule
 } from '@angular/material';
-import {AutoCompleteModule, InputTextModule, TooltipModule} from 'primeng';
+import {AutoCompleteModule, DropdownModule, InputTextModule, TooltipModule} from 'primeng';
 import {ItemFormComponent} from './item.form.component';
 import {ItemListComponent} from './item.list.component';
 import {ItemService} from './item.service';
@@ -28,7 +28,8 @@ import {ItemService} from './item.service';
     MatButtonModule,
     InputTextModule,
     TooltipModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    DropdownModule
   ],
   declarations: [
     ItemFormComponent,

@@ -16,6 +16,8 @@ import {CidadeFormComponent} from './cidade/cidade.form.component';
 import {ItemListComponent} from './item/item.list.component';
 import {ItemFormComponent} from './item/item.form.component';
 import {PageNotFoundComponent} from './pageNotFound/pageNotFound.component';
+import {CompraListComponent} from './compra/compra.list.component';
+import {CompraFormComponent} from './compra/compra.form.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -40,6 +42,9 @@ const routes: Routes = [
   {path: 'item', component: ItemListComponent},
   {path: 'item/form', component: ItemFormComponent},
   {path: 'item/form/:id', component: ItemFormComponent},
+  {path: 'compra', component: CompraListComponent},
+  {path: 'compra/form', component: CompraFormComponent},
+  {path: 'compra/form/:id', component: CompraFormComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
 

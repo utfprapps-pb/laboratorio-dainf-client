@@ -1,1 +1,163 @@
-<p>item works!</p>
+<div class="container-fluid my-3">
+  <mat-card>
+    <mat-card-title>
+      <div class="d-flex align-items-center">
+        <button type="button"
+                (click)="back()"
+                mat-icon-button>
+          <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+        <h4 class="m-0">Cadastro de Item</h4>
+      </div>
+    </mat-card-title>
+    <mat-card-content>
+      <form #form="ngForm">
+        <div class="row">
+          <div class="col-md-2">
+            <div class="form-group">
+              <label for="id">Código</label>
+              <input type="text"
+                     id="id"
+                     name="id"
+                     disabled
+                     class="form-control"
+                     [(ngModel)]="object.id"
+                     pInputText>
+            </div>
+          </div>
+
+          <div class="col-md-10">
+            <div class="form-group">
+              <label for="descricao">Nome</label>
+              <input type="text"
+                     id="descricao"
+                     name="descricao"
+                     class="form-control"
+                     [(ngModel)]="object.nome"
+                     pInputText>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="patrimonio">Patrimônio</label>
+              <input type="text"
+                     id="patrimonio"
+                     name="patrimonio"
+                     class="form-control"
+                     [(ngModel)]="object.patrimonio"
+                     pInputText>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="siorg">Siorg</label>
+              <input type="text"
+                     id="siorg"
+                     name="siorg"
+                     class="form-control"
+                     [(ngModel)]="object.siorg"
+                     pInputText>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="valor">Valor</label>
+              <input type="text"
+                     id="valor"
+                     name="valor"
+                     class="form-control"
+                     [(ngModel)]="object.valor"
+                     pInputText>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="qtdeMinima">Qtde Mínima</label>
+              <input type="text"
+                     id="qtdeMinima"
+                     name="qtdeMinima"
+                     class="form-control"
+                     [(ngModel)]="object.qtdeMinima"
+                     pInputText>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="localizacao">Localização</label>
+              <input type="text"
+                     id="localizacao"
+                     name="localizacao"
+                     class="form-control"
+                     [(ngModel)]="object.localizacao"
+                     pInputText>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="devolver">Devolver</label>
+              <p-dropdown [options]="yesNoDropdown"
+                          [(ngModel)]="object.devolver"
+                          [style]="{width: '100%'}"
+                          id="devolver"
+                          name="devolver"
+                          optionLabel="label">
+              </p-dropdown>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="saldo">Saldo</label>
+              <input type="text"
+                     id="saldo"
+                     name="saldo"
+                     class="form-control"
+                     [(ngModel)]="object.saldo"
+                     pInputText>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="grupo">Grupo</label>
+              <p-autoComplete id="grupo"
+                              name="grupo"
+                              appendTo="body"
+                              field="descricao"
+                              inputStyleClass="form-control"
+                              [style]="{width: '100%'}"
+                              [suggestions]="grupoList"
+                              [(ngModel)]="object.grupo"
+                              (onClear)="object.grupo = null"
+                              (completeMethod)="findGrupos($event)">
+              </p-autoComplete>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="row">
+        <div class="col-md-12 d-flex justify-content-end">
+          <button type="button"
+                  class="mr-2 w-100px br-25px"
+                  mat-stroked-button
+                  (click)="back()">
+            Cancelar
+          </button>
+
+          <button type="button"
+                  color="primary"
+                  class="w-100px br-25px"
+                  mat-stroked-button
+                  (click)="save()">
+            Salvar
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

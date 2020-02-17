@@ -58,6 +58,7 @@
                               appendTo="body"
                               field="nome"
                               inputStyleClass="form-control"
+                              [style]="{width: '100%'}"
                               [suggestions]="paisList"
                               [(ngModel)]="object.pais"
                               (onClear)="object.pais = null"

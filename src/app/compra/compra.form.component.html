@@ -1,0 +1,91 @@
+<div class="container-fluid my-3">
+  <mat-card>
+    <mat-card-title>
+      <div class="d-flex align-items-center">
+        <button type="button"
+                (click)="back()"
+                mat-icon-button>
+          <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+        <h4 class="m-0">Cadastro de Compra</h4>
+      </div>
+    </mat-card-title>
+    <mat-card-content>
+      <form #form="ngForm">
+        <div class="row">
+          <div class="col-md-2">
+            <div class="form-group">
+              <label for="id">Código</label>
+              <input type="text"
+                     id="id"
+                     name="id"
+                     disabled
+                     class="form-control"
+                     [(ngModel)]="object.id"
+                     pInputText>
+            </div>
+          </div>
+
+          <div class="col-md-10">
+            <div class="form-group">
+              <label for="descricao">Fornecedor</label>
+              <p-autoComplete id="descricao"
+                              name="descricao"
+                              appendTo="body"
+                              field="razaoSocial"
+                              inputStyleClass="form-control"
+                              [style]="{width: '100%'}"
+                              [(ngModel)]="object.fornecedor"
+                              [suggestions]="fornecedorList"
+                              (onClear)="object.fornecedor = null"
+                              (completeMethod)="findFornecedores($event)">
+              </p-autoComplete>
+            </div>
+          </div>
+        </div>
+
+        <div class="example-container mat-elevation-z8">
+          <table mat-table [dataSource]="transactions">
+            <!-- Item Column -->
+            <ng-container matColumnDef="item">
+              <th mat-header-cell *matHeaderCellDef> Item </th>
+              <td mat-cell *matCellDef="let transaction"> {{transaction.item}} </td>
+              <td mat-footer-cell *matFooterCellDef> Total </td>
+            </ng-container>
+
+            <!-- Cost Column -->
+            <ng-container matColumnDef="cost">
+              <th mat-header-cell *matHeaderCellDef> Cost </th>
+              <td mat-cell *matCellDef="let transaction"> {{transaction.cost | currency}} </td>
+              <td mat-footer-cell *matFooterCellDef> {{getTotalCost() | currency}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+          </table>
+        </div>
+      </form>
+
+      <div class="row">
+        <div class="col-md-12 d-flex justify-content-end">
+          <button type="button"
+                  class="mr-2 w-100px br-25px"
+                  mat-stroked-button
+                  (click)="back()">
+            Cancelar
+          </button>
+
+          <button type="button"
+                  color="primary"
+                  class="w-100px br-25px"
+                  mat-stroked-button
+                  (click)="save()">
+            Salvar
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
