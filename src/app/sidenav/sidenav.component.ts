@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-sidenav',
@@ -11,18 +11,20 @@ export class SidenavComponent implements OnInit {
   showSubMenuCadastro = false;
   showSubMenuGerais = false;
 
-  constructor() { }
+  constructor() {
 
-  ngOnInit() {
   }
 
-  openSidenav() {
-    if (!this.display) {
-      this.showSubMenuGerais = false;
-      this.showSubMenuCadastro = false;
-    }
-    this.display = true;
+  ngOnInit(): void {
   }
+
+  // openSidenav() {
+  //   if (!this.display) {
+  //     this.showSubMenuGerais = false;
+  //     this.showSubMenuCadastro = false;
+  //   }
+  //   this.display = true;
+  // }
 
   toggleSubMenuCadastro() {
     this.showSubMenuCadastro = !this.showSubMenuCadastro;
@@ -31,5 +33,4 @@ export class SidenavComponent implements OnInit {
   toggleSubMenuGerais() {
     this.showSubMenuGerais = !this.showSubMenuGerais;
   }
-
 }

@@ -20,6 +20,7 @@ import {PageNotFoundModule} from './pageNotFound/pageNotFound.module';
 import {NotAuthorizedModule} from './notAuthorized/notAuthorized.module';
 import {MessageService, ToastModule} from 'primeng';
 import {CompraModule} from './compra/compra.module';
+import {LoginModule} from "./login/login.module";
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import {CompraModule} from './compra/compra.module';
     CompraModule,
     PageNotFoundModule,
     NotAuthorizedModule,
+    LoginModule
   ],
   providers: [
     MessageService

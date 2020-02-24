@@ -18,9 +18,11 @@ import {ItemFormComponent} from './item/item.form.component';
 import {PageNotFoundComponent} from './pageNotFound/pageNotFound.component';
 import {CompraListComponent} from './compra/compra.list.component';
 import {CompraFormComponent} from './compra/compra.form.component';
+import {LoginComponent} from "./login/login.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'grupo', component: GrupoListComponent},
   {path: 'grupo/form', component: GrupoFormComponent},
   {path: 'grupo/form/:id', component: GrupoFormComponent},

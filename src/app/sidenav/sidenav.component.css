@@ -1,9 +1,25 @@
-#btn-sidenav > i {
-  color: #FFFFFF;
+/*#btn-sidenav > i {*/
+/*  color: #FFFFFF;*/
+/*}*/
+
+/*#btn-sidenav {*/
+/*  background-color: transparent;*/
+/*  border-color: transparent;*/
+/*  margin-right: 5px;*/
+/*}*/
+
+.example-sidenav {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 95vh;
 }
 
-#btn-sidenav {
-  background-color: transparent;
-  border-color: transparent;
-  margin-right: 5px;
+mat-sidenav {
+  width: 250px !important;
 }
+
+/*.mat-list-item-content {*/
+/*  padding: 0 0 0 20px;*/
+/*}*/
