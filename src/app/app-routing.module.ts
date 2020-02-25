@@ -18,35 +18,36 @@ import {ItemFormComponent} from './item/item.form.component';
 import {PageNotFoundComponent} from './pageNotFound/pageNotFound.component';
 import {CompraListComponent} from './compra/compra.list.component';
 import {CompraFormComponent} from './compra/compra.form.component';
-import {LoginComponent} from "./login/login.component";
+import {LoginComponent} from './login/login.component';
+import {LoginService} from './login/login.service';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'grupo', component: GrupoListComponent},
-  {path: 'grupo/form', component: GrupoFormComponent},
-  {path: 'grupo/form/:id', component: GrupoFormComponent},
-  {path: 'usuario', component: UsuarioListComponent},
-  {path: 'usuario/form', component: UsuarioFormComponent},
-  {path: 'usuario/form/:id', component: UsuarioFormComponent},
-  {path: 'fornecedor', component: FornecedorListComponent},
-  {path: 'fornecedor/form', component: FornecedorFormComponent},
-  {path: 'fornecedor/form/:id', component: FornecedorFormComponent},
-  {path: 'estado', component: EstadoListComponent},
-  {path: 'estado/form', component: EstadoFormComponent},
-  {path: 'estado/form/:id', component: EstadoFormComponent},
-  {path: 'pais', component: PaisListComponent},
-  {path: 'pais/form', component: PaisFormComponent},
-  {path: 'pais/form/:id', component: PaisFormComponent},
-  {path: 'cidade', component: CidadeListComponent},
-  {path: 'cidade/form', component: CidadeFormComponent},
-  {path: 'cidade/form/:id', component: CidadeFormComponent},
-  {path: 'item', component: ItemListComponent},
-  {path: 'item/form', component: ItemFormComponent},
-  {path: 'item/form/:id', component: ItemFormComponent},
-  {path: 'compra', component: CompraListComponent},
-  {path: 'compra/form', component: CompraFormComponent},
-  {path: 'compra/form/:id', component: CompraFormComponent},
+  {path: '', canActivate: [LoginService], component: HomeComponent},
+  {path: 'grupo', canActivate: [LoginService], component: GrupoListComponent},
+  {path: 'grupo/form', canActivate: [LoginService], component: GrupoFormComponent},
+  {path: 'grupo/form/:id', canActivate: [LoginService], component: GrupoFormComponent},
+  {path: 'usuario', canActivate: [LoginService], component: UsuarioListComponent},
+  {path: 'usuario/form', canActivate: [LoginService], component: UsuarioFormComponent},
+  {path: 'usuario/form/:id', canActivate: [LoginService], component: UsuarioFormComponent},
+  {path: 'fornecedor', canActivate: [LoginService], component: FornecedorListComponent},
+  {path: 'fornecedor/form', canActivate: [LoginService], component: FornecedorFormComponent},
+  {path: 'fornecedor/form/:id', canActivate: [LoginService], component: FornecedorFormComponent},
+  {path: 'estado', canActivate: [LoginService], component: EstadoListComponent},
+  {path: 'estado/form', canActivate: [LoginService], component: EstadoFormComponent},
+  {path: 'estado/form/:id', canActivate: [LoginService], component: EstadoFormComponent},
+  {path: 'pais', canActivate: [LoginService], component: PaisListComponent},
+  {path: 'pais/form', canActivate: [LoginService], component: PaisFormComponent},
+  {path: 'pais/form/:id', canActivate: [LoginService], component: PaisFormComponent},
+  {path: 'cidade', canActivate: [LoginService], component: CidadeListComponent},
+  {path: 'cidade/form', canActivate: [LoginService], component: CidadeFormComponent},
+  {path: 'cidade/form/:id', canActivate: [LoginService], component: CidadeFormComponent},
+  {path: 'item', canActivate: [LoginService], component: ItemListComponent},
+  {path: 'item/form', canActivate: [LoginService], component: ItemFormComponent},
+  {path: 'item/form/:id', canActivate: [LoginService], component: ItemFormComponent},
+  {path: 'compra', canActivate: [LoginService], component: CompraListComponent},
+  {path: 'compra/form', canActivate: [LoginService], component: CompraFormComponent},
+  {path: 'compra/form/:id', canActivate: [LoginService], component: CompraFormComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
 

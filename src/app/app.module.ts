@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HomeModule} from './home/home.module';
 import {ToolbarModule} from './toolbar/toolbar.module';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {SidenavModule} from './sidenav/sidenav.module';
 import {GrupoModule} from './grupo/grupo.module';
 import {CommonModule} from '@angular/common';
@@ -21,6 +21,8 @@ import {NotAuthorizedModule} from './notAuthorized/notAuthorized.module';
 import {MessageService, ToastModule} from 'primeng';
 import {CompraModule} from './compra/compra.module';
 import {LoginModule} from "./login/login.module";
+import {LoginService} from './login/login.service';
+import {HttpClientInterceptor} from './http-client.interceptor';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,13 @@ import {LoginModule} from "./login/login.module";
     LoginModule
   ],
   providers: [
-    MessageService
+    MessageService,
+    LoginService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpClientInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
