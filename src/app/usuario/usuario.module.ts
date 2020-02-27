@@ -5,7 +5,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {
   MatButtonModule,
-  MatCardModule,
+  MatCardModule, MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
@@ -28,7 +28,8 @@ import {UsuarioService} from './usuario.service';
     MatButtonModule,
     InputTextModule,
     TooltipModule,
-    DropdownModule
+    DropdownModule,
+    MatDialogModule
   ],
   declarations: [
     UsuarioFormComponent,

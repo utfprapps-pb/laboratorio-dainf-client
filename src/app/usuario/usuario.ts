@@ -4,5 +4,5 @@ export class Usuario {
   username: string;
   password: string;
   email: string;
-  grupo: string;
+  permissoes: string;
 }

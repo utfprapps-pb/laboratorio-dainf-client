@@ -19,11 +19,24 @@ export class UsuarioFormComponent extends CrudFormComponent<Usuario, number> {
               protected injector: Injector) {
     super(usuarioService, injector, '/usuario');
 
-    this.grupoAcessoDropdown = [
-      {label: 'Administrador', value: 'A'},
-      {label: 'Laboratorista', value: 'L'},
-      {label: 'Professor', value: 'P'},
-      {label: 'Aluno', value: 'S'}
-    ];
+    this.buildGrupoDeAcesso();
+    // this.grupoAcessoDropdown = [
+    //   {label: 'Administrador', value: 'ROLE_ADMINISTRADOR'},
+    //   {label: 'Laboratorista', value: 'ROLE_LABORATORISTA'},
+    //   {label: 'Professor', value: 'ROLE_PROFESSOR'},
+    //   {label: 'Aluno', value: 'ROLE_ALUNO'}
+    // ];
+  }
+
+  buildGrupoDeAcesso() {
+    this.usuarioService.findAllPermissao()
+      .subscribe(e => {
+        this.grupoAcessoDropdown = new Array();
+        if (e != null) {
+          e.forEach(permissao => {
+            this.grupoAcessoDropdown.push({label: permissao.nome, value: permissao.id});
+          });
+        }
+      });
   }
 }

@@ -12,6 +12,6 @@ export class ItemListComponent extends CrudListComponent<Item, number> {
 
   constructor(protected itemService: ItemService,
               protected injector: Injector) {
-    super(itemService, injector, ['id', 'nome'], 'item/form');
+    super(itemService, injector, ['id', 'nome', 'localizacao', 'saldo', 'actions'], 'item/form');
   }
 }

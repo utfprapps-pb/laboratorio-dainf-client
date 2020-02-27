@@ -1,17 +1,28 @@
 <div class="container-fluid my-3">
   <mat-card>
     <mat-card-title>
-      <div class="d-flex align-items-center">
-        <button type="button"
-                (click)="back()"
-                mat-icon-button>
-          <mat-icon>arrow_back_ios</mat-icon>
-        </button>
-        <h4 class="m-0">Cadastro de Usuário</h4>
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+          <button type="button"
+                  class="btn-voltar-form"
+                  (click)="back()"
+                  mat-icon-button>
+            <mat-icon>arrow_back_ios</mat-icon>
+          </button>
+          <h4 class="m-0">Cadastro de Usuário</h4>
+        </div>
+        <div *ngIf="object.id != null">
+          <button type="button"
+                  (click)="back()"
+                  pTooltip="Redefinir senha"
+                  mat-icon-button>
+            <mat-icon>verified_user</mat-icon>
+          </button>
+        </div>
       </div>
     </mat-card-title>
     <mat-card-content>
-      <form #form="ngForm">
+      <form #form="ngForm" (submit)="save()">
         <div class="row">
           <div class="col-md-2">
             <div class="form-group">
@@ -41,7 +52,7 @@
           <div class="col-md-5">
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="text"
+              <input type="email"
                      id="email"
                      name="email"
                      class="form-control"
@@ -52,62 +63,73 @@
         </div>
 
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="grupo">Grupo de Acesso</label>
+              <p-dropdown [options]="grupoAcessoDropdown"
+                          [(ngModel)]="object.permissoes"
+                          [style]="{width: '100%'}"
+                          id="grupo"
+                          name="grupo">
+              </p-dropdown>
+            </div>
+          </div>
+
+          <div class="col-md-6">
             <div class="form-group">
               <label for="usuario">Usuário</label>
               <input type="text"
                      id="usuario"
                      name="usuario"
                      class="form-control"
-                     [(ngModel)]="object.usuario"
+                     [(ngModel)]="object.username"
                      pInputText>
             </div>
           </div>
+        </div>
 
-          <div class="col-md-4">
+        <div *ngIf="object.id == null" class="row">
+          <div class="col-md-6">
             <div class="form-group">
               <label for="senha">Senha</label>
-              <input type="text"
+              <input type="password"
                      id="senha"
                      name="senha"
+                     class="form-control"
+                     [(ngModel)]="object.password"
+                     pInputText>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="confirmSenha">Confirmação Senha</label>
+              <input type="password"
+                     id="confirmSenha"
+                     name="confirmSenha"
                      class="form-control"
                      pInputText>
             </div>
           </div>
+        </div>
 
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="grupo">Grupo de Acesso</label>
-              <p-dropdown [options]="grupoAcessoDropdown"
-                          [(ngModel)]="object.grupo"
-                          [style]="{width: '100%'}"
-                          id="grupo"
-                          name="grupo"
-                          optionLabel="label">
-              </p-dropdown>
-            </div>
+        <div class="row">
+          <div class="col-md-12 d-flex justify-content-end">
+            <button type="button"
+                    class="mr-2 w-100px br-25px"
+                    mat-stroked-button
+                    (click)="back()">
+              Cancelar
+            </button>
+
+            <button type="submit"
+                    color="primary"
+                    class="w-100px br-25px"
+                    mat-stroked-button>
+              Salvar
+            </button>
           </div>
         </div>
       </form>
-
-      <div class="row">
-        <div class="col-md-12 d-flex justify-content-end">
-          <button type="button"
-                  class="mr-2 w-100px br-25px"
-                  mat-stroked-button
-                  (click)="back()">
-            Cancelar
-          </button>
-
-          <button type="button"
-                  color="primary"
-                  class="w-100px br-25px"
-                  mat-stroked-button
-                  (click)="save()">
-            Salvar
-          </button>
-        </div>
-      </div>
     </mat-card-content>
   </mat-card>
 </div>

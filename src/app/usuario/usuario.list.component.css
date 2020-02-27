@@ -10,3 +10,8 @@ table {
 td, th {
   width: 25%;
 }
+
+th.mat-column-actions,
+td.mat-column-actions {
+  width: 10%;
+}

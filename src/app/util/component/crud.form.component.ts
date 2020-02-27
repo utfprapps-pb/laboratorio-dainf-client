@@ -29,6 +29,7 @@ export abstract class CrudFormComponent<T, ID> implements OnInit {
   }
 
   save() {
+    console.log(this.object);
     this.service.save(this.object)
       .subscribe(e => {
         this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registro salvo com sucesso!'});
