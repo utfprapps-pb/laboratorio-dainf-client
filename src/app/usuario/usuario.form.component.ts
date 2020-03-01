@@ -14,18 +14,13 @@ export class UsuarioFormComponent extends CrudFormComponent<Usuario, number> {
 
   @ViewChild('form', {static: true}) form: NgForm;
   grupoAcessoDropdown: SelectItem[];
+  displayBasic = false;
 
   constructor(protected usuarioService: UsuarioService,
               protected injector: Injector) {
     super(usuarioService, injector, '/usuario');
 
     this.buildGrupoDeAcesso();
-    // this.grupoAcessoDropdown = [
-    //   {label: 'Administrador', value: 'ROLE_ADMINISTRADOR'},
-    //   {label: 'Laboratorista', value: 'ROLE_LABORATORISTA'},
-    //   {label: 'Professor', value: 'ROLE_PROFESSOR'},
-    //   {label: 'Aluno', value: 'ROLE_ALUNO'}
-    // ];
   }
 
   buildGrupoDeAcesso() {
@@ -34,9 +29,13 @@ export class UsuarioFormComponent extends CrudFormComponent<Usuario, number> {
         this.grupoAcessoDropdown = new Array();
         if (e != null) {
           e.forEach(permissao => {
-            this.grupoAcessoDropdown.push({label: permissao.nome, value: permissao.id});
+            this.grupoAcessoDropdown.push({label: permissao.nome, value: new Array(permissao)});
           });
         }
       });
+  }
+
+  showDialogRedefinirSenha() {
+    this.displayBasic = true;
   }
 }

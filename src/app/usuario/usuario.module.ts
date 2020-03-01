@@ -3,17 +3,15 @@ import {UsuarioFormComponent} from './usuario.form.component';
 import {UsuarioListComponent} from './usuario.list.component';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {
-  MatButtonModule,
-  MatCardModule, MatDialogModule,
-  MatFormFieldModule,
-  MatIconModule,
-  MatInputModule,
-  MatPaginatorModule,
-  MatTableModule
-} from '@angular/material';
-import {DropdownModule, InputTextModule, TooltipModule} from 'primeng';
+import {DialogModule, DropdownModule, InputTextModule, TooltipModule} from 'primeng';
 import {UsuarioService} from './usuario.service';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatIconModule} from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   imports: [
@@ -29,7 +27,7 @@ import {UsuarioService} from './usuario.service';
     InputTextModule,
     TooltipModule,
     DropdownModule,
-    MatDialogModule
+    DialogModule
   ],
   declarations: [
     UsuarioFormComponent,

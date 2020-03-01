@@ -1,8 +1,10 @@
 import {Injector, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {CrudService} from '../service/crud.service';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {MessageService} from 'primeng';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
 
 export abstract class CrudListComponent<T, ID> implements OnInit {
 

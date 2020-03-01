@@ -4,6 +4,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
+import {Permissao} from './permissao';
 
 @Injectable()
 export class UsuarioService extends CrudService<Usuario, number> {
@@ -12,7 +13,7 @@ export class UsuarioService extends CrudService<Usuario, number> {
     super(`${environment.api_url}usuario/`, http);
   }
 
-  findAllPermissao(): Observable<any[]> {
-    return this.http.get<any[]>(this.url + 'permissao');
+  findAllPermissao(): Observable<Permissao[]> {
+    return this.http.get<Permissao[]>(this.url + 'permissao');
   }
 }

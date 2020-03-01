@@ -1,17 +1,16 @@
 import {NgModule} from '@angular/core';
 import {SidenavComponent} from './sidenav.component';
 import {SidebarModule} from 'primeng';
-import {
-  MatExpansionModule, MatFormFieldModule,
-  MatIconModule,
-  MatListModule,
-  MatMenuModule, MatSelectModule,
-  MatSidenavModule,
-  MatToolbarModule
-} from '@angular/material';
 import {RouterModule} from '@angular/router';
 import {CommonModule} from '@angular/common';
-import {ToolbarModule} from "../toolbar/toolbar.module";
+import {MatListModule} from '@angular/material/list';
+import {MatIconModule} from '@angular/material/icon';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {ToolbarModule} from '../toolbar/toolbar.module';
 
 @NgModule({
   imports: [
@@ -28,7 +27,6 @@ import {ToolbarModule} from "../toolbar/toolbar.module";
     MatMenuModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatToolbarModule,
     ToolbarModule
   ],
   exports: [

@@ -20,9 +20,9 @@ import {PageNotFoundModule} from './pageNotFound/pageNotFound.module';
 import {NotAuthorizedModule} from './notAuthorized/notAuthorized.module';
 import {MessageService, ToastModule} from 'primeng';
 import {CompraModule} from './compra/compra.module';
-import {LoginModule} from "./login/login.module";
 import {LoginService} from './login/login.service';
 import {HttpClientInterceptor} from './http-client.interceptor';
+import {LoginModule} from './login/login.module';
 
 @NgModule({
   declarations: [

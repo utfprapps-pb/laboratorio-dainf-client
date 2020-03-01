@@ -3,17 +3,15 @@ import {CommonModule} from '@angular/common';
 import {EstadoFormComponent} from './estado.form.component';
 import {EstadoListComponent} from './estado.list.component';
 import {FormsModule} from '@angular/forms';
-import {
-  MatButtonModule,
-  MatCardModule,
-  MatFormFieldModule,
-  MatIconModule,
-  MatInputModule,
-  MatPaginatorModule,
-  MatTableModule
-} from '@angular/material';
 import {AutoCompleteModule, InputTextModule, TooltipModule} from 'primeng';
 import {EstadoService} from './estado.service';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatIconModule} from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   imports: [

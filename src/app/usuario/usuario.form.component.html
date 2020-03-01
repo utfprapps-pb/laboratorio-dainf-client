@@ -13,7 +13,7 @@
         </div>
         <div *ngIf="object.id != null">
           <button type="button"
-                  (click)="back()"
+                  (click)="showDialogRedefinirSenha()"
                   pTooltip="Redefinir senha"
                   mat-icon-button>
             <mat-icon>verified_user</mat-icon>
@@ -133,3 +133,48 @@
     </mat-card-content>
   </mat-card>
 </div>
+
+<p-dialog positionTop="top" header="Redefinir Senha" [(visible)]="displayBasic" [style]="{minWidth: '250px'}" [baseZIndex]="10000">
+  <form action="">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="confirmSenha">Senha Atual</label>
+          <input type="password"
+                 id="confirmSenha"
+                 name="confirmSenha"
+                 class="form-control"
+                 pInputText>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="confirmSenha">Nova Senha</label>
+          <input type="password"
+                 id="confirmSenha"
+                 name="confirmSenha"
+                 class="form-control"
+                 pInputText>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="confirmSenha">Confirme a nova senha</label>
+          <input type="password"
+                 id="confirmSenha"
+                 name="confirmSenha"
+                 class="form-control"
+                 pInputText>
+        </div>
+      </div>
+    </div>
+  </form>
+  <p-footer>
+    <button type="button" pButton icon="pi pi-check" (click)="displayBasic=false" label="Cancelar"></button>
+    <button type="button" pButton icon="pi pi-times" (click)="displayBasic=false" label="Salvar" class="ui-button-secondary"></button>
+  </p-footer>
+</p-dialog>
