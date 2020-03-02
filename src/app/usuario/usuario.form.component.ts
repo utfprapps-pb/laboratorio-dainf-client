@@ -14,7 +14,10 @@ export class UsuarioFormComponent extends CrudFormComponent<Usuario, number> {
 
   @ViewChild('form', {static: true}) form: NgForm;
   grupoAcessoDropdown: SelectItem[];
-  displayBasic = false;
+  dialogChangeSenha = false;
+  redSenhaAtual: string;
+  redConfNovaSenha: string;
+  redNovaSenha: string;
 
   constructor(protected usuarioService: UsuarioService,
               protected injector: Injector) {
@@ -35,7 +38,21 @@ export class UsuarioFormComponent extends CrudFormComponent<Usuario, number> {
       });
   }
 
-  showDialogRedefinirSenha() {
-    this.displayBasic = true;
+  showDialogChangeSenha() {
+    this.dialogChangeSenha = true;
+  }
+
+  redefinirSenha() {
+    if (this.redNovaSenha !== this.redConfNovaSenha) {
+      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Senhas não conferem!'});
+    } else {
+      this.object.password = this.redNovaSenha;
+      this.usuarioService.changeSenha(this.object, this.redSenhaAtual)
+        .subscribe(e => {
+          this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Senha redefinida com sucesso!'});
+        }, error => {
+          this.messageService.add({severity: 'error', summary: 'Atenção', detail: 'A senha atual está incorreta!'});
+        });
+    }
   }
 }

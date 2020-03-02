@@ -13,7 +13,7 @@
         </div>
         <div *ngIf="object.id != null">
           <button type="button"
-                  (click)="showDialogRedefinirSenha()"
+                  (click)="showDialogChangeSenha()"
                   pTooltip="Redefinir senha"
                   mat-icon-button>
             <mat-icon>verified_user</mat-icon>
@@ -134,15 +134,21 @@
   </mat-card>
 </div>
 
-<p-dialog positionTop="top" header="Redefinir Senha" [(visible)]="displayBasic" [style]="{minWidth: '250px'}" [baseZIndex]="10000">
-  <form action="">
+<p-dialog
+          header="Redefinir Senha"
+          [(visible)]="dialogChangeSenha"
+          [style]="{minWidth: '250px'}"
+          [baseZIndex]="10000">
+
+  <form>
     <div class="row">
       <div class="col-md-12">
         <div class="form-group">
-          <label for="confirmSenha">Senha Atual</label>
+          <label for="redSenhaAtual">Senha Atual</label>
           <input type="password"
-                 id="confirmSenha"
-                 name="confirmSenha"
+                 id="redSenhaAtual"
+                 name="redSenhaAtual"
+                 [(ngModel)]="redSenhaAtual"
                  class="form-control"
                  pInputText>
         </div>
@@ -151,10 +157,11 @@
     <div class="row">
       <div class="col-md-12">
         <div class="form-group">
-          <label for="confirmSenha">Nova Senha</label>
+          <label for="redNovaSenha">Nova Senha</label>
           <input type="password"
-                 id="confirmSenha"
-                 name="confirmSenha"
+                 id="redNovaSenha"
+                 name="redNovaSenha"
+                 [(ngModel)]="redNovaSenha"
                  class="form-control"
                  pInputText>
         </div>
@@ -163,10 +170,11 @@
     <div class="row">
       <div class="col-md-12">
         <div class="form-group">
-          <label for="confirmSenha">Confirme a nova senha</label>
+          <label for="redConfNovaSenha">Confirme a nova senha</label>
           <input type="password"
-                 id="confirmSenha"
-                 name="confirmSenha"
+                 id="redConfNovaSenha"
+                 name="redConfNovaSenha"
+                 [(ngModel)]="redConfNovaSenha"
                  class="form-control"
                  pInputText>
         </div>
@@ -174,7 +182,22 @@
     </div>
   </form>
   <p-footer>
-    <button type="button" pButton icon="pi pi-check" (click)="displayBasic=false" label="Cancelar"></button>
-    <button type="button" pButton icon="pi pi-times" (click)="displayBasic=false" label="Salvar" class="ui-button-secondary"></button>
+    <div class="row">
+      <div class="col-md-12 d-flex justify-content-end">
+        <button type="button"
+                class="mr-2 w-100px br-25px"
+                (click)="dialogChangeSenha = false"
+                mat-stroked-button>
+          Cancelar
+        </button>
+        <button type="submit"
+                color="primary"
+                class="w-100px br-25px"
+                (click)="redefinirSenha()"
+                mat-stroked-button>
+          Salvar
+        </button>
+      </div>
+    </div>
   </p-footer>
 </p-dialog>

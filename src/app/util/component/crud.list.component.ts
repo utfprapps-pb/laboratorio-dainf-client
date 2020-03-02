@@ -40,7 +40,8 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
     this.service.findAll()
       .subscribe(e => {
         this.objects = e;
-        if (e != null && e.length > 0) {
+        console.log(e);
+        if (e != null) {
           this.dataSource = new MatTableDataSource(e);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;

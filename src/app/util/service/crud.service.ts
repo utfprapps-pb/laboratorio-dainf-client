@@ -23,6 +23,6 @@ export abstract class CrudService<T, ID> {
   }
 
   delete(id: ID): Observable<void> {
-    return this.http.delete<void>(`${this.getUrl()}/${id}`);
+    return this.http.delete<void>(`${this.url + id}`);
   }
 }

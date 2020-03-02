@@ -16,4 +16,8 @@ export class UsuarioService extends CrudService<Usuario, number> {
   findAllPermissao(): Observable<Permissao[]> {
     return this.http.get<Permissao[]>(this.url + 'permissao');
   }
+
+  changeSenha(usuario: Usuario, senhaAtual: string): Observable<Usuario> {
+    return this.http.post<Usuario>(this.url  + `change-senha?senhaAtual=${senhaAtual}`, usuario);
+  }
 }
