@@ -44,19 +44,79 @@
           </div>
         </div>
 
-        <div class="example-container mat-elevation-z8">
-          <table mat-table [dataSource]="transactions">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="item">Produto</label>
+              <p-autoComplete id="item"
+                              name="item"
+                              appendTo="body"
+                              field="nome"
+                              inputStyleClass="form-control"
+                              [(ngModel)]="compraItem.item"
+                              (onSelect)="setPrecoProduto()"
+                              [style]="{width: '100%'}"
+                              [suggestions]="itemList"
+                              (onClear)="compraItem.item = null"
+                              (completeMethod)="findProdutos($event)">
+              </p-autoComplete>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="valor">Valor</label>
+              <input type="text"
+                     id="valor"
+                     name="valor"
+                     [(ngModel)]="compraItem.valor"
+                     class="form-control"
+                     pInputText>
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <label for="qtde">Quantidade</label>
+              <input type="text"
+                     id="qtde"
+                     [(ngModel)]="compraItem.qtde"
+                     name="qtde"
+                     class="form-control"
+                     pInputText>
+            </div>
+          </div>
+
+          <div class="col-md-1">
+            <button type="button"
+                    class="form-control"
+                    (click)="insertItem()"
+                    mat-stroked-button>
+              <mat-icon>arrow_back_ios</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="compraItemList.length > 0" class="example-container mat-elevation-z8">
+          <table mat-table [dataSource]="compraItemList">
             <!-- Item Column -->
             <ng-container matColumnDef="item">
               <th mat-header-cell *matHeaderCellDef> Item </th>
-              <td mat-cell *matCellDef="let transaction"> {{transaction.item}} </td>
+              <td mat-cell *matCellDef="let itemCompra"> {{itemCompra.item.nome}} </td>
               <td mat-footer-cell *matFooterCellDef> Total </td>
             </ng-container>
 
-            <!-- Cost Column -->
-            <ng-container matColumnDef="cost">
-              <th mat-header-cell *matHeaderCellDef> Cost </th>
-              <td mat-cell *matCellDef="let transaction"> {{transaction.cost | currency}} </td>
+            <!-- Qtde Column -->
+            <ng-container matColumnDef="qtde">
+              <th mat-header-cell *matHeaderCellDef> Qtde </th>
+              <td mat-cell *matCellDef="let itemCompra"> {{itemCompra.qtde}} </td>
+              <td mat-footer-cell *matFooterCellDef> {{getTotalCost() | currency}} </td>
+            </ng-container>
+
+            <!-- Valor Column -->
+            <ng-container matColumnDef="valor">
+              <th mat-header-cell *matHeaderCellDef> Valor </th>
+              <td mat-cell *matCellDef="let itemCompra"> {{itemCompra.valor | currency}} </td>
               <td mat-footer-cell *matFooterCellDef> {{getTotalCost() | currency}} </td>
             </ng-container>
 

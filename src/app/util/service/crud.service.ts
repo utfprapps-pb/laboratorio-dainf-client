@@ -1,5 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {Item} from '../../item/item';
 
 export abstract class CrudService<T, ID> {
 
@@ -24,5 +25,9 @@ export abstract class CrudService<T, ID> {
 
   delete(id: ID): Observable<void> {
     return this.http.delete<void>(`${this.url + id}`);
+  }
+
+  complete(query: string): Observable<T[]> {
+    return this.http.get<T[]>(`${this.url}complete?query=${query}`);
   }
 }
