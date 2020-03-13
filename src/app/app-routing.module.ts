@@ -20,6 +20,8 @@ import {CompraListComponent} from './compra/compra.list.component';
 import {CompraFormComponent} from './compra/compra.form.component';
 import {LoginComponent} from './login/login.component';
 import {LoginService} from './login/login.service';
+import {EmprestimoListComponent} from './emprestimo/emprestimo.list.component';
+import {EmprestimoFormComponent} from './emprestimo/emprestimo.form.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -48,6 +50,9 @@ const routes: Routes = [
   {path: 'compra', canActivate: [LoginService], component: CompraListComponent},
   {path: 'compra/form', canActivate: [LoginService], component: CompraFormComponent},
   {path: 'compra/form/:id', canActivate: [LoginService], component: CompraFormComponent},
+  {path: 'emprestimo', canActivate: [LoginService], component: EmprestimoListComponent},
+  {path: 'emprestimo/form', canActivate: [LoginService], component: EmprestimoFormComponent},
+  {path: 'emprestimo/form/:id', canActivate: [LoginService], component: EmprestimoFormComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
 

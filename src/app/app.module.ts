@@ -23,10 +23,11 @@ import {CompraModule} from './compra/compra.module';
 import {LoginService} from './login/login.service';
 import {HttpClientInterceptor} from './http-client.interceptor';
 import {LoginModule} from './login/login.module';
+import {EmprestimoModule} from './emprestimo/emprestimo.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +49,8 @@ import {LoginModule} from './login/login.module';
     CompraModule,
     PageNotFoundModule,
     NotAuthorizedModule,
-    LoginModule
+    LoginModule,
+    EmprestimoModule
   ],
   providers: [
     MessageService,

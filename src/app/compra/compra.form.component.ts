@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit, ViewChild} from '@angular/core';
+import {Component, Injector, ViewChild} from '@angular/core';
 import {CrudFormComponent} from '../util/component/crud.form.component';
 import {Compra} from './compra';
 import {CompraService} from './compra.service';
@@ -8,11 +8,7 @@ import {NgForm} from '@angular/forms';
 import {ItemService} from '../item/item.service';
 import {Item} from '../item/item';
 import {CompraItem} from './compraItem';
-
-export interface Transaction {
-  item: string;
-  cost: number;
-}
+import {MatTable, MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-form-compra',
@@ -22,16 +18,16 @@ export interface Transaction {
 export class CompraFormComponent extends CrudFormComponent<Compra, number> {
 
   displayedColumns = ['item', 'qtde', 'valor'];
-
   fornecedorList: Fornecedor[];
   itemList: Item[];
   valorIns: number;
   produtoIns: Item;
   quantidadeIns: number;
   compraItem: CompraItem;
-  compraItemList: CompraItem[];
+  dataSource: MatTableDataSource<CompraItem>;
 
   @ViewChild('form', {static: true}) form: NgForm;
+  @ViewChild('table') table: MatTable<any>;
 
   constructor(protected compraService: CompraService,
               protected injector: Injector,
@@ -39,7 +35,6 @@ export class CompraFormComponent extends CrudFormComponent<Compra, number> {
               private itemService: ItemService) {
     super(compraService, injector, '/compra');
     this.compraItem = new CompraItem();
-    this.compraItemList = new Array();
   }
 
   findFornecedores($event) {
@@ -56,8 +51,11 @@ export class CompraFormComponent extends CrudFormComponent<Compra, number> {
       });
   }
 
-  getTotalCost() {
-    return this.compraItemList.map(t => t.valor).reduce((acc, value) => acc + value, 0);
+  getTotalCompra() {
+    const valid = this?.object?.compraItem;
+    if (valid) {
+      return this.object.compraItem.map(t => t.valor).reduce((acc, value) => acc + value, 0);
+    }
   }
 
   setPrecoProduto() {
@@ -66,16 +64,21 @@ export class CompraFormComponent extends CrudFormComponent<Compra, number> {
     }
   }
 
-  clerFieldsInsert() {
-    this.produtoIns = null;
-    this.valorIns = null;
-    this.quantidadeIns = null;
-  }
-
   insertItem() {
-    this.compraItemList.push(this.compraItem);
+    if (!this.object.compraItem) {
+      this.object.compraItem = new Array();
+    }
+    const upQtde = this.object.compraItem.some(value => value.item.id === this.compraItem.item.id);
+    if (upQtde) {
+      this.object.compraItem.forEach(compItem => {
+        if (compItem.item.id === this.compraItem.item.id) {
+          compItem.qtde = Number(compItem.qtde) + Number(this.compraItem.qtde);
+        }
+      });
+    } else {
+      this.object.compraItem.push(this.compraItem);
+    }
     this.compraItem = new CompraItem();
-    console.log(this.compraItemList);
-    console.log(this.compraItem);
+    this.table.renderRows();
   }
 }

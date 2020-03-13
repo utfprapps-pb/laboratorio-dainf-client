@@ -1,6 +1,8 @@
 .example-container {
-  height: 270px;
+  height: auto;
+  max-height: 400px;
   overflow: auto;
+  margin-bottom: 2%;
 }
 
 table {
