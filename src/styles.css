@@ -47,18 +47,3 @@ body::-webkit-scrollbar-thumb {
   transparent 75%,
   transparent)
 }
-
-
-@keyframes go-back {
-  from {
-    transform: translateX(10px);
-  }
-  to {
-    transform: translateX(0px);
-  }
-}
-
-.btn-voltar-form:hover {
-  animation-delay: initial;
-  animation: go-back 1s infinite;
-}

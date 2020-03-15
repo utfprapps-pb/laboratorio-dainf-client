@@ -3,7 +3,7 @@ import {CompraItem} from './compraItem';
 
 export class Compra {
   id: number;
-  dataCompra: number;
+  dataCompra: string;
   fornecedor: Fornecedor;
   compraItem: CompraItem[];
 }

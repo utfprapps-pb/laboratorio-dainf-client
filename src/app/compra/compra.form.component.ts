@@ -17,12 +17,9 @@ import {MatTable, MatTableDataSource} from '@angular/material/table';
 })
 export class CompraFormComponent extends CrudFormComponent<Compra, number> {
 
-  displayedColumns = ['item', 'qtde', 'valor'];
+  displayedColumns = ['item', 'qtde', 'valor', 'actions'];
   fornecedorList: Fornecedor[];
   itemList: Item[];
-  valorIns: number;
-  produtoIns: Item;
-  quantidadeIns: number;
   compraItem: CompraItem;
   dataSource: MatTableDataSource<CompraItem>;
 
@@ -58,6 +55,13 @@ export class CompraFormComponent extends CrudFormComponent<Compra, number> {
     }
   }
 
+  getQtdeTotal() {
+    const valid = this?.object?.compraItem;
+    if (valid) {
+      return this.object.compraItem.map(t => t.qtde).reduce((acc, value) => Number(acc) + Number(value), 0);
+    }
+  }
+
   setPrecoProduto() {
     if (this.compraItem != null) {
       this.compraItem.valor = this.compraItem.item.valor;
@@ -81,4 +85,17 @@ export class CompraFormComponent extends CrudFormComponent<Compra, number> {
     this.compraItem = new CompraItem();
     this.table.renderRows();
   }
+
+  removeItem(id: number) {
+    let index;
+    this.object.compraItem.forEach(compItem => {
+      if (compItem.item.id === id) {
+        index = this.object.compraItem.indexOf(compItem);
+      }
+    });
+    this.object.compraItem.splice(index, 1);
+    this.table.renderRows();
+  }
+
+
 }
