@@ -1,7 +1,7 @@
 import {Component, Injector, ViewChild} from '@angular/core';
 import {Usuario} from './usuario';
 import {UsuarioService} from './usuario.service';
-import {NgForm} from '@angular/forms';
+import {NgForm, Validators} from '@angular/forms';
 import {CrudFormComponent} from '../util/component/crud.form.component';
 import {SelectItem} from 'primeng';
 
@@ -13,11 +13,13 @@ import {SelectItem} from 'primeng';
 export class UsuarioFormComponent extends CrudFormComponent<Usuario, number> {
 
   @ViewChild('form', {static: true}) form: NgForm;
+  @ViewChild('formChangeSenha', {static: true}) formChangeSenha: NgForm;
   grupoAcessoDropdown: SelectItem[];
   dialogChangeSenha = false;
   redSenhaAtual: string;
   redConfNovaSenha: string;
   redNovaSenha: string;
+  formInvalid = false;
 
   constructor(protected usuarioService: UsuarioService,
               protected injector: Injector) {
@@ -43,16 +45,22 @@ export class UsuarioFormComponent extends CrudFormComponent<Usuario, number> {
   }
 
   redefinirSenha() {
-    if (this.redNovaSenha !== this.redConfNovaSenha) {
-      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Senhas não conferem!'});
+    if (this.formChangeSenha.valid) {
+      if (this.redNovaSenha !== this.redConfNovaSenha) {
+        this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Senhas não conferem!'});
+      } else {
+        this.object.password = this.redNovaSenha;
+        this.usuarioService.changeSenha(this.object, this.redSenhaAtual)
+          .subscribe(e => {
+            this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Senha redefinida com sucesso!'});
+            this.formChangeSenha.reset();
+            this.dialogChangeSenha = false;
+          }, error => {
+            this.messageService.add({severity: 'error', summary: 'Atenção', detail: 'A senha atual está incorreta!'});
+          });
+      }
     } else {
-      this.object.password = this.redNovaSenha;
-      this.usuarioService.changeSenha(this.object, this.redSenhaAtual)
-        .subscribe(e => {
-          this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Senha redefinida com sucesso!'});
-        }, error => {
-          this.messageService.add({severity: 'error', summary: 'Atenção', detail: 'A senha atual está incorreta!'});
-        });
+      alert('Form invalid');
     }
   }
 }

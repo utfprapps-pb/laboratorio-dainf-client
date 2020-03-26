@@ -20,4 +20,8 @@ export class UsuarioService extends CrudService<Usuario, number> {
   changeSenha(usuario: Usuario, senhaAtual: string): Observable<Usuario> {
     return this.http.post<Usuario>(this.url  + `change-senha?senhaAtual=${senhaAtual}`, usuario);
   }
+
+  findByUsername(username: string): Observable<Usuario> {
+    return this.http.get<Usuario>(this.url + `find-by-username?username=${username}`);
+  }
 }

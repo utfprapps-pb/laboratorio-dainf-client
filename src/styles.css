@@ -47,3 +47,22 @@ body::-webkit-scrollbar-thumb {
   transparent 75%,
   transparent)
 }
+
+
+/* style's default modal */
+.ui-dialog {
+  border-radius: 10px !important;
+}
+
+.ui-dialog-content {
+  overflow: hidden !important;
+}
+
+.ui-dialog-titlebar {
+  border-radius: 10px 10px 0 0 !important;
+}
+
+.ui-dialog-footer {
+  border-radius: 0 0 10px 10px !important;
+}
+

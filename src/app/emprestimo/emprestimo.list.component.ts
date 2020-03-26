@@ -13,7 +13,7 @@ export class EmprestimoListComponent extends CrudListComponent<Emprestimo, numbe
 
   constructor(protected emprestimoService: EmprestimoService,
               protected injector: Injector) {
-    super(emprestimoService, injector, ['id', 'pessoa', 'dataEmprestimo', 'actions'], 'emprestimo/form');
+    super(emprestimoService, injector, ['id', 'usuarioEmprestimo', 'usuarioResponsavel', 'dataEmprestimo', 'actions'], 'emprestimo/form');
   }
 
 }

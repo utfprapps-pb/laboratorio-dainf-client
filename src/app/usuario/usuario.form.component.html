@@ -43,6 +43,7 @@
                      id="descricao"
                      name="descricao"
                      class="form-control"
+                     required
                      [(ngModel)]="object.nome"
                      pInputText>
             </div>
@@ -54,6 +55,7 @@
               <input type="email"
                      id="email"
                      name="email"
+                     required
                      class="form-control"
                      [(ngModel)]="object.email"
                      pInputText>
@@ -139,7 +141,7 @@
           [style]="{minWidth: '250px'}"
           [baseZIndex]="10000">
 
-  <form>
+  <form #formChangeSenha="ngForm">
     <div class="row">
       <div class="col-md-12">
         <div class="form-group">
@@ -147,6 +149,7 @@
           <input type="password"
                  id="redSenhaAtual"
                  name="redSenhaAtual"
+                 required
                  [(ngModel)]="redSenhaAtual"
                  class="form-control"
                  pInputText>

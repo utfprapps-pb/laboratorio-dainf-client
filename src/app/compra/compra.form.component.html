@@ -11,7 +11,7 @@
       </div>
     </mat-card-title>
     <mat-card-content>
-      <form #form="ngForm">
+      <form #form="ngForm" (submit)="save()">
         <div class="row">
           <div class="col-md-2">
             <div class="form-group">
@@ -26,7 +26,7 @@
             </div>
           </div>
 
-          <div class="col-md-8">
+          <div class="col-md-4">
             <div class="form-group">
               <label for="descricao">Fornecedor</label>
               <p-autoComplete id="descricao"
@@ -40,6 +40,18 @@
                               (onClear)="object.fornecedor = null"
                               (completeMethod)="findFornecedores($event)">
               </p-autoComplete>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="usuarioResponsavel">Usuário Responsável</label>
+              <input type="text"
+                     id="usuarioResponsavel"
+                     name="usuarioResponsavel"
+                     class="form-control"
+                     [(ngModel)]="object.usuario.nome"
+                     disabled>
             </div>
           </div>
 
@@ -159,11 +171,10 @@
               Cancelar
             </button>
 
-            <button type="button"
+            <button type="submit"
                     color="primary"
                     class="w-100px br-25px"
-                    mat-stroked-button
-                    (click)="save()">
+                    mat-stroked-button>
               Salvar
             </button>
           </div>

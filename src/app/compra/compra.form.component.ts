@@ -9,6 +9,7 @@ import {ItemService} from '../item/item.service';
 import {Item} from '../item/item';
 import {CompraItem} from './compraItem';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
+import {UsuarioService} from '../usuario/usuario.service';
 
 @Component({
   selector: 'app-form-compra',
@@ -29,9 +30,21 @@ export class CompraFormComponent extends CrudFormComponent<Compra, number> {
   constructor(protected compraService: CompraService,
               protected injector: Injector,
               private fornecedorService: FornecedorService,
-              private itemService: ItemService) {
+              private itemService: ItemService,
+              private usuarioService: UsuarioService) {
     super(compraService, injector, '/compra');
     this.compraItem = new CompraItem();
+    if (!this.editando) {
+      this.setUsuarioResponsavel();
+    }
+  }
+
+  setUsuarioResponsavel() {
+    const userLogado = localStorage.getItem('username');
+    this.usuarioService.findByUsername(userLogado)
+      .subscribe(e => {
+        this.object.usuario = e;
+      });
   }
 
   findFornecedores($event) {

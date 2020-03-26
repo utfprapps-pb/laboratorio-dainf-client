@@ -1,0 +1,18 @@
+.example-container {
+  height: auto;
+  max-height: 400px;
+  overflow: auto;
+  margin-bottom: 2%;
+}
+
+table {
+  width: 100%;
+}
+
+tr.mat-footer-row {
+  font-weight: bold;
+}
+
+.mat-table-sticky {
+  border-top: 1px solid #e0e0e0;
+}

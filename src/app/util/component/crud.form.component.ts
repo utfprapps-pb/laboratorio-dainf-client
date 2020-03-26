@@ -8,6 +8,7 @@ export abstract class CrudFormComponent<T, ID> implements OnInit {
   protected router: Router;
   protected messageService: MessageService;
   protected route: ActivatedRoute;
+  editando = false;
   object: T;
 
   constructor(protected service: CrudService<T, ID>,
@@ -45,6 +46,7 @@ export abstract class CrudFormComponent<T, ID> implements OnInit {
     this.service.findOne(id)
       .subscribe(e => {
         this.object = e;
+        this.editando = true;
       });
   }
 

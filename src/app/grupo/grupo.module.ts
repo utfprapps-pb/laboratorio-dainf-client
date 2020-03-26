@@ -25,7 +25,7 @@ import {MatButtonModule} from '@angular/material/button';
     MatCardModule,
     MatButtonModule,
     InputTextModule,
-    TooltipModule,
+    TooltipModule
   ],
   declarations: [
     GrupoListComponent,

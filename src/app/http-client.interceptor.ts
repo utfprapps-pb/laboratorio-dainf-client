@@ -29,7 +29,11 @@ export class HttpClientInterceptor implements HttpInterceptor {
         tap(() => {
         }, err => {
           if (err.status === 403) {
-            this.messageService.add({severity: 'info', detail: 'Você não tem permissão para acessar este recurso'});
+            if (token) {
+              this.messageService.add({severity: 'info', detail: 'Você não tem permissão para acessar este recurso'});
+            } else {
+              this.loginService.logout();
+            }
           } else if (err.status === 401) {
             this.loginService.logout();
           }
