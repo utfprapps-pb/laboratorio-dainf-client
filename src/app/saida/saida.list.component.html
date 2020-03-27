@@ -2,7 +2,7 @@
   <mat-card>
     <mat-card-title>
       <div class="d-flex align-items-center justify-content-between">
-        <h4 class="m-0">Item</h4>
+        <h4 class="m-0">Saída</h4>
         <button type="button"
                 (click)="openForm()"
                 pTooltip="Inserir Novo Registro"
@@ -24,19 +24,19 @@
             <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
           </ng-container>
 
-          <ng-container matColumnDef="nome">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Descrição</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.nome}}</mat-cell>
+          <ng-container matColumnDef="dtSaida">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Data Saída</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row?.dataSaida}}</mat-cell>
           </ng-container>
 
-          <ng-container matColumnDef="localizacao">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Localização</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.localizacao}}</mat-cell>
+          <ng-container matColumnDef="qtde">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Quantidade</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{getQtdeTotal(row?.saidaItem)}}</mat-cell>
           </ng-container>
 
-          <ng-container matColumnDef="saldo">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Saldo</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.saldo}}</mat-cell>
+          <ng-container matColumnDef="usuario">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Usuário Responsável</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row?.usuarioResponsavel?.nome}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="actions">
@@ -66,4 +66,3 @@
     </mat-card-content>
   </mat-card>
 </div>
-

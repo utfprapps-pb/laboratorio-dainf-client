@@ -66,3 +66,31 @@ body::-webkit-scrollbar-thumb {
   border-radius: 0 0 10px 10px !important;
 }
 
+/* validation */
+.help-block {
+  color: #a80000;
+}
+
+.field-required {
+  padding-left: 5px;
+}
+
+/* list */
+table {
+  width: 100%;
+}
+
+.mat-column-actions {
+  max-width: 10% !important;
+}
+
+.mat-column-id {
+  max-width: 10% !important;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+

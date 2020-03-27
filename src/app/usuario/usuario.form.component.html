@@ -39,11 +39,13 @@
           <div class="col-md-5">
             <div class="form-group">
               <label for="descricao">Nome</label>
+              <span class="field-required">*</span>
               <input type="text"
                      id="descricao"
                      name="descricao"
                      class="form-control"
                      required
+                     validation
                      [(ngModel)]="object.nome"
                      pInputText>
             </div>
@@ -52,10 +54,12 @@
           <div class="col-md-5">
             <div class="form-group">
               <label for="email">Email</label>
+              <span class="field-required">*</span>
               <input type="email"
                      id="email"
                      name="email"
                      required
+                     validation
                      class="form-control"
                      [(ngModel)]="object.email"
                      pInputText>
@@ -79,9 +83,12 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="usuario">Usuário</label>
+              <span class="field-required">*</span>
               <input type="text"
                      id="usuario"
                      name="usuario"
+                     required
+                     validation
                      class="form-control"
                      [(ngModel)]="object.username"
                      pInputText>
@@ -93,9 +100,12 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="senha">Senha</label>
+              <span class="field-required">*</span>
               <input type="password"
                      id="senha"
                      name="senha"
+                     required
+                     validation
                      class="form-control"
                      [(ngModel)]="object.password"
                      pInputText>
@@ -104,6 +114,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="confirmSenha">Confirmação Senha</label>
+              <span class="field-required">*</span>
               <input type="password"
                      id="confirmSenha"
                      name="confirmSenha"
@@ -135,8 +146,7 @@
   </mat-card>
 </div>
 
-<p-dialog
-          header="Redefinir Senha"
+<p-dialog header="Redefinir Senha"
           [(visible)]="dialogChangeSenha"
           [style]="{minWidth: '250px'}"
           [baseZIndex]="10000">
@@ -150,6 +160,7 @@
                  id="redSenhaAtual"
                  name="redSenhaAtual"
                  required
+                 validation
                  [(ngModel)]="redSenhaAtual"
                  class="form-control"
                  pInputText>
@@ -163,6 +174,8 @@
           <input type="password"
                  id="redNovaSenha"
                  name="redNovaSenha"
+                 required
+                 validation
                  [(ngModel)]="redNovaSenha"
                  class="form-control"
                  pInputText>
@@ -176,6 +189,8 @@
           <input type="password"
                  id="redConfNovaSenha"
                  name="redConfNovaSenha"
+                 required
+                 validation
                  [(ngModel)]="redConfNovaSenha"
                  class="form-control"
                  pInputText>

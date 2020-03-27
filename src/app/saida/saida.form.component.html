@@ -7,7 +7,7 @@
                 mat-icon-button>
           <mat-icon>arrow_back_ios</mat-icon>
         </button>
-        <h4 class="m-0">Cadastro de Empréstimo</h4>
+        <h4 class="m-0">Cadastro de Saída</h4>
       </div>
     </mat-card-title>
     <mat-card-content>
@@ -26,27 +26,7 @@
             </div>
           </div>
 
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="usuarioEmprestimo">Usuário Empréstimo</label>
-              <span class="field-required">*</span>
-              <p-autoComplete id="usuarioEmprestimo"
-                              name="usuarioEmprestimo"
-                              required
-                              validation
-                              appendTo="body"
-                              field="nome"
-                              inputStyleClass="form-control"
-                              [style]="{width: '100%'}"
-                              [(ngModel)]="object.usuarioEmprestimo"
-                              [suggestions]="usuarioList"
-                              (onClear)="object.usuarioEmprestimo = null"
-                              (completeMethod)="findUsuarios($event)">
-              </p-autoComplete>
-            </div>
-          </div>
-
-          <div class="col-md-4">
+          <div class="col-md-8">
             <div class="form-group">
               <label for="usuarioResponsavel">Usuário Responsável</label>
               <input type="text"
@@ -60,17 +40,17 @@
 
           <div class="col-md-2">
             <div class="form-group">
-              <label for="dataCompra">Data do Empréstimo</label>
+              <label for="dataSaida">Data da Saída</label>
               <span class="field-required">*</span>
-              <p-calendar name="dataCompra"
-                          id="dataCompra"
+              <p-calendar name="dataSaida"
+                          id="dataSaida"
                           required
                           validation
                           dataType="string"
                           dateFormat="dd/mm/yy"
                           [style]="{width: '100%'}"
                           inputStyleClass="form-control"
-                          [(ngModel)]="object.dataEmprestimo">
+                          [(ngModel)]="object.dataSaida">
               </p-calendar>
             </div>
           </div>
@@ -84,36 +64,27 @@
                               name="item"
                               appendTo="body"
                               field="nome"
+                              #itemToAdd
                               inputStyleClass="form-control"
-                              [(ngModel)]="emprestimoItem.item"
-                              (onSelect)="setDevolucaoItem()"
+                              (onSelect)="setQtdeDefaultItem()"
+                              (keyup.control.enter)="insertItem()"
+                              [(ngModel)]="saidaItem.item"
                               [style]="{width: '100%'}"
                               [suggestions]="itemList"
-                              (onClear)="emprestimoItem.item = null"
+                              (onClear)="saidaItem.item = null"
                               (completeMethod)="findProdutos($event)">
               </p-autoComplete>
             </div>
           </div>
 
-          <div class="col-md-2">
-            <div class="form-group">
-              <label for="devolvido">Devolver</label>
-              <p-dropdown [options]="yesNoDropdown"
-                          [(ngModel)]="itemDevolver"
-                          [style]="{width: '100%'}"
-                          [disabled]="true"
-                          id="devolvido"
-                          name="devolvido">
-              </p-dropdown>
-            </div>
-          </div>
-
-          <div class="col-md-2">
+          <div class="col-md-4">
             <div class="form-group">
               <label for="qtde">Quantidade</label>
               <input type="number"
                      id="qtde"
-                     [(ngModel)]="emprestimoItem.qtde"
+                     #qtdeToAdd
+                     (keyup.control.enter)="insertItem()"
+                     [(ngModel)]="saidaItem.qtde"
                      name="qtde"
                      class="form-control"
                      pInputText>
@@ -134,36 +105,27 @@
           </div>
         </div>
 
-        <div *ngIf="object?.emprestimoItem?.length > 0" class="example-container mat-elevation-z8">
-          <mat-table #table="matTable"  [dataSource]="object.emprestimoItem">
+        <div *ngIf="object?.saidaItem?.length > 0" class="example-container mat-elevation-z8">
+          <mat-table #table="matTable"  [dataSource]="object.saidaItem">
             <ng-container matColumnDef="item">
               <mat-header-cell *matHeaderCellDef> Item </mat-header-cell>
-              <mat-cell *matCellDef="let itemEmprestimo"> {{itemEmprestimo.item.nome}} </mat-cell>
+              <mat-cell *matCellDef="let itemSaida"> {{itemSaida.item.nome}} </mat-cell>
               <mat-footer-cell *matFooterCellDef class="font-weight-bolder"> Total </mat-footer-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="devolver">
-              <mat-header-cell *matHeaderCellDef> Devolver </mat-header-cell>
-              <mat-cell *matCellDef="let itemEmprestimo">
-                <span *ngIf="itemEmprestimo.item.devolver">Sim</span>
-                <span *ngIf="!itemEmprestimo.item.devolver">Não</span>
-              </mat-cell>
-              <mat-footer-cell *matFooterCellDef></mat-footer-cell>
             </ng-container>
 
             <ng-container matColumnDef="qtde">
               <mat-header-cell *matHeaderCellDef> Qtde </mat-header-cell>
-              <mat-cell *matCellDef="let itemEmprestimo"> {{itemEmprestimo.qtde}} </mat-cell>
+              <mat-cell *matCellDef="let itemSaida"> {{itemSaida.qtde}} </mat-cell>
               <mat-footer-cell *matFooterCellDef> {{getQtdeTotal()}} </mat-footer-cell>
             </ng-container>
 
             <ng-container matColumnDef="actionsForm">
               <mat-header-cell *matHeaderCellDef> Opções </mat-header-cell>
-              <mat-cell *matCellDef="let itemEmprestimo">
+              <mat-cell *matCellDef="let itemSaida">
                 <button class="btn btn-outline-primary rounded"
                         type="button"
                         pTooltip="Remover"
-                        (click)="removeItem(itemEmprestimo.item.id)">
+                        (click)="removeItem(itemSaida.item.id)">
                   <i class="fa fa-trash-o"></i>
                 </button>
               </mat-cell>
@@ -174,6 +136,22 @@
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
             <mat-footer-row *matFooterRowDef="displayedColumns; sticky: true" class="font-weight-bolder"></mat-footer-row>
           </mat-table>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="observacao">Observação</label>
+              <textarea id="observacao"
+                        name="observacao"
+                        rows="1"
+                        class="form-control"
+                        pInputTextarea
+                        [(ngModel)]="object.observacao"
+                        autoResize="autoResize">
+              </textarea>
+            </div>
+          </div>
         </div>
 
         <div class="row">

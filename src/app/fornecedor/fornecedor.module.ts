@@ -12,6 +12,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
+import {ValidationService} from '../validation/validation.service';
+import {ValidationModule} from '../validation/validation.module';
 
 @NgModule({
   imports: [
@@ -26,7 +28,8 @@ import {MatButtonModule} from '@angular/material/button';
     MatButtonModule,
     InputTextModule,
     TooltipModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    ValidationModule
   ],
   declarations: [
     FornecedorFormComponent,
@@ -37,7 +40,8 @@ import {MatButtonModule} from '@angular/material/button';
     FornecedorListComponent
   ],
   providers: [
-    FornecedorService
+    FornecedorService,
+    ValidationService
   ]
 })
 export class FornecedorModule {

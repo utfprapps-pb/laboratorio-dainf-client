@@ -11,32 +11,31 @@
       </mat-form-field>
 
       <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource" matSort>
+        <mat-table [dataSource]="dataSource" matSort>
 
           <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Código</th>
-            <td mat-cell *matCellDef="let row">{{row.id}}</td>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Código</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="nome">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
-            <td mat-cell *matCellDef="let row">{{row.nome}}</td>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Nome</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.nome}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="uf">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>UF</th>
-            <td mat-cell *matCellDef="let row">{{row.uf}}</td>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>UF</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.uf}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="pais">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>País</th>
-            <td mat-cell *matCellDef="let row">{{row.pais.nome}}</td>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>País</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.pais.nome}}</mat-cell>
           </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-          </tr>
-        </table>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
 
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 50]"></mat-paginator>
       </div>

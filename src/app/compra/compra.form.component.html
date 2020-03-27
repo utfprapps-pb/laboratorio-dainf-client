@@ -29,8 +29,11 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="descricao">Fornecedor</label>
+              <span class="field-required">*</span>
               <p-autoComplete id="descricao"
                               name="descricao"
+                              required
+                              validation
                               appendTo="body"
                               field="razaoSocial"
                               inputStyleClass="form-control"
@@ -58,8 +61,11 @@
           <div class="col-md-2">
             <div class="form-group">
               <label for="dataCompra">Data da Compra</label>
+              <span class="field-required">*</span>
               <p-calendar name="dataCompra"
                           id="dataCompra"
+                          required
+                          validation
                           dataType="string"
                           dateFormat="dd/mm/yy"
                           [style]="{width: '100%'}"

@@ -18,7 +18,7 @@ import {SelectItem} from 'primeng';
 })
 export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, number> {
 
-  displayedColumns = ['item', 'devolver', 'qtde', 'actions'];
+  displayedColumns = ['item', 'devolver', 'qtde', 'actionsForm'];
   emprestimoItem: EmprestimoItem;
   itemList: Item[];
   usuarioList: Usuario[];

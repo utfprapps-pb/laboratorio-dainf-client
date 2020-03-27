@@ -5,16 +5,7 @@
   margin-bottom: 2%;
 }
 
-tr.mat-footer-row {
-  font-weight: bold;
-}
-
-.mat-table-sticky {
-  border-top: 1px solid #e0e0e0;
-}
-
 .mat-column-actionsForm,
-.mat-column-devolver,
 .mat-column-qtde {
   max-width: 5% !important;
 }

@@ -1,7 +1,7 @@
 import {Component, Injector, ViewChild} from '@angular/core';
 import {Usuario} from './usuario';
 import {UsuarioService} from './usuario.service';
-import {NgForm, Validators} from '@angular/forms';
+import {NgForm} from '@angular/forms';
 import {CrudFormComponent} from '../util/component/crud.form.component';
 import {SelectItem} from 'primeng';
 
@@ -19,7 +19,6 @@ export class UsuarioFormComponent extends CrudFormComponent<Usuario, number> {
   redSenhaAtual: string;
   redConfNovaSenha: string;
   redNovaSenha: string;
-  formInvalid = false;
 
   constructor(protected usuarioService: UsuarioService,
               protected injector: Injector) {
@@ -60,7 +59,7 @@ export class UsuarioFormComponent extends CrudFormComponent<Usuario, number> {
           });
       }
     } else {
-      alert('Form invalid');
+      this.validarFormulario(this.formChangeSenha);
     }
   }
 }

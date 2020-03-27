@@ -29,9 +29,12 @@
           <div class="col-md-10">
             <div class="form-group">
               <label for="descricao">Nome</label>
+              <span class="field-required">*</span>
               <input type="text"
                      id="descricao"
                      name="descricao"
+                     required
+                     validation
                      class="form-control"
                      [(ngModel)]="object.nome"
                      pInputText>
@@ -43,9 +46,12 @@
           <div class="col-md-3">
             <div class="form-group">
               <label for="patrimonio">Patrimônio</label>
+              <span class="field-required">*</span>
               <input type="number"
                      id="patrimonio"
                      name="patrimonio"
+                     required
+                     validation
                      class="form-control"
                      [(ngModel)]="object.patrimonio"
                      pInputText>
@@ -54,9 +60,12 @@
           <div class="col-md-3">
             <div class="form-group">
               <label for="siorg">Siorg</label>
+              <span class="field-required">*</span>
               <input type="number"
                      id="siorg"
                      name="siorg"
+                     required
+                     validation
                      class="form-control"
                      [(ngModel)]="object.siorg"
                      pInputText>
@@ -65,9 +74,12 @@
           <div class="col-md-3">
             <div class="form-group">
               <label for="valor">Valor</label>
+              <span class="field-required">*</span>
               <input type="number"
                      id="valor"
                      name="valor"
+                     required
+                     validation
                      class="form-control"
                      [(ngModel)]="object.valor"
                      pInputText>
@@ -76,9 +88,12 @@
           <div class="col-md-3">
             <div class="form-group">
               <label for="qtdeMinima">Qtde Mínima</label>
+              <span class="field-required">*</span>
               <input type="number"
                      id="qtdeMinima"
                      name="qtdeMinima"
+                     required
+                     validation
                      class="form-control"
                      [(ngModel)]="object.qtdeMinima"
                      pInputText>
@@ -90,9 +105,12 @@
           <div class="col-md-3">
             <div class="form-group">
               <label for="localizacao">Localização</label>
+              <span class="field-required">*</span>
               <input type="text"
                      id="localizacao"
                      name="localizacao"
+                     required
+                     validation
                      class="form-control"
                      [(ngModel)]="object.localizacao"
                      pInputText>
@@ -112,9 +130,12 @@
           <div class="col-md-3">
             <div class="form-group">
               <label for="saldo">Saldo</label>
+              <span class="field-required">*</span>
               <input type="number"
                      id="saldo"
                      name="saldo"
+                     required
+                     validation
                      class="form-control"
                      [(ngModel)]="object.saldo"
                      pInputText>
@@ -123,10 +144,13 @@
           <div class="col-md-3">
             <div class="form-group">
               <label for="grupo">Grupo</label>
+              <span class="field-required">*</span>
               <p-autoComplete id="grupo"
                               name="grupo"
                               appendTo="body"
                               field="descricao"
+                              required
+                              validation
                               inputStyleClass="form-control"
                               [style]="{width: '100%'}"
                               [suggestions]="grupoList"

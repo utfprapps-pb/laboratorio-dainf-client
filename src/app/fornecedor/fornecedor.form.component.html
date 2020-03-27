@@ -29,9 +29,12 @@
           <div class="col-md-10">
             <div class="form-group">
               <label for="razaoSocial">Razão Social</label>
+              <span class="field-required">*</span>
               <input type="text"
                      id="razaoSocial"
                      name="razaoSocial"
+                     required
+                     validation
                      class="form-control"
                      [(ngModel)]="object.razaoSocial"
                      pInputText>
@@ -43,9 +46,12 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="nomeFantasia">Nome Fantasia</label>
+              <span class="field-required">*</span>
               <input type="text"
                      id="nomeFantasia"
                      name="nomeFantasia"
+                     required
+                     validation
                      class="form-control"
                      [(ngModel)]="object.nomeFantasia"
                      pInputText>
@@ -55,9 +61,12 @@
           <div class="col-md-3">
             <div class="form-group">
               <label for="cnpj">CNPJ</label>
+              <span class="field-required">*</span>
               <input type="text"
                      id="cnpj"
                      name="cnpj"
+                     required
+                     validation
                      class="form-control"
                      [(ngModel)]="object.cnpj"
                      pInputText>
@@ -67,9 +76,12 @@
           <div class="col-md-3">
             <div class="form-group">
               <label for="ie">Inscrição Estadual</label>
+              <span class="field-required">*</span>
               <input type="text"
                      id="ie"
                      name="ie"
+                     required
+                     validation
                      class="form-control"
                      [(ngModel)]="object.ie"
                      pInputText>
@@ -81,9 +93,12 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="endereco">Endereço</label>
+              <span class="field-required">*</span>
               <input type="text"
                      id="endereco"
                      name="endereco"
+                     required
+                     validation
                      class="form-control"
                      [(ngModel)]="object.endereco"
                      pInputText>
@@ -92,9 +107,14 @@
 
           <div class="col-md-4">
             <div class="form-group d-flex flex-column">
-              <label for="cidade">Cidade</label>
+              <div>
+                <label for="cidade">Cidade</label>
+                <span class="field-required">*</span>
+              </div>
               <p-autoComplete id="cidade"
                               name="cidade"
+                              required
+                              validation
                               field="nome"
                               inputStyleClass="form-control"
                               [style]="{width: '100%'}"
@@ -108,9 +128,14 @@
 
           <div class="col-md-4">
             <div class="form-group d-flex flex-column">
-              <label for="estado">Estado</label>
+              <div>
+                <label for="estado">Estado</label>
+                <span class="field-required">*</span>
+              </div>
               <p-autoComplete id="estado"
                               name="estado"
+                              required
+                              validation
                               appendTo="body"
                               field="nome"
                               inputStyleClass="form-control"

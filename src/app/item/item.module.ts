@@ -12,6 +12,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {ValidationService} from '../validation/validation.service';
+import {ValidationModule} from '../validation/validation.module';
 
 @NgModule({
   imports: [
@@ -27,7 +29,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     InputTextModule,
     TooltipModule,
     AutoCompleteModule,
-    DropdownModule
+    DropdownModule,
+    ValidationModule
   ],
   declarations: [
     ItemFormComponent,
@@ -38,7 +41,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     ItemListComponent
   ],
   providers: [
-    ItemService
+    ItemService,
+    ValidationService
   ]
 })
 export class ItemModule {

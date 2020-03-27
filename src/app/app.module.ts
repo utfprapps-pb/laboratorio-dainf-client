@@ -18,12 +18,13 @@ import {CidadeModule} from './cidade/cidade.module';
 import {ItemModule} from './item/item.module';
 import {PageNotFoundModule} from './pageNotFound/pageNotFound.module';
 import {NotAuthorizedModule} from './notAuthorized/notAuthorized.module';
-import {MessageService, ToastModule} from 'primeng';
+import {ConfirmationService, ConfirmDialogModule, MessageService, ToastModule} from 'primeng';
 import {CompraModule} from './compra/compra.module';
 import {LoginService} from './login/login.service';
 import {HttpClientInterceptor} from './http-client.interceptor';
 import {LoginModule} from './login/login.module';
 import {EmprestimoModule} from './emprestimo/emprestimo.module';
+import {SaidaModule} from './saida/saida.module';
 
 @NgModule({
   declarations: [
@@ -50,11 +51,14 @@ import {EmprestimoModule} from './emprestimo/emprestimo.module';
     PageNotFoundModule,
     NotAuthorizedModule,
     LoginModule,
-    EmprestimoModule
+    EmprestimoModule,
+    ConfirmDialogModule,
+    SaidaModule
   ],
   providers: [
     MessageService,
     LoginService,
+    ConfirmationService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpClientInterceptor,

@@ -17,31 +17,31 @@
       </mat-form-field>
 
       <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource" matSort>
+        <mat-table [dataSource]="dataSource" matSort>
 
           <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Código</th>
-            <td mat-cell *matCellDef="let row">{{row.id}}</td>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Código</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="usuarioEmprestimo">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuário Empréstimo</th>
-            <td mat-cell *matCellDef="let row">{{row?.usuarioEmprestimo?.nome}}</td>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Usuário Empréstimo</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row?.usuarioEmprestimo?.nome}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="usuarioResponsavel">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuário Responsável</th>
-            <td mat-cell *matCellDef="let row">{{row?.usuarioResponsavel?.nome}}</td>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Usuário Responsável</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row?.usuarioResponsavel?.nome}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="dataEmprestimo">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Data do Empréstimo</th>
-            <td mat-cell *matCellDef="let row">{{row.dataEmprestimo}}</td>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Data do Empréstimo</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.dataEmprestimo}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef> Opções </th>
-            <td mat-cell *matCellDef="let row">
+            <mat-header-cell *matHeaderCellDef> Opções </mat-header-cell>
+            <mat-cell *matCellDef="let row">
               <button class="btn btn-outline-secondary rounded mr-2"
                       type="button"
                       pTooltip="Editar"
@@ -54,13 +54,12 @@
                       (click)="delete(row.id)">
                 <i class="fa fa-trash-o"></i>
               </button>
-            </td>
+            </mat-cell>
           </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-          </tr>
-        </table>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
 
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 50]"></mat-paginator>
       </div>

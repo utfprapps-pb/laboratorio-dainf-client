@@ -1,7 +1,7 @@
 import {Injector, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {CrudService} from '../service/crud.service';
-import {MessageService} from 'primeng';
+import {ConfirmationService, MessageService} from 'primeng';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
@@ -12,6 +12,7 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
   protected messageService: MessageService;
   protected displayedColumns: string[] = this.columnsTable;
   protected dataSource: MatTableDataSource<T>;
+  protected confirmationService: ConfirmationService;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   objects: T[];
@@ -26,6 +27,7 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
               protected urlForm: string) {
     this.router = this.injector.get(Router);
     this.messageService = this.injector.get(MessageService);
+    this.confirmationService = this.injector.get(ConfirmationService);
   }
 
   applyFilter(filterValue: string) {
@@ -40,7 +42,6 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
     this.service.findAll()
       .subscribe(e => {
         this.objects = e;
-        console.log(e);
         if (e != null) {
           this.dataSource = new MatTableDataSource(e);
           this.dataSource.paginator = this.paginator;
@@ -54,15 +55,23 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
   }
 
   delete(id: any) {
-    this.service.delete(id)
-      .subscribe(e => {
-        this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registro excluído com sucesso!'});
-        this.findAll();
-      }, error => {
-        this.messageService.add({severity: 'error', summary: 'Atenção', detail: 'Ocorreu um erro ao remover o registro!'});
-        console.log(error);
-      });
-
+    this.confirmationService.confirm({
+      message: 'Tem certeza que deseja remover o registro?',
+      header: 'Confirmação',
+      icon: 'fa fa-question-circle',
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
+      accept: () => {
+        this.service.delete(id)
+          .subscribe(e => {
+            this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registro excluído com sucesso!'});
+            this.findAll();
+          }, error => {
+            this.messageService.add({severity: 'error', summary: 'Atenção', detail: 'Ocorreu um erro ao remover o registro!'});
+            console.log(error);
+          });
+      }
+    });
   }
 
   openForm() {

@@ -22,6 +22,8 @@ import {LoginComponent} from './login/login.component';
 import {LoginService} from './login/login.service';
 import {EmprestimoListComponent} from './emprestimo/emprestimo.list.component';
 import {EmprestimoFormComponent} from './emprestimo/emprestimo.form.component';
+import {SaidaListComponent} from './saida/saida.list.component';
+import {SaidaFormComponent} from './saida/saida.form.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -53,6 +55,9 @@ const routes: Routes = [
   {path: 'emprestimo', canActivate: [LoginService], component: EmprestimoListComponent},
   {path: 'emprestimo/form', canActivate: [LoginService], component: EmprestimoFormComponent},
   {path: 'emprestimo/form/:id', canActivate: [LoginService], component: EmprestimoFormComponent},
+  {path: 'saida', canActivate: [LoginService], component: SaidaListComponent},
+  {path: 'saida/form', canActivate: [LoginService], component: SaidaFormComponent},
+  {path: 'saida/form/:id', canActivate: [LoginService], component: SaidaFormComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
 

@@ -12,6 +12,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
+import {ValidationModule} from '../validation/validation.module';
+import {ValidationService} from '../validation/validation.service';
 
 @NgModule({
   imports: [
@@ -25,7 +27,8 @@ import {MatButtonModule} from '@angular/material/button';
     MatCardModule,
     MatButtonModule,
     InputTextModule,
-    TooltipModule
+    TooltipModule,
+    ValidationModule
   ],
   declarations: [
     GrupoListComponent,
@@ -36,7 +39,8 @@ import {MatButtonModule} from '@angular/material/button';
     GrupoFormComponent
   ],
   providers: [
-    GrupoService
+    GrupoService,
+    ValidationService
   ]
 })
 export class GrupoModule {

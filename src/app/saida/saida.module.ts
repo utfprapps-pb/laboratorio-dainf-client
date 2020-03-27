@@ -1,5 +1,8 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {SaidaFormComponent} from './saida.form.component';
+import {SaidaListComponent} from './saida.list.component';
+import {SaidaService} from './saida.service';
 import {FormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -8,12 +11,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
-import {AutoCompleteModule, CalendarModule, DropdownModule, InputTextModule, TooltipModule} from 'primeng';
-import {EmprestimoFormComponent} from './emprestimo.form.component';
-import {EmprestimoListComponent} from './emprestimo.list.component';
-import {EmprestimoService} from './emprestimo.service';
+import {AutoCompleteModule, CalendarModule, DropdownModule, InputTextareaModule, InputTextModule, TooltipModule} from 'primeng';
 import {ValidationModule} from '../validation/validation.module';
-import {ValidationService} from '../validation/validation.service';
 
 @NgModule({
   imports: [
@@ -31,21 +30,21 @@ import {ValidationService} from '../validation/validation.service';
     AutoCompleteModule,
     CalendarModule,
     DropdownModule,
-    ValidationModule
+    ValidationModule,
+    InputTextareaModule
   ],
   declarations: [
-    EmprestimoFormComponent,
-    EmprestimoListComponent
+    SaidaFormComponent,
+    SaidaListComponent
   ],
   exports: [
-    EmprestimoFormComponent,
-    EmprestimoListComponent
+    SaidaFormComponent,
+    SaidaListComponent
   ],
   providers: [
-    EmprestimoService,
-    ValidationService
+    SaidaService
   ]
 })
-export class EmprestimoModule {
+export class SaidaModule {
 
 }
