@@ -1,4 +1,4 @@
-<div class="container-fluid my-3">
+<div class="container-fluid my-3" (keyup.control.n)="openForm()">
   <mat-card>
     <mat-card-title>
       <div class="d-flex align-items-center justify-content-between">
@@ -36,7 +36,7 @@
 
           <ng-container matColumnDef="dataEmprestimo">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Data do Empréstimo</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.dataEmprestimo}}</mat-cell>
+            <mat-cell *matCellDef="let row">{{row?.dataEmprestimo}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="actions">

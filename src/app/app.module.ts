@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -9,7 +9,7 @@ import {ToolbarModule} from './toolbar/toolbar.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {SidenavModule} from './sidenav/sidenav.module';
 import {GrupoModule} from './grupo/grupo.module';
-import {CommonModule} from '@angular/common';
+import {CommonModule, registerLocaleData} from '@angular/common';
 import {UsuarioModule} from './usuario/usuario.module';
 import {FornecedorModule} from './fornecedor/fornecedor.module';
 import {EstadoModule} from './estado/estado.module';
@@ -25,6 +25,8 @@ import {HttpClientInterceptor} from './http-client.interceptor';
 import {LoginModule} from './login/login.module';
 import {EmprestimoModule} from './emprestimo/emprestimo.module';
 import {SaidaModule} from './saida/saida.module';
+import ptBr from '@angular/common/locales/pt';
+registerLocaleData(ptBr);
 
 @NgModule({
   declarations: [
@@ -53,7 +55,8 @@ import {SaidaModule} from './saida/saida.module';
     LoginModule,
     EmprestimoModule,
     ConfirmDialogModule,
-    SaidaModule
+    SaidaModule,
+
   ],
   providers: [
     MessageService,
@@ -63,6 +66,10 @@ import {SaidaModule} from './saida/saida.module';
       provide: HTTP_INTERCEPTORS,
       useClass: HttpClientInterceptor,
       multi: true
+    },
+    {
+      provide: LOCALE_ID,
+      useValue: 'pt'
     }
   ],
   bootstrap: [AppComponent]

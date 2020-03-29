@@ -18,7 +18,7 @@ import {UsuarioService} from '../usuario/usuario.service';
 })
 export class CompraFormComponent extends CrudFormComponent<Compra, number> {
 
-  displayedColumns = ['item', 'qtde', 'valor', 'actions'];
+  displayedColumns = ['item', 'qtde', 'valor', 'actionsForm'];
   fornecedorList: Fornecedor[];
   itemList: Item[];
   compraItem: CompraItem;

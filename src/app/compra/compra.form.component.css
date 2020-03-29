@@ -12,3 +12,14 @@ tr.mat-footer-row {
 .mat-table-sticky {
   border-top: 1px solid #e0e0e0;
 }
+
+.mat-column-actionsForm,
+.mat-column-qtde {
+  max-width: 5% !important;
+}
+
+.mat-column-valor {
+  max-width: 10% !important;
+}
+
+

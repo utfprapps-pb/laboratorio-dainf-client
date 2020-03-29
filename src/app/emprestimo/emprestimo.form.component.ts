@@ -10,6 +10,7 @@ import {Usuario} from '../usuario/usuario';
 import {MatTable} from '@angular/material/table';
 import {NgForm} from '@angular/forms';
 import {SelectItem} from 'primeng';
+import {Utils} from '../util/utils';
 
 @Component({
   selector: 'app-form--emprestimo',
@@ -26,6 +27,7 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
   @ViewChild('form', {static: true}) form: NgForm;
   @ViewChild('table') table: MatTable<any>;
   yesNoDropdown: SelectItem[];
+  pt: any;
 
   constructor(protected emprestimoService: EmprestimoService,
               protected injector: Injector,
@@ -40,6 +42,7 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
     if (!this.editando) {
       this.setUsuarioResponsavel();
     }
+    this.pt = Utils.calendarPtBr(this.pt);
   }
 
   setUsuarioResponsavel() {
@@ -60,7 +63,7 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
   findUsuarios($event) {
     this.usuarioService.complete($event.query)
       .subscribe(e => {
-        this.usuarioList = e;
+          this.usuarioList = e;
         }
       );
   }

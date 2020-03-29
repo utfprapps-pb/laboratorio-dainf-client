@@ -1,7 +1,6 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, Injector} from '@angular/core';
 import {CrudListComponent} from '../util/component/crud.list.component';
 import {Emprestimo} from './emprestimo';
-import {CompraService} from '../compra/compra.service';
 import {EmprestimoService} from './emprestimo.service';
 
 @Component({

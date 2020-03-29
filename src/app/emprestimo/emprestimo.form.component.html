@@ -68,8 +68,9 @@
                           validation
                           dataType="string"
                           dateFormat="dd/mm/yy"
-                          [style]="{width: '100%'}"
                           inputStyleClass="form-control"
+                          [locale]="pt"
+                          [style]="{width: '100%'}"
                           [(ngModel)]="object.dataEmprestimo">
               </p-calendar>
             </div>
@@ -85,6 +86,7 @@
                               appendTo="body"
                               field="nome"
                               inputStyleClass="form-control"
+                              (keyup.control.enter)="insertItem()"
                               [(ngModel)]="emprestimoItem.item"
                               (onSelect)="setDevolucaoItem()"
                               [style]="{width: '100%'}"
@@ -114,6 +116,7 @@
               <input type="number"
                      id="qtde"
                      [(ngModel)]="emprestimoItem.qtde"
+                     (keyup.control.enter)="insertItem()"
                      name="qtde"
                      class="form-control"
                      pInputText>
