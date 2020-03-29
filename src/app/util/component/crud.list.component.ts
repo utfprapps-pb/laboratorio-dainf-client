@@ -10,8 +10,8 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
 
   protected router: Router;
   protected messageService: MessageService;
-  protected displayedColumns: string[] = this.columnsTable;
-  protected dataSource: MatTableDataSource<T>;
+  public displayedColumns: string[] = this.columnsTable;
+  public dataSource: MatTableDataSource<T>;
   protected confirmationService: ConfirmationService;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
