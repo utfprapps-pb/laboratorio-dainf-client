@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api_url: 'http://192.168.56.1:8025/server/'
+  api_url: 'https://tcc-server-utfpr.herokuapp.com/server'
 };
 
 /*
