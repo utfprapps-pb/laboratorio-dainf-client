@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {LoginService} from './login/login.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'tcc-client';
+
+  isAuthenticated = false;
+
+  constructor(private loginService: LoginService) {
+    loginService.isAuthenticated.asObservable()
+      .subscribe(e => this.isAuthenticated = e);
+  }
 }

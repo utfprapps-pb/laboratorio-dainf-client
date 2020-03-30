@@ -1,6 +1,4 @@
-<app-toolbar></app-toolbar>
-
-<mat-sidenav-container class="example-sidenav">
+<mat-sidenav-container class="example-sidenav" style="height: calc(100vh - 50px)">
   <mat-sidenav [opened]="true" mode="side">
     <mat-nav-list>
       <a mat-list-item routerLink="/" routerLinkActive="active" (click)="display = false">
@@ -87,7 +85,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <router-outlet></router-outlet>
+<!--    <router-outlet></router-outlet>-->
   </mat-sidenav-content>
 </mat-sidenav-container>
 

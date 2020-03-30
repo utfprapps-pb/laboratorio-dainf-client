@@ -1,5 +1,16 @@
-<app-sidenav></app-sidenav>
-<router-outlet></router-outlet>
+<section>
+  <div class="ui-grid" style="min-height: 100vh">
+    <div class="ui-grid-col-12">
+      <app-toolbar *ngIf="isAuthenticated"></app-toolbar>
+    </div>
+    <div class="ui-grid-col-2" style="width: 250px">
+      <app-sidenav *ngIf="isAuthenticated"></app-sidenav>
+    </div>
+    <div class="ui-grid-col-10" [ngClass]="isAuthenticated ? 'content' : 'only-login'">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</section>
 <p-toast></p-toast>
 <p-confirmDialog [closeOnEscape]="true"
                  [closable]="true"

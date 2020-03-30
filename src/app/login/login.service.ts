@@ -1,14 +1,16 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
-import {Observable} from 'rxjs';
+import {Observable, Subject, throwError} from 'rxjs';
 import {Usuario} from '../usuario/usuario';
 import {environment} from '../../environments/environment';
+import {catchError, map} from 'rxjs/operators';
 
 @Injectable()
 export class LoginService {
 
   url: string;
+  isAuthenticated = new Subject<boolean>();
 
   constructor(private http: HttpClient,
               private router: Router) {
@@ -16,18 +18,23 @@ export class LoginService {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const token = localStorage.getItem('token');
-    if (token) {
-      return true;
-    } else {
-      this.logout();
-      return false;
-    }
+    const url = `${environment.api_url}usuario/user-info`;
+    return this.http.get(url).pipe(
+      map(e => {
+        this.isAuthenticated.next(true);
+        return true;
+      }),
+      catchError(err => {
+        this.logout();
+        return throwError(new Error('O usuário não está autenticado!'));
+      })
+    );
   }
 
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
+    this.isAuthenticated.next(false);
     this.router.navigate(['/login']);
   }
 

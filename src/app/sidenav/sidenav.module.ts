@@ -10,7 +10,6 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
-import {ToolbarModule} from '../toolbar/toolbar.module';
 
 @NgModule({
   imports: [
@@ -26,8 +25,7 @@ import {ToolbarModule} from '../toolbar/toolbar.module';
     MatExpansionModule,
     MatMenuModule,
     MatFormFieldModule,
-    MatSelectModule,
-    ToolbarModule
+    MatSelectModule
   ],
   exports: [
     SidenavComponent
