@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api_url: 'https://tcc-server-utfpr.herokuapp.com/server'
+  api_url: 'https://tcc-server-utfpr.herokuapp.com/server/'
 };
