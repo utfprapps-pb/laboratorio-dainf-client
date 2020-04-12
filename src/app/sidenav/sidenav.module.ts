@@ -10,6 +10,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import {SidenavService} from './sidenav.service';
 
 @NgModule({
   imports: [
@@ -33,7 +34,9 @@ import {MatSelectModule} from '@angular/material/select';
   declarations: [
     SidenavComponent
   ],
-  providers: []
+  providers: [
+    SidenavService
+  ]
 })
 export class SidenavModule {
 

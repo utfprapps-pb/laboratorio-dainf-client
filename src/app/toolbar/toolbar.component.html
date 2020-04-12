@@ -1,8 +1,12 @@
-<mat-toolbar color="primary" class="d-flex justify-content-between" style="height: 50px">
-  <div>
-    <span>Sistema de Gerenciamento do DAINF</span>
+<mat-toolbar class="d-flex justify-content-between mat-elevation-z9" style="height: 50px; background-color: #000000">
+  <div class="d-flex align-items-center">
+    <button *ngIf="widthScreen < 1200" id="btn-sidenav" class="btn-icon btn-sidenav" (click)="toogleSidenav()">
+      <i class="fa fa fa-bars"></i>
+    </button>
+    <img src="../../assets/utfpr.jpg" alt="logo_constru" style="width: 40px">
+    <a href="/" style="margin-left: 10px; color: white; text-decoration: none">Sistema de Gerenciamento do DAINF</a>
   </div>
-  <div>
-    <a href="#" (click)="logout()"><mat-icon style="color: #FFFFFF">exit_to_app</mat-icon></a>
-  </div>
+  <button class="btn-sidenav">
+    <a (click)="logout()" class="d-flex"><mat-icon style="color: #FFFFFF">exit_to_app</mat-icon></a>
+  </button>
 </mat-toolbar>

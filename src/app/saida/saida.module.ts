@@ -13,6 +13,9 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {AutoCompleteModule, CalendarModule, DropdownModule, InputTextareaModule, InputTextModule, TooltipModule} from 'primeng';
 import {ValidationModule} from '../validation/validation.module';
+import {VoltarModule} from '../geral/voltar/voltar.module';
+import {CancelarModule} from '../geral/cancelar/cancelar.module';
+import {SalvarModule} from '../geral/salvar/salvar.module';
 
 @NgModule({
   imports: [
@@ -31,7 +34,10 @@ import {ValidationModule} from '../validation/validation.module';
     CalendarModule,
     DropdownModule,
     ValidationModule,
-    InputTextareaModule
+    InputTextareaModule,
+    VoltarModule,
+    CancelarModule,
+    SalvarModule
   ],
   declarations: [
     SaidaFormComponent,

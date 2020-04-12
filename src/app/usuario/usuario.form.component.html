@@ -3,11 +3,7 @@
     <mat-card-title>
       <div class="d-flex align-items-center justify-content-between">
         <div class="d-flex align-items-center">
-          <button type="button"
-                  (click)="back()"
-                  mat-icon-button>
-            <mat-icon>arrow_back_ios</mat-icon>
-          </button>
+          <app-voltar (onClick)="back()"></app-voltar>
           <h4 class="m-0">Cadastro de Usuário</h4>
         </div>
         <div *ngIf="object.id != null">
@@ -126,19 +122,8 @@
 
         <div class="row">
           <div class="col-md-12 d-flex justify-content-end">
-            <button type="button"
-                    class="mr-2 w-100px br-25px"
-                    mat-stroked-button
-                    (click)="back()">
-              Cancelar
-            </button>
-
-            <button type="submit"
-                    color="primary"
-                    class="w-100px br-25px"
-                    mat-stroked-button>
-              Salvar
-            </button>
+            <app-cancelar (onClick)="back()"></app-cancelar>
+            <app-salvar [typeButton]="'submit'"></app-salvar>
           </div>
         </div>
       </form>

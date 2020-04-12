@@ -12,6 +12,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import {MatCardModule} from '@angular/material/card';
     MatIconModule,
     MatCardModule,
     MatButtonModule,
+    MatSortModule,
     InputTextModule,
     TooltipModule,
     AutoCompleteModule

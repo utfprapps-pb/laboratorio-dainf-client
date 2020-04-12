@@ -14,6 +14,10 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {ValidationService} from '../validation/validation.service';
 import {ValidationModule} from '../validation/validation.module';
+import {NovoModule} from '../geral/novo/novo.module';
+import {CancelarModule} from '../geral/cancelar/cancelar.module';
+import {SalvarModule} from '../geral/salvar/salvar.module';
+import {VoltarModule} from '../geral/voltar/voltar.module';
 
 @NgModule({
   imports: [
@@ -29,7 +33,11 @@ import {ValidationModule} from '../validation/validation.module';
     InputTextModule,
     TooltipModule,
     AutoCompleteModule,
-    ValidationModule
+    ValidationModule,
+    NovoModule,
+    CancelarModule,
+    SalvarModule,
+    VoltarModule
   ],
   declarations: [
     FornecedorFormComponent,

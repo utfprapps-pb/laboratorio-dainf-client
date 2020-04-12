@@ -1,31 +1,12 @@
-<mat-sidenav-container class="example-sidenav" style="height: calc(100vh - 50px)">
-  <mat-sidenav [opened]="true" mode="side">
-    <mat-nav-list>
-      <a mat-list-item routerLink="/" routerLinkActive="active" (click)="display = false">
-        <mat-icon mat-list-icon>home</mat-icon>
-        Home
+<mat-drawer-container class="example-sidenav" style="height: calc(100vh - 50px)">
+  <mat-drawer #drawer [opened]="true" mode="side" style="width: 100%">
+    <mat-nav-list #navList>
+      <a *ngFor="let menuItem of menuItems" mat-list-item [id]="[menuItem.id]" [routerLink]="[menuItem.path]"
+         routerLinkActive="active" class="color-toolbar">
+        <mat-icon mat-list-icon >{{menuItem.icon}}</mat-icon>
+        {{menuItem.title}}
+        <mat-divider></mat-divider>
       </a>
-      <mat-divider></mat-divider>
-      <a mat-list-item routerLink="/emprestimo" routerLinkActive="active" (click)="display = false">
-        <mat-icon mat-list-icon>business</mat-icon>
-        Empréstimo
-      </a>
-      <mat-divider></mat-divider>
-      <a mat-list-item routerLink="/saida" routerLinkActive="active" (click)="display = false">
-        <mat-icon mat-list-icon>arrow_downward</mat-icon>
-        Saída
-      </a>
-      <mat-divider></mat-divider>
-      <a mat-list-item routerLink="/compra" routerLinkActive="active" (click)="display = false">
-        <mat-icon mat-list-icon>money</mat-icon>
-        Compra
-      </a>
-      <mat-divider></mat-divider>
-      <a mat-list-item routerLink="/relatorios" routerLinkActive="active" (click)="display = false">
-        <mat-icon mat-list-icon>equalizer</mat-icon>
-        Relatórios
-      </a>
-      <mat-divider></mat-divider>
 
       <a mat-list-item (click)="toggleSubMenuCadastro()">
         <mat-icon mat-list-icon>edit</mat-icon>
@@ -34,24 +15,11 @@
         <mat-icon *ngIf="showSubMenuCadastro">expand_more</mat-icon>
       </a>
       <mat-nav-list class="sidenav-submenu" *ngIf="showSubMenuCadastro" style="margin-left: 25px !important;">
-        <a mat-list-item routerLink="/item" routerLinkActive="active" (click)="display = false">
-          <mat-icon mat-list-icon>business</mat-icon>
-          Item
-        </a>
-        <mat-divider></mat-divider>
-        <a mat-list-item routerLink="/grupo" routerLinkActive="active" (click)="display = false">
-          <mat-icon mat-list-icon>view_compact</mat-icon>
-          Grupo
-        </a>
-        <mat-divider></mat-divider>
-        <a mat-list-item routerLink="/fornecedor" routerLinkActive="active" (click)="display = false">
-          <mat-icon mat-list-icon>work</mat-icon>
-          Fornecedor
-        </a>
-        <mat-divider></mat-divider>
-        <a mat-list-item routerLink="/usuario" routerLinkActive="active" (click)="display = false">
-          <mat-icon mat-list-icon>person</mat-icon>
-          Usuário
+        <a *ngFor="let menuItem of menuCadastros" mat-list-item [id]="[menuItem.id]" [routerLink]="[menuItem.path]"
+           routerLinkActive="active" class="color-toolbar">
+          <mat-icon mat-list-icon >{{menuItem.icon}}</mat-icon>
+          {{menuItem.title}}
+          <mat-divider></mat-divider>
         </a>
       </mat-nav-list>
 
@@ -65,125 +33,14 @@
       </a>
 
       <mat-nav-list class="sidenav-submenu" *ngIf="showSubMenuGerais" style="margin-left: 25px !important;">
-        <a mat-list-item routerLink="/cidade" routerLinkActive="active" (click)="display = false">
-          <mat-icon mat-list-icon>location_city</mat-icon>
-          Cidade
-        </a>
-        <mat-divider></mat-divider>
-        <a mat-list-item routerLink="/estado" routerLinkActive="active" (click)="display = false">
-          <mat-icon mat-list-icon>view_compact</mat-icon>
-          Estado
-        </a>
-        <mat-divider></mat-divider>
-        <a mat-list-item routerLink="/pais" routerLinkActive="active" (click)="display = false">
-          <mat-icon mat-list-icon>emoji_flags</mat-icon>
-          País
+        <a *ngFor="let menuItem of menuGeral" mat-list-item [id]="[menuItem.id]" [routerLink]="[menuItem.path]"
+           routerLinkActive="active" class="color-toolbar">
+          <mat-icon mat-list-icon >{{menuItem.icon}}</mat-icon>
+          {{menuItem.title}}
+          <mat-divider></mat-divider>
         </a>
       </mat-nav-list>
 
     </mat-nav-list>
-  </mat-sidenav>
-
-  <mat-sidenav-content>
-<!--    <router-outlet></router-outlet>-->
-  </mat-sidenav-content>
-</mat-sidenav-container>
-
-<!--<p-sidebar [(visible)]="display"-->
-<!--           [baseZIndex]="1000"-->
-<!--           [showCloseIcon]="false"-->
-<!--           [style]="{overflowY: 'auto'}">-->
-
-<!--  <mat-nav-list>-->
-<!--    <a mat-list-item routerLink="/" routerLinkActive="active" (click)="display = false">-->
-<!--      <mat-icon mat-list-icon>home</mat-icon>-->
-<!--      Home-->
-<!--    </a>-->
-<!--    <mat-divider></mat-divider>-->
-<!--    <a mat-list-item routerLink="/emprestimo" routerLinkActive="active" (click)="display = false">-->
-<!--      <mat-icon mat-list-icon>business</mat-icon>-->
-<!--      Empréstimo-->
-<!--    </a>-->
-<!--    <mat-divider></mat-divider>-->
-<!--    <a mat-list-item routerLink="/saida" routerLinkActive="active" (click)="display = false">-->
-<!--      <mat-icon mat-list-icon>arrow_downward</mat-icon>-->
-<!--      Saída-->
-<!--    </a>-->
-<!--    <mat-divider></mat-divider>-->
-<!--    <a mat-list-item routerLink="/entrada" routerLinkActive="active" (click)="display = false">-->
-<!--      <mat-icon mat-list-icon>arrow_upward</mat-icon>-->
-<!--      Entrada-->
-<!--    </a>-->
-<!--    <mat-divider></mat-divider>-->
-<!--    <a mat-list-item routerLink="/compra" routerLinkActive="active" (click)="display = false">-->
-<!--      <mat-icon mat-list-icon>money</mat-icon>-->
-<!--      Compra-->
-<!--    </a>-->
-<!--    <mat-divider></mat-divider>-->
-<!--    <a mat-list-item routerLink="/relatorios" routerLinkActive="active" (click)="display = false">-->
-<!--      <mat-icon mat-list-icon>equalizer</mat-icon>-->
-<!--      Relatórios-->
-<!--    </a>-->
-<!--    <mat-divider></mat-divider>-->
-
-<!--    <a mat-list-item (click)="toggleSubMenuCadastro()">-->
-<!--      <mat-icon mat-list-icon>edit</mat-icon>-->
-<!--      Cadastros-->
-<!--      <mat-icon *ngIf="!showSubMenuCadastro">chevron_right</mat-icon>-->
-<!--      <mat-icon *ngIf="showSubMenuCadastro">expand_more</mat-icon>-->
-<!--    </a>-->
-<!--    <mat-nav-list class="sidenav-submenu" *ngIf="showSubMenuCadastro" style="margin-left: 25px !important;">-->
-<!--      <a mat-list-item routerLink="/item" routerLinkActive="active" (click)="display = false">-->
-<!--        <mat-icon mat-list-icon>business</mat-icon>-->
-<!--        Item-->
-<!--      </a>-->
-<!--      <mat-divider></mat-divider>-->
-<!--      <a mat-list-item routerLink="/grupo" routerLinkActive="active" (click)="display = false">-->
-<!--        <mat-icon mat-list-icon>view_compact</mat-icon>-->
-<!--        Grupo-->
-<!--      </a>-->
-<!--      <mat-divider></mat-divider>-->
-<!--      <a mat-list-item routerLink="/fornecedor" routerLinkActive="active" (click)="display = false">-->
-<!--        <mat-icon mat-list-icon>work</mat-icon>-->
-<!--        Fornecedor-->
-<!--      </a>-->
-<!--      <mat-divider></mat-divider>-->
-<!--      <a mat-list-item routerLink="/usuario" routerLinkActive="active" (click)="display = false">-->
-<!--        <mat-icon mat-list-icon>person</mat-icon>-->
-<!--        Usuário-->
-<!--      </a>-->
-<!--    </mat-nav-list>-->
-
-<!--    <mat-divider></mat-divider>-->
-
-<!--    <a mat-list-item (click)="toggleSubMenuGerais()">-->
-<!--      <mat-icon mat-list-icon>business</mat-icon>-->
-<!--      Geral-->
-<!--      <mat-icon *ngIf="!showSubMenuGerais">chevron_right</mat-icon>-->
-<!--      <mat-icon *ngIf="showSubMenuGerais">expand_more</mat-icon>-->
-<!--    </a>-->
-
-<!--    <mat-nav-list class="sidenav-submenu" *ngIf="showSubMenuGerais" style="margin-left: 25px !important;">-->
-<!--      <a mat-list-item routerLink="/cidade" routerLinkActive="active" (click)="display = false">-->
-<!--        <mat-icon mat-list-icon>location_city</mat-icon>-->
-<!--        Cidade-->
-<!--      </a>-->
-<!--      <mat-divider></mat-divider>-->
-<!--      <a mat-list-item routerLink="/estado" routerLinkActive="active" (click)="display = false">-->
-<!--        <mat-icon mat-list-icon>view_compact</mat-icon>-->
-<!--        Estado-->
-<!--      </a>-->
-<!--      <mat-divider></mat-divider>-->
-<!--      <a mat-list-item routerLink="/pais" routerLinkActive="active" (click)="display = false">-->
-<!--        <mat-icon mat-list-icon>emoji_flags</mat-icon>-->
-<!--        País-->
-<!--      </a>-->
-<!--    </mat-nav-list>-->
-
-<!--  </mat-nav-list>-->
-
-<!--</p-sidebar>-->
-
-<!--<button id="btn-sidenav" class="btn-icon" (click)="openSidenav()">-->
-<!--  <i class="fa fa-bars white-text"></i>-->
-<!--</button>-->
+  </mat-drawer>
+</mat-drawer-container>

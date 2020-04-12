@@ -2,16 +2,12 @@
   <mat-card>
     <mat-card-title>
       <div class="d-flex align-items-center">
-        <button type="button"
-                (click)="back()"
-                mat-icon-button>
-          <mat-icon>arrow_back_ios</mat-icon>
-        </button>
+        <app-voltar (onClick)="back()"></app-voltar>
         <h4 class="m-0">Cadastro de Fornecedor</h4>
       </div>
     </mat-card-title>
     <mat-card-content>
-      <form #form="ngForm">
+      <form #form="ngForm" (submit)="save()">
         <div class="row">
           <div class="col-md-2">
             <div class="form-group">
@@ -148,26 +144,14 @@
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-12 d-flex justify-content-end">
+            <app-cancelar (onClick)="back()"></app-cancelar>
+            <app-salvar [typeButton]="'submit'"></app-salvar>
+          </div>
+        </div>
       </form>
 
-      <div class="row">
-        <div class="col-md-12 d-flex justify-content-end">
-          <button type="button"
-                  class="mr-2 w-100px br-25px"
-                  mat-stroked-button
-                  (click)="back()">
-            Cancelar
-          </button>
-
-          <button type="button"
-                  color="primary"
-                  class="w-100px br-25px"
-                  mat-stroked-button
-                  (click)="save()">
-            Salvar
-          </button>
-        </div>
-      </div>
     </mat-card-content>
   </mat-card>
 </div>

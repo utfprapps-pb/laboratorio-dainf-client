@@ -14,6 +14,12 @@ import {EmprestimoListComponent} from './emprestimo.list.component';
 import {EmprestimoService} from './emprestimo.service';
 import {ValidationModule} from '../validation/validation.module';
 import {ValidationService} from '../validation/validation.service';
+import {MatSortModule} from '@angular/material/sort';
+import {NovoModule} from '../geral/novo/novo.module';
+import {VoltarModule} from '../geral/voltar/voltar.module';
+import {CancelarModule} from '../geral/cancelar/cancelar.module';
+import {SalvarModule} from '../geral/salvar/salvar.module';
+import {BottomSheetModule} from '../geral/bottomScheet/bottomSheet.module';
 
 @NgModule({
   imports: [
@@ -25,13 +31,19 @@ import {ValidationService} from '../validation/validation.service';
     MatPaginatorModule,
     MatIconModule,
     MatCardModule,
+    MatSortModule,
     MatButtonModule,
     InputTextModule,
     TooltipModule,
     AutoCompleteModule,
     CalendarModule,
     DropdownModule,
-    ValidationModule
+    ValidationModule,
+    NovoModule,
+    VoltarModule,
+    CancelarModule,
+    SalvarModule,
+    BottomSheetModule
   ],
   declarations: [
     EmprestimoFormComponent,

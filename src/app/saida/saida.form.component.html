@@ -2,11 +2,7 @@
   <mat-card>
     <mat-card-title>
       <div class="d-flex align-items-center">
-        <button type="button"
-                (click)="back()"
-                mat-icon-button>
-          <mat-icon>arrow_back_ios</mat-icon>
-        </button>
+        <app-voltar (onClick)="back()"></app-voltar>
         <h4 class="m-0">Cadastro de Saída</h4>
       </div>
     </mat-card-title>
@@ -49,6 +45,8 @@
                           dataType="string"
                           dateFormat="dd/mm/yy"
                           [style]="{width: '100%'}"
+                          [maxDate]="maxDate"
+                          [locale]="pt"
                           inputStyleClass="form-control"
                           [(ngModel)]="object.dataSaida">
               </p-calendar>
@@ -82,6 +80,7 @@
               <label for="qtde">Quantidade</label>
               <input type="number"
                      id="qtde"
+                     autocomplete="off"
                      #qtdeToAdd
                      (keyup.control.enter)="insertItem()"
                      [(ngModel)]="saidaItem.qtde"
@@ -106,21 +105,21 @@
         </div>
 
         <div *ngIf="object?.saidaItem?.length > 0" class="example-container mat-elevation-z8">
-          <mat-table #table="matTable"  [dataSource]="object.saidaItem">
+          <mat-table #table="matTable" [dataSource]="object.saidaItem">
             <ng-container matColumnDef="item">
-              <mat-header-cell *matHeaderCellDef> Item </mat-header-cell>
+              <mat-header-cell *matHeaderCellDef> Item</mat-header-cell>
               <mat-cell *matCellDef="let itemSaida"> {{itemSaida.item.nome}} </mat-cell>
-              <mat-footer-cell *matFooterCellDef class="font-weight-bolder"> Total </mat-footer-cell>
+              <mat-footer-cell *matFooterCellDef class="font-weight-bolder"> Total</mat-footer-cell>
             </ng-container>
 
             <ng-container matColumnDef="qtde">
-              <mat-header-cell *matHeaderCellDef> Qtde </mat-header-cell>
+              <mat-header-cell *matHeaderCellDef> Qtde</mat-header-cell>
               <mat-cell *matCellDef="let itemSaida"> {{itemSaida.qtde}} </mat-cell>
               <mat-footer-cell *matFooterCellDef> {{getQtdeTotal()}} </mat-footer-cell>
             </ng-container>
 
             <ng-container matColumnDef="actionsForm">
-              <mat-header-cell *matHeaderCellDef> Opções </mat-header-cell>
+              <mat-header-cell *matHeaderCellDef> Opções</mat-header-cell>
               <mat-cell *matCellDef="let itemSaida">
                 <button class="btn btn-outline-primary rounded"
                         type="button"
@@ -134,7 +133,8 @@
 
             <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-            <mat-footer-row *matFooterRowDef="displayedColumns; sticky: true" class="font-weight-bolder"></mat-footer-row>
+            <mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"
+                            class="font-weight-bolder"></mat-footer-row>
           </mat-table>
         </div>
 
@@ -156,20 +156,8 @@
 
         <div class="row">
           <div class="col-md-12 d-flex justify-content-end">
-            <button type="button"
-                    class="mr-2 w-100px br-25px"
-                    mat-stroked-button
-                    (click)="back()">
-              Cancelar
-            </button>
-
-            <button type="button"
-                    color="primary"
-                    class="w-100px br-25px"
-                    mat-stroked-button
-                    (click)="save()">
-              Salvar
-            </button>
+            <app-cancelar (onClick)="back()"></app-cancelar>
+            <app-salvar (onClick)="save()"></app-salvar>
           </div>
         </div>
       </form>

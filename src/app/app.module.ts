@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {LOCALE_ID, NgModule} from '@angular/core';
+import {DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -18,7 +18,7 @@ import {CidadeModule} from './cidade/cidade.module';
 import {ItemModule} from './item/item.module';
 import {PageNotFoundModule} from './pageNotFound/pageNotFound.module';
 import {NotAuthorizedModule} from './notAuthorized/notAuthorized.module';
-import {ConfirmationService, ConfirmDialogModule, MessageService, ToastModule} from 'primeng';
+import {ConfirmationService, ConfirmDialogModule, MessageService, ScrollPanelModule, ToastModule} from 'primeng';
 import {CompraModule} from './compra/compra.module';
 import {LoginService} from './login/login.service';
 import {HttpClientInterceptor} from './http-client.interceptor';
@@ -26,6 +26,7 @@ import {LoginModule} from './login/login.module';
 import {EmprestimoModule} from './emprestimo/emprestimo.module';
 import {SaidaModule} from './saida/saida.module';
 import ptBr from '@angular/common/locales/pt';
+
 registerLocaleData(ptBr);
 
 @NgModule({
@@ -56,6 +57,7 @@ registerLocaleData(ptBr);
     EmprestimoModule,
     ConfirmDialogModule,
     SaidaModule,
+    ScrollPanelModule,
 
   ],
   providers: [
@@ -70,6 +72,10 @@ registerLocaleData(ptBr);
     {
       provide: LOCALE_ID,
       useValue: 'pt'
+    },
+    {
+      provide: DEFAULT_CURRENCY_CODE,
+      useValue: 'BRL'
     }
   ],
   bootstrap: [AppComponent]

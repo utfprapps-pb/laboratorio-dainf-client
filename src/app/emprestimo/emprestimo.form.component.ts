@@ -8,12 +8,11 @@ import {ItemService} from '../item/item.service';
 import {UsuarioService} from '../usuario/usuario.service';
 import {Usuario} from '../usuario/usuario';
 import {MatTable} from '@angular/material/table';
-import {NgForm} from '@angular/forms';
-import {SelectItem} from 'primeng';
+import {AutoComplete, SelectItem} from 'primeng';
 import {Utils} from '../util/utils';
 
 @Component({
-  selector: 'app-form--emprestimo',
+  selector: 'app-form-emprestimo',
   templateUrl: './emprestimo.form.component.html',
   styleUrls: ['./emprestimo.form.component.css']
 })
@@ -24,8 +23,9 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
   itemList: Item[];
   usuarioList: Usuario[];
   itemDevolver: any;
-  @ViewChild('form', {static: true}) form: NgForm;
+  maxDate = new Date();
   @ViewChild('table') table: MatTable<any>;
+  @ViewChild('itemToAdd') itemToAdd: AutoComplete;
   yesNoDropdown: SelectItem[];
   pt: any;
 
@@ -39,10 +39,12 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
       {label: 'Sim', value: true},
       {label: 'Não', value: false}
     ];
-    if (!this.editando) {
-      this.setUsuarioResponsavel();
-    }
     this.pt = Utils.calendarPtBr(this.pt);
+  }
+
+  initializeValues(): void {
+    this.object.dataEmprestimo = new Date().toLocaleDateString();
+    this.setUsuarioResponsavel();
   }
 
   setUsuarioResponsavel() {
@@ -69,21 +71,27 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
   }
 
   insertItem() {
-    if (!this.object.emprestimoItem) {
-      this.object.emprestimoItem = new Array();
-    }
-    const upQtde = this.object.emprestimoItem.some(value => value.item.id === this.emprestimoItem.item.id);
-    if (upQtde) {
-      this.object.emprestimoItem.forEach(empItem => {
-        if (empItem.item.id === this.emprestimoItem.item.id) {
-          empItem.qtde = Number(empItem.qtde) + Number(this.emprestimoItem.qtde);
-        }
-      });
+    if (this.emprestimoItem.item && this.emprestimoItem.qtde
+      && typeof this.emprestimoItem.item === 'object') {
+      if (!this.object.emprestimoItem) {
+        this.object.emprestimoItem = new Array();
+      }
+      const upQtde = this.object.emprestimoItem.some(value => value.item.id === this.emprestimoItem.item.id);
+      if (upQtde) {
+        this.object.emprestimoItem.forEach(empItem => {
+          if (empItem.item.id === this.emprestimoItem.item.id) {
+            empItem.qtde = Number(empItem.qtde) + Number(this.emprestimoItem.qtde);
+          }
+        });
+      } else {
+        this.object.emprestimoItem.push(this.emprestimoItem);
+      }
+      this.emprestimoItem = new EmprestimoItem();
+      this.setFocusInputItem();
+      this.table.renderRows();
     } else {
-      this.object.emprestimoItem.push(this.emprestimoItem);
+      this.messageService.add({severity: 'info', detail: 'Necessário informar o item e a quantidade.'});
     }
-    this.emprestimoItem = new EmprestimoItem();
-    this.table.renderRows();
   }
 
   removeItem(id: number) {
@@ -107,6 +115,11 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
   setDevolucaoItem() {
     if (this.emprestimoItem.item != null) {
       this.itemDevolver = this.emprestimoItem.item.devolver;
+      this.emprestimoItem.qtde = 1;
     }
+  }
+
+  setFocusInputItem() {
+    this.itemToAdd.focusInput();
   }
 }

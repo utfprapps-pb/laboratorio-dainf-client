@@ -26,14 +26,18 @@ export abstract class CrudFormComponent<T, ID> extends BaseFormComponent impleme
 
   ngOnInit(): void {
     this.newInstance();
+    this.preOnInit();
     this.route.params.subscribe(params => {
       if (params.id) {
         this.edit(params.id);
+      } else {
+        this.initializeValues();
       }
     });
   }
 
   save() {
+    console.log(this.object);
     if (this.isValid() && this.validExtra) {
       this.service.save(this.object)
         .subscribe(e => {
@@ -49,6 +53,10 @@ export abstract class CrudFormComponent<T, ID> extends BaseFormComponent impleme
       this.validarFormulario();
     }
   }
+
+  initializeValues(): void {}
+
+  preOnInit(): void {}
 
   edit(id: ID) {
     this.service.findOne(id)

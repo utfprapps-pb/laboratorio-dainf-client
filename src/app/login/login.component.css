@@ -1,10 +1,14 @@
 .div-header {
-  background: linear-gradient(60deg, #1a88ff, #1a88ff);
-  box-shadow: 0 4px 20px 0 rgba(0, 0, 0,.14), 0 7px 10px -5px rgba(26, 136, 255,.4);
+  background: linear-gradient(60deg, #000000, #000009);
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0,.14), 0 7px 10px -5px rgba(11, 11, 12, 0.64);
   padding: 10px;
   border-radius: 3px;
   color: white;
   text-align: center;
   margin-top: -30px !important;
   height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
 }

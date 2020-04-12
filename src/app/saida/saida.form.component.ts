@@ -8,6 +8,7 @@ import {ItemService} from '../item/item.service';
 import {UsuarioService} from '../usuario/usuario.service';
 import {MatTable} from '@angular/material/table';
 import {AutoComplete} from 'primeng';
+import {Utils} from '../util/utils';
 
 @Component({
   selector: 'app-form-saida',
@@ -18,10 +19,12 @@ export class SaidaFormComponent extends CrudFormComponent<Saida, number> {
 
   itemList: Item[];
   saidaItem: SaidaItem;
+  maxDate = new Date();
   displayedColumns = ['item', 'qtde', 'actionsForm'];
   @ViewChild('table') table: MatTable<any>;
   @ViewChild('itemToAdd') itemToAdd: AutoComplete;
   @ViewChild('qtdeToAdd') qtdeToAdd: ElementRef;
+  pt: any;
 
   constructor(protected saidaService: SaidaService,
               protected injector: Injector,
@@ -29,9 +32,12 @@ export class SaidaFormComponent extends CrudFormComponent<Saida, number> {
               private usuarioService: UsuarioService) {
     super(saidaService, injector, '/saida');
     this.saidaItem = new SaidaItem();
-    if (!this.editando) {
-      this.setUsuarioResponsavel();
-    }
+    this.pt = Utils.calendarPtBr(this.pt);
+  }
+
+  initializeValues(): void {
+    this.object.dataSaida = new Date().toLocaleDateString();
+    this.setUsuarioResponsavel();
   }
 
   setFocusInputItem() {
@@ -76,7 +82,8 @@ export class SaidaFormComponent extends CrudFormComponent<Saida, number> {
   }
 
   insertItem() {
-    if (this.saidaItem.item && this.saidaItem.qtde) {
+    if (this.saidaItem.item && this.saidaItem.qtde
+            && typeof this.saidaItem.item === 'object') {
       if (!this.object.saidaItem) {
         this.object.saidaItem = new Array();
       }

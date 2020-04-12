@@ -10,6 +10,8 @@ import {Item} from '../item/item';
 import {CompraItem} from './compraItem';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {UsuarioService} from '../usuario/usuario.service';
+import {AutoComplete} from 'primeng';
+import {Utils} from '../util/utils';
 
 @Component({
   selector: 'app-form-compra',
@@ -23,9 +25,10 @@ export class CompraFormComponent extends CrudFormComponent<Compra, number> {
   itemList: Item[];
   compraItem: CompraItem;
   dataSource: MatTableDataSource<CompraItem>;
-
-  @ViewChild('form', {static: true}) form: NgForm;
+  maxDate = new Date();
   @ViewChild('table') table: MatTable<any>;
+  @ViewChild('itemToAdd') itemToAdd: AutoComplete;
+  pt: any;
 
   constructor(protected compraService: CompraService,
               protected injector: Injector,
@@ -34,9 +37,12 @@ export class CompraFormComponent extends CrudFormComponent<Compra, number> {
               private usuarioService: UsuarioService) {
     super(compraService, injector, '/compra');
     this.compraItem = new CompraItem();
-    if (!this.editando) {
-      this.setUsuarioResponsavel();
-    }
+    this.pt = Utils.calendarPtBr(this.pt);
+  }
+
+  initializeValues(): void {
+    this.object.dataCompra = new Date().toLocaleDateString();
+    this.setUsuarioResponsavel();
   }
 
   setUsuarioResponsavel() {
@@ -78,25 +84,32 @@ export class CompraFormComponent extends CrudFormComponent<Compra, number> {
   setPrecoProduto() {
     if (this.compraItem != null) {
       this.compraItem.valor = this.compraItem.item.valor;
+      this.compraItem.qtde = 1;
     }
   }
 
   insertItem() {
-    if (!this.object.compraItem) {
-      this.object.compraItem = new Array();
-    }
-    const upQtde = this.object.compraItem.some(value => value.item.id === this.compraItem.item.id);
-    if (upQtde) {
-      this.object.compraItem.forEach(compItem => {
-        if (compItem.item.id === this.compraItem.item.id) {
-          compItem.qtde = Number(compItem.qtde) + Number(this.compraItem.qtde);
-        }
-      });
+    if (this.compraItem.item && this.compraItem.qtde
+          && typeof this.compraItem.item === 'object') {
+      if (!this.object.compraItem) {
+        this.object.compraItem = new Array();
+      }
+      const upQtde = this.object.compraItem.some(value => value.item.id === this.compraItem.item.id);
+      if (upQtde) {
+        this.object.compraItem.forEach(compItem => {
+          if (compItem.item.id === this.compraItem.item.id) {
+            compItem.qtde = Number(compItem.qtde) + Number(this.compraItem.qtde);
+          }
+        });
+      } else {
+        this.object.compraItem.push(this.compraItem);
+      }
+      this.compraItem = new CompraItem();
+      this.setFocusInputItem();
+      this.table.renderRows();
     } else {
-      this.object.compraItem.push(this.compraItem);
+      this.messageService.add({severity: 'info', detail: 'Necessário informar o item e a quantidade.'});
     }
-    this.compraItem = new CompraItem();
-    this.table.renderRows();
   }
 
   removeItem(id: number) {
@@ -108,6 +121,10 @@ export class CompraFormComponent extends CrudFormComponent<Compra, number> {
     });
     this.object.compraItem.splice(index, 1);
     this.table.renderRows();
+  }
+
+  setFocusInputItem() {
+    this.itemToAdd.focusInput();
   }
 
 

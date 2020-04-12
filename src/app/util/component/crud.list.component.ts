@@ -1,18 +1,21 @@
-import {Injector, OnInit, ViewChild} from '@angular/core';
+import {HostListener, Injector, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {CrudService} from '../service/crud.service';
 import {ConfirmationService, MessageService} from 'primeng';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
+import {BottomSheetComponent} from '../../geral/bottomScheet/bottomSheet.component';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
 
 export abstract class CrudListComponent<T, ID> implements OnInit {
 
   protected router: Router;
   protected messageService: MessageService;
+  protected confirmationService: ConfirmationService;
+  protected bottom: MatBottomSheet;
   public displayedColumns: string[] = this.columnsTable;
   public dataSource: MatTableDataSource<T>;
-  protected confirmationService: ConfirmationService;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   objects: T[];
@@ -28,6 +31,7 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
     this.router = this.injector.get(Router);
     this.messageService = this.injector.get(MessageService);
     this.confirmationService = this.injector.get(ConfirmationService);
+    this.bottom = injector.get(MatBottomSheet);
   }
 
   applyFilter(filterValue: string) {
@@ -74,8 +78,33 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
     });
   }
 
+  openBottomSheet(id): void {
+    if (window.innerWidth <= 1200) {
+      const sheet = this.bottom.open(BottomSheetComponent);
+      sheet.afterDismissed().subscribe(action => {
+        if (action === 'E') {
+          this.edit(id);
+        } else if (action === 'R') {
+          this.delete(id);
+        }
+      });
+    }
+  }
+
   openForm() {
     this.router.navigate([this.urlForm]);
   }
 
+  @HostListener('window:resize', ['$event'])
+  buildColumnsTable() {
+    if (window.innerWidth <= 1200) {
+      this.columnsTable.forEach((value, index) => {
+        if (value === 'actions') {
+          this.columnsTable.splice(index, 1);
+        }
+      });
+    } else if (this.columnsTable.filter(value => value === 'actions').length === 0) {
+      this.columnsTable.push('actions');
+    }
+  }
 }

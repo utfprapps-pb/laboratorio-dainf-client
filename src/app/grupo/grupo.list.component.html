@@ -3,12 +3,7 @@
     <mat-card-title>
       <div class="d-flex align-items-center justify-content-between">
         <h4 class="m-0">Grupo</h4>
-        <button type="button"
-                (click)="openForm()"
-                pTooltip="Inserir Novo Registro"
-                mat-icon-button>
-          <mat-icon>add</mat-icon>
-        </button>
+        <app-novo (onClick)="openForm()"></app-novo>
       </div>
     </mat-card-title>
     <mat-card-content>
@@ -21,12 +16,12 @@
 
           <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Código</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+            <mat-cell *matCellDef="let row" (click)="openBottomSheet(row.id)">{{row.id}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="descricao">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Descrição</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.descricao}}</mat-cell>
+            <mat-cell *matCellDef="let row" (click)="openBottomSheet(row.id)">{{row.descricao}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="actions">
@@ -52,7 +47,8 @@
           </mat-row>
         </mat-table>
 
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 50]"></mat-paginator>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]"
+                       [pageSize]="100"></mat-paginator>
       </div>
     </mat-card-content>
   </mat-card>

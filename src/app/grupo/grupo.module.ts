@@ -14,6 +14,10 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {ValidationModule} from '../validation/validation.module';
 import {ValidationService} from '../validation/validation.service';
+import {VoltarModule} from '../geral/voltar/voltar.module';
+import {CancelarModule} from '../geral/cancelar/cancelar.module';
+import {SalvarModule} from '../geral/salvar/salvar.module';
+import {NovoModule} from '../geral/novo/novo.module';
 
 @NgModule({
   imports: [
@@ -28,7 +32,11 @@ import {ValidationService} from '../validation/validation.service';
     MatButtonModule,
     InputTextModule,
     TooltipModule,
-    ValidationModule
+    ValidationModule,
+    VoltarModule,
+    CancelarModule,
+    SalvarModule,
+    NovoModule
   ],
   declarations: [
     GrupoListComponent,

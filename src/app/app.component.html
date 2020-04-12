@@ -1,13 +1,15 @@
 <section>
   <div class="ui-grid" style="min-height: 100vh">
-    <div class="ui-grid-col-12">
-      <app-toolbar *ngIf="isAuthenticated"></app-toolbar>
+    <div *ngIf="isAuthenticated" class="ui-grid-col-12">
+      <app-toolbar></app-toolbar>
     </div>
-    <div class="ui-grid-col-2" style="width: 250px">
-      <app-sidenav *ngIf="isAuthenticated"></app-sidenav>
+    <div *ngIf="isAuthenticated" class="ui-grid-col-2" style="width: 250px; height: 100%; min-height: 100%" id="sidenav">
+      <app-sidenav></app-sidenav>
     </div>
-    <div class="ui-grid-col-10" [ngClass]="isAuthenticated ? 'content' : 'only-login'">
-      <router-outlet></router-outlet>
+    <div class="ui-grid-col-10" [ngClass]="isAuthenticated ? 'content' : 'only-login'" id="content">
+      <p-scrollPanel [style]="{width: '100%', height: 'calc(100vh - 50px)'}" styleClass="scrool-table-dash">
+        <router-outlet></router-outlet>
+      </p-scrollPanel>
     </div>
   </div>
 </section>

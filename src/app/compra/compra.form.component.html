@@ -2,11 +2,7 @@
   <mat-card>
     <mat-card-title>
       <div class="d-flex align-items-center">
-        <button type="button"
-                (click)="back()"
-                mat-icon-button>
-          <mat-icon>arrow_back_ios</mat-icon>
-        </button>
+        <app-voltar (onClick)="back()"></app-voltar>
         <h4 class="m-0">Cadastro de Compra</h4>
       </div>
     </mat-card-title>
@@ -69,6 +65,8 @@
                           dataType="string"
                           dateFormat="dd/mm/yy"
                           [style]="{width: '100%'}"
+                          [maxDate]="maxDate"
+                          [locale]="pt"
                           inputStyleClass="form-control"
                           [(ngModel)]="object.dataCompra">
               </p-calendar>
@@ -79,13 +77,15 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label for="item">Produto</label>
+              <label for="item">Item</label>
               <p-autoComplete id="item"
                               name="item"
                               appendTo="body"
                               field="nome"
+                              #itemToAdd
                               inputStyleClass="form-control"
                               [(ngModel)]="compraItem.item"
+                              (keyup.control.enter)="insertItem()"
                               (onSelect)="setPrecoProduto()"
                               [style]="{width: '100%'}"
                               [suggestions]="itemList"
@@ -101,7 +101,9 @@
               <input type="text"
                      id="valor"
                      name="valor"
+                     (keyup.control.enter)="insertItem()"
                      [(ngModel)]="compraItem.valor"
+                     disabled
                      class="form-control"
                      pInputText>
             </div>
@@ -110,8 +112,10 @@
           <div class="col-md-2">
             <div class="form-group">
               <label for="qtde">Quantidade</label>
-              <input type="text"
+              <input type="number"
                      id="qtde"
+                     autocomplete="off"
+                     (keyup.control.enter)="insertItem()"
                      [(ngModel)]="compraItem.qtde"
                      name="qtde"
                      class="form-control"
@@ -163,7 +167,7 @@
                   <i class="fa fa-trash-o"></i>
                 </button>
               </mat-cell>
-              <td mat-footer-cell *matFooterCellDef></td>
+              <mat-footer-cell *matFooterCellDef></mat-footer-cell>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
@@ -174,19 +178,8 @@
 
         <div class="row">
           <div class="col-md-12 d-flex justify-content-end">
-            <button type="button"
-                    class="mr-2 w-100px br-25px"
-                    mat-stroked-button
-                    (click)="back()">
-              Cancelar
-            </button>
-
-            <button type="submit"
-                    color="primary"
-                    class="w-100px br-25px"
-                    mat-stroked-button>
-              Salvar
-            </button>
+            <app-cancelar (onClick)="back()"></app-cancelar>
+            <app-salvar [typeButton]="'submit'"></app-salvar>
           </div>
         </div>
       </form>

@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {AutoCompleteModule, DropdownModule, InputTextModule, TooltipModule} from 'primeng';
+import {AutoCompleteModule, DialogModule, DropdownModule, InputTextModule, TooltipModule} from 'primeng';
 import {ItemFormComponent} from './item.form.component';
 import {ItemListComponent} from './item.list.component';
 import {ItemService} from './item.service';
@@ -14,6 +14,11 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {ValidationService} from '../validation/validation.service';
 import {ValidationModule} from '../validation/validation.module';
+import {VoltarModule} from '../geral/voltar/voltar.module';
+import {CancelarModule} from '../geral/cancelar/cancelar.module';
+import {SalvarModule} from '../geral/salvar/salvar.module';
+import {NovoModule} from '../geral/novo/novo.module';
+import {GrupoModule} from '../grupo/grupo.module';
 
 @NgModule({
   imports: [
@@ -30,7 +35,13 @@ import {ValidationModule} from '../validation/validation.module';
     TooltipModule,
     AutoCompleteModule,
     DropdownModule,
-    ValidationModule
+    ValidationModule,
+    VoltarModule,
+    CancelarModule,
+    SalvarModule,
+    NovoModule,
+    DialogModule,
+    GrupoModule
   ],
   declarations: [
     ItemFormComponent,

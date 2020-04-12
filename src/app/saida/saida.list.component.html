@@ -21,22 +21,22 @@
 
           <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Código</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+            <mat-cell *matCellDef="let row" (click)="openBottomSheet(row.id)">{{row.id}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="dtSaida">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Data Saída</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row?.dataSaida}}</mat-cell>
+            <mat-cell *matCellDef="let row" (click)="openBottomSheet(row.id)">{{row?.dataSaida}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="qtde">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Quantidade</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{getQtdeTotal(row?.saidaItem)}}</mat-cell>
+            <mat-cell *matCellDef="let row" (click)="openBottomSheet(row.id)">{{getQtdeTotal(row?.saidaItem)}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="usuario">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Usuário Responsável</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row?.usuarioResponsavel?.nome}}</mat-cell>
+            <mat-cell *matCellDef="let row" (click)="openBottomSheet(row.id)">{{row?.usuarioResponsavel?.nome}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="actions">
@@ -61,7 +61,8 @@
           <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
 
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 50]"></mat-paginator>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]"
+                       [pageSize]="100"></mat-paginator>
       </div>
     </mat-card-content>
   </mat-card>
