@@ -113,7 +113,7 @@
                               validation
                               field="nome"
                               inputStyleClass="form-control"
-                              [style]="{width: '100%'}"
+                              [dropdown]="true"
                               [suggestions]="cidadeList"
                               [(ngModel)]="object.cidade"
                               (onClear)="object.cidade = null"
@@ -135,7 +135,7 @@
                               appendTo="body"
                               field="nome"
                               inputStyleClass="form-control"
-                              [style]="{width: '100%'}"
+                              [dropdown]="true"
                               [suggestions]="estadoList"
                               [(ngModel)]="object.estado"
                               (onClear)="object.estado = null"

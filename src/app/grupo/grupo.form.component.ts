@@ -1,9 +1,9 @@
-import {Component, Injector, OnInit, ViewChild} from '@angular/core';
+import {Component, Injector} from '@angular/core';
 import {Grupo} from './grupo';
 import {GrupoService} from './grupo.service';
-import {NgForm} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
 import {CrudFormComponent} from '../util/component/crud.form.component';
+import {Item} from '../item/item';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form-grupo',
@@ -12,37 +12,28 @@ import {CrudFormComponent} from '../util/component/crud.form.component';
 })
 export class GrupoFormComponent extends CrudFormComponent<Grupo, number> {
 
-  // grupo: Grupo;
-  @ViewChild('form', {static: true}) form: NgForm;
+  dialogItensRelacionados = false;
+  itensVinculados: Item[];
+  displayedColumns = ['id', 'nome'];
 
   constructor(protected grupoService: GrupoService,
               protected injector: Injector) {
     super(grupoService, injector, '/grupo');
   }
-  //
-  // ngOnInit() {
-  //   this.grupo = new Grupo();
-  //
-  //   this.route.params.subscribe(params => {
-  //     if (params['id']) {
-  //       this.grupoService.findOne(params['id'])
-  //         .subscribe(e => {
-  //           this.grupo = e;
-  //         });
-  //     }
-  //   });
-  // }
-  //
-  // save() {
-  //   this.grupoService.save(this.grupo)
-  //     .subscribe(e => {
-  //       this.grupo = e;
-  //       this.back();
-  //     });
-  // }
-  //
-  // back() {
-  //   this.router.navigate(['/grupo']);
-  // }
 
+  showDialogItensVinculados() {
+    this.findItensVinculados();
+  }
+
+  findItensVinculados() {
+    this.grupoService.findItensVinculados(this.object.id)
+      .subscribe(e => {
+        if (e.length === 0) {
+          Swal.fire('Ops...', 'Não existe nenhum item vinculado ao grupo.', 'info');
+        } else {
+          this.itensVinculados = e;
+          this.dialogItensRelacionados = true;
+        }
+      });
+  }
 }

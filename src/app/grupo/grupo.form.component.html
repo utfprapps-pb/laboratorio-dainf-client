@@ -1,9 +1,19 @@
 <div class="container-fluid my-3">
   <mat-card>
     <mat-card-title>
-      <div class="d-flex align-items-center">
-        <app-voltar (onClick)="back()"></app-voltar>
-        <h4 class="m-0">Cadastro de Grupo</h4>
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+          <app-voltar (onClick)="back()"></app-voltar>
+          <h4 class="m-0">Cadastro de Grupo</h4>
+        </div>
+        <div *ngIf="object.id">
+          <button type="button"
+                  (click)="showDialogItensVinculados()"
+                  pTooltip="Itens Vinculados"
+                  mat-icon-button>
+            <mat-icon>widgets</mat-icon>
+          </button>
+        </div>
       </div>
     </mat-card-title>
     <mat-card-content>
@@ -47,3 +57,26 @@
     </mat-card-content>
   </mat-card>
 </div>
+
+<p-dialog header="Itens Vinculados"
+          [(visible)]="dialogItensRelacionados"
+          [style]="{minWidth: '650px'}"
+          [baseZIndex]="10000">
+
+  <div class="example-container mat-elevation-z8">
+    <mat-table #table="matTable"  [dataSource]="itensVinculados">
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef>Cód</mat-header-cell>
+        <mat-cell *matCellDef="let item"> {{item.id}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="nome">
+        <mat-header-cell *matHeaderCellDef>Descrição</mat-header-cell>
+        <mat-cell *matCellDef="let item"> {{item.nome}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+</p-dialog>

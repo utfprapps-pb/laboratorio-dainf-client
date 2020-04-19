@@ -17,10 +17,20 @@ export class ToolbarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getScreenSize();
+    this.buildListenerCloseDrawer();
   }
 
   logout() {
     this.loginService.logout();
+  }
+
+  buildListenerCloseDrawer() {
+    document.getElementById('content').addEventListener('click', ev => {
+      if (this.widthScreen < 1200) {
+        this.hideSidenav();
+      }
+    });
   }
 
   @HostListener('window:resize', ['$event'])
@@ -29,29 +39,52 @@ export class ToolbarComponent implements OnInit {
     if (this.widthScreen < 1200) {
       this.hideSidenav();
     } else {
-      this.showSidenav();
+      this.showSidenav(false);
     }
   }
 
   hideSidenav() {
+    document.getElementById('sidenav').classList.remove('sidenav-drawer-on');
+    document.getElementById('content').classList.remove('content-responsive');
     document.getElementById('sidenav').style.width = '0';
     document.getElementById('content').style.width = '100%';
     this.sidenavService.minimizar(true);
     this.sidenavIsOpen = false;
   }
 
-  showSidenav() {
+  showSidenav(isBtnToogle) {
     this.sidenavService.minimizar(false);
-    document.getElementById('sidenav').style.width = '250px';
-    document.getElementById('content').style.width = 'calc(100% - 250px)';
+    if (isBtnToogle) {
+      document.getElementById('sidenav').classList.add('sidenav-drawer-on');
+      document.getElementById('content').classList.add('content-responsive');
+    } else {
+      document.getElementById('sidenav').classList.remove('sidenav-drawer-on');
+      document.getElementById('content').classList.remove('content-responsive');
+      document.getElementById('sidenav').style.width = '260px';
+      document.getElementById('content').style.width = 'calc(100% - 260px)';
+    }
     this.sidenavIsOpen = true;
   }
+
+  // hideSidenav() {
+  //   document.getElementById('sidenav').style.width = '0';
+  //   document.getElementById('content').style.width = '100%';
+  //   this.sidenavService.minimizar(true);
+  //   this.sidenavIsOpen = false;
+  // }
+  //
+  // showSidenav() {
+  //   this.sidenavService.minimizar(false);
+  //   document.getElementById('sidenav').style.width = '250px';
+  //   document.getElementById('content').style.width = 'calc(100% - 250px)';
+  //   this.sidenavIsOpen = true;
+  // }
 
   toogleSidenav() {
     if (this.sidenavIsOpen) {
       this.hideSidenav();
     } else {
-      this.showSidenav();
+      this.showSidenav(true);
     }
   }
 }

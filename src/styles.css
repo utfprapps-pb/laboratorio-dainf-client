@@ -31,7 +31,7 @@ body {
 
 .ui-dialog-content {
   overflow: hidden !important;
-  padding: 3em 2em !important;
+  /*padding: 3em 2em !important;*/
 }
 
 .ui-dialog-titlebar {
@@ -86,5 +86,48 @@ mat-row:nth-child(even) {
   }
 }
 
+/* drawer and content responsive */
+.sidenav-drawer-on {
+  width: 260px !important;
+  position: absolute !important;
+  min-height: calc(100vh - 50px) !important;
+  height: calc(100vh - 50px) !important;
+  z-index: 3;
+  top: 50px;
+}
 
+.content-responsive {
+  width: 100%;
+}
 
+.content-responsive:before {
+  content: '';
+  position: fixed;
+  top: 50px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #00000052;
+  opacity: 1;
+  z-index: 2;
+}
+
+.ui-autocomplete {
+  width: 100% !important;
+  display: flex;
+}
+
+.ui-autocomplete-input {
+  width: calc(100% - 35px) !important;
+}
+
+.ui-autocomplete-dropdown {
+  border-top: 1px solid #a6a6a6 !important;
+  border-right: 1px solid #a6a6a6 !important;
+  border-bottom: 1px solid #a6a6a6 !important;
+  border-left: none !important;
+  height: auto !important;
+  width: 35px !important;
+  background-color: transparent !important;
+  color: #000000 !important;
+}

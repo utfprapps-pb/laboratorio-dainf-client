@@ -9,7 +9,7 @@ import {ToolbarModule} from './toolbar/toolbar.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {SidenavModule} from './sidenav/sidenav.module';
 import {GrupoModule} from './grupo/grupo.module';
-import {CommonModule, registerLocaleData} from '@angular/common';
+import {CommonModule, HashLocationStrategy, LocationStrategy, registerLocaleData} from '@angular/common';
 import {UsuarioModule} from './usuario/usuario.module';
 import {FornecedorModule} from './fornecedor/fornecedor.module';
 import {EstadoModule} from './estado/estado.module';
@@ -76,6 +76,10 @@ registerLocaleData(ptBr);
     {
       provide: DEFAULT_CURRENCY_CODE,
       useValue: 'BRL'
+    },
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
     }
   ],
   bootstrap: [AppComponent]

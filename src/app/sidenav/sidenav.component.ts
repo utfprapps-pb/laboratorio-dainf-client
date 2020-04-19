@@ -3,6 +3,7 @@ import {SidenavService} from './sidenav.service';
 import {NavigationStart, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {MatDrawer} from '@angular/material/sidenav';
+import {browserChange} from '../app.component';
 
 export let browserRefresh = false;
 
@@ -52,14 +53,15 @@ export class SidenavComponent implements OnInit {
 
   constructor(private sidenavService: SidenavService,
               private router: Router) {
-  }
-
-  ngOnInit(): void {
-    this.initObservableDrawer();
     this.menuItems = ITEM.filter(menuItem => menuItem);
     this.menuCadastros = CADASTROS.filter(menuItem => menuItem);
     this.menuGeral = GERAL.filter(menuItem => menuItem);
-    this.initSubscribeMenuItem();
+  }
+
+  ngOnInit(): void {
+    this.changeColorMenuItem();
+    this.initObservableDrawer();
+    this.initObservableMenuItem();
   }
 
   initObservableDrawer() {
@@ -74,10 +76,9 @@ export class SidenavComponent implements OnInit {
     });
   }
 
-  initSubscribeMenuItem() {
-    this.subscription = this.router.events.subscribe((event) => {
-      if (event instanceof NavigationStart) {
-        browserRefresh = !this.router.navigated;
+  initObservableMenuItem() {
+    browserChange.asObservable().subscribe(value => {
+      if (value) {
         this.changeColorMenuItem();
       }
     });
@@ -92,20 +93,21 @@ export class SidenavComponent implements OnInit {
   }
 
   changeColorMenuItem() {
+    const that = this;
     setTimeout(() => {
-      const pathCurrent = '/' + window.location.pathname.split('/')[1];
+      const pathCurrent = '/' + window.location.href.split('#')[1].split('/')[1];
       if (pathCurrent !== '/login') {
-        this.menuItems.forEach(menu => {
-          this.setColorMenuItem(menu, pathCurrent);
+        that.menuItems.forEach(menu => {
+          that.setColorMenuItem(menu, pathCurrent);
         });
-        if (this.showSubMenuCadastro) {
-          this.menuCadastros.forEach(menu => {
-            this.setColorMenuItem(menu, pathCurrent);
+        if (that.showSubMenuCadastro) {
+          that.menuCadastros.forEach(menu => {
+            that.setColorMenuItem(menu, pathCurrent);
           });
         }
-        if (this.showSubMenuGerais) {
-          this.menuGeral.forEach(menu => {
-            this.setColorMenuItem(menu, pathCurrent);
+        if (that.showSubMenuGerais) {
+          that.menuGeral.forEach(menu => {
+            that.setColorMenuItem(menu, pathCurrent);
           });
         }
       }

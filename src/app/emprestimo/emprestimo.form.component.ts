@@ -18,15 +18,18 @@ import {Utils} from '../util/utils';
 })
 export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, number> {
 
+  @ViewChild('table') table: MatTable<any>;
+  @ViewChild('itemToAdd') itemToAdd: AutoComplete;
+
   displayedColumns = ['item', 'devolver', 'qtde', 'actionsForm'];
   emprestimoItem: EmprestimoItem;
   itemList: Item[];
   usuarioList: Usuario[];
   itemDevolver: any;
   maxDate = new Date();
-  @ViewChild('table') table: MatTable<any>;
-  @ViewChild('itemToAdd') itemToAdd: AutoComplete;
   yesNoDropdown: SelectItem[];
+  estoqueItem = 0;
+  hasItemInformado = false;
   pt: any;
 
   constructor(protected emprestimoService: EmprestimoService,
@@ -88,6 +91,7 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
       }
       this.emprestimoItem = new EmprestimoItem();
       this.setFocusInputItem();
+      this.hasItemInformado = false;
       this.table.renderRows();
     } else {
       this.messageService.add({severity: 'info', detail: 'Necessário informar o item e a quantidade.'});
@@ -113,13 +117,21 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
   }
 
   setDevolucaoItem() {
-    if (this.emprestimoItem.item != null) {
+    if (this.emprestimoItem.item != null && typeof this.emprestimoItem.item === 'object') {
       this.itemDevolver = this.emprestimoItem.item.devolver;
       this.emprestimoItem.qtde = 1;
+      this.estoqueItem = this.emprestimoItem.item.saldo;
+      this.hasItemInformado = true;
     }
   }
 
   setFocusInputItem() {
     this.itemToAdd.focusInput();
+  }
+
+  clearNewItem() {
+    this.emprestimoItem.item = null;
+    this.emprestimoItem.qtde = null;
+    this.hasItemInformado = false;
   }
 }

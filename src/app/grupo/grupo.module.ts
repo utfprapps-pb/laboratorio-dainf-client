@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {GrupoListComponent} from './grupo.list.component';
 import {GrupoFormComponent} from './grupo.form.component';
 import {GrupoService} from './grupo.service';
-import {InputTextModule, TooltipModule} from 'primeng';
+import {DialogModule, InputTextModule, TooltipModule} from 'primeng';
 import {FormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -20,24 +20,25 @@ import {SalvarModule} from '../geral/salvar/salvar.module';
 import {NovoModule} from '../geral/novo/novo.module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatIconModule,
-    MatCardModule,
-    MatButtonModule,
-    InputTextModule,
-    TooltipModule,
-    ValidationModule,
-    VoltarModule,
-    CancelarModule,
-    SalvarModule,
-    NovoModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatIconModule,
+        MatCardModule,
+        MatButtonModule,
+        InputTextModule,
+        TooltipModule,
+        ValidationModule,
+        VoltarModule,
+        CancelarModule,
+        SalvarModule,
+        NovoModule,
+        DialogModule
+    ],
   declarations: [
     GrupoListComponent,
     GrupoFormComponent

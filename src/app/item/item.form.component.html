@@ -133,7 +133,6 @@
                      required
                      validation
                      class="form-control"
-                     [disabled]="object.id"
                      [(ngModel)]="object.saldo"
                      pInputText>
             </div>
@@ -142,6 +141,7 @@
             <div class="form-group">
               <label for="grupo">Grupo</label>
               <span class="field-required">*</span>
+              <app-cadastroRapido href="/grupo/form" [id]="object?.grupo?.id"></app-cadastroRapido>
               <p-autoComplete id="grupo"
                               name="grupo"
                               appendTo="body"
@@ -149,7 +149,7 @@
                               required
                               validation
                               inputStyleClass="form-control"
-                              [style]="{width: '100%'}"
+                              [dropdown]="true"
                               [suggestions]="grupoList"
                               [(ngModel)]="object.grupo"
                               (onClear)="object.grupo = null"

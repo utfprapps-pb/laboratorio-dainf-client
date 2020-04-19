@@ -7,6 +7,8 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {BottomSheetComponent} from '../../geral/bottomScheet/bottomSheet.component';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
+import Swal from 'sweetalert2';
+import {Exception} from '../../exception/exception';
 
 export abstract class CrudListComponent<T, ID> implements OnInit {
 
@@ -59,20 +61,23 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
   }
 
   delete(id: any) {
-    this.confirmationService.confirm({
-      message: 'Tem certeza que deseja remover o registro?',
-      header: 'Confirmação',
-      icon: 'fa fa-question-circle',
-      acceptLabel: 'Sim',
-      rejectLabel: 'Não',
-      accept: () => {
+    Swal.fire({
+      title: `Tem certeza que deseja remover o registro?`,
+      text: 'A ação não poderá ser desfeita.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Não'
+    }).then((result) => {
+      if (result.value) {
         this.service.delete(id)
           .subscribe(e => {
-            this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registro excluído com sucesso!'});
+            Swal.fire('Sucesso!', 'Registro excluído com sucesso!', 'success');
             this.findAll();
           }, error => {
-            this.messageService.add({severity: 'error', summary: 'Atenção', detail: 'Ocorreu um erro ao remover o registro!'});
-            console.log(error);
+            this.showError(error);
           });
       }
     });
@@ -106,5 +111,9 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
     } else if (this.columnsTable.filter(value => value === 'actions').length === 0) {
       this.columnsTable.push('actions');
     }
+  }
+
+  showError(error: any): void {
+    Exception.addMessage(error);
   }
 }

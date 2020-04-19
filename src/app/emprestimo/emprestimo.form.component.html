@@ -33,7 +33,7 @@
                               appendTo="body"
                               field="nome"
                               inputStyleClass="form-control"
-                              [style]="{width: '100%'}"
+                              [dropdown]="true"
                               [(ngModel)]="object.usuarioEmprestimo"
                               [suggestions]="usuarioList"
                               (onClear)="object.usuarioEmprestimo = null"
@@ -84,12 +84,12 @@
                               field="nome"
                               #itemToAdd
                               inputStyleClass="form-control"
+                              [dropdown]="true"
                               (keyup.control.enter)="insertItem()"
                               [(ngModel)]="emprestimoItem.item"
                               (onSelect)="setDevolucaoItem()"
-                              [style]="{width: '100%'}"
                               [suggestions]="itemList"
-                              (onClear)="emprestimoItem.item = null"
+                              (onClear)="clearNewItem()"
                               (completeMethod)="findProdutos($event)">
               </p-autoComplete>
             </div>
@@ -111,6 +111,7 @@
           <div class="col-md-2">
             <div class="form-group">
               <label for="qtde">Quantidade</label>
+              <span *ngIf="hasItemInformado" class="float-right">({{estoqueItem}})</span>
               <input type="number"
                      id="qtde"
                      autocomplete="off"

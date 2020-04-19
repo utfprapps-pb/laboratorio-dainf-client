@@ -19,6 +19,7 @@ import {CancelarModule} from '../geral/cancelar/cancelar.module';
 import {SalvarModule} from '../geral/salvar/salvar.module';
 import {NovoModule} from '../geral/novo/novo.module';
 import {GrupoModule} from '../grupo/grupo.module';
+import {CadastroRapidoModule} from '../geral/cadastroRapido/cadastroRapido.module';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import {GrupoModule} from '../grupo/grupo.module';
     SalvarModule,
     NovoModule,
     DialogModule,
-    GrupoModule
+    GrupoModule,
+    CadastroRapidoModule
   ],
   declarations: [
     ItemFormComponent,

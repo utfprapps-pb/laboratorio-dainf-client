@@ -64,10 +64,10 @@
                               field="nome"
                               #itemToAdd
                               inputStyleClass="form-control"
+                              [dropdown]="true"
                               (onSelect)="setQtdeDefaultItem()"
                               (keyup.control.enter)="insertItem()"
                               [(ngModel)]="saidaItem.item"
-                              [style]="{width: '100%'}"
                               [suggestions]="itemList"
                               (onClear)="saidaItem.item = null"
                               (completeMethod)="findProdutos($event)">

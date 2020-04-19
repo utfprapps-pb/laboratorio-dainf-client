@@ -1,0 +1,10 @@
+.link-cadastroRapido {
+  color: #292929;
+  float: right;
+  font-size: 1em;
+  position: relative;
+  top: 6px;
+}
+.link-cadastroRapido:hover {
+  text-decoration: none;
+}

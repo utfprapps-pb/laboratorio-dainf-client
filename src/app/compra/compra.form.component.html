@@ -33,7 +33,7 @@
                               appendTo="body"
                               field="razaoSocial"
                               inputStyleClass="form-control"
-                              [style]="{width: '100%'}"
+                              [dropdown]="true"
                               [(ngModel)]="object.fornecedor"
                               [suggestions]="fornecedorList"
                               (onClear)="object.fornecedor = null"
@@ -84,10 +84,10 @@
                               field="nome"
                               #itemToAdd
                               inputStyleClass="form-control"
+                              [dropdown]="true"
                               [(ngModel)]="compraItem.item"
                               (keyup.control.enter)="insertItem()"
                               (onSelect)="setPrecoProduto()"
-                              [style]="{width: '100%'}"
                               [suggestions]="itemList"
                               (onClear)="compraItem.item = null"
                               (completeMethod)="findProdutos($event)">
