@@ -10,6 +10,7 @@ import {Usuario} from '../usuario/usuario';
 import {MatTable} from '@angular/material/table';
 import {AutoComplete, SelectItem} from 'primeng';
 import {Utils} from '../util/utils';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-form-emprestimo',
@@ -18,6 +19,7 @@ import {Utils} from '../util/utils';
 })
 export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, number> {
 
+  @ViewChild('form') form: NgForm;
   @ViewChild('table') table: MatTable<any>;
   @ViewChild('itemToAdd') itemToAdd: AutoComplete;
 
@@ -28,8 +30,6 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
   itemDevolver: any;
   maxDate = new Date();
   yesNoDropdown: SelectItem[];
-  estoqueItem = 0;
-  hasItemInformado = false;
   pt: any;
 
   constructor(protected emprestimoService: EmprestimoService,
@@ -54,6 +54,7 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
     const username = localStorage.getItem('username');
     this.usuarioService.findByUsername(username)
       .subscribe(e => {
+        console.log(e);
         this.object.usuarioResponsavel = e;
       });
   }
@@ -66,7 +67,7 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
   }
 
   findUsuarios($event) {
-    this.usuarioService.complete($event.query)
+    this.usuarioService.completeCustom($event.query)
       .subscribe(e => {
           this.usuarioList = e;
         }
@@ -74,28 +75,44 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
   }
 
   insertItem() {
-    if (this.emprestimoItem.item && this.emprestimoItem.qtde
-      && typeof this.emprestimoItem.item === 'object') {
-      if (!this.object.emprestimoItem) {
-        this.object.emprestimoItem = new Array();
+    if (this.emprestimoItem.item && this.emprestimoItem.qtde && typeof this.emprestimoItem.item === 'object') {
+      if (this.saldoItemIsValid(this.emprestimoItem.qtde)) {
+        if (!this.object.emprestimoItem) {
+          this.object.emprestimoItem = new Array();
+        }
+        const upQtde = this.object.emprestimoItem.some(value => value.item.id === this.emprestimoItem.item.id);
+        if (upQtde) {
+          this.object.emprestimoItem.forEach(empItem => {
+            if (empItem.item.id === this.emprestimoItem.item.id) {
+              const novaQtde = Number(empItem.qtde) + Number(this.emprestimoItem.qtde);
+              if (this.saldoItemIsValid(novaQtde)) {
+                empItem.qtde = novaQtde;
+              }
+            }
+          });
+        } else {
+          this.object.emprestimoItem.push(this.emprestimoItem);
+        }
+        this.postInsertItemList();
       }
-      const upQtde = this.object.emprestimoItem.some(value => value.item.id === this.emprestimoItem.item.id);
-      if (upQtde) {
-        this.object.emprestimoItem.forEach(empItem => {
-          if (empItem.item.id === this.emprestimoItem.item.id) {
-            empItem.qtde = Number(empItem.qtde) + Number(this.emprestimoItem.qtde);
-          }
-        });
-      } else {
-        this.object.emprestimoItem.push(this.emprestimoItem);
-      }
-      this.emprestimoItem = new EmprestimoItem();
-      this.setFocusInputItem();
-      this.hasItemInformado = false;
-      this.table.renderRows();
     } else {
       this.messageService.add({severity: 'info', detail: 'Necessário informar o item e a quantidade.'});
     }
+  }
+
+  saldoItemIsValid(qtdeInserir) {
+    const isValid = this.emprestimoItem.item.saldo > 0 && qtdeInserir <= this.emprestimoItem.item.saldo;
+    if (!isValid) {
+      this.messageService.add({severity: 'info', detail: 'A quantidade é maior do que o saldo atual do item.'});
+      return false;
+    }
+    return true;
+  }
+
+  postInsertItemList() {
+    this.emprestimoItem = new EmprestimoItem();
+    this.setFocusInputItem();
+    this.table.renderRows();
   }
 
   removeItem(id: number) {
@@ -120,8 +137,6 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
     if (this.emprestimoItem.item != null && typeof this.emprestimoItem.item === 'object') {
       this.itemDevolver = this.emprestimoItem.item.devolver;
       this.emprestimoItem.qtde = 1;
-      this.estoqueItem = this.emprestimoItem.item.saldo;
-      this.hasItemInformado = true;
     }
   }
 
@@ -132,6 +147,25 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
   clearNewItem() {
     this.emprestimoItem.item = null;
     this.emprestimoItem.qtde = null;
-    this.hasItemInformado = false;
+  }
+
+  getDocumentoUsuarioEmprestimo() {
+    const userEmprestimo = this.object.usuarioEmprestimo;
+    if (userEmprestimo.documento) {
+      if (userEmprestimo.permissoes[0].nome === 'ROLE_ALUNO') {
+        return `RA: ${userEmprestimo.documento}`;
+      } else {
+        return `SIAPE: ${userEmprestimo.documento}`;
+      }
+    }
+  }
+
+  save() {
+    if (!this.object.emprestimoItem || this.object.emprestimoItem.length <= 0 || typeof this.object.usuarioEmprestimo !== 'object') {
+      this.validExtra = false;
+    } else {
+      this.validExtra = true;
+    }
+    super.save();
   }
 }

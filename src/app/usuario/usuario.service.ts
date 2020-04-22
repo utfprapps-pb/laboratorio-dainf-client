@@ -24,4 +24,10 @@ export class UsuarioService extends CrudService<Usuario, number> {
   findByUsername(username: string): Observable<Usuario> {
     return this.http.get<Usuario>(this.url + `find-by-username?username=${username}`);
   }
+
+  completeCustom(query: string): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(`${this.url}complete-custom?query=${query}`);
+  }
+
+
 }

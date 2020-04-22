@@ -26,6 +26,8 @@
             <div class="form-group">
               <label for="usuarioEmprestimo">Aluno/Professor</label>
               <span class="field-required">*</span>
+              <app-cadastroRapido [href]="'/usuario/form'" [id]="object?.usuarioEmprestimo?.id"></app-cadastroRapido>
+              <span *ngIf="object.usuarioEmprestimo" class="float-right">{{getDocumentoUsuarioEmprestimo()}}</span>
               <p-autoComplete id="usuarioEmprestimo"
                               name="usuarioEmprestimo"
                               required
@@ -78,6 +80,7 @@
           <div class="col-md-7">
             <div class="form-group">
               <label for="item">Item</label>
+              <app-cadastroRapido [href]="'/item/form'" [id]="emprestimoItem?.item?.id"></app-cadastroRapido>
               <p-autoComplete id="item"
                               name="item"
                               appendTo="body"
@@ -111,7 +114,7 @@
           <div class="col-md-2">
             <div class="form-group">
               <label for="qtde">Quantidade</label>
-              <span *ngIf="hasItemInformado" class="float-right">({{estoqueItem}})</span>
+              <span *ngIf="emprestimoItem?.item" class="float-right">Saldo: {{emprestimoItem?.item?.saldo}}</span>
               <input type="number"
                      id="qtde"
                      autocomplete="off"
@@ -182,7 +185,7 @@
         <div class="row">
           <div class="col-md-12 d-flex justify-content-end">
             <app-cancelar (onClick)="back()"></app-cancelar>
-            <app-salvar (onClick)="save()"></app-salvar>
+            <app-salvar (onClick)="save()" [typeButton]="'button'"></app-salvar>
           </div>
         </div>
       </form>

@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit, ViewChild} from '@angular/core';
+import {Component, Injector, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {CrudFormComponent} from '../util/component/crud.form.component';
 import {Item} from './item';
@@ -12,7 +12,7 @@ import {SelectItem} from 'primeng';
   templateUrl: './item.form.component.html',
   styleUrls: ['./item.form.component.css']
 })
-export class ItemFormComponent extends CrudFormComponent<Item, number>{
+export class ItemFormComponent extends CrudFormComponent<Item, number> {
 
   grupoList: Grupo[];
   yesNoDropdown: SelectItem[];
@@ -28,6 +28,10 @@ export class ItemFormComponent extends CrudFormComponent<Item, number>{
       {label: 'Sim', value: true},
       {label: 'Não', value: false}
     ];
+  }
+
+  initializeValues(): void {
+    this.object.devolver = this.yesNoDropdown[0].value;
   }
 
   findGrupos($event) {

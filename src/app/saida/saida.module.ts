@@ -16,29 +16,31 @@ import {ValidationModule} from '../validation/validation.module';
 import {VoltarModule} from '../geral/voltar/voltar.module';
 import {CancelarModule} from '../geral/cancelar/cancelar.module';
 import {SalvarModule} from '../geral/salvar/salvar.module';
+import {CadastroRapidoModule} from '../geral/cadastroRapido/cadastroRapido.module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatIconModule,
-    MatCardModule,
-    MatButtonModule,
-    InputTextModule,
-    TooltipModule,
-    AutoCompleteModule,
-    CalendarModule,
-    DropdownModule,
-    ValidationModule,
-    InputTextareaModule,
-    VoltarModule,
-    CancelarModule,
-    SalvarModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatIconModule,
+        MatCardModule,
+        MatButtonModule,
+        InputTextModule,
+        TooltipModule,
+        AutoCompleteModule,
+        CalendarModule,
+        DropdownModule,
+        ValidationModule,
+        InputTextareaModule,
+        VoltarModule,
+        CancelarModule,
+        SalvarModule,
+        CadastroRapidoModule
+    ],
   declarations: [
     SaidaFormComponent,
     SaidaListComponent

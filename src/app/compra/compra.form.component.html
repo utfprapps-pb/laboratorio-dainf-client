@@ -7,7 +7,7 @@
       </div>
     </mat-card-title>
     <mat-card-content>
-      <form #form="ngForm" (submit)="save()">
+      <form #form="ngForm">
         <div class="row">
           <div class="col-md-2">
             <div class="form-group">
@@ -26,6 +26,7 @@
             <div class="form-group">
               <label for="descricao">Fornecedor</label>
               <span class="field-required">*</span>
+              <app-cadastroRapido [href]="'/fornecedor/form'" [id]="object?.fornecedor?.id"></app-cadastroRapido>
               <p-autoComplete id="descricao"
                               name="descricao"
                               required
@@ -78,6 +79,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="item">Item</label>
+              <app-cadastroRapido [href]="'/item/form'" [id]="compraItem?.item?.id"></app-cadastroRapido>
               <p-autoComplete id="item"
                               name="item"
                               appendTo="body"
@@ -112,6 +114,7 @@
           <div class="col-md-2">
             <div class="form-group">
               <label for="qtde">Quantidade</label>
+              <span *ngIf="compraItem?.item" class="float-right">Saldo: {{compraItem?.item?.saldo}}</span>
               <input type="number"
                      id="qtde"
                      autocomplete="off"
@@ -179,7 +182,7 @@
         <div class="row">
           <div class="col-md-12 d-flex justify-content-end">
             <app-cancelar (onClick)="back()"></app-cancelar>
-            <app-salvar [typeButton]="'submit'"></app-salvar>
+            <app-salvar (onClick)="save()" [typeButton]="'button'"></app-salvar>
           </div>
         </div>
       </form>

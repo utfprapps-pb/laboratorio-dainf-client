@@ -64,15 +64,28 @@
         </div>
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-3">
             <div class="form-group">
               <label for="grupo">Grupo de Acesso</label>
               <p-dropdown [options]="grupoAcessoDropdown"
                           [(ngModel)]="object.permissoes"
+                          (ngModelChange)="buildLabelDocumento()"
                           [style]="{width: '100%'}"
                           id="grupo"
                           name="grupo">
               </p-dropdown>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="documento">{{labelDocumento}}</label>
+              <input type="text"
+                     id="documento"
+                     name="documento"
+                     class="form-control"
+                     [(ngModel)]="object.documento"
+                     pInputText>
             </div>
           </div>
 

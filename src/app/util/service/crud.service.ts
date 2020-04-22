@@ -1,6 +1,5 @@
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Item} from '../../item/item';
 
 export abstract class CrudService<T, ID> {
 

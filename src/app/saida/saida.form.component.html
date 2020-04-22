@@ -58,6 +58,7 @@
           <div class="col-md-7">
             <div class="form-group">
               <label for="item">Item</label>
+              <app-cadastroRapido [href]="'/item/form'" [id]="saidaItem?.item?.id"></app-cadastroRapido>
               <p-autoComplete id="item"
                               name="item"
                               appendTo="body"
@@ -78,6 +79,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="qtde">Quantidade</label>
+              <span *ngIf="saidaItem?.item" class="float-right">Saldo: {{saidaItem?.item?.saldo}}</span>
               <input type="number"
                      id="qtde"
                      autocomplete="off"

@@ -58,11 +58,14 @@ export abstract class CrudFormComponent<T, ID> extends BaseFormComponent impleme
 
   preOnInit(): void {}
 
+  postEdit(): void {}
+
   edit(id: ID) {
     this.service.findOne(id)
       .subscribe(e => {
         this.object = e;
         this.editando = true;
+        this.postEdit();
       });
   }
 

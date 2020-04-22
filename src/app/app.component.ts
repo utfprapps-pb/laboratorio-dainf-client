@@ -25,9 +25,9 @@ export class AppComponent {
   buildSubscriptionEvent() {
     this.subscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
-        browserChange.next(true);
+        // TODO verificar se virá algo aqui
       } else if (event instanceof NavigationEnd || event instanceof NavigationCancel) {
-        // TODO será implementado
+        browserChange.next(true);
       }
     });
   }

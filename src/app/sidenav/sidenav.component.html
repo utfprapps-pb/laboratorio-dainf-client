@@ -1,5 +1,5 @@
 <mat-drawer-container class="example-sidenav" style="height: calc(100vh - 50px)">
-  <mat-drawer #drawer [opened]="true" mode="side" style="width: 100%">
+  <mat-drawer #drawer [opened]="true" mode="side" style="width: 100%" [disableClose]="true">
     <mat-nav-list #navList>
       <a *ngFor="let menuItem of menuItems" mat-list-item [id]="[menuItem.id]" [routerLink]="[menuItem.path]"
          routerLinkActive="active" class="color-toolbar">

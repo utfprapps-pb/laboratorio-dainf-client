@@ -82,27 +82,44 @@ export class SaidaFormComponent extends CrudFormComponent<Saida, number> {
   }
 
   insertItem() {
-    if (this.saidaItem.item && this.saidaItem.qtde
-            && typeof this.saidaItem.item === 'object') {
-      if (!this.object.saidaItem) {
-        this.object.saidaItem = new Array();
+    if (this.saidaItem.item && this.saidaItem.qtde && typeof this.saidaItem.item === 'object') {
+      if (this.saldoItemIsValid(this.saidaItem.qtde)) {
+        if (!this.object.saidaItem) {
+          this.object.saidaItem = new Array();
+        }
+        const upQtde = this.object.saidaItem.some(value => value.item.id === this.saidaItem.item.id);
+        if (upQtde) {
+          this.object.saidaItem.forEach(saiItem => {
+            if (saiItem.item.id === this.saidaItem.item.id) {
+              const novaQtde = Number(saiItem.qtde) + Number(this.saidaItem.qtde);
+              if (this.saldoItemIsValid(novaQtde)) {
+                saiItem.qtde = novaQtde;
+              }
+            }
+          });
+        } else {
+          this.object.saidaItem.push(this.saidaItem);
+        }
+        this.postInsertItemList();
       }
-      const upQtde = this.object.saidaItem.some(value => value.item.id === this.saidaItem.item.id);
-      if (upQtde) {
-        this.object.saidaItem.forEach(saiItem => {
-          if (saiItem.item.id === this.saidaItem.item.id) {
-            saiItem.qtde = Number(saiItem.qtde) + Number(this.saidaItem.qtde);
-          }
-        });
-      } else {
-        this.object.saidaItem.push(this.saidaItem);
-      }
-      this.saidaItem = new SaidaItem();
-      this.setFocusInputItem();
-      this.table.renderRows();
     } else {
       this.messageService.add({severity: 'info', detail: 'Necessário informar o item e a quantidade.'});
     }
+  }
+
+  saldoItemIsValid(qtdeInserir) {
+    const isValid = this.saidaItem.item.saldo > 0 && qtdeInserir <= this.saidaItem.item.saldo;
+    if (!isValid) {
+      this.messageService.add({severity: 'info', detail: 'A quantidade informada é maior do que o saldo atual do item.'});
+      return false;
+    }
+    return true;
+  }
+
+  postInsertItemList() {
+    this.saidaItem = new SaidaItem();
+    this.setFocusInputItem();
+    this.table.renderRows();
   }
 
   save() {

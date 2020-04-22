@@ -127,5 +127,14 @@ export class CompraFormComponent extends CrudFormComponent<Compra, number> {
     this.itemToAdd.focusInput();
   }
 
+  save() {
+    if (!this.object.compraItem || this.object.compraItem.length <= 0 || typeof this.object.fornecedor !== 'object') {
+      this.validExtra = false;
+    } else {
+      this.validExtra = true;
+    }
+    super.save();
+  }
+
 
 }
