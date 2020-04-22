@@ -72,7 +72,7 @@ export class UsuarioFormComponent extends CrudFormComponent<Usuario, number> {
     }
   }
 
-  private buildLabelDocumento() {
+  buildLabelDocumento() {
     const permissao = this.object.permissoes[0].nome;
     if (permissao === 'ROLE_ALUNO') {
       this.labelDocumento = 'RA';
