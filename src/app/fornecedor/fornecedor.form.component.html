@@ -63,6 +63,7 @@
                      name="cnpj"
                      required
                      validation
+                     onlyNumber
                      class="form-control"
                      [(ngModel)]="object.cnpj"
                      pInputText>
@@ -78,6 +79,7 @@
                      name="ie"
                      required
                      validation
+                     onlyNumber
                      class="form-control"
                      [(ngModel)]="object.ie"
                      pInputText>
@@ -104,27 +106,6 @@
           <div class="col-md-4">
             <div class="form-group d-flex flex-column">
               <div>
-                <label for="cidade">Cidade</label>
-                <span class="field-required">*</span>
-              </div>
-              <p-autoComplete id="cidade"
-                              name="cidade"
-                              required
-                              validation
-                              field="nome"
-                              inputStyleClass="form-control"
-                              [dropdown]="true"
-                              [suggestions]="cidadeList"
-                              [(ngModel)]="object.cidade"
-                              (onClear)="object.cidade = null"
-                              (completeMethod)="findCidades($event)">
-              </p-autoComplete>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="form-group d-flex flex-column">
-              <div>
                 <label for="estado">Estado</label>
                 <span class="field-required">*</span>
               </div>
@@ -135,11 +116,36 @@
                               appendTo="body"
                               field="nome"
                               inputStyleClass="form-control"
+                              (ngModelChange)="object.cidade = null"
+                              [forceSelection]="true"
                               [dropdown]="true"
                               [suggestions]="estadoList"
                               [(ngModel)]="object.estado"
                               (onClear)="object.estado = null"
                               (completeMethod)="findEstados($event)">
+              </p-autoComplete>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group d-flex flex-column">
+              <div>
+                <label for="cidade">Cidade</label>
+                <span class="field-required">*</span>
+              </div>
+              <p-autoComplete id="cidade"
+                              name="cidade"
+                              required
+                              validation
+                              field="nome"
+                              inputStyleClass="form-control"
+                              [forceSelection]="true"
+                              [disabled]="!object.estado"
+                              [dropdown]="true"
+                              [suggestions]="cidadeList"
+                              [(ngModel)]="object.cidade"
+                              (onClear)="object.cidade = null"
+                              (completeMethod)="findCidadesByEstado($event)">
               </p-autoComplete>
             </div>
           </div>

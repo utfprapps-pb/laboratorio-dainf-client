@@ -46,6 +46,7 @@
                      id="patrimonio"
                      name="patrimonio"
                      class="form-control"
+                     onlyNumber
                      [(ngModel)]="object.patrimonio"
                      pInputText>
             </div>
@@ -57,6 +58,7 @@
                      id="siorg"
                      name="siorg"
                      class="form-control"
+                     onlyNumber
                      [(ngModel)]="object.siorg"
                      pInputText>
             </div>
@@ -64,8 +66,9 @@
           <div class="col-md-3">
             <div class="form-group">
               <label for="valor">Valor</label>
-              <input type="number"
+              <input type="string"
                      id="valor"
+                     currencyMask
                      name="valor"
                      class="form-control"
                      [(ngModel)]="object.valor"
@@ -79,6 +82,7 @@
               <input type="number"
                      id="qtdeMinima"
                      name="qtdeMinima"
+                     onlyNumber
                      required
                      validation
                      class="form-control"
@@ -121,6 +125,7 @@
               <input type="number"
                      id="saldo"
                      name="saldo"
+                     onlyNumber
                      required
                      validation
                      class="form-control"
@@ -140,6 +145,7 @@
                               required
                               validation
                               inputStyleClass="form-control"
+                              [forceSelection]="true"
                               [dropdown]="true"
                               [suggestions]="grupoList"
                               [(ngModel)]="object.grupo"

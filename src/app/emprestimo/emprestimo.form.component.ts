@@ -70,6 +70,10 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
     this.usuarioService.completeCustom($event.query)
       .subscribe(e => {
           this.usuarioList = e;
+          console.log(this.usuarioList);
+          if (this.usuarioList != null && this.usuarioList.length === 1) {
+            this.object.usuarioEmprestimo = this.usuarioList[0];
+          }
         }
       );
   }

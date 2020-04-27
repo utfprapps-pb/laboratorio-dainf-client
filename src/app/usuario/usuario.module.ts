@@ -18,6 +18,7 @@ import {VoltarModule} from '../geral/voltar/voltar.module';
 import {CancelarModule} from '../geral/cancelar/cancelar.module';
 import {SalvarModule} from '../geral/salvar/salvar.module';
 import {NovoModule} from '../geral/novo/novo.module';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import {NovoModule} from '../geral/novo/novo.module';
     MatIconModule,
     MatCardModule,
     MatButtonModule,
+    MatSortModule,
     InputTextModule,
     TooltipModule,
     DropdownModule,

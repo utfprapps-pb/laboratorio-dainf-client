@@ -1,3 +1,6 @@
+import {Cidade} from '../cidade/cidade';
+import {Estado} from '../estado/estado';
+
 export class Fornecedor {
   id: number;
   razaoSocial: string;
@@ -6,6 +9,6 @@ export class Fornecedor {
   ie: string;
   endereco: string;
   observacao: string;
-  cidade: number;
-  estado: number;
+  cidade: Cidade;
+  estado: Estado;
 }

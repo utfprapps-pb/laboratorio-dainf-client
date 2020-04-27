@@ -1,0 +1,40 @@
+.container-card {
+  max-width: 24%;
+  border-top: 4px solid;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+}
+
+.body-card {
+  margin: 10px 0 10px 0;
+  border-right: 1px solid #EEEEEE;
+}
+
+.content-card {
+  font-size: 36px;
+  font-weight: bolder;
+}
+
+.container-info {
+  height: 50px;
+  background-color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+  border-radius: 5px;
+}
+
+.font-size-18px {
+  font-size: 18px;
+}
+
+.container-charts {
+  padding: 20px 0 5px 0;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+}
+
+.container-chart-col-6 {
+  flex: 0 0 49% !important;
+}

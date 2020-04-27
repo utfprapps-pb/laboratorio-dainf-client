@@ -16,6 +16,7 @@
   },
   "private": true,
   "dependencies": {
+    "@amcharts/amcharts4": "^4.9.17",
     "@angular/animations": "^9.0.4",
     "@angular/cdk": "~9.1.0",
     "@angular/cli": "~9.0.4",
@@ -36,6 +37,7 @@
     "hammerjs": "^2.0.8",
     "jquery": "^3.4.1",
     "ng-fullcalendar": "^2.0.3",
+    "ng2-currency-mask": "^9.0.2",
     "path": "^0.12.7",
     "primeicons": "^2.0.0",
     "primeng": "^9.0.0",

@@ -20,6 +20,9 @@ import {SalvarModule} from '../geral/salvar/salvar.module';
 import {NovoModule} from '../geral/novo/novo.module';
 import {GrupoModule} from '../grupo/grupo.module';
 import {CadastroRapidoModule} from '../geral/cadastroRapido/cadastroRapido.module';
+import {CurrencyMaskModule} from 'ng2-currency-mask';
+import {OnlyNumberModule} from '../util/directives/onlyNumber/onlyNumber.module';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   imports: [
@@ -32,6 +35,7 @@ import {CadastroRapidoModule} from '../geral/cadastroRapido/cadastroRapido.modul
     MatIconModule,
     MatCardModule,
     MatButtonModule,
+    MatSortModule,
     InputTextModule,
     TooltipModule,
     AutoCompleteModule,
@@ -43,7 +47,9 @@ import {CadastroRapidoModule} from '../geral/cadastroRapido/cadastroRapido.modul
     NovoModule,
     DialogModule,
     GrupoModule,
-    CadastroRapidoModule
+    CadastroRapidoModule,
+    CurrencyMaskModule,
+    OnlyNumberModule
   ],
   declarations: [
     ItemFormComponent,

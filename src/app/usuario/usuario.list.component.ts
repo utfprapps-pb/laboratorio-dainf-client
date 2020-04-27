@@ -12,6 +12,6 @@ export class UsuarioListComponent extends CrudListComponent<Usuario, number> {
 
   constructor(protected usuarioService: UsuarioService,
               protected injector: Injector) {
-    super(usuarioService, injector, ['id', 'nome', 'usuario', 'actions'], 'usuario/form');
+    super(usuarioService, injector, ['id', 'nome', 'username', 'actions'], 'usuario/form');
   }
 }

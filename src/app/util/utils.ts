@@ -14,4 +14,9 @@ export class Utils {
     };
     return pt;
   }
+
+  public static removeDays(date: Date, days: number): Date {
+    date.setDate(date.getDate() - days);
+    return date;
+  }
 }

@@ -27,8 +27,8 @@ export class FornecedorFormComponent extends CrudFormComponent<Fornecedor, numbe
     super(fornecedorService, injector, 'fornecedor');
   }
 
-  findCidades($event) {
-    this.cidadeService.complete($event.query)
+  findCidadesByEstado($event) {
+    this.cidadeService.completeByEstado($event.query, this.object.estado)
       .subscribe(e => {
         this.cidadeList = e;
       });

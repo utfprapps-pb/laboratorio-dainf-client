@@ -34,6 +34,7 @@
                               appendTo="body"
                               field="razaoSocial"
                               inputStyleClass="form-control"
+                              [forceSelection]="true"
                               [dropdown]="true"
                               [(ngModel)]="object.fornecedor"
                               [suggestions]="fornecedorList"
@@ -120,6 +121,7 @@
                      autocomplete="off"
                      (keyup.control.enter)="insertItem()"
                      [(ngModel)]="compraItem.qtde"
+                     onlyNumber
                      name="qtde"
                      class="form-control"
                      pInputText>

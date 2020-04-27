@@ -18,6 +18,8 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
   protected bottom: MatBottomSheet;
   public displayedColumns: string[] = this.columnsTable;
   public dataSource: MatTableDataSource<T>;
+  public bottomSheetEnabled = true;
+  public hostListenerColumnEnable = true;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   objects: T[];
@@ -84,7 +86,7 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
   }
 
   openBottomSheet(id): void {
-    if (window.innerWidth <= 1200) {
+    if (window.innerWidth <= 1200 && this.bottomSheetEnabled) {
       const sheet = this.bottom.open(BottomSheetComponent);
       sheet.afterDismissed().subscribe(action => {
         if (action === 'E') {
@@ -102,14 +104,16 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   buildColumnsTable() {
-    if (window.innerWidth <= 1200) {
-      this.columnsTable.forEach((value, index) => {
-        if (value === 'actions') {
-          this.columnsTable.splice(index, 1);
-        }
-      });
-    } else if (this.columnsTable.filter(value => value === 'actions').length === 0) {
-      this.columnsTable.push('actions');
+    if (this.hostListenerColumnEnable) {
+      if (window.innerWidth <= 1200) {
+        this.columnsTable.forEach((value, index) => {
+          if (value === 'actions') {
+            this.columnsTable.splice(index, 1);
+          }
+        });
+      } else if (this.columnsTable.filter(value => value === 'actions').length === 0) {
+        this.columnsTable.push('actions');
+      }
     }
   }
 

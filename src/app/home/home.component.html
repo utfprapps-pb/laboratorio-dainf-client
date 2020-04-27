@@ -1,0 +1,160 @@
+<div class="container-fluid my-3">
+
+  <div class="row m-0">
+    <div class="col-md-12 container-info mat-elevation-z5">
+      <div class="w-100 d-flex justify-content-center align-items-center">
+        <span class="font-weight-bolder text-center mr-2 font-size-18px">Dados do dia {{this.getDateIni()}}
+          à {{this.getDateFim()}}</span>
+        <button type="button"
+                pTooltip="Filtrar"
+                (click)="dialodFiltroData = true"
+                class="btn">
+          <i class="fa fa-filter font-size-18px"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row m-0">
+    <div class="d-flex w-100 justify-content-between">
+      <div class="col-md-3 p-0 container-card mat-elevation-z5 border-secondary">
+        <div class="d-flex flex-row text-center body-card">
+          <i class="fa fa-5x fa-handshake-o text-secondary" style="width: 30%"></i>
+          <div style="width: 70%">
+            <h6>Total de Empréstimos</h6>
+            <p class="content-card text-secondary">{{dashEmprestimoCount?.total}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 p-0 container-card mat-elevation-z5 border-primary">
+        <div class="d-flex flex-row text-center body-card">
+          <i class="fa fa-5x fa-ellipsis-h text-primary" style="width: 30%"></i>
+          <div style="width: 70%">
+            <h6>Empréstimos em Andamento</h6>
+            <p class="content-card text-primary">{{dashEmprestimoCount?.emAndamento}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 p-0 container-card mat-elevation-z5 border-danger">
+        <div class="d-flex flex-row text-center body-card">
+          <i class="fa fa-5x fa-calendar-times-o text-danger" style="width: 30%"></i>
+          <div style="width: 70%">
+            <h6>Empréstimos em Atraso</h6>
+            <p class="content-card text-danger">{{dashEmprestimoCount?.emAtraso}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 p-0 container-card mat-elevation-z5 border-success">
+        <div class="d-flex flex-row text-center body-card">
+          <i class="fa fa-5x fa-check text-success" style="width: 30%"></i>
+          <div style="width: 70%">
+            <h6>Empréstimos Finalizados</h6>
+            <p class="content-card text-success">{{dashEmprestimoCount?.finalizado}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row m-0">
+    <div class="col-md-12 mat-elevation-z5 container-charts">
+      <h6 class="font-weight-bolder text-center">Total de Empréstimos Realizados por Dia</h6>
+      <div class="chartdiv2" style="height: 450px"></div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row m-0">
+    <div class="col-md-12 mat-elevation-z5 container-charts">
+      <h6 class="font-weight-bolder text-center">Top 10 | Itens Emprestados</h6>
+      <div class="chartdiv4" style="height: 450px"></div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row m-0 d-flex justify-content-between">
+    <div class="col-md-6 mat-elevation-z5 container-charts container-chart-col-6">
+      <h6 class="font-weight-bolder text-center">Top 10 | Itens Adquiridos</h6>
+      <div class="chartdivPie1" style="height: 450px"></div>
+    </div>
+
+    <div class="col-md-6 mat-elevation-z5 container-charts container-chart-col-6">
+      <h6 class="font-weight-bolder text-center">Top 10 | Itens com Saídas</h6>
+      <div class="chartdivPie2" style="height: 450px"></div>
+    </div>
+  </div>
+
+
+</div>
+
+
+<p-dialog header="Filtro"
+          [(visible)]="dialodFiltroData"
+          [style]="{minWidth: '250px'}"
+          [modal]="true"
+          [baseZIndex]="10000">
+
+  <form #formFiltro="ngForm">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="dtIni">Data Inicial</label>
+          <p-calendar name="dtIni"
+                      id="dtIni"
+                      appendTo="body"
+                      required
+                      validation
+                      dataType="string"
+                      dateFormat="dd/mm/yy"
+                      [(ngModel)]="dtIniFiltro"
+                      [style]="{width: '100%'}"
+                      inputStyleClass="form-control">
+          </p-calendar>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="dtFim">Data Final</label>
+          <p-calendar name="dtFim"
+                      id="dtFim"
+                      required
+                      appendTo="body"
+                      validation
+                      dataType="string"
+                      dateFormat="dd/mm/yy"
+                      [(ngModel)]="dtFimFiltro"
+                      [style]="{width: '100%'}"
+                      inputStyleClass="form-control">
+          </p-calendar>
+        </div>
+      </div>
+    </div>
+    <p-footer>
+      <div class="row">
+        <div class="col-md-12 d-flex justify-content-end">
+          <button type="button"
+                  class="mr-2 w-100px br-25px"
+                  mat-stroked-button>
+            Cancelar
+          </button>
+          <button type="submit"
+                  color="primary"
+                  class="w-100px br-25px"
+                  (click)="filtrar()"
+                  mat-stroked-button>
+            Buscar
+          </button>
+        </div>
+      </div>
+    </p-footer>
+  </form>
+</p-dialog>

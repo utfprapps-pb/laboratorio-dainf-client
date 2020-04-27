@@ -8,4 +8,5 @@ export class Emprestimo {
   usuarioResponsavel: Usuario;
   usuarioEmprestimo: Usuario;
   emprestimoItem: EmprestimoItem[];
+  observacao: string;
 }

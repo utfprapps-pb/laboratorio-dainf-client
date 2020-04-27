@@ -18,6 +18,8 @@ import {NovoModule} from '../geral/novo/novo.module';
 import {CancelarModule} from '../geral/cancelar/cancelar.module';
 import {SalvarModule} from '../geral/salvar/salvar.module';
 import {VoltarModule} from '../geral/voltar/voltar.module';
+import {OnlyNumberModule} from '../util/directives/onlyNumber/onlyNumber.module';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   imports: [
@@ -30,6 +32,7 @@ import {VoltarModule} from '../geral/voltar/voltar.module';
     MatIconModule,
     MatCardModule,
     MatButtonModule,
+    MatSortModule,
     InputTextModule,
     TooltipModule,
     AutoCompleteModule,
@@ -37,7 +40,8 @@ import {VoltarModule} from '../geral/voltar/voltar.module';
     NovoModule,
     CancelarModule,
     SalvarModule,
-    VoltarModule
+    VoltarModule,
+    OnlyNumberModule
   ],
   declarations: [
     FornecedorFormComponent,

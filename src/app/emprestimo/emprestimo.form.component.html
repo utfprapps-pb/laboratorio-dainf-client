@@ -26,7 +26,6 @@
             <div class="form-group">
               <label for="usuarioEmprestimo">Aluno/Professor</label>
               <span class="field-required">*</span>
-              <app-cadastroRapido [href]="'/usuario/form'" [id]="object?.usuarioEmprestimo?.id"></app-cadastroRapido>
               <span *ngIf="object.usuarioEmprestimo" class="float-right">{{getDocumentoUsuarioEmprestimo()}}</span>
               <p-autoComplete id="usuarioEmprestimo"
                               name="usuarioEmprestimo"
@@ -35,6 +34,7 @@
                               appendTo="body"
                               field="nome"
                               inputStyleClass="form-control"
+                              [forceSelection]="true"
                               [dropdown]="true"
                               [(ngModel)]="object.usuarioEmprestimo"
                               [suggestions]="usuarioList"
@@ -118,6 +118,7 @@
               <input type="number"
                      id="qtde"
                      autocomplete="off"
+                     onlyNumber
                      [(ngModel)]="emprestimoItem.qtde"
                      (keyup.control.enter)="insertItem()"
                      name="qtde"
@@ -181,6 +182,23 @@
             <mat-footer-row *matFooterRowDef="displayedColumns; sticky: true" class="font-weight-bolder"></mat-footer-row>
           </mat-table>
         </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="observacao">Observação</label>
+              <textarea id="observacao"
+                        name="observacao"
+                        rows="1"
+                        class="form-control"
+                        pInputTextarea
+                        [(ngModel)]="object.observacao"
+                        autoResize="autoResize">
+              </textarea>
+            </div>
+          </div>
+        </div>
+
 
         <div class="row">
           <div class="col-md-12 d-flex justify-content-end">

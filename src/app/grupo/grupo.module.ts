@@ -18,27 +18,29 @@ import {VoltarModule} from '../geral/voltar/voltar.module';
 import {CancelarModule} from '../geral/cancelar/cancelar.module';
 import {SalvarModule} from '../geral/salvar/salvar.module';
 import {NovoModule} from '../geral/novo/novo.module';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatIconModule,
-        MatCardModule,
-        MatButtonModule,
-        InputTextModule,
-        TooltipModule,
-        ValidationModule,
-        VoltarModule,
-        CancelarModule,
-        SalvarModule,
-        NovoModule,
-        DialogModule
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatIconModule,
+    MatCardModule,
+    MatSortModule,
+    MatButtonModule,
+    InputTextModule,
+    TooltipModule,
+    ValidationModule,
+    VoltarModule,
+    CancelarModule,
+    SalvarModule,
+    NovoModule,
+    DialogModule
+  ],
   declarations: [
     GrupoListComponent,
     GrupoFormComponent

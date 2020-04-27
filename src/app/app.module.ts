@@ -26,6 +26,10 @@ import {LoginModule} from './login/login.module';
 import {EmprestimoModule} from './emprestimo/emprestimo.module';
 import {SaidaModule} from './saida/saida.module';
 import ptBr from '@angular/common/locales/pt';
+import {MatPaginatorIntl} from '@angular/material/paginator';
+import {getDutchPaginatorIntl} from './util/dutch-paginator';
+import {CURRENCY_MASK_CONFIG} from 'ng2-currency-mask';
+import {CustomCurrencyMaskConfig} from './util/currency.mask.config';
 
 registerLocaleData(ptBr);
 
@@ -80,7 +84,15 @@ registerLocaleData(ptBr);
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
-    }
+    },
+    {
+      provide: MatPaginatorIntl,
+      useValue: getDutchPaginatorIntl()
+    },
+    {
+      provide: CURRENCY_MASK_CONFIG,
+      useValue: CustomCurrencyMaskConfig,
+    },
   ],
   bootstrap: [AppComponent]
 })

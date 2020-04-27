@@ -29,6 +29,7 @@ export const CADASTROS: MenuItem[] = [
   {path: '/usuario', title: 'Usuário', icon: 'person', id: 'usuario'},
 ];
 
+// TODO remover posteriormente
 export const GERAL: MenuItem[] = [
   {path: '/cidade', title: 'Cidade', icon: 'location_city', id: 'cidade'},
   {path: '/estado', title: 'Estado', icon: 'view_compact', id: 'estado'},
@@ -55,7 +56,7 @@ export class SidenavComponent implements OnInit {
               private router: Router) {
     this.menuItems = ITEM.filter(menuItem => menuItem);
     this.menuCadastros = CADASTROS.filter(menuItem => menuItem);
-    this.menuGeral = GERAL.filter(menuItem => menuItem);
+    // this.menuGeral = GERAL.filter(menuItem => menuItem);
   }
 
   ngOnInit(): void {
@@ -88,9 +89,9 @@ export class SidenavComponent implements OnInit {
     this.showSubMenuCadastro = !this.showSubMenuCadastro;
   }
 
-  toggleSubMenuGerais() {
-    this.showSubMenuGerais = !this.showSubMenuGerais;
-  }
+  // toggleSubMenuGerais() {
+  //   this.showSubMenuGerais = !this.showSubMenuGerais;
+  // }
 
   changeColorMenuItem() {
     const that = this;
@@ -105,11 +106,11 @@ export class SidenavComponent implements OnInit {
             that.setColorMenuItem(menu, pathCurrent);
           });
         }
-        if (that.showSubMenuGerais) {
-          that.menuGeral.forEach(menu => {
-            that.setColorMenuItem(menu, pathCurrent);
-          });
-        }
+        // if (that.showSubMenuGerais) {
+        //   that.menuGeral.forEach(menu => {
+        //     that.setColorMenuItem(menu, pathCurrent);
+        //   });
+        // }
       }
     }, 100);
   }
