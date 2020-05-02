@@ -3,7 +3,6 @@ import {CrudFormComponent} from '../framework/component/crud.form.component';
 import {Emprestimo} from './emprestimo';
 import {EmprestimoService} from './emprestimo.service';
 import {MatTable} from '@angular/material/table';
-import {AutoComplete} from 'primeng';
 import {NgForm} from '@angular/forms';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {MatMenuTrigger} from '@angular/material/menu';
@@ -20,8 +19,7 @@ export class EmprestimoDevolucaoComponent extends CrudFormComponent<Emprestimo, 
 
   @ViewChild('form') form: NgForm;
   @ViewChild('table') table: MatTable<any>;
-  @ViewChild('itemToAdd') itemToAdd: AutoComplete;
-  @ViewChild(MatMenuTrigger)
+  @ViewChild(MatMenuTrigger) contextMenu: MatMenuTrigger;
 
   itensPendentes = [];
   itensDevolvidos = [];
@@ -29,10 +27,11 @@ export class EmprestimoDevolucaoComponent extends CrudFormComponent<Emprestimo, 
   qtdeItemDuplicado: number;
   itemIsEditing: EmprestimoDevolucaoItem;
   dialogDuplicaItem = false;
-  contextMenu: MatMenuTrigger;
+
   contextMenuPosition = {x: '0px', y: '0px'};
   optionDuplicateDisable = false;
   optionRemoveDuplicateDisable = false;
+  documentoUsuario: string;
 
   constructor(protected emprestimoService: EmprestimoService,
               protected injector: Injector) {
@@ -40,6 +39,7 @@ export class EmprestimoDevolucaoComponent extends CrudFormComponent<Emprestimo, 
   }
 
   postEdit(): void {
+    this.documentoUsuario = this.object.usuarioEmprestimo.documento;
     this.buildItensKanban();
   }
 
@@ -62,45 +62,38 @@ export class EmprestimoDevolucaoComponent extends CrudFormComponent<Emprestimo, 
     });
   }
 
-  getDocumentoUsuarioEmprestimo() {
-    const userEmprestimo = this.object.usuarioEmprestimo;
-    if (userEmprestimo.documento) {
-      if (userEmprestimo.permissoes[0].nome === 'ROLE_ALUNO') {
-        return `RA: ${userEmprestimo.documento}`;
-      } else {
-        return `SIAPE: ${userEmprestimo.documento}`;
-      }
+  saveDevolucao() {
+    if (this.itensPendentes.length === 0) {
+      this.object.emprestimoDevolucaoItem.forEach(empDevItem => {
+        this.itensPendentes.forEach(pendente => {
+          if (empDevItem.id === pendente.id) {
+            empDevItem.statusDevolucao = StatusDevolucao.P;
+          }
+        });
+        this.itensDevolvidos.forEach(devolvido => {
+          if (empDevItem.id === devolvido.id) {
+            empDevItem.statusDevolucao = StatusDevolucao.D;
+          }
+        });
+        this.itensSaida.forEach(saida => {
+          if (empDevItem.id === saida.id) {
+            empDevItem.statusDevolucao = StatusDevolucao.S;
+          }
+        });
+      });
+      this.emprestimoService.saveDevolucao(this.object)
+        .subscribe(e => {
+          Swal.fire('Sucesso!', 'Devolução efetuada com sucesso!', 'success');
+          this.back();
+        }, error => {
+          Swal.fire('Atenção!', 'Ocorreu um erro ao salvar a devolução!', 'error');
+        });
+    } else {
+      Swal.fire('Atenção!', 'Ainda há ' + this.itensPendentes.length + ' itens pendentes para devolução!', 'error');
     }
   }
 
-  saveDevolucao() {
-    this.object.emprestimoDevolucaoItem.forEach(empDevItem => {
-      this.itensPendentes.forEach(pendente => {
-        if (empDevItem.id === pendente.id) {
-          empDevItem.statusDevolucao = StatusDevolucao.P;
-        }
-      });
-      this.itensDevolvidos.forEach(devolvido => {
-        if (empDevItem.id === devolvido.id) {
-          empDevItem.statusDevolucao = StatusDevolucao.D;
-        }
-      });
-      this.itensSaida.forEach(saida => {
-        if (empDevItem.id === saida.id) {
-          empDevItem.statusDevolucao = StatusDevolucao.S;
-        }
-      });
-    });
-    this.emprestimoService.saveDevolucao(this.object)
-      .subscribe(e => {
-        Swal.fire('Sucesso!', 'Devolução efetuada com sucesso!', 'success');
-        this.back();
-      }, error => {
-        Swal.fire('Atenção!', 'Ocorreu um erro ao salvar a devolução!', 'error');
-      });
-  }
-
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<EmprestimoDevolucaoItem[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -119,6 +112,7 @@ export class EmprestimoDevolucaoComponent extends CrudFormComponent<Emprestimo, 
       this.itensPendentes.push(itemDuplicado);
       this.object.emprestimoDevolucaoItem.push(itemDuplicado);
       this.itemIsEditing.qtde = this.itemIsEditing.qtde - this.qtdeItemDuplicado;
+      this.qtdeItemDuplicado = null;
       this.dialogDuplicaItem = false;
     }
   }
@@ -162,20 +156,26 @@ export class EmprestimoDevolucaoComponent extends CrudFormComponent<Emprestimo, 
     this.removeItensDuplicadosByItem(item);
   }
 
-  // todo pendente para desenvolvimento
   removeItensDuplicadosByItem(item: EmprestimoDevolucaoItem) {
-    let qtdeTotal;
+    let qtdeTotal = 0;
+    let empDetItemToRemove;
     this.object.emprestimoDevolucaoItem.forEach(empDevItem => {
       if (empDevItem.item.id === item.item.id) {
-        qtdeTotal = empDevItem.qtde;
+        qtdeTotal += Number(empDevItem.qtde);
+      }
+      if (empDevItem.id == null) {
+        empDetItemToRemove = empDevItem;
       }
     });
-    this.object.emprestimoDevolucaoItem.forEach(empDevItem => {
-      if (empDevItem.item.id === item.item.id) {
-        qtdeTotal = empDevItem.qtde;
-      }
-    });
+    this.object.emprestimoDevolucaoItem.splice(this.object.emprestimoDevolucaoItem
+      .indexOf(empDetItemToRemove), 1);
+    this.itensPendentes.splice(this.itensPendentes.indexOf(empDetItemToRemove, 1));
 
+    this.object.emprestimoDevolucaoItem.forEach(empDevItem => {
+      if (empDevItem.item.id === item.item.id) {
+        empDevItem.qtde = qtdeTotal;
+      }
+    });
   }
 
   disableBtnSaveDuplicar() {

@@ -25,11 +25,10 @@
             </div>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-8">
             <div class="form-group">
               <label for="usuarioEmprestimo">Aluno/Professor</label>
               <span class="field-required">*</span>
-              <span *ngIf="object.usuarioEmprestimo" class="float-right">{{getDocumentoUsuarioEmprestimo()}}</span>
               <input type="text"
                      id="usuarioEmprestimo"
                      name="usuarioEmprestimo"
@@ -40,7 +39,22 @@
             </div>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-2">
+            <div class="form-group">
+              <label for="documento">RA/SIAPE</label>
+              <input type="text"
+                     id="documento"
+                     name="documento"
+                     class="form-control"
+                     [(ngModel)]="documentoUsuario"
+                     disabled
+                     pInputText>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
             <div class="form-group">
               <label for="usuarioResponsavel">Usuário Responsável</label>
               <input type="text"
@@ -70,6 +84,42 @@
               </p-calendar>
             </div>
           </div>
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <label for="prazoDevolucao">Prazo de Devolução</label>
+              <span class="field-required">*</span>
+              <p-calendar name="prazoDevolucao"
+                          id="prazoDevolucao"
+                          required
+                          validation
+                          dataType="string"
+                          dateFormat="dd/mm/yy"
+                          inputStyleClass="form-control"
+                          disabled
+                          [style]="{width: '100%'}"
+                          [(ngModel)]="object.prazoDevolucao">
+              </p-calendar>
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <label for="dataDevolucao">Data de Devolução</label>
+              <span class="field-required">*</span>
+              <p-calendar name="dataDevolucao"
+                          id="dataDevolucao"
+                          required
+                          validation
+                          dataType="string"
+                          dateFormat="dd/mm/yy"
+                          inputStyleClass="form-control"
+                          disabled
+                          [style]="{width: '100%'}"
+                          [(ngModel)]="object.dataDevolucao">
+              </p-calendar>
+            </div>
+          </div>
         </div>
 
         <div class="row">
@@ -94,12 +144,12 @@
                      (contextmenu)="onContextMenu($event, item)"
                      #item
                      cdkDrag>
-                  <span>{{item.item.nome}}</span>
+                  <span>{{item?.item?.nome}}</span>
                   <span class="badge badge-secondary size-badge">{{item.qtde}}</span>
                 </div>
 
                 <div [ngClass]="itensPendentes?.length === 0 ? 'flex-message' : null"
-                     *ngIf="itensPendentes.length === 0">
+                     *ngIf="itensPendentes?.length === 0">
                   <span class="font-weight-bolder">Não há nenhum item pendente para devolução.</span>
                 </div>
               </p-scrollPanel>

@@ -55,6 +55,7 @@
                      id="documento"
                      name="documento"
                      class="form-control"
+                     pInputText
                      [(ngModel)]="documentoUsuario"
                      disabled>
             </div>
@@ -69,6 +70,7 @@
                      id="usuarioResponsavel"
                      name="usuarioResponsavel"
                      class="form-control"
+                     pInputText
                      [(ngModel)]="object.usuarioResponsavel.nome"
                      disabled>
             </div>
@@ -85,6 +87,7 @@
                           dataType="string"
                           dateFormat="dd/mm/yy"
                           inputStyleClass="form-control"
+                          (onSelect)="setDateMinPrazoDevolucao()"
                           [disabled]="object.dataDevolucao"
                           [maxDate]="maxDateEmprestimo"
                           [locale]="pt"
@@ -106,7 +109,7 @@
                           dateFormat="dd/mm/yy"
                           inputStyleClass="form-control"
                           [disabled]="object.dataDevolucao"
-                          [minDate]="maxDateEmprestimo"
+                          [minDate]="minDatePrazoDevolucao"
                           [locale]="pt"
                           [style]="{width: '100%'}"
                           [(ngModel)]="object.prazoDevolucao">
@@ -117,17 +120,12 @@
           <div class="col-md-2">
             <div class="form-group">
               <label for="dataDevolucao">Data de Devolução</label>
-              <span class="field-required">*</span>
               <p-calendar name="dataDevolucao"
                           id="dataDevolucao"
-                          required
-                          validation
                           dataType="string"
                           dateFormat="dd/mm/yy"
                           inputStyleClass="form-control"
                           [disabled]="true"
-                          [maxDate]="maxDateEmprestimo"
-                          [locale]="pt"
                           [style]="{width: '100%'}"
                           [(ngModel)]="object.dataDevolucao">
               </p-calendar>

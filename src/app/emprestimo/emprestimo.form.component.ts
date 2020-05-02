@@ -11,6 +11,7 @@ import {MatTable} from '@angular/material/table';
 import {AutoComplete, SelectItem} from 'primeng';
 import {Utils} from '../framework/util/utils';
 import {NgForm} from '@angular/forms';
+import {DateUtil} from '../framework/util/dateUtil';
 
 @Component({
   selector: 'app-form-emprestimo',
@@ -29,6 +30,7 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
   usuarioList: Usuario[];
   itemDevolver: any;
   maxDateEmprestimo = new Date();
+  minDatePrazoDevolucao: Date;
   yesNoDropdown: SelectItem[];
   documentoUsuario: string;
   pt: any;
@@ -48,6 +50,7 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
 
   initializeValues(): void {
     this.object.dataEmprestimo = new Date().toLocaleDateString();
+    this.setDateMinPrazoDevolucao();
     this.setUsuarioResponsavel();
   }
 
@@ -158,26 +161,8 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
     this.emprestimoItem.qtde = null;
   }
 
-  getLabelDocUsuarioEmprestimo() {
-    const userEmprestimo = this.object.usuarioEmprestimo;
-    if (userEmprestimo.documento) {
-      if (userEmprestimo.permissoes[0].nome === 'ROLE_ALUNO') {
-        return 'RA';
-      } else {
-        return 'SIAPE';
-      }
-    }
-  }
-
-  getDocumentoUsuarioEmprestimo() {
-    const userEmprestimo = this.object.usuarioEmprestimo;
-    if (userEmprestimo.documento) {
-      if (userEmprestimo.permissoes[0].nome === 'ROLE_ALUNO') {
-        return `RA: ${userEmprestimo.documento}`;
-      } else {
-        return `SIAPE: ${userEmprestimo.documento}`;
-      }
-    }
+  setDateMinPrazoDevolucao() {
+    this.minDatePrazoDevolucao = DateUtil.parseStringToDate(this.object.dataEmprestimo);
   }
 
   save() {
