@@ -1,9 +1,12 @@
 <div class="container-fluid my-3">
   <mat-card>
     <mat-card-title>
-      <div class="d-flex align-items-center">
-        <app-voltar (onClick)="back()"></app-voltar>
-        <h4 class="m-0">Cadastro de Empréstimo</h4>
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+          <app-voltar (onClick)="back()"></app-voltar>
+          <h4 class="m-0">Cadastro de Empréstimo</h4>
+        </div>
+        <span *ngIf="object.dataDevolucao" class="badge badge-success float-right" style="font-size: 15px">Empréstimo Finalizado</span>
       </div>
     </mat-card-title>
     <mat-card-content>
@@ -22,11 +25,10 @@
             </div>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-8">
             <div class="form-group">
               <label for="usuarioEmprestimo">Aluno/Professor</label>
               <span class="field-required">*</span>
-              <span *ngIf="object.usuarioEmprestimo" class="float-right">{{getDocumentoUsuarioEmprestimo()}}</span>
               <p-autoComplete id="usuarioEmprestimo"
                               name="usuarioEmprestimo"
                               required
@@ -37,14 +39,30 @@
                               [forceSelection]="true"
                               [dropdown]="true"
                               [(ngModel)]="object.usuarioEmprestimo"
+                              (ngModelChange)="documentoUsuario = object.usuarioEmprestimo.documento"
                               [suggestions]="usuarioList"
+                              [disabled]="object.dataDevolucao"
                               (onClear)="object.usuarioEmprestimo = null"
                               (completeMethod)="findUsuarios($event)">
               </p-autoComplete>
             </div>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-2">
+            <div class="form-group">
+              <label for="documento">RA/SIAPE</label>
+              <input type="text"
+                     id="documento"
+                     name="documento"
+                     class="form-control"
+                     [(ngModel)]="documentoUsuario"
+                     disabled>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
             <div class="form-group">
               <label for="usuarioResponsavel">Usuário Responsável</label>
               <input type="text"
@@ -58,25 +76,66 @@
 
           <div class="col-md-2">
             <div class="form-group">
-              <label for="dataCompra">Data do Empréstimo</label>
+              <label for="dataEmprestimo">Data do Empréstimo</label>
               <span class="field-required">*</span>
-              <p-calendar name="dataCompra"
-                          id="dataCompra"
+              <p-calendar name="dataEmprestimo"
+                          id="dataEmprestimo"
                           required
                           validation
                           dataType="string"
                           dateFormat="dd/mm/yy"
                           inputStyleClass="form-control"
-                          [maxDate]="maxDate"
+                          [disabled]="object.dataDevolucao"
+                          [maxDate]="maxDateEmprestimo"
                           [locale]="pt"
                           [style]="{width: '100%'}"
                           [(ngModel)]="object.dataEmprestimo">
               </p-calendar>
             </div>
           </div>
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <label for="prazoDevolucao">Prazo de Devolução</label>
+              <span class="field-required">*</span>
+              <p-calendar name="prazoDevolucao"
+                          id="prazoDevolucao"
+                          required
+                          validation
+                          dataType="string"
+                          dateFormat="dd/mm/yy"
+                          inputStyleClass="form-control"
+                          [disabled]="object.dataDevolucao"
+                          [minDate]="maxDateEmprestimo"
+                          [locale]="pt"
+                          [style]="{width: '100%'}"
+                          [(ngModel)]="object.prazoDevolucao">
+              </p-calendar>
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <label for="dataDevolucao">Data de Devolução</label>
+              <span class="field-required">*</span>
+              <p-calendar name="dataDevolucao"
+                          id="dataDevolucao"
+                          required
+                          validation
+                          dataType="string"
+                          dateFormat="dd/mm/yy"
+                          inputStyleClass="form-control"
+                          [disabled]="true"
+                          [maxDate]="maxDateEmprestimo"
+                          [locale]="pt"
+                          [style]="{width: '100%'}"
+                          [(ngModel)]="object.dataDevolucao">
+              </p-calendar>
+            </div>
+          </div>
         </div>
 
-        <div class="row">
+        <div class="row" *ngIf="!object.dataDevolucao">
           <div class="col-md-7">
             <div class="form-group">
               <label for="item">Item</label>
@@ -170,6 +229,7 @@
                 <button class="btn btn-outline-primary rounded"
                         type="button"
                         pTooltip="Remover"
+                        [disabled]="object.dataDevolucao"
                         (click)="removeItem(itemEmprestimo.item.id)">
                   <i class="fa fa-trash-o"></i>
                 </button>
@@ -192,6 +252,7 @@
                         rows="1"
                         class="form-control"
                         pInputTextarea
+                        [disabled]="object.dataDevolucao"
                         [(ngModel)]="object.observacao"
                         autoResize="autoResize">
               </textarea>
@@ -203,7 +264,7 @@
         <div class="row">
           <div class="col-md-12 d-flex justify-content-end">
             <app-cancelar (onClick)="back()"></app-cancelar>
-            <app-salvar (onClick)="save()" [typeButton]="'button'"></app-salvar>
+            <app-salvar (onClick)="save()" [typeButton]="'button'" [disabled]="object.dataDevolucao"></app-salvar>
           </div>
         </div>
       </form>

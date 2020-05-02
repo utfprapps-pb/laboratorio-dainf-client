@@ -1,7 +1,7 @@
 import {Component, Injector} from '@angular/core';
 import {Usuario} from './usuario';
 import {UsuarioService} from './usuario.service';
-import {CrudListComponent} from '../util/component/crud.list.component';
+import {CrudListComponent} from '../framework/component/crud.list.component';
 
 @Component({
   selector: 'app-list-usuario',

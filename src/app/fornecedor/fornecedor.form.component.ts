@@ -1,6 +1,6 @@
 import {Component, Injector, ViewChild} from '@angular/core';
 import {Fornecedor} from './fornecedor';
-import {CrudFormComponent} from '../util/component/crud.form.component';
+import {CrudFormComponent} from '../framework/component/crud.form.component';
 import {FornecedorService} from './fornecedor.service';
 import {NgForm} from '@angular/forms';
 import {Estado} from '../estado/estado';

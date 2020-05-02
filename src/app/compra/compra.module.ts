@@ -12,14 +12,14 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
-import {ValidationModule} from '../validation/validation.module';
-import {ValidationService} from '../validation/validation.service';
+import {ValidationModule} from '../framework/validation/validation.module';
+import {ValidationService} from '../framework/validation/validation.service';
 import {NovoModule} from '../geral/novo/novo.module';
 import {VoltarModule} from '../geral/voltar/voltar.module';
 import {CancelarModule} from '../geral/cancelar/cancelar.module';
 import {SalvarModule} from '../geral/salvar/salvar.module';
 import {CadastroRapidoModule} from '../geral/cadastroRapido/cadastroRapido.module';
-import {OnlyNumberModule} from '../util/directives/onlyNumber/onlyNumber.module';
+import {OnlyNumberModule} from '../framework/directives/onlyNumber/onlyNumber.module';
 import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({

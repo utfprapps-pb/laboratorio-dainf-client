@@ -2,7 +2,7 @@ import {Component, Injector, ViewChild} from '@angular/core';
 import {Usuario} from './usuario';
 import {UsuarioService} from './usuario.service';
 import {NgForm} from '@angular/forms';
-import {CrudFormComponent} from '../util/component/crud.form.component';
+import {CrudFormComponent} from '../framework/component/crud.form.component';
 import {SelectItem} from 'primeng';
 
 @Component({

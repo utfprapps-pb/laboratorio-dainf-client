@@ -6,8 +6,8 @@ import {CalendarModule, DialogModule, TooltipModule} from 'primeng';
 import {HomeService} from './home.service';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
-import {ValidationModule} from '../validation/validation.module';
-import {ValidationService} from '../validation/validation.service';
+import {ValidationModule} from '../framework/validation/validation.module';
+import {ValidationService} from '../framework/validation/validation.service';
 
 @NgModule({
   imports: [

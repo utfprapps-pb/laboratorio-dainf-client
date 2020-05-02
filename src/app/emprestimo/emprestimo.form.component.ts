@@ -1,5 +1,5 @@
 import {Component, Injector, ViewChild} from '@angular/core';
-import {CrudFormComponent} from '../util/component/crud.form.component';
+import {CrudFormComponent} from '../framework/component/crud.form.component';
 import {Emprestimo} from './emprestimo';
 import {EmprestimoService} from './emprestimo.service';
 import {EmprestimoItem} from './emprestimoItem';
@@ -9,7 +9,7 @@ import {UsuarioService} from '../usuario/usuario.service';
 import {Usuario} from '../usuario/usuario';
 import {MatTable} from '@angular/material/table';
 import {AutoComplete, SelectItem} from 'primeng';
-import {Utils} from '../util/utils';
+import {Utils} from '../framework/util/utils';
 import {NgForm} from '@angular/forms';
 
 @Component({
@@ -28,8 +28,9 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
   itemList: Item[];
   usuarioList: Usuario[];
   itemDevolver: any;
-  maxDate = new Date();
+  maxDateEmprestimo = new Date();
   yesNoDropdown: SelectItem[];
+  documentoUsuario: string;
   pt: any;
 
   constructor(protected emprestimoService: EmprestimoService,
@@ -48,6 +49,10 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
   initializeValues(): void {
     this.object.dataEmprestimo = new Date().toLocaleDateString();
     this.setUsuarioResponsavel();
+  }
+
+  postEdit(): void {
+    this.documentoUsuario = this.object.usuarioEmprestimo.documento;
   }
 
   setUsuarioResponsavel() {
@@ -151,6 +156,17 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
   clearNewItem() {
     this.emprestimoItem.item = null;
     this.emprestimoItem.qtde = null;
+  }
+
+  getLabelDocUsuarioEmprestimo() {
+    const userEmprestimo = this.object.usuarioEmprestimo;
+    if (userEmprestimo.documento) {
+      if (userEmprestimo.permissoes[0].nome === 'ROLE_ALUNO') {
+        return 'RA';
+      } else {
+        return 'SIAPE';
+      }
+    }
   }
 
   getDocumentoUsuarioEmprestimo() {

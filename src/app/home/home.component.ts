@@ -5,9 +5,9 @@ import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import {DashboardEmprestimoCountRange} from './dashboard/dashboardEmprestimoCountRange';
 import {HomeService} from './home.service';
-import {Utils} from '../util/utils';
+import {Utils} from '../framework/util/utils';
 import {NgForm} from '@angular/forms';
-import {BaseFormComponent} from '../util/component/base.form.component';
+import {BaseFormComponent} from '../framework/component/base.form.component';
 
 am4core.useTheme(am4themes_animated);
 

@@ -29,37 +29,19 @@
             <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{row?.dataEmprestimo}}</mat-cell>
           </ng-container>
 
-          <ng-container matColumnDef="dataDevolucao">
+          <ng-container matColumnDef="prazoDevolucao">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Prazo de Devolução</mat-header-cell>
-            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{row?.dataEmprestimo}}</mat-cell>
+            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{row?.prazoDevolucao}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="status">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
             <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">
-              <span class="badge badge-success" style="font-size: 85%">Em andamento</span>
-<!--              <span class="badge badge-danger" style="font-size: 85%">Em atraso</span>-->
-<!--              <span class="badge badge-secondary" style="font-size: 85%">Finalizado</span>-->
+              <span *ngIf="getStatusEmprestimo(row) === 'P'" class="badge badge-primary" style="font-size: 85%">Em andamento</span>
+              <span *ngIf="getStatusEmprestimo(row) === 'A'" class="badge badge-danger" style="font-size: 85%">Em atraso</span>
+              <span *ngIf="getStatusEmprestimo(row) === 'F'" class="badge badge-success" style="font-size: 85%">Finalizado</span>
             </mat-cell>
           </ng-container>
-
-<!--          <ng-container matColumnDef="actions">-->
-<!--            <mat-header-cell *matHeaderCellDef> Opções </mat-header-cell>-->
-<!--            <mat-cell *matCellDef="let row">-->
-<!--              <button class="btn btn-outline-secondary rounded mr-2"-->
-<!--                      type="button"-->
-<!--                      pTooltip="Editar"-->
-<!--                      (click)="edit(row.id)">-->
-<!--                <i class="fa fa-edit"></i>-->
-<!--              </button>-->
-<!--              <button class="btn btn-outline-primary rounded"-->
-<!--                      type="button"-->
-<!--                      pTooltip="Remover"-->
-<!--                      (click)="delete(row.id)">-->
-<!--                <i class="fa fa-trash-o"></i>-->
-<!--              </button>-->
-<!--            </mat-cell>-->
-<!--          </ng-container>-->
 
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
@@ -71,3 +53,4 @@
     </mat-card-content>
   </mat-card>
 </div>
+

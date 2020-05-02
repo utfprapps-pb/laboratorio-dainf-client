@@ -16,17 +16,17 @@ export interface MenuItem {
 
 export const ITEM: MenuItem[] = [
   {path: '/', title: 'Home', icon: 'home', id: 'home'},
-  {path: '/emprestimo', title: 'Empréstimo', icon: 'business', id: 'emprestimo'},
-  {path: '/saida', title: 'Saída', icon: 'arrow_downward', id: 'saida'},
-  {path: '/compra', title: 'Compra', icon: 'money', id: 'compra'},
-  {path: '/relatorios', title: 'Relatórios', icon: 'equalizer', id: 'relatorios'},
+  {path: '/emprestimo', title: 'Empréstimo', icon: 'handshake-o', id: 'emprestimo'},
+  {path: '/saida', title: 'Saída', icon: 'arrow-down', id: 'saida'},
+  {path: '/compra', title: 'Compra', icon: 'shopping-cart', id: 'compra'},
+  {path: '/relatorios', title: 'Relatórios', icon: 'line-chart', id: 'relatorios'},
 ];
 
 export const CADASTROS: MenuItem[] = [
-  {path: '/item', title: 'Item', icon: 'business', id: 'item'},
-  {path: '/grupo', title: 'Grupo', icon: 'view_compact', id: 'grupo'},
-  {path: '/fornecedor', title: 'Fornecedor', icon: 'work', id: 'fornecedor'},
-  {path: '/usuario', title: 'Usuário', icon: 'person', id: 'usuario'},
+  {path: '/item', title: 'Item', icon: 'microchip', id: 'item'},
+  {path: '/grupo', title: 'Grupo', icon: 'sitemap', id: 'grupo'},
+  {path: '/fornecedor', title: 'Fornecedor', icon: 'briefcase', id: 'fornecedor'},
+  {path: '/usuario', title: 'Usuário', icon: 'users', id: 'usuario'},
 ];
 
 // TODO remover posteriormente

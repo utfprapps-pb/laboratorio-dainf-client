@@ -2,7 +2,7 @@ import {Component, Injector, ViewChild} from '@angular/core';
 import {Pais} from './pais';
 import {PaisService} from './pais.service';
 import {NgForm} from '@angular/forms';
-import {CrudFormComponent} from '../util/component/crud.form.component';
+import {CrudFormComponent} from '../framework/component/crud.form.component';
 
 @Component({
   selector: 'app-form-pais',

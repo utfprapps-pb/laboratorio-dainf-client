@@ -12,8 +12,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import {ValidationService} from '../validation/validation.service';
-import {ValidationModule} from '../validation/validation.module';
+import {ValidationService} from '../framework/validation/validation.service';
+import {ValidationModule} from '../framework/validation/validation.module';
 import {VoltarModule} from '../geral/voltar/voltar.module';
 import {CancelarModule} from '../geral/cancelar/cancelar.module';
 import {SalvarModule} from '../geral/salvar/salvar.module';
@@ -21,7 +21,7 @@ import {NovoModule} from '../geral/novo/novo.module';
 import {GrupoModule} from '../grupo/grupo.module';
 import {CadastroRapidoModule} from '../geral/cadastroRapido/cadastroRapido.module';
 import {CurrencyMaskModule} from 'ng2-currency-mask';
-import {OnlyNumberModule} from '../util/directives/onlyNumber/onlyNumber.module';
+import {OnlyNumberModule} from '../framework/directives/onlyNumber/onlyNumber.module';
 import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({

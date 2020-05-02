@@ -1,5 +1,5 @@
 import {Component, Injector, ViewChild} from '@angular/core';
-import {CrudFormComponent} from '../util/component/crud.form.component';
+import {CrudFormComponent} from '../framework/component/crud.form.component';
 import {Cidade} from './cidade';
 import {CidadeService} from './cidade.service';
 import {NgForm} from '@angular/forms';

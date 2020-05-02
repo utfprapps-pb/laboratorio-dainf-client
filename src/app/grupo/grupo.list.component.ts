@@ -1,7 +1,7 @@
 import {Component, Injector} from '@angular/core';
 import {Grupo} from './grupo';
 import {GrupoService} from './grupo.service';
-import {CrudListComponent} from '../util/component/crud.list.component';
+import {CrudListComponent} from '../framework/component/crud.list.component';
 
 @Component({
   selector: 'app-list-grupo',

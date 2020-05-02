@@ -16,7 +16,8 @@ export class ValidationService {
       required: 'Preenchimento Obrigatório',
       minlength: 'O valor é muito curto',
       maxlength: 'O valor é muito longo',
-      email: 'O email é inválido'
+      email: 'O email é inválido',
+      validateCnpj: 'CNPJ inválido'
     };
   }
 

@@ -1,5 +1,5 @@
 import {Component, ElementRef, Injector, ViewChild} from '@angular/core';
-import {CrudFormComponent} from '../util/component/crud.form.component';
+import {CrudFormComponent} from '../framework/component/crud.form.component';
 import {Saida} from './saida';
 import {SaidaService} from './saida.service';
 import {Item} from '../item/item';
@@ -8,7 +8,7 @@ import {ItemService} from '../item/item.service';
 import {UsuarioService} from '../usuario/usuario.service';
 import {MatTable} from '@angular/material/table';
 import {AutoComplete} from 'primeng';
-import {Utils} from '../util/utils';
+import {Utils} from '../framework/util/utils';
 
 @Component({
   selector: 'app-form-saida',

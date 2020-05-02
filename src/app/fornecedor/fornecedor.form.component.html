@@ -63,8 +63,11 @@
                      name="cnpj"
                      required
                      validation
+                     validateCnpj
                      onlyNumber
-                     class="form-control"
+                     formatCnpj
+                     [maxLength]="14"
+                     [style]="{width: '100%'}"
                      [(ngModel)]="object.cnpj"
                      pInputText>
             </div>

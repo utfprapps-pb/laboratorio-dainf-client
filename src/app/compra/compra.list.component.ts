@@ -1,5 +1,5 @@
 import {Component, Injector} from '@angular/core';
-import {CrudListComponent} from '../util/component/crud.list.component';
+import {CrudListComponent} from '../framework/component/crud.list.component';
 import {Compra} from './compra';
 import {CompraService} from './compra.service';
 

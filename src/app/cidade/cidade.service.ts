@@ -1,4 +1,4 @@
-import {CrudService} from '../util/service/crud.service';
+import {CrudService} from '../framework/service/crud.service';
 import {Cidade} from './cidade';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';

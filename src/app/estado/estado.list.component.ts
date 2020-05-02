@@ -1,7 +1,7 @@
 import {Component, Injector} from '@angular/core';
 import {Estado} from './estado';
 import {EstadoService} from './estado.service';
-import {CrudListComponent} from '../util/component/crud.list.component';
+import {CrudListComponent} from '../framework/component/crud.list.component';
 
 @Component({
   selector: 'app-list-estado',

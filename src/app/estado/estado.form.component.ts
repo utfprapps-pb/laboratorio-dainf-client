@@ -3,7 +3,7 @@ import {Estado} from './estado';
 import {EstadoService} from './estado.service';
 import {NgForm} from '@angular/forms';
 import {Pais} from '../pais/pais';
-import {CrudFormComponent} from '../util/component/crud.form.component';
+import {CrudFormComponent} from '../framework/component/crud.form.component';
 import {PaisService} from '../pais/pais.service';
 
 @Component({

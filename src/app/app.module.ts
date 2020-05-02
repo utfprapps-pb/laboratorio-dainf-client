@@ -27,9 +27,9 @@ import {EmprestimoModule} from './emprestimo/emprestimo.module';
 import {SaidaModule} from './saida/saida.module';
 import ptBr from '@angular/common/locales/pt';
 import {MatPaginatorIntl} from '@angular/material/paginator';
-import {getDutchPaginatorIntl} from './util/dutch-paginator';
+import {getDutchPaginatorIntl} from './framework/util/dutch-paginator';
 import {CURRENCY_MASK_CONFIG} from 'ng2-currency-mask';
-import {CustomCurrencyMaskConfig} from './util/currency.mask.config';
+import {CustomCurrencyMaskConfig} from './framework/util/currency.mask.config';
 
 registerLocaleData(ptBr);
 

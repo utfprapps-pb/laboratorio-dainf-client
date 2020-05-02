@@ -1,7 +1,7 @@
 import {Component, Injector} from '@angular/core';
 import {Pais} from './pais';
 import {PaisService} from './pais.service';
-import {CrudListComponent} from '../util/component/crud.list.component';
+import {CrudListComponent} from '../framework/component/crud.list.component';
 
 @Component({
   selector: 'app-list-pais',

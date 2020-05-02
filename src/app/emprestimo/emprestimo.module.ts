@@ -8,12 +8,21 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
-import {AutoCompleteModule, CalendarModule, DropdownModule, InputTextareaModule, InputTextModule, TooltipModule} from 'primeng';
+import {
+  AutoCompleteModule,
+  CalendarModule,
+  DialogModule,
+  DropdownModule,
+  InputTextareaModule,
+  InputTextModule,
+  ScrollPanelModule,
+  TooltipModule
+} from 'primeng';
 import {EmprestimoFormComponent} from './emprestimo.form.component';
 import {EmprestimoListComponent} from './emprestimo.list.component';
 import {EmprestimoService} from './emprestimo.service';
-import {ValidationModule} from '../validation/validation.module';
-import {ValidationService} from '../validation/validation.service';
+import {ValidationModule} from '../framework/validation/validation.module';
+import {ValidationService} from '../framework/validation/validation.service';
 import {MatSortModule} from '@angular/material/sort';
 import {NovoModule} from '../geral/novo/novo.module';
 import {VoltarModule} from '../geral/voltar/voltar.module';
@@ -21,8 +30,11 @@ import {CancelarModule} from '../geral/cancelar/cancelar.module';
 import {SalvarModule} from '../geral/salvar/salvar.module';
 import {BottomSheetModule} from '../geral/bottomScheet/bottomSheet.module';
 import {CadastroRapidoModule} from '../geral/cadastroRapido/cadastroRapido.module';
-import {OnlyNumberModule} from '../util/directives/onlyNumber/onlyNumber.module';
+import {OnlyNumberModule} from '../framework/directives/onlyNumber/onlyNumber.module';
 import {BottomSheetEmprestimoModule} from '../geral/bottomScheetEmprestimo/bottomSheetEmprestimo.module';
+import {EmprestimoDevolucaoComponent} from './emprestimo.devolucao.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   imports: [
@@ -50,15 +62,21 @@ import {BottomSheetEmprestimoModule} from '../geral/bottomScheetEmprestimo/botto
     BottomSheetModule,
     BottomSheetEmprestimoModule,
     CadastroRapidoModule,
-    OnlyNumberModule
+    OnlyNumberModule,
+    DragDropModule,
+    ScrollPanelModule,
+    DialogModule,
+    MatMenuModule
   ],
   declarations: [
     EmprestimoFormComponent,
-    EmprestimoListComponent
+    EmprestimoListComponent,
+    EmprestimoDevolucaoComponent
   ],
   exports: [
     EmprestimoFormComponent,
-    EmprestimoListComponent
+    EmprestimoListComponent,
+    EmprestimoDevolucaoComponent
   ],
   providers: [
     EmprestimoService,

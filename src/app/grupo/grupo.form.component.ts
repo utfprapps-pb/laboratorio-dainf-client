@@ -1,7 +1,7 @@
 import {Component, Injector} from '@angular/core';
 import {Grupo} from './grupo';
 import {GrupoService} from './grupo.service';
-import {CrudFormComponent} from '../util/component/crud.form.component';
+import {CrudFormComponent} from '../framework/component/crud.form.component';
 import {Item} from '../item/item';
 import Swal from 'sweetalert2';
 

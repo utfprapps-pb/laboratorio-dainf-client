@@ -31,7 +31,7 @@
 
           <ng-container matColumnDef="cnpj">
             <mat-header-cell *matHeaderCellDef mat-sort-header>CNPJ</mat-header-cell>
-            <mat-cell *matCellDef="let row" (click)="openBottomSheet(row.id)">{{row.cnpj}}</mat-cell>
+            <mat-cell *matCellDef="let row" (click)="openBottomSheet(row.id)">{{row.cnpj | cpfCnpj}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="actions">

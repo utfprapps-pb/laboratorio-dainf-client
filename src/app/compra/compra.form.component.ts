@@ -1,17 +1,16 @@
 import {Component, Injector, ViewChild} from '@angular/core';
-import {CrudFormComponent} from '../util/component/crud.form.component';
+import {CrudFormComponent} from '../framework/component/crud.form.component';
 import {Compra} from './compra';
 import {CompraService} from './compra.service';
 import {Fornecedor} from '../fornecedor/fornecedor';
 import {FornecedorService} from '../fornecedor/fornecedor.service';
-import {NgForm} from '@angular/forms';
 import {ItemService} from '../item/item.service';
 import {Item} from '../item/item';
 import {CompraItem} from './compraItem';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {UsuarioService} from '../usuario/usuario.service';
 import {AutoComplete} from 'primeng';
-import {Utils} from '../util/utils';
+import {Utils} from '../framework/util/utils';
 
 @Component({
   selector: 'app-form-compra',
@@ -90,7 +89,7 @@ export class CompraFormComponent extends CrudFormComponent<Compra, number> {
 
   insertItem() {
     if (this.compraItem.item && this.compraItem.qtde
-          && typeof this.compraItem.item === 'object') {
+      && typeof this.compraItem.item === 'object') {
       if (!this.object.compraItem) {
         this.object.compraItem = new Array();
       }

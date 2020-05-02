@@ -29,8 +29,13 @@ body {
   border-radius: 10px !important;
 }
 
+.ui-dialog-titlebar {
+  font-size: 16px;
+}
+
 .ui-dialog-content {
   overflow: hidden !important;
+  border-radius: 0 0 10px 10px;
   /*padding: 3em 2em !important;*/
 }
 

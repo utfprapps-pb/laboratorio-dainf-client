@@ -1,16 +1,18 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {OnlyNumberDirective} from "./onlyNumber.directive";
+import {CpfCnpjPipe} from './cpfCnpj.pipe';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   declarations: [
-    OnlyNumberDirective
+    CpfCnpjPipe
   ],
   exports: [
-    OnlyNumberDirective
+    CpfCnpjPipe
   ]
 })
-export class OnlyNumberModule { }
+export class CpfCnpjPipeModule {
+
+}

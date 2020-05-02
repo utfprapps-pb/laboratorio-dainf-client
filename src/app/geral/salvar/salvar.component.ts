@@ -8,6 +8,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 export class SalvarComponent {
 
   @Input() typeButton: string;
+  @Input() disabled: boolean;
   @Output() onClick: EventEmitter<any> = new EventEmitter();
 
   click(): void {
