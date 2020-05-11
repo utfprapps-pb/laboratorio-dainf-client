@@ -90,7 +90,7 @@
                           (onSelect)="setDateMinPrazoDevolucao()"
                           [disabled]="object.dataDevolucao"
                           [maxDate]="maxDateEmprestimo"
-                          [locale]="pt"
+                          [locale]="localePt"
                           [style]="{width: '100%'}"
                           [(ngModel)]="object.dataEmprestimo">
               </p-calendar>
@@ -110,7 +110,7 @@
                           inputStyleClass="form-control"
                           [disabled]="object.dataDevolucao"
                           [minDate]="minDatePrazoDevolucao"
-                          [locale]="pt"
+                          [locale]="localePt"
                           [style]="{width: '100%'}"
                           [(ngModel)]="object.prazoDevolucao">
               </p-calendar>
@@ -151,6 +151,10 @@
                               [suggestions]="itemList"
                               (onClear)="clearNewItem()"
                               (completeMethod)="findProdutos($event)">
+                <ng-template let-item pTemplate="item">
+                  <span>{{item.nome}}</span>
+                  <span class="autocomplete-separator-field">{{item.patrimonio}}</span>
+                </ng-template>
               </p-autoComplete>
             </div>
           </div>
@@ -202,7 +206,10 @@
           <mat-table #table="matTable"  [dataSource]="object.emprestimoItem">
             <ng-container matColumnDef="item">
               <mat-header-cell *matHeaderCellDef> Item </mat-header-cell>
-              <mat-cell *matCellDef="let itemEmprestimo"> {{itemEmprestimo.item.nome}} </mat-cell>
+              <mat-cell *matCellDef="let itemEmprestimo">
+                <p>{{itemEmprestimo?.item?.nome}}</p>
+                <p *ngIf="itemEmprestimo?.item?.patrimonio" class="ml-2"> | {{itemEmprestimo.item.patrimonio}}</p>
+              </mat-cell>
               <mat-footer-cell *matFooterCellDef class="font-weight-bolder"> Total </mat-footer-cell>
             </ng-container>
 

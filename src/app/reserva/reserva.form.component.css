@@ -1,0 +1,11 @@
+.example-container {
+  height: auto;
+  max-height: 400px;
+  overflow: auto;
+  margin-bottom: 2%;
+}
+
+.mat-column-actionsForm,
+.mat-column-qtde {
+  max-width: 5% !important;
+}

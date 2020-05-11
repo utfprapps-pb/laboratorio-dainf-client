@@ -25,6 +25,11 @@ import {EmprestimoFormComponent} from './emprestimo/emprestimo.form.component';
 import {SaidaListComponent} from './saida/saida.list.component';
 import {SaidaFormComponent} from './saida/saida.form.component';
 import {EmprestimoDevolucaoComponent} from './emprestimo/emprestimo.devolucao.component';
+import {ReservaFormComponent} from './reserva/reserva.form.component';
+import {ReservaListComponent} from './reserva/reserva.list.component';
+import {SolicitacaoCompraListComponent} from './solicitacaoCompra/solicitacaoCompra.list.component';
+import {SolicitacaoCompraFormComponent} from './solicitacaoCompra/solicitacaoCompra.form.component';
+import {NotAuthorizedComponent} from './notAuthorized/notAuthorized.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -50,6 +55,7 @@ const routes: Routes = [
   {path: 'item', canActivate: [LoginService], component: ItemListComponent},
   {path: 'item/form', canActivate: [LoginService], component: ItemFormComponent},
   {path: 'item/form/:id', canActivate: [LoginService], component: ItemFormComponent},
+  {path: 'item/form/copy/:id', canActivate: [LoginService], component: ItemFormComponent},
   {path: 'compra', canActivate: [LoginService], component: CompraListComponent},
   {path: 'compra/form', canActivate: [LoginService], component: CompraFormComponent},
   {path: 'compra/form/:id', canActivate: [LoginService], component: CompraFormComponent},
@@ -60,6 +66,13 @@ const routes: Routes = [
   {path: 'saida', canActivate: [LoginService], component: SaidaListComponent},
   {path: 'saida/form', canActivate: [LoginService], component: SaidaFormComponent},
   {path: 'saida/form/:id', canActivate: [LoginService], component: SaidaFormComponent},
+  {path: 'reserva', canActivate: [LoginService], component: ReservaListComponent},
+  {path: 'reserva/form', canActivate: [LoginService], component: ReservaFormComponent},
+  {path: 'reserva/form/:id', canActivate: [LoginService], component: ReservaFormComponent},
+  {path: 'solicitacao-compra', canActivate: [LoginService], component: SolicitacaoCompraListComponent},
+  {path: 'solicitacao-compra/form', canActivate: [LoginService], component: SolicitacaoCompraFormComponent},
+  {path: 'solicitacao-compra/form/:id', canActivate: [LoginService], component: SolicitacaoCompraFormComponent},
+  {path: '403', component: NotAuthorizedComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
 

@@ -14,6 +14,7 @@
         <mat-icon *ngIf="!showSubMenuCadastro">chevron_right</mat-icon>
         <mat-icon *ngIf="showSubMenuCadastro">expand_more</mat-icon>
       </a>
+
       <mat-nav-list class="sidenav-submenu" *ngIf="showSubMenuCadastro" style="margin-left: 25px !important;">
         <a *ngFor="let menuItem of menuCadastros" mat-list-item [id]="[menuItem.id]" [routerLink]="[menuItem.path]"
            routerLinkActive="active" class="color-toolbar">
@@ -22,24 +23,6 @@
           <mat-divider></mat-divider>
         </a>
       </mat-nav-list>
-
-<!--      <mat-divider></mat-divider>-->
-
-<!--      <a mat-list-item (click)="toggleSubMenuGerais()">-->
-<!--        <mat-icon mat-list-icon>business</mat-icon>-->
-<!--        Geral-->
-<!--        <mat-icon *ngIf="!showSubMenuGerais">chevron_right</mat-icon>-->
-<!--        <mat-icon *ngIf="showSubMenuGerais">expand_more</mat-icon>-->
-<!--      </a>-->
-
-<!--      <mat-nav-list class="sidenav-submenu" *ngIf="showSubMenuGerais" style="margin-left: 25px !important;">-->
-<!--        <a *ngFor="let menuItem of menuGeral" mat-list-item [id]="[menuItem.id]" [routerLink]="[menuItem.path]"-->
-<!--           routerLinkActive="active" class="color-toolbar">-->
-<!--          <mat-icon mat-list-icon >{{menuItem.icon}}</mat-icon>-->
-<!--          {{menuItem.title}}-->
-<!--          <mat-divider></mat-divider>-->
-<!--        </a>-->
-<!--      </mat-nav-list>-->
 
     </mat-nav-list>
   </mat-drawer>

@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {MatBottomSheetRef} from '@angular/material/bottom-sheet';
+import {LoginService} from '../../login/login.service';
 
 @Component({
   selector: 'app-bottom-sheet-emprestimo',
@@ -8,7 +9,11 @@ import {MatBottomSheetRef} from '@angular/material/bottom-sheet';
 })
 export class BottomSheetEmprestimoComponent {
 
-  constructor(private bottomSheetRef: MatBottomSheetRef<BottomSheetEmprestimoComponent>) {
+  isAlunoOrProfessor = true;
+
+  constructor(private bottomSheetRef: MatBottomSheetRef<BottomSheetEmprestimoComponent>,
+              private loginService: LoginService) {
+    loginService.userLoggedIsAlunoOrProfessor().then(value => this.isAlunoOrProfessor = value);
   }
 
   click(action) {

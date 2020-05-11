@@ -13,7 +13,7 @@ export class SaidaListComponent extends CrudListComponent<Saida, number> {
 
   constructor(protected saidaService: SaidaService,
               protected injector: Injector) {
-    super(saidaService, injector, ['id', 'dtSaida', 'qtde', 'usuario', 'actions'], 'saida/form');
+    super(saidaService, injector, ['id', 'dtSaida', 'qtde', 'usuario', 'observacao', 'actions'], 'saida/form');
   }
 
   getQtdeTotal(saidaItem: SaidaItem[]) {

@@ -33,7 +33,7 @@ export class UsuarioFormComponent extends CrudFormComponent<Usuario, number> {
         this.grupoAcessoDropdown = new Array();
         if (e != null) {
           e.forEach(permissao => {
-            this.grupoAcessoDropdown.push({label: permissao.nome, value: new Array(permissao)});
+            this.grupoAcessoDropdown.push({label: this.formatRule(permissao.nome), value: permissao});
           });
           if (!this.editando) {
             this.object.permissoes = [];
@@ -42,6 +42,12 @@ export class UsuarioFormComponent extends CrudFormComponent<Usuario, number> {
           }
         }
       });
+  }
+
+  formatRule(nome) {
+    let toReturn = nome.replace('ROLE_', '');
+    toReturn = toReturn.charAt(0).toUpperCase() + toReturn.slice(1).toLowerCase();
+    return toReturn;
   }
 
   postEdit(): void {

@@ -9,9 +9,9 @@ import {UsuarioService} from '../usuario/usuario.service';
 import {Usuario} from '../usuario/usuario';
 import {MatTable} from '@angular/material/table';
 import {AutoComplete, SelectItem} from 'primeng';
-import {Utils} from '../framework/util/utils';
 import {NgForm} from '@angular/forms';
 import {DateUtil} from '../framework/util/dateUtil';
+import {pt} from '../framework/constantes/calendarPt';
 
 @Component({
   selector: 'app-form-emprestimo',
@@ -33,7 +33,7 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
   minDatePrazoDevolucao: Date;
   yesNoDropdown: SelectItem[];
   documentoUsuario: string;
-  pt: any;
+  localePt: any;
 
   constructor(protected emprestimoService: EmprestimoService,
               protected injector: Injector,
@@ -45,7 +45,7 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
       {label: 'Sim', value: true},
       {label: 'Não', value: false}
     ];
-    this.pt = Utils.calendarPtBr(this.pt);
+    this.localePt = pt;
   }
 
   initializeValues(): void {
@@ -68,7 +68,7 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
   }
 
   findProdutos($event) {
-    this.itemService.complete($event.query)
+    this.itemService.completeItem($event.query, true)
       .subscribe(e => {
         this.itemList = e;
       });

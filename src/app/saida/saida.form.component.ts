@@ -8,7 +8,7 @@ import {ItemService} from '../item/item.service';
 import {UsuarioService} from '../usuario/usuario.service';
 import {MatTable} from '@angular/material/table';
 import {AutoComplete} from 'primeng';
-import {Utils} from '../framework/util/utils';
+import {pt} from '../framework/constantes/calendarPt';
 
 @Component({
   selector: 'app-form-saida',
@@ -24,7 +24,7 @@ export class SaidaFormComponent extends CrudFormComponent<Saida, number> {
   @ViewChild('table') table: MatTable<any>;
   @ViewChild('itemToAdd') itemToAdd: AutoComplete;
   @ViewChild('qtdeToAdd') qtdeToAdd: ElementRef;
-  pt: any;
+  localePt: any;
 
   constructor(protected saidaService: SaidaService,
               protected injector: Injector,
@@ -32,7 +32,7 @@ export class SaidaFormComponent extends CrudFormComponent<Saida, number> {
               private usuarioService: UsuarioService) {
     super(saidaService, injector, '/saida');
     this.saidaItem = new SaidaItem();
-    this.pt = Utils.calendarPtBr(this.pt);
+    this.localePt = pt;
   }
 
   initializeValues(): void {
@@ -57,7 +57,7 @@ export class SaidaFormComponent extends CrudFormComponent<Saida, number> {
   }
 
   findProdutos($event) {
-    this.itemService.complete($event.query)
+    this.itemService.completeItem($event.query, true)
       .subscribe(e => {
         this.itemList = e;
       });

@@ -1,4 +1,4 @@
-<div class="container-fluid my-3">
+<div class="container-fluid my-3" id="container-dashboard" style="display: none">
 
   <div class="row m-0">
     <div class="col-md-12 container-info mat-elevation-z5">
@@ -97,11 +97,11 @@
 
 <p-dialog header="Filtro"
           [(visible)]="dialodFiltroData"
-          [style]="{minWidth: '250px'}"
+          [style]="{minWidth: '400px'}"
           [modal]="true"
           [baseZIndex]="10000">
 
-  <form #formFiltro="ngForm">
+  <form>
     <div class="row">
       <div class="col-md-12">
         <div class="form-group">
@@ -109,10 +109,9 @@
           <p-calendar name="dtIni"
                       id="dtIni"
                       appendTo="body"
-                      required
-                      validation
                       dataType="string"
                       dateFormat="dd/mm/yy"
+                      [locale]="localePt"
                       [(ngModel)]="dtIniFiltro"
                       [style]="{width: '100%'}"
                       inputStyleClass="form-control">
@@ -126,11 +125,10 @@
           <label for="dtFim">Data Final</label>
           <p-calendar name="dtFim"
                       id="dtFim"
-                      required
                       appendTo="body"
-                      validation
                       dataType="string"
                       dateFormat="dd/mm/yy"
+                      [locale]="localePt"
                       [(ngModel)]="dtFimFiltro"
                       [style]="{width: '100%'}"
                       inputStyleClass="form-control">
@@ -142,16 +140,18 @@
       <div class="row">
         <div class="col-md-12 d-flex justify-content-end">
           <button type="button"
-                  class="mr-2 w-100px br-25px"
-                  mat-stroked-button>
+                  class="mr-2 text-uppercase"
+                  (click)="dialodFiltroData = false"
+                  mat-raised-button>
             Cancelar
           </button>
           <button type="submit"
                   color="primary"
-                  class="w-100px br-25px"
+                  class="text-uppercase"
+                  [disabled]="disableBtnFiltrar()"
                   (click)="filtrar()"
-                  mat-stroked-button>
-            Buscar
+                  mat-raised-button>
+            Filtrar
           </button>
         </div>
       </div>

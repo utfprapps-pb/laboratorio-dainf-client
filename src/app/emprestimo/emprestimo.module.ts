@@ -31,7 +31,7 @@ import {SalvarModule} from '../geral/salvar/salvar.module';
 import {BottomSheetModule} from '../geral/bottomScheet/bottomSheet.module';
 import {CadastroRapidoModule} from '../geral/cadastroRapido/cadastroRapido.module';
 import {OnlyNumberModule} from '../framework/directives/onlyNumber/onlyNumber.module';
-import {BottomSheetEmprestimoModule} from '../geral/bottomScheetEmprestimo/bottomSheetEmprestimo.module';
+import {BottomSheetEmprestimoModule} from './bottomScheetEmprestimo/bottomSheetEmprestimo.module';
 import {EmprestimoDevolucaoComponent} from './emprestimo.devolucao.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatMenuModule} from '@angular/material/menu';

@@ -68,7 +68,7 @@
                           dateFormat="dd/mm/yy"
                           [style]="{width: '100%'}"
                           [maxDate]="maxDate"
-                          [locale]="pt"
+                          [locale]="localePt"
                           inputStyleClass="form-control"
                           [(ngModel)]="object.dataCompra">
               </p-calendar>
@@ -94,6 +94,10 @@
                               [suggestions]="itemList"
                               (onClear)="compraItem.item = null"
                               (completeMethod)="findProdutos($event)">
+                <ng-template let-item pTemplate="item">
+                  <span>{{item.nome}}</span>
+                  <span class="autocomplete-separator-field">{{item.patrimonio}}</span>
+                </ng-template>
               </p-autoComplete>
             </div>
           </div>
@@ -136,7 +140,7 @@
                       style="height: 35px"
                       (click)="insertItem()"
                       mat-stroked-button>
-                <mat-icon>arrow_back_ios</mat-icon>
+                <mat-icon>done</mat-icon>
               </button>
             </div>
           </div>
@@ -146,7 +150,10 @@
           <mat-table #table="matTable" [dataSource]="object.compraItem">
             <ng-container matColumnDef="item">
               <mat-header-cell *matHeaderCellDef> Item </mat-header-cell>
-              <mat-cell *matCellDef="let itemCompra"> {{itemCompra.item.nome}} </mat-cell>
+              <mat-cell *matCellDef="let itemCompra">
+                <p>{{itemCompra?.item?.nome}}</p>
+                <p *ngIf="itemCompra?.item?.patrimonio" class="ml-2"> | {{itemCompra.item.patrimonio}}</p>
+              </mat-cell>
               <mat-footer-cell *matFooterCellDef> Total </mat-footer-cell>
             </ng-container>
 

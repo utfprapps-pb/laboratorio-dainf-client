@@ -1,39 +1,93 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {SidenavService} from './sidenav.service';
-import {NavigationStart, Router} from '@angular/router';
-import {Subscription} from 'rxjs';
 import {MatDrawer} from '@angular/material/sidenav';
 import {browserChange} from '../app.component';
-
-export let browserRefresh = false;
+import {LoginService} from '../login/login.service';
+import {UsuarioService} from '../usuario/usuario.service';
 
 export interface MenuItem {
   path: string;
   title: string;
   icon: string;
   id: string;
+  roles?: any;
+  group?: any;
 }
 
-export const ITEM: MenuItem[] = [
-  {path: '/', title: 'Home', icon: 'home', id: 'home'},
-  {path: '/emprestimo', title: 'Empréstimo', icon: 'handshake-o', id: 'emprestimo'},
-  {path: '/saida', title: 'Saída', icon: 'arrow-down', id: 'saida'},
-  {path: '/compra', title: 'Compra', icon: 'shopping-cart', id: 'compra'},
-  {path: '/relatorios', title: 'Relatórios', icon: 'line-chart', id: 'relatorios'},
-];
-
-export const CADASTROS: MenuItem[] = [
-  {path: '/item', title: 'Item', icon: 'microchip', id: 'item'},
-  {path: '/grupo', title: 'Grupo', icon: 'sitemap', id: 'grupo'},
-  {path: '/fornecedor', title: 'Fornecedor', icon: 'briefcase', id: 'fornecedor'},
-  {path: '/usuario', title: 'Usuário', icon: 'users', id: 'usuario'},
-];
-
-// TODO remover posteriormente
-export const GERAL: MenuItem[] = [
-  {path: '/cidade', title: 'Cidade', icon: 'location_city', id: 'cidade'},
-  {path: '/estado', title: 'Estado', icon: 'view_compact', id: 'estado'},
-  {path: '/pais', title: 'País', icon: 'emoji_flags', id: 'pais'},
+export const MENU_ITEM: MenuItem[] = [
+  {
+    path: '/',
+    title: 'Home',
+    icon: 'home',
+    id: 'home',
+    group: 'ITEM'
+  },
+  {
+    path: '/emprestimo',
+    title: 'Empréstimo',
+    icon: 'handshake-o',
+    id: 'emprestimo',
+    group: 'ITEM'},
+  {
+    path: '/reserva',
+    title: 'Reserva',
+    icon: 'paste',
+    id: 'reserva',
+    group: 'ITEM'},
+  {
+    path: '/solicitacao-compra',
+    title: 'Solicitação de Compra',
+    icon: 'list',
+    id: 'solicitacao',
+    group: 'ITEM'},
+  {
+    path: '/saida',
+    title: 'Saída',
+    icon: 'arrow-down',
+    id: 'saida',
+    roles: ['ADMINISTRADOR', 'LABORATORISTA'],
+    group: 'ITEM'},
+  {
+    path: '/compra',
+    title: 'Compra',
+    icon: 'shopping-cart',
+    id: 'compra',
+    roles: ['ADMINISTRADOR', 'LABORATORISTA'],
+    group: 'ITEM'},
+  {
+    path: '/relatorios',
+    title: 'Relatórios',
+    icon: 'line-chart',
+    id: 'relatorios',
+    roles: ['ADMINISTRADOR', 'LABORATORISTA'],
+    group: 'ITEM'},
+  {
+    path: '/item',
+    title: 'Item',
+    icon: 'microchip',
+    id: 'item',
+    group: 'CADASTRO'},
+  {
+    path: '/grupo',
+    title: 'Grupo',
+    icon: 'sitemap',
+    id: 'grupo',
+    roles: ['ADMINISTRADOR', 'LABORATORISTA'],
+    group: 'CADASTRO'},
+  {
+    path: '/fornecedor',
+    title: 'Fornecedor',
+    icon: 'briefcase',
+    id: 'fornecedor',
+    roles: ['ADMINISTRADOR', 'LABORATORISTA'],
+    group: 'CADASTRO'},
+  {
+    path: '/usuario',
+    title: 'Usuário',
+    icon: 'users',
+    id: 'usuario',
+    roles: ['ADMINISTRADOR'],
+    group: 'CADASTRO'},
 ];
 
 @Component({
@@ -45,24 +99,48 @@ export class SidenavComponent implements OnInit {
 
   public menuItems: any[];
   public menuCadastros: any[];
-  public menuGeral: any[];
   display = false;
   showSubMenuCadastro = false;
-  showSubMenuGerais = false;
-  subscription: Subscription;
   @ViewChild('drawer') drawer: MatDrawer;
 
   constructor(private sidenavService: SidenavService,
-              private router: Router) {
-    this.menuItems = ITEM.filter(menuItem => menuItem);
-    this.menuCadastros = CADASTROS.filter(menuItem => menuItem);
-    // this.menuGeral = GERAL.filter(menuItem => menuItem);
+              private loginService: LoginService,
+              private usuarioService: UsuarioService) {
   }
 
   ngOnInit(): void {
+    this.buildMenu();
     this.changeColorMenuItem();
     this.initObservableDrawer();
     this.initObservableMenuItem();
+  }
+
+  buildMenu() {
+    this.menuItems = new Array();
+    this.menuCadastros = new Array();
+    this.loginService.getPermissoesUser()
+      .subscribe(permissoes => {
+        const userRoles = permissoes.map((x: any) =>
+          x.nome.replace('ROLE_', '')
+        );
+        const items = [];
+        MENU_ITEM.forEach((menu: any) => {
+          if (menu.roles != null) {
+            if (menu.roles.filter(value => -1 !== userRoles.indexOf(value)).length > 0) {
+              items.push(menu);
+            }
+          } else {
+            items.push(menu);
+          }
+        });
+        items.forEach(value => {
+          if (value.group === 'ITEM') {
+            this.menuItems.push(value);
+          } else if (value.group === 'CADASTRO') {
+            this.menuCadastros.push(value);
+          }
+        });
+      });
   }
 
   initObservableDrawer() {
@@ -89,10 +167,6 @@ export class SidenavComponent implements OnInit {
     this.showSubMenuCadastro = !this.showSubMenuCadastro;
   }
 
-  // toggleSubMenuGerais() {
-  //   this.showSubMenuGerais = !this.showSubMenuGerais;
-  // }
-
   changeColorMenuItem() {
     const that = this;
     setTimeout(() => {
@@ -106,11 +180,6 @@ export class SidenavComponent implements OnInit {
             that.setColorMenuItem(menu, pathCurrent);
           });
         }
-        // if (that.showSubMenuGerais) {
-        //   that.menuGeral.forEach(menu => {
-        //     that.setColorMenuItem(menu, pathCurrent);
-        //   });
-        // }
       }
     }, 100);
   }

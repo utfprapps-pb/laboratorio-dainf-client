@@ -1,13 +1,14 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import {DashboardEmprestimoCountRange} from './dashboard/dashboardEmprestimoCountRange';
 import {HomeService} from './home.service';
-import {Utils} from '../framework/util/utils';
-import {NgForm} from '@angular/forms';
 import {BaseFormComponent} from '../framework/component/base.form.component';
+import {LoginService} from '../login/login.service';
+import {DateUtil} from '../framework/util/dateUtil';
+import {pt} from '../framework/constantes/calendarPt';
 
 am4core.useTheme(am4themes_animated);
 
@@ -18,19 +19,28 @@ am4core.useTheme(am4themes_animated);
 })
 export class HomeComponent extends BaseFormComponent implements OnInit {
 
-  @ViewChild('formFiltro') formFiltro: NgForm;
   dashEmprestimoCount: DashboardEmprestimoCountRange;
   dialodFiltroData = false;
   dtIniFiltro: string;
   dtFimFiltro: string;
+  localePt: any;
 
-  constructor(private homeService: HomeService) {
+  constructor(private homeService: HomeService,
+              private loginService: LoginService) {
     super();
     this.dashEmprestimoCount = new DashboardEmprestimoCountRange();
+    this.localePt = pt;
   }
 
   ngOnInit() {
-    this.buildDashboards();
+    this.loginService.userLoggedIsAlunoOrProfessor().then(value => {
+      if (!value) {
+        document.getElementById('container-dashboard').style.display = 'block';
+        this.buildDashboards();
+      } else {
+        document.getElementById('container-dashboard').style.display = 'none';
+      }
+    });
   }
 
   buildDashboards() {
@@ -42,14 +52,10 @@ export class HomeComponent extends BaseFormComponent implements OnInit {
   }
 
   filtrar() {
-    if (this.isValid()) {
-      this.dialodFiltroData = false;
-      localStorage.setItem('dash_dt_ini', this.dtIniFiltro);
-      localStorage.setItem('dash_dt_fim', this.dtFimFiltro);
-      this.buildDashboards();
-    } else {
-      this.validarFormulario(this.formFiltro);
-    }
+    this.dialodFiltroData = false;
+    localStorage.setItem('dash_dt_ini', this.dtIniFiltro);
+    localStorage.setItem('dash_dt_fim', this.dtFimFiltro);
+    this.buildDashboards();
   }
 
   findCountEmprestimoDashboard() {
@@ -90,7 +96,7 @@ export class HomeComponent extends BaseFormComponent implements OnInit {
   getDateIni() {
     let dtIni = localStorage.getItem('dash_dt_ini');
     if (!dtIni) {
-      dtIni = Utils.removeDays(new Date(), 90).toLocaleDateString();
+      dtIni = DateUtil.removeDays(new Date(), 90).toLocaleDateString();
       localStorage.setItem('dash_dt_ini', dtIni);
     }
     return dtIni;
@@ -202,5 +208,10 @@ export class HomeComponent extends BaseFormComponent implements OnInit {
     chartLine.scrollbarX = new am4charts.XYChartScrollbar();
     (chartLine.scrollbarX as am4charts.XYChartScrollbar).series.push(series);
     chartLine.scrollbarX.parent = chartLine.bottomAxesContainer;
+  }
+
+  disableBtnFiltrar() {
+    return this.dtIniFiltro == null || this.dtIniFiltro === ''
+      || this.dtFimFiltro == null || this.dtFimFiltro === '';
   }
 }

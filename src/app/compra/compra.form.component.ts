@@ -10,7 +10,7 @@ import {CompraItem} from './compraItem';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {UsuarioService} from '../usuario/usuario.service';
 import {AutoComplete} from 'primeng';
-import {Utils} from '../framework/util/utils';
+import {pt} from '../framework/constantes/calendarPt';
 
 @Component({
   selector: 'app-form-compra',
@@ -27,7 +27,7 @@ export class CompraFormComponent extends CrudFormComponent<Compra, number> {
   maxDate = new Date();
   @ViewChild('table') table: MatTable<any>;
   @ViewChild('itemToAdd') itemToAdd: AutoComplete;
-  pt: any;
+  localePt: any;
 
   constructor(protected compraService: CompraService,
               protected injector: Injector,
@@ -36,7 +36,7 @@ export class CompraFormComponent extends CrudFormComponent<Compra, number> {
               private usuarioService: UsuarioService) {
     super(compraService, injector, '/compra');
     this.compraItem = new CompraItem();
-    this.pt = Utils.calendarPtBr(this.pt);
+    this.localePt = pt;
   }
 
   initializeValues(): void {
@@ -60,7 +60,7 @@ export class CompraFormComponent extends CrudFormComponent<Compra, number> {
   }
 
   findProdutos($event) {
-    this.itemService.complete($event.query)
+    this.itemService.completeItem($event.query, false)
       .subscribe(e => {
         this.itemList = e;
       });

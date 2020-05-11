@@ -2,13 +2,8 @@
   <mat-card>
     <mat-card-title>
       <div class="d-flex align-items-center justify-content-between">
-        <h4 class="m-0">Saída</h4>
-        <button type="button"
-                (click)="openForm()"
-                pTooltip="Inserir Novo Registro"
-                mat-icon-button>
-          <mat-icon>add</mat-icon>
-        </button>
+        <h4 class="m-0">Solicitação de Compra</h4>
+        <app-novo (onClick)="openForm()"></app-novo>
       </div>
     </mat-card-title>
     <mat-card-content>
@@ -24,32 +19,23 @@
             <mat-cell *matCellDef="let row" (click)="openBottomSheet(row.id)">{{row.id}}</mat-cell>
           </ng-container>
 
-          <ng-container matColumnDef="dtSaida">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Data Saída</mat-header-cell>
-            <mat-cell *matCellDef="let row" (click)="openBottomSheet(row.id)">{{row?.dataSaida}}</mat-cell>
+          <ng-container matColumnDef="descricao">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Descrição</mat-header-cell>
+            <mat-cell *matCellDef="let row" (click)="openBottomSheet(row.id)">{{row.descricao}}</mat-cell>
           </ng-container>
 
-          <ng-container matColumnDef="qtde">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Quantidade</mat-header-cell>
-            <mat-cell *matCellDef="let row"
-                      (click)="openBottomSheet(row.id)">{{getQtdeTotal(row?.saidaItem)}}</mat-cell>
+          <ng-container matColumnDef="dataSolicitacao">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Data Solicitação</mat-header-cell>
+            <mat-cell *matCellDef="let row" (click)="openBottomSheet(row.id)">{{row.dataSolicitacao}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="usuario">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Usuário Responsável</mat-header-cell>
-            <mat-cell *matCellDef="let row"
-                      (click)="openBottomSheet(row.id)">{{row?.usuarioResponsavel?.nome}}</mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="observacao">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Observação</mat-header-cell>
-            <mat-cell *matCellDef="let row" (click)="openBottomSheet(row.id)">
-              <p class="abbreviate">{{row?.observacao || 'Nenhuma observação'}}</p>
-            </mat-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Usuário</mat-header-cell>
+            <mat-cell *matCellDef="let row" (click)="openBottomSheet(row.id)">{{row.usuario.nome}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef> Opções</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> Opções </mat-header-cell>
             <mat-cell *matCellDef="let row">
               <button class="btn btn-outline-secondary rounded mr-2"
                       type="button"
@@ -67,7 +53,8 @@
           </ng-container>
 
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;">
+          </mat-row>
         </mat-table>
 
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]"

@@ -1,13 +1,3 @@
-.mat-form-field {
-  font-size: 14px;
-  width: 100%;
-}
-
-td, th {
-  width: 15%;
-}
-
-th.mat-column-actions,
-td.mat-column-actions {
-  width: 5%;
+mat-cell {
+  cursor: pointer;
 }

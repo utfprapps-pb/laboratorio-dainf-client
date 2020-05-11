@@ -23,6 +23,7 @@ import {CadastroRapidoModule} from '../geral/cadastroRapido/cadastroRapido.modul
 import {CurrencyMaskModule} from 'ng2-currency-mask';
 import {OnlyNumberModule} from '../framework/directives/onlyNumber/onlyNumber.module';
 import {MatSortModule} from '@angular/material/sort';
+import {BottomSheetItemModule} from './bottomScheetItem/bottomSheetItem.module';
 
 @NgModule({
   imports: [
@@ -49,7 +50,8 @@ import {MatSortModule} from '@angular/material/sort';
     GrupoModule,
     CadastroRapidoModule,
     CurrencyMaskModule,
-    OnlyNumberModule
+    OnlyNumberModule,
+    BottomSheetItemModule
   ],
   declarations: [
     ItemFormComponent,

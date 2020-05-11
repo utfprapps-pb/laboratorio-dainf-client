@@ -30,6 +30,8 @@ import {MatPaginatorIntl} from '@angular/material/paginator';
 import {getDutchPaginatorIntl} from './framework/util/dutch-paginator';
 import {CURRENCY_MASK_CONFIG} from 'ng2-currency-mask';
 import {CustomCurrencyMaskConfig} from './framework/util/currency.mask.config';
+import {ReservaModule} from './reserva/reserva.module';
+import {SolicitacaoCompraModule} from './solicitacaoCompra/solicitacaoCompra.module';
 
 registerLocaleData(ptBr);
 
@@ -62,7 +64,8 @@ registerLocaleData(ptBr);
     ConfirmDialogModule,
     SaidaModule,
     ScrollPanelModule,
-
+    ReservaModule,
+    SolicitacaoCompraModule
   ],
   providers: [
     MessageService,

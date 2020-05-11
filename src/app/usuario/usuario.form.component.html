@@ -67,13 +67,23 @@
           <div class="col-md-3">
             <div class="form-group">
               <label for="grupo">Grupo de Acesso</label>
-              <p-dropdown [options]="grupoAcessoDropdown"
-                          [(ngModel)]="object.permissoes"
-                          (ngModelChange)="buildLabelDocumento()"
-                          [style]="{width: '100%'}"
-                          id="grupo"
-                          name="grupo">
-              </p-dropdown>
+<!--              <p-dropdown [options]="grupoAcessoDropdown"-->
+<!--                          [(ngModel)]="object.permissoes"-->
+<!--                          (ngModelChange)="buildLabelDocumento()"-->
+<!--                          [style]="{width: '100%'}"-->
+<!--                          id="grupo"-->
+<!--                          name="grupo">-->
+<!--              </p-dropdown>-->
+              <p-multiSelect id="grupo"
+                             name="grupo"
+                             [selectedItemsLabel]="'{0} itens selecionados'"
+                             [emptyFilterMessage]="'Nenhum resultado encontrado'"
+                             [defaultLabel]="'Nenhum Selecionado'"
+                             [style]="{width: '100%'}"
+                             [options]="grupoAcessoDropdown"
+                             [(ngModel)]="object.permissoes"
+                             [panelStyle]="{minWidth:'100%', maxWidth: '100%'}">
+              </p-multiSelect>
             </div>
           </div>
 

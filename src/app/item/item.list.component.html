@@ -16,40 +16,22 @@
 
           <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Código</mat-header-cell>
-            <mat-cell *matCellDef="let row" (click)="openBottomSheet(row.id)">{{row.id}}</mat-cell>
+            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{row.id}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="nome">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Descrição</mat-header-cell>
-            <mat-cell *matCellDef="let row" (click)="openBottomSheet(row.id)">{{row.nome}}</mat-cell>
+            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{row.nome}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="localizacao">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Localização</mat-header-cell>
-            <mat-cell *matCellDef="let row" (click)="openBottomSheet(row.id)">{{row.localizacao}}</mat-cell>
+            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{row.localizacao}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="saldo">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Saldo</mat-header-cell>
-            <mat-cell *matCellDef="let row" (click)="openBottomSheet(row.id)">{{row.saldo}}</mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef> Opções </mat-header-cell>
-            <mat-cell *matCellDef="let row">
-              <button class="btn btn-outline-secondary rounded mr-2"
-                      type="button"
-                      pTooltip="Editar"
-                      (click)="edit(row.id)">
-                <i class="fa fa-edit"></i>
-              </button>
-              <button class="btn btn-outline-primary rounded"
-                      type="button"
-                      pTooltip="Remover"
-                      (click)="delete(row.id)">
-                <i class="fa fa-trash-o"></i>
-              </button>
-            </mat-cell>
+            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{row.saldo}}</mat-cell>
           </ng-container>
 
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

@@ -3,7 +3,7 @@ import {UsuarioFormComponent} from './usuario.form.component';
 import {UsuarioListComponent} from './usuario.list.component';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {DialogModule, DropdownModule, InputTextModule, TooltipModule} from 'primeng';
+import {DialogModule, DropdownModule, InputTextModule, MultiSelectModule, TooltipModule} from 'primeng';
 import {UsuarioService} from './usuario.service';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -21,27 +21,28 @@ import {NovoModule} from '../geral/novo/novo.module';
 import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatIconModule,
-    MatCardModule,
-    MatButtonModule,
-    MatSortModule,
-    InputTextModule,
-    TooltipModule,
-    DropdownModule,
-    DialogModule,
-    ValidationModule,
-    VoltarModule,
-    CancelarModule,
-    SalvarModule,
-    NovoModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatIconModule,
+        MatCardModule,
+        MatButtonModule,
+        MatSortModule,
+        InputTextModule,
+        TooltipModule,
+        DropdownModule,
+        DialogModule,
+        ValidationModule,
+        VoltarModule,
+        CancelarModule,
+        SalvarModule,
+        NovoModule,
+        MultiSelectModule
+    ],
   declarations: [
     UsuarioFormComponent,
     UsuarioListComponent

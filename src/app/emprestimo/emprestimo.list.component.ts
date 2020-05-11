@@ -3,7 +3,7 @@ import {CrudListComponent} from '../framework/component/crud.list.component';
 import {Emprestimo} from './emprestimo';
 import {EmprestimoService} from './emprestimo.service';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
-import {BottomSheetEmprestimoComponent} from '../geral/bottomScheetEmprestimo/bottomSheetEmprestimo.component';
+import {BottomSheetEmprestimoComponent} from './bottomScheetEmprestimo/bottomSheetEmprestimo.component';
 import {Calendar} from 'primeng';
 import {DateUtil} from '../framework/util/dateUtil';
 

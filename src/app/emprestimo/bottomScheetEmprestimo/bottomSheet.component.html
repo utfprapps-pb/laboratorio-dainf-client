@@ -1,0 +1,21 @@
+<mat-nav-list>
+  <a *ngIf="!isAlunoOrProfessor" mat-list-item (click)="click('D')">
+    <i class="fa fa-2x fa-undo" mat-list-icon></i>
+    <span mat-line>Devolução</span>
+  </a>
+
+  <a *ngIf="!isAlunoOrProfessor" mat-list-item (click)="click('P')">
+    <i class="fa fa-2x fa-clock-o" mat-list-icon></i>
+    <span mat-line>Novo Prazo</span>
+  </a>
+
+  <a mat-list-item (click)="click('E')">
+    <i class="fa fa-2x fa-edit" mat-list-icon></i>
+    <span mat-line>Editar</span>
+  </a>
+
+  <a *ngIf="!isAlunoOrProfessor" mat-list-item (click)="click('R')">
+    <i class="fa fa-2x fa-trash-o" mat-list-icon></i>
+    <span mat-line>Remover</span>
+  </a>
+</mat-nav-list>

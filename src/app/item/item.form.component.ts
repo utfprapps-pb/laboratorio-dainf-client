@@ -34,6 +34,13 @@ export class ItemFormComponent extends CrudFormComponent<Item, number> {
     this.object.devolver = this.yesNoDropdown[0].value;
   }
 
+  postEdit(): void {
+    if (window.location.href.includes('copy')) {
+      this.editando = false;
+      this.object.id = null;
+    }
+  }
+
   findGrupos($event) {
     this.grupoService.complete($event.query)
       .subscribe(e => {

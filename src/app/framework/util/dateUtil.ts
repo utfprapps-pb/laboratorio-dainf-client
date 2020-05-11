@@ -32,4 +32,9 @@ export class DateUtil {
     }
     return dtCompare.getTime() > dtLimit.getTime();
   }
+
+  public static removeDays(date: Date, days: number): Date {
+    date.setDate(date.getDate() - days);
+    return date;
+  }
 }

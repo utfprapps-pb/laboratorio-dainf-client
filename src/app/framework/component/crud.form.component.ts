@@ -3,6 +3,7 @@ import {CrudService} from '../service/crud.service';
 import {Injector, OnInit} from '@angular/core';
 import {MessageService} from 'primeng';
 import {BaseFormComponent} from './base.form.component';
+import Swal from 'sweetalert2';
 
 export abstract class CrudFormComponent<T, ID> extends BaseFormComponent implements OnInit {
 
@@ -41,11 +42,11 @@ export abstract class CrudFormComponent<T, ID> extends BaseFormComponent impleme
     if (this.isValid() && this.validExtra) {
       this.service.save(this.object)
         .subscribe(e => {
-          this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Registro salvo com sucesso!'});
+          Swal.fire('Sucesso!', 'Registro salvo com sucesso!', 'success');
           this.object = e;
           this.back();
         }, error => {
-          this.messageService.add({severity: 'error', summary: 'Atenção', detail: 'Ocorreu um erro ao salvar o registro!'});
+          Swal.fire('Atenção!', 'Ocorreu um erro ao salvar o registro!', 'error');
           console.log(error);
         });
     } else {
@@ -54,11 +55,14 @@ export abstract class CrudFormComponent<T, ID> extends BaseFormComponent impleme
     }
   }
 
-  initializeValues(): void {}
+  initializeValues(): void {
+  }
 
-  preOnInit(): void {}
+  preOnInit(): void {
+  }
 
-  postEdit(): void {}
+  postEdit(): void {
+  }
 
   edit(id: ID) {
     this.service.findOne(id)

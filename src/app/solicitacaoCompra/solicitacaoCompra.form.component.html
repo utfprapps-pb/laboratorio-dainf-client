@@ -3,7 +3,7 @@
     <mat-card-title>
       <div class="d-flex align-items-center">
         <app-voltar (onClick)="back()"></app-voltar>
-        <h4 class="m-0">Cadastro de Saída</h4>
+        <h4 class="m-0">Cadastro de Solicitação de Compra</h4>
       </div>
     </mat-card-title>
     <mat-card-content>
@@ -22,33 +22,48 @@
             </div>
           </div>
 
+          <div class="col-md-10">
+            <div class="form-group">
+              <label for="descricao">Descrição</label>
+              <span class="field-required">*</span>
+              <input type="text"
+                     id="descricao"
+                     name="descricao"
+                     class="form-control"
+                     required
+                     validation
+                     [(ngModel)]="object.descricao"
+                     pInputText>
+            </div>
+          </div>
+
           <div class="col-md-8">
             <div class="form-group">
-              <label for="usuarioResponsavel">Usuário Responsável</label>
+              <label for="usuario">Usuário</label>
               <input type="text"
-                     id="usuarioResponsavel"
-                     name="usuarioResponsavel"
+                     id="usuario"
+                     name="usuario"
                      class="form-control"
-                     [(ngModel)]="object.usuarioResponsavel.nome"
+                     [(ngModel)]="object.usuario.nome"
+                     pInputText
                      disabled>
             </div>
           </div>
 
-          <div class="col-md-2">
+          <div class="col-md-4">
             <div class="form-group">
-              <label for="dataSaida">Data da Saída</label>
+              <label for="dataReserva">Data da Solicitação</label>
               <span class="field-required">*</span>
-              <p-calendar name="dataSaida"
-                          id="dataSaida"
+              <p-calendar name="dataReserva"
+                          id="dataReserva"
                           required
                           validation
                           dataType="string"
                           dateFormat="dd/mm/yy"
                           [style]="{width: '100%'}"
-                          [maxDate]="maxDate"
                           [locale]="localePt"
                           inputStyleClass="form-control"
-                          [(ngModel)]="object.dataSaida">
+                          [(ngModel)]="object.dataSolicitacao">
               </p-calendar>
             </div>
           </div>
@@ -58,19 +73,20 @@
           <div class="col-md-7">
             <div class="form-group">
               <label for="item">Item</label>
-              <app-cadastroRapido [href]="'/item/form'" [id]="saidaItem?.item?.id"></app-cadastroRapido>
+              <app-cadastroRapido [href]="'/item/form'" [id]="solicitacaoCompraItem?.item?.id"></app-cadastroRapido>
               <p-autoComplete id="item"
                               name="item"
                               appendTo="body"
                               field="nome"
                               #itemToAdd
                               inputStyleClass="form-control"
+                              [forceSelection]="true"
                               [dropdown]="true"
-                              (onSelect)="setQtdeDefaultItem()"
+                              (onSelect)="solicitacaoCompraItem.qtde = 1"
                               (keyup.control.enter)="insertItem()"
-                              [(ngModel)]="saidaItem.item"
+                              [(ngModel)]="solicitacaoCompraItem.item"
                               [suggestions]="itemList"
-                              (onClear)="saidaItem.item = null"
+                              (onClear)="solicitacaoCompraItem.item = null"
                               (completeMethod)="findProdutos($event)">
                 <ng-template let-item pTemplate="item">
                   <span>{{item.nome}}</span>
@@ -83,14 +99,14 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="qtde">Quantidade</label>
-              <span *ngIf="saidaItem?.item" class="float-right">Saldo: {{saidaItem?.item?.saldo}}</span>
+              <span *ngIf="solicitacaoCompraItem?.item" class="float-right">Saldo: {{solicitacaoCompraItem?.item?.saldo}}</span>
               <input type="number"
                      id="qtde"
                      autocomplete="off"
                      #qtdeToAdd
                      onlyNumber
                      (keyup.control.enter)="insertItem()"
-                     [(ngModel)]="saidaItem.qtde"
+                     [(ngModel)]="solicitacaoCompraItem.qtde"
                      name="qtde"
                      class="form-control"
                      pInputText>
@@ -111,30 +127,30 @@
           </div>
         </div>
 
-        <div *ngIf="object?.saidaItem?.length > 0" class="example-container mat-elevation-z8">
-          <mat-table #table="matTable" [dataSource]="object.saidaItem">
+        <div *ngIf="object?.solicitacaoItem?.length > 0" class="example-container mat-elevation-z8">
+          <mat-table #table="matTable" [dataSource]="object.solicitacaoItem">
             <ng-container matColumnDef="item">
               <mat-header-cell *matHeaderCellDef> Item</mat-header-cell>
-              <mat-cell *matCellDef="let itemSaida">
-                <p>{{itemSaida?.item?.nome}}</p>
-                <p *ngIf="itemSaida?.item?.patrimonio" class="ml-2"> | {{itemSaida.item.patrimonio}}</p>
+              <mat-cell *matCellDef="let itemReserva">
+                <p>{{itemReserva?.item?.nome}}</p>
+                <p *ngIf="itemReserva?.item?.patrimonio" class="ml-2"> | {{itemReserva.item.patrimonio}}</p>
               </mat-cell>
               <mat-footer-cell *matFooterCellDef class="font-weight-bolder"> Total</mat-footer-cell>
             </ng-container>
 
             <ng-container matColumnDef="qtde">
               <mat-header-cell *matHeaderCellDef> Qtde</mat-header-cell>
-              <mat-cell *matCellDef="let itemSaida"> {{itemSaida.qtde}} </mat-cell>
+              <mat-cell *matCellDef="let itemReserva"> {{itemReserva.qtde}} </mat-cell>
               <mat-footer-cell *matFooterCellDef> {{getQtdeTotal()}} </mat-footer-cell>
             </ng-container>
 
             <ng-container matColumnDef="actionsForm">
               <mat-header-cell *matHeaderCellDef> Opções</mat-header-cell>
-              <mat-cell *matCellDef="let itemSaida">
+              <mat-cell *matCellDef="let itemReserva">
                 <button class="btn btn-outline-primary rounded"
                         type="button"
                         pTooltip="Remover"
-                        (click)="removeItem(itemSaida.item.id)">
+                        (click)="removeItem(itemReserva.item.id)">
                   <i class="fa fa-trash-o"></i>
                 </button>
               </mat-cell>
@@ -175,4 +191,5 @@
     </mat-card-content>
   </mat-card>
 </div>
+
 
