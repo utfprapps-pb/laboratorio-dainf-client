@@ -4,12 +4,16 @@ import {Injector, OnInit} from '@angular/core';
 import {MessageService} from 'primeng';
 import {BaseFormComponent} from './base.form.component';
 import Swal from 'sweetalert2';
+import {LoaderService} from '../loader/loader.service';
+import {LoginService} from '../../login/login.service';
 
 export abstract class CrudFormComponent<T, ID> extends BaseFormComponent implements OnInit {
 
   protected router: Router;
   protected messageService: MessageService;
   protected route: ActivatedRoute;
+  protected loaderService: LoaderService;
+  protected loginService: LoginService;
   // utilizado para validações extras
   validExtra = true;
   editando = false;
@@ -23,6 +27,8 @@ export abstract class CrudFormComponent<T, ID> extends BaseFormComponent impleme
     this.router = this.injector.get(Router);
     this.route = this.injector.get(ActivatedRoute);
     this.messageService = this.injector.get(MessageService);
+    this.loaderService = this.injector.get(LoaderService);
+    this.loginService = this.injector.get(LoginService);
   }
 
   ngOnInit(): void {
@@ -38,18 +44,21 @@ export abstract class CrudFormComponent<T, ID> extends BaseFormComponent impleme
   }
 
   save() {
-    console.log(this.object);
+    this.loaderService.display(true);
     if (this.isValid() && this.validExtra) {
       this.service.save(this.object)
         .subscribe(e => {
-          Swal.fire('Sucesso!', 'Registro salvo com sucesso!', 'success');
           this.object = e;
+          this.loaderService.display(false);
+          Swal.fire('Sucesso!', 'Registro salvo com sucesso!', 'success');
           this.back();
         }, error => {
+          this.loaderService.display(false);
           Swal.fire('Atenção!', 'Ocorreu um erro ao salvar o registro!', 'error');
           console.log(error);
         });
     } else {
+      this.loaderService.display(false);
       this.messageService.add({severity: 'info', summary: 'Atenção', detail: 'Necessário preencher todos os campos corretamente!'});
       this.validarFormulario();
     }
@@ -65,11 +74,16 @@ export abstract class CrudFormComponent<T, ID> extends BaseFormComponent impleme
   }
 
   edit(id: ID) {
+    this.loaderService.display(true);
     this.service.findOne(id)
       .subscribe(e => {
         this.object = e;
         this.editando = true;
         this.postEdit();
+        this.loaderService.display(false);
+      }, error => {
+        this.loaderService.display(false);
+        Swal.fire('Atenção!', 'Ocorreu um erro ao buscar o registro!', 'error');
       });
   }
 

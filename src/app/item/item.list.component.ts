@@ -12,12 +12,18 @@ import {BottomSheetItemComponent} from './bottomScheetItem/bottomSheetItem.compo
 })
 export class ItemListComponent extends CrudListComponent<Item, number> {
 
+  isAlunoOrProfessor;
+
   constructor(protected itemService: ItemService,
               protected injector: Injector,
               private bottomSheetOptions: MatBottomSheet) {
     super(itemService, injector, ['id', 'nome', 'localizacao', 'saldo'], 'item/form');
     this.bottomSheetEnabled = false;
     this.hostListenerColumnEnable = false;
+  }
+
+  postFindAll(): void {
+    this.loginService.userLoggedIsAlunoOrProfessor().then(value => this.isAlunoOrProfessor = value);
   }
 
   openOptions(id): void {

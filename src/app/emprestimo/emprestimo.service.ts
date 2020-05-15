@@ -4,6 +4,7 @@ import {Emprestimo} from './emprestimo';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
+import {EmprestimoFilter} from './emprestimo.filter';
 
 @Injectable()
 export class EmprestimoService extends CrudService<Emprestimo, number> {
@@ -14,5 +15,13 @@ export class EmprestimoService extends CrudService<Emprestimo, number> {
 
   saveDevolucao(emprestimo: Emprestimo): Observable<Emprestimo> {
     return this.http.post<Emprestimo>(this.getUrl() + 'save-devolucao', emprestimo);
+  }
+
+  filter(filter: EmprestimoFilter): Observable<Emprestimo[]> {
+    return this.http.post<Emprestimo[]>(this.getUrl() + 'filter', filter);
+  }
+
+  findAllByUsuarioEmprestimo(username: string): Observable<Emprestimo[]> {
+    return this.http.get<Emprestimo[]>(this.getUrl() + `find-all-by-username/${username}`);
   }
 }

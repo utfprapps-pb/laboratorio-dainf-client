@@ -56,6 +56,7 @@
                      name="email"
                      required
                      validation
+                     validateEmail
                      class="form-control"
                      [(ngModel)]="object.email"
                      pInputText>
@@ -67,13 +68,6 @@
           <div class="col-md-3">
             <div class="form-group">
               <label for="grupo">Grupo de Acesso</label>
-<!--              <p-dropdown [options]="grupoAcessoDropdown"-->
-<!--                          [(ngModel)]="object.permissoes"-->
-<!--                          (ngModelChange)="buildLabelDocumento()"-->
-<!--                          [style]="{width: '100%'}"-->
-<!--                          id="grupo"-->
-<!--                          name="grupo">-->
-<!--              </p-dropdown>-->
               <p-multiSelect id="grupo"
                              name="grupo"
                              [selectedItemsLabel]="'{0} itens selecionados'"
@@ -156,10 +150,10 @@
 
 <p-dialog header="Redefinir Senha"
           [(visible)]="dialogChangeSenha"
-          [style]="{minWidth: '250px'}"
+          [style]="{minWidth: '400px'}"
           [baseZIndex]="10000">
 
-  <form #formChangeSenha="ngForm">
+  <form #formChangeSenha="ngForm" (submit)="redefinirSenha()">
     <div class="row">
       <div class="col-md-12">
         <div class="form-group">
@@ -205,24 +199,22 @@
         </div>
       </div>
     </div>
-  </form>
-  <p-footer>
+
     <div class="row">
       <div class="col-md-12 d-flex justify-content-end">
         <button type="button"
-                class="mr-2 w-100px br-25px"
+                class="mr-2 text-uppercase"
                 (click)="dialogChangeSenha = false"
-                mat-stroked-button>
+                mat-raised-button>
           Cancelar
         </button>
         <button type="submit"
                 color="primary"
-                class="w-100px br-25px"
-                (click)="redefinirSenha()"
-                mat-stroked-button>
+                class="text-uppercase"
+                mat-raised-button>
           Salvar
         </button>
       </div>
     </div>
-  </p-footer>
+  </form>
 </p-dialog>

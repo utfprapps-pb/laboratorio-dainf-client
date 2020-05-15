@@ -41,7 +41,7 @@
                               [(ngModel)]="object.usuarioEmprestimo"
                               (ngModelChange)="documentoUsuario = object.usuarioEmprestimo.documento"
                               [suggestions]="usuarioList"
-                              [disabled]="object.dataDevolucao"
+                              [disabled]="disableForm"
                               (onClear)="object.usuarioEmprestimo = null"
                               (completeMethod)="findUsuarios($event)">
               </p-autoComplete>
@@ -88,7 +88,7 @@
                           dateFormat="dd/mm/yy"
                           inputStyleClass="form-control"
                           (onSelect)="setDateMinPrazoDevolucao()"
-                          [disabled]="object.dataDevolucao"
+                          [disabled]="disableForm"
                           [maxDate]="maxDateEmprestimo"
                           [locale]="localePt"
                           [style]="{width: '100%'}"
@@ -108,7 +108,7 @@
                           dataType="string"
                           dateFormat="dd/mm/yy"
                           inputStyleClass="form-control"
-                          [disabled]="object.dataDevolucao"
+                          [disabled]="disableForm"
                           [minDate]="minDatePrazoDevolucao"
                           [locale]="localePt"
                           [style]="{width: '100%'}"
@@ -125,7 +125,7 @@
                           dataType="string"
                           dateFormat="dd/mm/yy"
                           inputStyleClass="form-control"
-                          [disabled]="true"
+                          disabled
                           [style]="{width: '100%'}"
                           [(ngModel)]="object.dataDevolucao">
               </p-calendar>
@@ -133,7 +133,7 @@
           </div>
         </div>
 
-        <div class="row" *ngIf="!object.dataDevolucao">
+        <div class="row" *ngIf="!disableForm">
           <div class="col-md-7">
             <div class="form-group">
               <label for="item">Item</label>
@@ -145,6 +145,7 @@
                               #itemToAdd
                               inputStyleClass="form-control"
                               [dropdown]="true"
+                              (keyup.control.arrowRight)="setFocusInputQtde()"
                               (keyup.control.enter)="insertItem()"
                               [(ngModel)]="emprestimoItem.item"
                               (onSelect)="setDevolucaoItem()"
@@ -179,8 +180,10 @@
               <input type="number"
                      id="qtde"
                      autocomplete="off"
+                     #qtdeToAdd
                      onlyNumber
                      [(ngModel)]="emprestimoItem.qtde"
+                     (keyup.control.arrowLeft)="setFocusInputItem()"
                      (keyup.control.enter)="insertItem()"
                      name="qtde"
                      class="form-control"
@@ -203,18 +206,18 @@
         </div>
 
         <div *ngIf="object?.emprestimoItem?.length > 0" class="example-container mat-elevation-z8">
-          <mat-table #table="matTable"  [dataSource]="object.emprestimoItem">
+          <mat-table #table="matTable" [dataSource]="object.emprestimoItem">
             <ng-container matColumnDef="item">
-              <mat-header-cell *matHeaderCellDef> Item </mat-header-cell>
+              <mat-header-cell *matHeaderCellDef> Item</mat-header-cell>
               <mat-cell *matCellDef="let itemEmprestimo">
                 <p>{{itemEmprestimo?.item?.nome}}</p>
                 <p *ngIf="itemEmprestimo?.item?.patrimonio" class="ml-2"> | {{itemEmprestimo.item.patrimonio}}</p>
               </mat-cell>
-              <mat-footer-cell *matFooterCellDef class="font-weight-bolder"> Total </mat-footer-cell>
+              <mat-footer-cell *matFooterCellDef class="font-weight-bolder"> Total</mat-footer-cell>
             </ng-container>
 
             <ng-container matColumnDef="devolver">
-              <mat-header-cell *matHeaderCellDef> Devolver </mat-header-cell>
+              <mat-header-cell *matHeaderCellDef> Devolver</mat-header-cell>
               <mat-cell *matCellDef="let itemEmprestimo">
                 <span *ngIf="itemEmprestimo.item.devolver">Sim</span>
                 <span *ngIf="!itemEmprestimo.item.devolver">Não</span>
@@ -223,18 +226,18 @@
             </ng-container>
 
             <ng-container matColumnDef="qtde">
-              <mat-header-cell *matHeaderCellDef> Qtde </mat-header-cell>
+              <mat-header-cell *matHeaderCellDef> Qtde</mat-header-cell>
               <mat-cell *matCellDef="let itemEmprestimo"> {{itemEmprestimo.qtde}} </mat-cell>
               <mat-footer-cell *matFooterCellDef> {{getQtdeTotal()}} </mat-footer-cell>
             </ng-container>
 
             <ng-container matColumnDef="actionsForm">
-              <mat-header-cell *matHeaderCellDef> Opções </mat-header-cell>
+              <mat-header-cell *matHeaderCellDef> Opções</mat-header-cell>
               <mat-cell *matCellDef="let itemEmprestimo">
                 <button class="btn btn-outline-primary rounded"
                         type="button"
                         pTooltip="Remover"
-                        [disabled]="object.dataDevolucao"
+                        [disabled]="disableForm"
                         (click)="removeItem(itemEmprestimo.item.id)">
                   <i class="fa fa-trash-o"></i>
                 </button>
@@ -244,7 +247,8 @@
 
             <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-            <mat-footer-row *matFooterRowDef="displayedColumns; sticky: true" class="font-weight-bolder"></mat-footer-row>
+            <mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"
+                            class="font-weight-bolder"></mat-footer-row>
           </mat-table>
         </div>
 
@@ -257,7 +261,7 @@
                         rows="1"
                         class="form-control"
                         pInputTextarea
-                        [disabled]="object.dataDevolucao"
+                        [disabled]="disableForm"
                         [(ngModel)]="object.observacao"
                         autoResize="autoResize">
               </textarea>
@@ -266,7 +270,7 @@
         </div>
 
 
-        <div class="row">
+        <div *ngIf="!disableForm" class="row">
           <div class="col-md-12 d-flex justify-content-end">
             <app-cancelar (onClick)="back()"></app-cancelar>
             <app-salvar (onClick)="save()" [typeButton]="'button'" [disabled]="object.dataDevolucao"></app-salvar>

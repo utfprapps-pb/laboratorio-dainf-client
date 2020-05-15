@@ -1,4 +1,4 @@
-import {Component, Injector, ViewChild} from '@angular/core';
+import {Component, ElementRef, Injector, ViewChild} from '@angular/core';
 import {CrudFormComponent} from '../framework/component/crud.form.component';
 import {Emprestimo} from './emprestimo';
 import {EmprestimoService} from './emprestimo.service';
@@ -23,6 +23,7 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
   @ViewChild('form') form: NgForm;
   @ViewChild('table') table: MatTable<any>;
   @ViewChild('itemToAdd') itemToAdd: AutoComplete;
+  @ViewChild('qtdeToAdd') qtdeToAdd: ElementRef;
 
   displayedColumns = ['item', 'devolver', 'qtde', 'actionsForm'];
   emprestimoItem: EmprestimoItem;
@@ -33,6 +34,7 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
   minDatePrazoDevolucao: Date;
   yesNoDropdown: SelectItem[];
   documentoUsuario: string;
+  disableForm = false;
   localePt: any;
 
   constructor(protected emprestimoService: EmprestimoService,
@@ -56,6 +58,7 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
 
   postEdit(): void {
     this.documentoUsuario = this.object.usuarioEmprestimo.documento;
+    this.verifyFormDisable();
   }
 
   setUsuarioResponsavel() {
@@ -78,7 +81,6 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
     this.usuarioService.completeCustom($event.query)
       .subscribe(e => {
           this.usuarioList = e;
-          console.log(this.usuarioList);
           if (this.usuarioList != null && this.usuarioList.length === 1) {
             this.object.usuarioEmprestimo = this.usuarioList[0];
           }
@@ -156,6 +158,10 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
     this.itemToAdd.focusInput();
   }
 
+  setFocusInputQtde() {
+    this.qtdeToAdd.nativeElement.focus();
+  }
+
   clearNewItem() {
     this.emprestimoItem.item = null;
     this.emprestimoItem.qtde = null;
@@ -172,5 +178,13 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
       this.validExtra = true;
     }
     super.save();
+  }
+
+  verifyFormDisable() {
+    this.loginService.userLoggedIsAlunoOrProfessor().then(value => {
+      if (value || this.object.dataDevolucao) {
+        this.disableForm = true;
+      }
+    });
   }
 }

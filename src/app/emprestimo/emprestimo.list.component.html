@@ -3,7 +3,16 @@
     <mat-card-title>
       <div class="d-flex align-items-center justify-content-between">
         <h4 class="m-0">Empréstimo</h4>
-        <app-novo (onClick)="openForm()"></app-novo>
+        <div>
+          <button type="button"
+                  (click)="openDialogFiltro()"
+                  pTooltip="Filtro"
+                  tooltipPosition="left"
+                  mat-icon-button>
+            <mat-icon>search</mat-icon>
+          </button>
+          <app-novo *ngIf="!isAlunoOrProfessor" (onClick)="openForm()"></app-novo>
+        </div>
       </div>
     </mat-card-title>
     <mat-card-content>
@@ -54,3 +63,120 @@
   </mat-card>
 </div>
 
+<p-dialog header="Filtro"
+          [(visible)]="dialogFiltroEmprestimo"
+          [style]="{minWidth: '400px', maxWidth: '400px'}"
+          [modal]="true"
+          [baseZIndex]="10000">
+
+  <form>
+
+    <div class="row" *ngIf="!isAlunoOrProfessor">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="usuarioEmprestimo">Aluno/Professor</label>
+          <p-autoComplete id="usuarioEmprestimo"
+                          name="usuarioEmprestimo"
+                          appendTo="body"
+                          field="nome"
+                          inputStyleClass="form-control"
+                          [forceSelection]="true"
+                          [dropdown]="true"
+                          [(ngModel)]="emprestimoFilter.usuarioEmprestimo"
+                          [suggestions]="usuarioEmprestimoList"
+                          (onClear)="emprestimoFilter.usuarioEmprestimo = null"
+                          (completeMethod)="findUsuarios($event)">
+          </p-autoComplete>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="!isAlunoOrProfessor">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="usuarioResponsavel">Usuário Responsável</label>
+          <p-autoComplete id="usuarioResponsavel"
+                          name="usuarioResponsavel"
+                          appendTo="body"
+                          field="nome"
+                          inputStyleClass="form-control"
+                          [forceSelection]="true"
+                          [dropdown]="true"
+                          [(ngModel)]="emprestimoFilter.usuarioResponsalvel"
+                          [suggestions]="usuarioResponsalvel"
+                          (onClear)="emprestimoFilter.usuarioResponsalvel = null"
+                          (completeMethod)="findUsuarioResponsavel($event)">
+          </p-autoComplete>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="dtIni">Data Inicial</label>
+          <p-calendar name="dtIni"
+                      id="dtIni"
+                      appendTo="body"
+                      dataType="string"
+                      dateFormat="dd/mm/yy"
+                      [style]="{width: '100%'}"
+                      [locale]="localePt"
+                      [(ngModel)]="emprestimoFilter.dtIniEmp"
+                      inputStyleClass="form-control">
+          </p-calendar>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="dtFim">Data Final</label>
+          <p-calendar name="dtFim"
+                      id="dtFim"
+                      appendTo="body"
+                      dataType="string"
+                      dateFormat="dd/mm/yy"
+                      [style]="{width: '100%'}"
+                      [locale]="localePt"
+                      [(ngModel)]="emprestimoFilter.dtFimEmp"
+                      inputStyleClass="form-control">
+          </p-calendar>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="status">Status</label>
+          <p-dropdown [options]="statusDropdown"
+                      [style]="{width: '100%'}"
+                      appendTo="body"
+                      id="status"
+                      [(ngModel)]="emprestimoFilter.status"
+                      name="status">
+          </p-dropdown>
+        </div>
+      </div>
+    </div>
+
+    <p-footer>
+      <div class="row">
+        <div class="col-md-12 d-flex justify-content-end">
+          <button type="button"
+                  class="mr-2 text-uppercase"
+                  (click)="clearFilter()"
+                  mat-raised-button>
+            Limpar
+          </button>
+          <button type="submit"
+                  color="primary"
+                  class="text-uppercase"
+                  (click)="filter()"
+                  mat-raised-button>
+            Filtrar
+          </button>
+        </div>
+      </div>
+    </p-footer>
+  </form>
+</p-dialog>

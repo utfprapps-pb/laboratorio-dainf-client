@@ -32,6 +32,8 @@ import {CURRENCY_MASK_CONFIG} from 'ng2-currency-mask';
 import {CustomCurrencyMaskConfig} from './framework/util/currency.mask.config';
 import {ReservaModule} from './reserva/reserva.module';
 import {SolicitacaoCompraModule} from './solicitacaoCompra/solicitacaoCompra.module';
+import {LoaderService} from './framework/loader/loader.service';
+import {LoaderModule} from './framework/loader/loader.module';
 
 registerLocaleData(ptBr);
 
@@ -65,12 +67,14 @@ registerLocaleData(ptBr);
     SaidaModule,
     ScrollPanelModule,
     ReservaModule,
-    SolicitacaoCompraModule
+    SolicitacaoCompraModule,
+    LoaderModule
   ],
   providers: [
     MessageService,
     LoginService,
     ConfirmationService,
+    LoaderService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpClientInterceptor,

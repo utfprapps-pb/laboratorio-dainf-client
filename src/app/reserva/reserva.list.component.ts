@@ -14,4 +14,15 @@ export class ReservaListComponent extends CrudListComponent<Reserva, number> {
               protected injector: Injector) {
     super(reservaService, injector, ['id', 'descricao', 'dataReserva', 'usuario', 'actions'], 'reserva/form');
   }
+
+  postFindAll(): void {
+    if (this.dataSource != null) {
+      this.dataSource.sortingDataAccessor = (data, sortHeaderId) => {
+        switch (sortHeaderId) {
+          case 'usuario': return data.usuario.nome;
+          default: return data[sortHeaderId];
+        }
+      };
+    }
+  }
 }

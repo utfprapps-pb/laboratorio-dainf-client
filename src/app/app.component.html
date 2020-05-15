@@ -9,6 +9,7 @@
     <div class="ui-grid-col-10" [ngClass]="isAuthenticated ? 'content' : 'only-login'" id="content">
       <p-scrollPanel [style]="{width: '100%', height: 'calc(100vh - 50px)'}" styleClass="scrool-table-dash">
         <router-outlet></router-outlet>
+        <app-loader></app-loader>
       </p-scrollPanel>
     </div>
   </div>

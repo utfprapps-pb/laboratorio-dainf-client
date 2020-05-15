@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {LoginService} from './login/login.service';
 import {Subject, Subscription} from 'rxjs';
 import {NavigationCancel, NavigationEnd, NavigationStart, Router} from '@angular/router';
+import {LoaderService} from './framework/loader/loader.service';
 
 export let browserChange = new Subject<boolean>();
 
@@ -16,7 +17,8 @@ export class AppComponent {
   subscription: Subscription;
 
   constructor(private loginService: LoginService,
-              private router: Router) {
+              private router: Router,
+              private loaderService: LoaderService) {
     loginService.isAuthenticated.asObservable()
       .subscribe(e => this.isAuthenticated = e);
     this.buildSubscriptionEvent();
@@ -25,8 +27,9 @@ export class AppComponent {
   buildSubscriptionEvent() {
     this.subscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
-        // TODO verificar se virá algo aqui
+        this.loaderService.display(true);
       } else if (event instanceof NavigationEnd || event instanceof NavigationCancel) {
+        this.loaderService.display(false);
         browserChange.next(true);
       }
     });

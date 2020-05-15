@@ -9,6 +9,8 @@ import {BottomSheetComponent} from '../../geral/bottomScheet/bottomSheet.compone
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import Swal from 'sweetalert2';
 import {Exception} from '../../exception/exception';
+import {LoaderService} from '../loader/loader.service';
+import {LoginService} from '../../login/login.service';
 
 export abstract class CrudListComponent<T, ID> implements OnInit {
 
@@ -16,6 +18,8 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
   protected messageService: MessageService;
   protected confirmationService: ConfirmationService;
   protected bottom: MatBottomSheet;
+  protected loaderService: LoaderService;
+  protected loginService: LoginService;
   public displayedColumns: string[] = this.columnsTable;
   public dataSource: MatTableDataSource<T>;
   public bottomSheetEnabled = true;
@@ -36,6 +40,8 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
     this.messageService = this.injector.get(MessageService);
     this.confirmationService = this.injector.get(ConfirmationService);
     this.bottom = injector.get(MatBottomSheet);
+    this.loaderService = injector.get(LoaderService);
+    this.loginService = injector.get(LoginService);
   }
 
   applyFilter(filterValue: string) {
@@ -47,6 +53,7 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
   }
 
   findAll() {
+    this.loaderService.display(true);
     this.service.findAll()
       .subscribe(e => {
         this.objects = e;
@@ -55,11 +62,18 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
         }
+        this.loaderService.display(false);
+        this.postFindAll();
+      }, error => {
+        this.loaderService.display(false);
       });
   }
 
   edit(id: number) {
     this.router.navigate([this.urlForm, id]);
+  }
+
+  postFindAll(): void {
   }
 
   delete(id: any) {
@@ -74,11 +88,14 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
       cancelButtonText: 'Não'
     }).then((result) => {
       if (result.value) {
+        this.loaderService.display(true);
         this.service.delete(id)
           .subscribe(e => {
             Swal.fire('Sucesso!', 'Registro excluído com sucesso!', 'success');
             this.findAll();
+            this.loaderService.display(false);
           }, error => {
+            this.loaderService.display(false);
             this.showError(error);
           });
       }

@@ -10,8 +10,11 @@
   </a>
 
   <a mat-list-item (click)="click('E')">
-    <i class="fa fa-2x fa-edit" mat-list-icon></i>
-    <span mat-line>Editar</span>
+    <i *ngIf="!isAlunoOrProfessor" class="fa fa-2x fa-edit" mat-list-icon></i>
+    <span *ngIf="!isAlunoOrProfessor" mat-line>Editar</span>
+
+    <i *ngIf="isAlunoOrProfessor" class="fa fa-2x fa-eye" mat-list-icon></i>
+    <span *ngIf="isAlunoOrProfessor" mat-line>Visualizar</span>
   </a>
 
   <a *ngIf="!isAlunoOrProfessor" mat-list-item (click)="click('R')">

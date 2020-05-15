@@ -51,22 +51,23 @@ export class LoginService {
       );
   }
 
-  userLoggedIsAlunoOrProfessor(): Promise<boolean> {
-    return new Promise<boolean>(resolve => {
-      let isAlunoOrProfessor = false;
-      this.getPermissoesUser().subscribe(permissoes => {
-        permissoes.forEach(permissao => {
-          if (permissao.nome === 'ROLE_ADMINISTRADOR' || permissao.nome === 'ROLE_LABORATORISTA') {
-            resolve(false);
-          } else if (permissao.nome === 'ROLE_ALUNO' || permissao.nome === 'ROLE_PROFESSOR') {
-            isAlunoOrProfessor = true;
-          }
-        });
-        resolve(isAlunoOrProfessor);
-      });
+  hasAnyRole(componentRoles: any) {
+    const loggedUser = JSON.parse(localStorage.getItem('userLogged'));
+    let hasRole = false;
+    loggedUser.authorities.forEach(p => {
+      if (componentRoles.includes(p.nome)) {
+        hasRole = true;
+        return false;
+      }
     });
+    return hasRole;
   }
 
+  userLoggedIsAlunoOrProfessor(): Promise<boolean> {
+    return new Promise<boolean>(resolve => {
+      resolve(!this.hasAnyRole(['ROLE_ADMINISTRADOR', 'ROLE_LABORATORISTA']));
+    });
+  }
 
   logout() {
     localStorage.removeItem('token');

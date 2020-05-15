@@ -38,3 +38,18 @@
 .container-chart-col-6 {
   flex: 0 0 49% !important;
 }
+
+@media (max-width: 950px) {
+  .container-body {
+    flex-direction: column;
+  }
+
+  .container-chart-col-6 {
+    max-width: 100%;
+  }
+
+  .container-card {
+    max-width: 100%;
+
+  }
+}

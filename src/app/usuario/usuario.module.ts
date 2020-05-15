@@ -19,6 +19,7 @@ import {CancelarModule} from '../geral/cancelar/cancelar.module';
 import {SalvarModule} from '../geral/salvar/salvar.module';
 import {NovoModule} from '../geral/novo/novo.module';
 import {MatSortModule} from '@angular/material/sort';
+import {EmailValidatorModule} from '../framework/validator/email/email.validator.module';
 
 @NgModule({
     imports: [
@@ -41,7 +42,8 @@ import {MatSortModule} from '@angular/material/sort';
         CancelarModule,
         SalvarModule,
         NovoModule,
-        MultiSelectModule
+        MultiSelectModule,
+        EmailValidatorModule
     ],
   declarations: [
     UsuarioFormComponent,

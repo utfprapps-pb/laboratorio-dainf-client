@@ -29,5 +29,7 @@ export class UsuarioService extends CrudService<Usuario, number> {
     return this.http.get<Usuario[]>(`${this.url}complete-custom?query=${query}`);
   }
 
-
+  completeCustomUsersLab(query: string): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(`${this.url}complete-users-lab?query=${query}`);
+  }
 }

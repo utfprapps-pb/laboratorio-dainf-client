@@ -5,10 +5,11 @@ import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import {DashboardEmprestimoCountRange} from './dashboard/dashboardEmprestimoCountRange';
 import {HomeService} from './home.service';
-import {BaseFormComponent} from '../framework/component/base.form.component';
 import {LoginService} from '../login/login.service';
 import {DateUtil} from '../framework/util/dateUtil';
 import {pt} from '../framework/constantes/calendarPt';
+import {Subject} from 'rxjs/internal/Subject';
+import {LoaderService} from '../framework/loader/loader.service';
 
 am4core.useTheme(am4themes_animated);
 
@@ -17,17 +18,19 @@ am4core.useTheme(am4themes_animated);
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent extends BaseFormComponent implements OnInit {
+export class HomeComponent implements OnInit {
 
   dashEmprestimoCount: DashboardEmprestimoCountRange;
   dialodFiltroData = false;
   dtIniFiltro: string;
   dtFimFiltro: string;
   localePt: any;
+  count: Subject<number> = new Subject();
+  countAux = 0;
 
   constructor(private homeService: HomeService,
-              private loginService: LoginService) {
-    super();
+              private loginService: LoginService,
+              private loaderService: LoaderService) {
     this.dashEmprestimoCount = new DashboardEmprestimoCountRange();
     this.localePt = pt;
   }
@@ -44,17 +47,27 @@ export class HomeComponent extends BaseFormComponent implements OnInit {
   }
 
   buildDashboards() {
+    this.loaderService.display(true);
     this.findCountEmprestimoDashboard();
     this.findEmprestimoByDayDashboard();
     this.findItensMaisEmprestados();
     this.findItensMaisAdquiridos();
     this.findItensMaisSaidas();
+    this.count.asObservable().subscribe(value => {
+      if (value === 5) {
+        this.loaderService.display(false);
+        this.countAux = 0;
+        this.count.next(this.countAux);
+      }
+    });
   }
 
   filtrar() {
     this.dialodFiltroData = false;
     localStorage.setItem('dash_dt_ini', this.dtIniFiltro);
     localStorage.setItem('dash_dt_fim', this.dtFimFiltro);
+    this.dtIniFiltro = null;
+    this.dtFimFiltro = null;
     this.buildDashboards();
   }
 
@@ -62,6 +75,8 @@ export class HomeComponent extends BaseFormComponent implements OnInit {
     this.homeService.findDadosEmprestimoCountInRange(this.getDateIni(), this.getDateFim())
       .subscribe(e => {
         this.dashEmprestimoCount = e;
+        this.countAux++;
+        this.count.next(this.countAux);
       });
   }
 
@@ -69,6 +84,8 @@ export class HomeComponent extends BaseFormComponent implements OnInit {
     this.homeService.findDadosEmprestimoByDayInRange(this.getDateIni(), this.getDateFim())
       .subscribe(dados => {
         this.createXYChartLine('chartdiv2', dados, 'dtEmprestimo', 'qtde');
+        this.countAux++;
+        this.count.next(this.countAux);
       });
   }
 
@@ -76,6 +93,8 @@ export class HomeComponent extends BaseFormComponent implements OnInit {
     this.homeService.findItensMaisEmprestados(this.getDateIni(), this.getDateFim())
       .subscribe(dados => {
         this.createXYChartBar('chartdiv4', dados, 'item', 'qtde');
+        this.countAux++;
+        this.count.next(this.countAux);
       });
   }
 
@@ -83,6 +102,8 @@ export class HomeComponent extends BaseFormComponent implements OnInit {
     this.homeService.findItensMaisAdquiridos(this.getDateIni(), this.getDateFim())
       .subscribe(dados => {
         this.createPieChart('chartdivPie1', dados, 'item', 'qtde');
+        this.countAux++;
+        this.count.next(this.countAux);
       });
   }
 
@@ -90,6 +111,8 @@ export class HomeComponent extends BaseFormComponent implements OnInit {
     this.homeService.findItensMaisSaidas(this.getDateIni(), this.getDateFim())
       .subscribe(dados => {
         this.createPieChart('chartdivPie2', dados, 'item', 'qtde');
+        this.countAux++;
+        this.count.next(this.countAux);
       });
   }
 

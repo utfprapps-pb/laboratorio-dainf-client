@@ -16,4 +16,15 @@ export class SolicitacaoCompraListComponent extends CrudListComponent<Solicitaca
       ['id', 'descricao', 'dataSolicitacao', 'usuario', 'actions'], 'solicitacao-compra/form');
   }
 
+  postFindAll(): void {
+    if (this.dataSource != null) {
+      this.dataSource.sortingDataAccessor = (data, sortHeaderId) => {
+        switch (sortHeaderId) {
+          case 'usuario': return data.usuario.nome;
+          default: return data[sortHeaderId];
+        }
+      };
+    }
+  }
+
 }

@@ -1,0 +1,36 @@
+.loader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #CCCCCC85;
+  margin: auto;
+  top: 50px;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 998;
+}
+
+.loader-content {
+  font-size: 18px;
+  width: 232px;
+  height: 104px;
+  z-index: 999;
+}
+
+.loader-content span {
+  position: relative;
+  top: -64px;
+  left: 113px;
+}
+
+@media (min-width: 1200px) {
+  .loader {
+    left: 260px;
+  }
+
+  .loader-content {
+    margin-right: 260px;
+  }
+}

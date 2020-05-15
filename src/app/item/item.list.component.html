@@ -3,7 +3,7 @@
     <mat-card-title>
       <div class="d-flex align-items-center justify-content-between">
         <h4 class="m-0">Item</h4>
-        <app-novo (onClick)="openForm()"></app-novo>
+        <app-novo *ngIf="!isAlunoOrProfessor" (onClick)="openForm()"></app-novo>
       </div>
     </mat-card-title>
     <mat-card-content>

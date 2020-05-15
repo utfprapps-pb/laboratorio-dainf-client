@@ -7,6 +7,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import {MatButtonModule} from '@angular/material/button';
     MatFormFieldModule,
     MatCardModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    MatProgressBarModule
   ],
   declarations: [
     LoginComponent

@@ -9,7 +9,7 @@ import {LoginService} from '../../login/login.service';
 })
 export class BottomSheetEmprestimoComponent {
 
-  isAlunoOrProfessor = true;
+  isAlunoOrProfessor = false;
 
   constructor(private bottomSheetRef: MatBottomSheetRef<BottomSheetEmprestimoComponent>,
               private loginService: LoginService) {

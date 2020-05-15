@@ -17,6 +17,7 @@ import {CancelarModule} from '../geral/cancelar/cancelar.module';
 import {SalvarModule} from '../geral/salvar/salvar.module';
 import {ValidationModule} from '../framework/validation/validation.module';
 import {ValidationService} from '../framework/validation/validation.service';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import {ValidationService} from '../framework/validation/validation.service';
     NovoModule,
     MatInputModule,
     MatTableModule,
+    MatSortModule,
     MatPaginatorModule,
     VoltarModule,
     CalendarModule,

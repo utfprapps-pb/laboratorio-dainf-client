@@ -17,6 +17,7 @@ import {SolicitacaoCompraFormComponent} from './solicitacaoCompra.form.component
 import {SolicitacaoCompraListComponent} from './solicitacaoCompra.list.component';
 import {ValidationService} from '../framework/validation/validation.service';
 import {SolicitacaoCompraService} from './solicitacaoCompra.service';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import {SolicitacaoCompraService} from './solicitacaoCompra.service';
     NovoModule,
     MatInputModule,
     MatTableModule,
+    MatSortModule,
     MatPaginatorModule,
     VoltarModule,
     CalendarModule,
