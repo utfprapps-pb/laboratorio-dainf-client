@@ -10,7 +10,6 @@ import {pt} from '../framework/constantes/calendarPt';
 import {EmprestimoFilter} from './emprestimo.filter';
 import {Usuario} from '../usuario/usuario';
 import {UsuarioService} from '../usuario/usuario.service';
-import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-list-emprestimo',
@@ -22,7 +21,6 @@ export class EmprestimoListComponent extends CrudListComponent<Emprestimo, numbe
   @ViewChild('novaData') novaData: Calendar;
   dialogFiltroEmprestimo = false;
   emprestimoFilter: EmprestimoFilter;
-  isAlunoOrProfessor = false;
   statusDropdown: SelectItem[];
   localePt = pt;
   usuarioEmprestimoList: Usuario[];
@@ -37,6 +35,14 @@ export class EmprestimoListComponent extends CrudListComponent<Emprestimo, numbe
     this.hostListenerColumnEnable = false;
     this.emprestimoFilter = new EmprestimoFilter();
     this.buildDropdown();
+  }
+
+  // tslint:disable-next-line:use-lifecycle-interface
+  ngOnInit(): void {
+    this.loginService.userLoggedIsAlunoOrProfessor().then(value => {
+      this.isAlunoOrProfessor = value;
+      this.isAlunoOrProfessor ? this.findAllByUsername() : this.findAll();
+    });
   }
 
   buildDropdown() {
@@ -61,13 +67,15 @@ export class EmprestimoListComponent extends CrudListComponent<Emprestimo, numbe
             return data[sortHeaderId];
         }
       };
+      this.dataSource.filterPredicate = (data, filter1) => {
+        switch (filter1) {
+          case 'usuarioEmprestimo':
+            return data.usuarioEmprestimo.nome;
+          default:
+            return data[filter1];
+        }
+      };
     }
-    const u = localStorage.getItem('username');
-    this.emprestimoService.findAllByUsuarioEmprestimo(u)
-      .subscribe(e => {
-        console.log(e);
-      });
-    this.loginService.userLoggedIsAlunoOrProfessor().then(value => this.isAlunoOrProfessor = value);
   }
 
   openOptions(id): void {
@@ -123,18 +131,38 @@ export class EmprestimoListComponent extends CrudListComponent<Emprestimo, numbe
 
   clearFilter() {
     this.emprestimoFilter = new EmprestimoFilter();
-    this.findAll();
+    this.isAlunoOrProfessor ? this.findAllCustom() : this.findAll();
   }
 
   filter() {
-    console.log(this.emprestimoFilter);
+    this.dialogFiltroEmprestimo = false;
+    this.loaderService.display(true);
+    if (this.isAlunoOrProfessor) {
+      this.setUserLogadoInFilter().then(() => {
+        this.findByFilter();
+      });
+    } else {
+      this.findByFilter();
+    }
+  }
+
+  findByFilter() {
     this.emprestimoService.filter(this.emprestimoFilter)
       .subscribe(e => {
         this.objects = e;
-        this.dataSource = new MatTableDataSource(e);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.dialogFiltroEmprestimo = false;
+        this.buildList();
+        this.loaderService.display(false);
+      }, error => {
+        this.loaderService.display(false);
       });
+  }
+
+  setUserLogadoInFilter(): Promise<void> {
+    return new Promise<void>(resolve => {
+      const u = new Usuario();
+      u.username = localStorage.getItem('username');
+      this.emprestimoFilter.usuarioEmprestimo = u;
+      resolve();
+    });
   }
 }

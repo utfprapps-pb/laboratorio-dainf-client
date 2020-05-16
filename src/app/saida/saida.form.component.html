@@ -44,17 +44,18 @@
                           validation
                           dataType="string"
                           dateFormat="dd/mm/yy"
+                          inputStyleClass="form-control"
+                          [disabled]="object.idEmprestimo"
                           [style]="{width: '100%'}"
                           [maxDate]="maxDate"
                           [locale]="localePt"
-                          inputStyleClass="form-control"
                           [(ngModel)]="object.dataSaida">
               </p-calendar>
             </div>
           </div>
         </div>
 
-        <div class="row">
+        <div class="row" *ngIf="!object.idEmprestimo">
           <div class="col-md-7">
             <div class="form-group">
               <label for="item">Item</label>
@@ -134,6 +135,7 @@
                 <button class="btn btn-outline-primary rounded"
                         type="button"
                         pTooltip="Remover"
+                        [disabled]="object.idEmprestimo"
                         (click)="removeItem(itemSaida.item.id)">
                   <i class="fa fa-trash-o"></i>
                 </button>
@@ -157,6 +159,7 @@
                         rows="1"
                         class="form-control"
                         pInputTextarea
+                        [disabled]="object.idEmprestimo"
                         [(ngModel)]="object.observacao"
                         autoResize="autoResize">
               </textarea>
@@ -164,7 +167,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div *ngIf="!object.idEmprestimo" class="row">
           <div class="col-md-12 d-flex justify-content-end">
             <app-cancelar (onClick)="back()"></app-cancelar>
             <app-salvar (onClick)="save()"></app-salvar>

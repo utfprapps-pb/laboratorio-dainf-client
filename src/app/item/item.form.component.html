@@ -32,6 +32,7 @@
                      required
                      validation
                      class="form-control"
+                     [disabled]="isAlunosOrProfessor"
                      [(ngModel)]="object.nome"
                      pInputText>
             </div>
@@ -47,6 +48,7 @@
                      name="patrimonio"
                      class="form-control"
                      onlyNumber
+                     [disabled]="isAlunosOrProfessor"
                      [(ngModel)]="object.patrimonio"
                      pInputText>
             </div>
@@ -59,6 +61,7 @@
                      name="siorg"
                      class="form-control"
                      onlyNumber
+                     [disabled]="isAlunosOrProfessor"
                      [(ngModel)]="object.siorg"
                      pInputText>
             </div>
@@ -71,6 +74,7 @@
                      currencyMask
                      name="valor"
                      class="form-control"
+                     [disabled]="isAlunosOrProfessor"
                      [(ngModel)]="object.valor"
                      pInputText>
             </div>
@@ -86,6 +90,7 @@
                      required
                      validation
                      class="form-control"
+                     [disabled]="isAlunosOrProfessor"
                      [(ngModel)]="object.qtdeMinima"
                      pInputText>
             </div>
@@ -103,6 +108,7 @@
                      required
                      validation
                      class="form-control"
+                     [disabled]="isAlunosOrProfessor"
                      [(ngModel)]="object.localizacao"
                      pInputText>
             </div>
@@ -113,6 +119,7 @@
               <p-dropdown [options]="yesNoDropdown"
                           [(ngModel)]="object.devolver"
                           [style]="{width: '100%'}"
+                          [disabled]="isAlunosOrProfessor"
                           id="devolver"
                           name="devolver">
               </p-dropdown>
@@ -129,6 +136,7 @@
                      required
                      validation
                      class="form-control"
+                     [disabled]="isAlunosOrProfessor"
                      [(ngModel)]="object.saldo"
                      pInputText>
             </div>
@@ -145,6 +153,7 @@
                               required
                               validation
                               inputStyleClass="form-control"
+                              [disabled]="isAlunosOrProfessor"
                               [forceSelection]="true"
                               [dropdown]="true"
                               [suggestions]="grupoList"
@@ -156,7 +165,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div *ngIf="!isAlunosOrProfessor" class="row">
           <div class="col-md-12 d-flex justify-content-end">
             <app-cancelar (onClick)="back()"></app-cancelar>
             <app-salvar [typeButton]="'submit'"></app-salvar>

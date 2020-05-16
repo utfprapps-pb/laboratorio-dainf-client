@@ -15,12 +15,22 @@ export class ReservaListComponent extends CrudListComponent<Reserva, number> {
     super(reservaService, injector, ['id', 'descricao', 'dataReserva', 'usuario', 'actions'], 'reserva/form');
   }
 
+  // tslint:disable-next-line:use-lifecycle-interface
+  ngOnInit(): void {
+    this.loginService.userLoggedIsAlunoOrProfessor().then(value => {
+      this.isAlunoOrProfessor = value;
+      this.isAlunoOrProfessor ? this.findAllByUsername() : this.findAll();
+    });
+  }
+
   postFindAll(): void {
     if (this.dataSource != null) {
       this.dataSource.sortingDataAccessor = (data, sortHeaderId) => {
         switch (sortHeaderId) {
-          case 'usuario': return data.usuario.nome;
-          default: return data[sortHeaderId];
+          case 'usuario':
+            return data.usuario.nome;
+          default:
+            return data[sortHeaderId];
         }
       };
     }

@@ -20,8 +20,4 @@ export class EmprestimoService extends CrudService<Emprestimo, number> {
   filter(filter: EmprestimoFilter): Observable<Emprestimo[]> {
     return this.http.post<Emprestimo[]>(this.getUrl() + 'filter', filter);
   }
-
-  findAllByUsuarioEmprestimo(username: string): Observable<Emprestimo[]> {
-    return this.http.get<Emprestimo[]>(this.getUrl() + `find-all-by-username/${username}`);
-  }
 }

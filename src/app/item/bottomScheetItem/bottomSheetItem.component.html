@@ -1,15 +1,18 @@
 <mat-nav-list>
-  <a mat-list-item (click)="click('C')">
+  <a *ngIf="!isAlunoOrProfessor" mat-list-item (click)="click('C')">
     <i class="fa fa-2x fa-copy" mat-list-icon></i>
     <span mat-line>Copiar</span>
   </a>
 
   <a mat-list-item (click)="click('E')">
-    <i class="fa fa-2x fa-edit" mat-list-icon></i>
-    <span mat-line>Editar</span>
+    <i *ngIf="!isAlunoOrProfessor" class="fa fa-2x fa-edit" mat-list-icon></i>
+    <span *ngIf="!isAlunoOrProfessor" mat-line>Editar</span>
+
+    <i *ngIf="isAlunoOrProfessor" class="fa fa-2x fa-eye" mat-list-icon></i>
+    <span *ngIf="isAlunoOrProfessor" mat-line>Visualizar</span>
   </a>
 
-  <a mat-list-item (click)="click('R')">
+  <a *ngIf="!isAlunoOrProfessor" mat-list-item (click)="click('R')">
     <i class="fa fa-2x fa-trash-o" mat-list-icon></i>
     <span mat-line>Remover</span>
   </a>

@@ -17,6 +17,7 @@ export abstract class CrudFormComponent<T, ID> extends BaseFormComponent impleme
   // utilizado para validações extras
   validExtra = true;
   editando = false;
+  isAlunosOrProfessor = false;
   object: T;
 
   constructor(protected service: CrudService<T, ID>,
@@ -32,6 +33,8 @@ export abstract class CrudFormComponent<T, ID> extends BaseFormComponent impleme
   }
 
   ngOnInit(): void {
+    this.loginService.userLoggedIsAlunoOrProfessor()
+      .then(value => this.isAlunosOrProfessor = value);
     this.newInstance();
     this.preOnInit();
     this.route.params.subscribe(params => {

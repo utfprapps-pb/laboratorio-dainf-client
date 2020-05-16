@@ -14,6 +14,10 @@ export abstract class CrudService<T, ID> {
     return this.http.get<T[]>(this.getUrl());
   }
 
+  findAllByUsername(username: string): Observable<T[]> {
+    return this.http.get<T[]>(this.getUrl() + `find-all-by-username/${username}`);
+  }
+
   findOne(id: ID): Observable<T> {
     return this.http.get<T>(this.getUrl() + id);
   }

@@ -24,11 +24,14 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
   public dataSource: MatTableDataSource<T>;
   public bottomSheetEnabled = true;
   public hostListenerColumnEnable = true;
+  public isAlunoOrProfessor = false;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   objects: T[];
 
   ngOnInit(): void {
+    this.loginService.userLoggedIsAlunoOrProfessor()
+      .then(value => this.isAlunoOrProfessor = value);
     this.findAll();
   }
 
@@ -46,10 +49,12 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  findAllCustom(): void {
   }
 
   findAll() {
@@ -57,16 +62,34 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
     this.service.findAll()
       .subscribe(e => {
         this.objects = e;
-        if (e != null) {
-          this.dataSource = new MatTableDataSource(e);
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-        }
+        this.buildList();
         this.loaderService.display(false);
         this.postFindAll();
       }, error => {
         this.loaderService.display(false);
       });
+  }
+
+  findAllByUsername() {
+    this.loaderService.display(true);
+    const u = localStorage.getItem('username');
+    this.service.findAllByUsername(u)
+      .subscribe(e => {
+        this.objects = e;
+        this.buildList();
+        this.loaderService.display(false);
+        this.postFindAll();
+      }, error => {
+        this.loaderService.display(false);
+      });
+  }
+
+  buildList() {
+    if (this.objects != null) {
+      this.dataSource = new MatTableDataSource(this.objects);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
   }
 
   edit(id: number) {

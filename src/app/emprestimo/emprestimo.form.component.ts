@@ -181,10 +181,8 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
   }
 
   verifyFormDisable() {
-    this.loginService.userLoggedIsAlunoOrProfessor().then(value => {
-      if (value || this.object.dataDevolucao) {
-        this.disableForm = true;
-      }
-    });
+    if (this.isAlunosOrProfessor || this.object.dataDevolucao) {
+      this.disableForm = true;
+    }
   }
 }

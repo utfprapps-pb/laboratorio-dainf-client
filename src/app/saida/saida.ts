@@ -8,4 +8,5 @@ export class Saida {
   qtde: number;
   usuarioResponsavel: Usuario;
   saidaItem: SaidaItem[];
+  idEmprestimo: number;
 }
