@@ -47,14 +47,18 @@ export abstract class CrudFormComponent<T, ID> extends BaseFormComponent impleme
   }
 
   save() {
+
     this.loaderService.display(true);
     if (this.isValid() && this.validExtra) {
       this.service.save(this.object)
         .subscribe(e => {
           this.object = e;
-          this.loaderService.display(false);
-          Swal.fire('Sucesso!', 'Registro salvo com sucesso!', 'success');
-          this.back();
+
+          this.postSave(() => {
+            this.loaderService.display(false);
+            Swal.fire('Sucesso!', 'Registro salvo com sucesso!', 'success');
+            this.back();
+          });
         }, error => {
           this.loaderService.display(false);
           Swal.fire('Atenção!', 'Ocorreu um erro ao salvar o registro!', 'error');
@@ -65,6 +69,9 @@ export abstract class CrudFormComponent<T, ID> extends BaseFormComponent impleme
       this.messageService.add({severity: 'info', summary: 'Atenção', detail: 'Necessário preencher todos os campos corretamente!'});
       this.validarFormulario();
     }
+  }
+
+  postSave(callback: Function): void {
   }
 
   initializeValues(): void {
@@ -101,5 +108,4 @@ export abstract class CrudFormComponent<T, ID> extends BaseFormComponent impleme
       this.object = {} as T;
     }
   }
-
 }

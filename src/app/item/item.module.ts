@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {AutoCompleteModule, DialogModule, DropdownModule, InputTextModule, TooltipModule} from 'primeng';
+import {AutoCompleteModule, CarouselModule, DialogModule, DropdownModule, FileUploadModule, InputTextModule, TooltipModule} from 'primeng';
 import {ItemFormComponent} from './item.form.component';
 import {ItemListComponent} from './item.list.component';
 import {ItemService} from './item.service';
@@ -26,33 +26,35 @@ import {MatSortModule} from '@angular/material/sort';
 import {BottomSheetItemModule} from './bottomScheetItem/bottomSheetItem.module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatIconModule,
-    MatCardModule,
-    MatButtonModule,
-    MatSortModule,
-    InputTextModule,
-    TooltipModule,
-    AutoCompleteModule,
-    DropdownModule,
-    ValidationModule,
-    VoltarModule,
-    CancelarModule,
-    SalvarModule,
-    NovoModule,
-    DialogModule,
-    GrupoModule,
-    CadastroRapidoModule,
-    CurrencyMaskModule,
-    OnlyNumberModule,
-    BottomSheetItemModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatIconModule,
+        MatCardModule,
+        MatButtonModule,
+        MatSortModule,
+        InputTextModule,
+        TooltipModule,
+        AutoCompleteModule,
+        DropdownModule,
+        ValidationModule,
+        VoltarModule,
+        CancelarModule,
+        SalvarModule,
+        NovoModule,
+        DialogModule,
+        GrupoModule,
+        CadastroRapidoModule,
+        CurrencyMaskModule,
+        OnlyNumberModule,
+        BottomSheetItemModule,
+        FileUploadModule,
+        CarouselModule
+    ],
   declarations: [
     ItemFormComponent,
     ItemListComponent
