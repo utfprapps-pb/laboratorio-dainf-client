@@ -17,7 +17,7 @@
       </div>
     </mat-card-title>
     <mat-card-content>
-      <form #form="ngForm" (submit)="preSave()"
+      <form #form="ngForm" (submit)="save()"
             enctype="multipart/form-data">
         <div class="row">
           <div class="col-md-2">
@@ -176,7 +176,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div *ngIf="!isAlunosOrProfessor" class="row mb-3">
           <div class="col-md-12">
             <p-fileUpload name="anexos[]"
                           #fileUpload
@@ -209,8 +209,9 @@
 </div>
 
 <p-dialog header="Imagens do Item"
+          [modal]="true"
           [(visible)]="dialogImagens"
-          [style]="{minWidth: '400px'}"
+          [style]="{minWidth: '400px', maxWidth: '80%'}"
           [baseZIndex]="10000">
 
   <p-carousel [value]="images"
@@ -218,13 +219,17 @@
               [numVisible]="3"
               [numScroll]="1"
               [circular]="true"
-              [autoplayInterval]="3000"
               [responsiveOptions]="responsiveOptions">
     <ng-template let-image pTemplate="item">
       <div class="car-details">
         <div class="p-grid p-nogutter">
           <div class="p-col-12">
-            <img src="assets/logo.png"/>
+            <img src="data:image/png;base64,{{image}}" class="mw-100" style="width: 300px"/>
+          </div>
+          <div *ngIf="!isAlunosOrProfessor" class="p-col-12 car-data">
+            <div class="car-buttons my-1">
+              <button pButton type="button" class="ui-button-secondary" icon="pi pi-trash"></button>
+            </div>
           </div>
         </div>
       </div>

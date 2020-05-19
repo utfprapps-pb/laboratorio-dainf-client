@@ -15,10 +15,10 @@ export abstract class CrudFormComponent<T, ID> extends BaseFormComponent impleme
   protected loaderService: LoaderService;
   protected loginService: LoginService;
   // utilizado para validações extras
-  validExtra = true;
-  editando = false;
-  isAlunosOrProfessor = false;
-  object: T;
+  public validExtra = true;
+  public editando = false;
+  public isAlunosOrProfessor = false;
+  public object: T;
 
   constructor(protected service: CrudService<T, ID>,
               protected injector: Injector,
@@ -47,14 +47,12 @@ export abstract class CrudFormComponent<T, ID> extends BaseFormComponent impleme
   }
 
   save() {
-
     this.loaderService.display(true);
     if (this.isValid() && this.validExtra) {
       this.service.save(this.object)
         .subscribe(e => {
           this.object = e;
-
-          this.postSave(() => {
+          this.postSave(value => {
             this.loaderService.display(false);
             Swal.fire('Sucesso!', 'Registro salvo com sucesso!', 'success');
             this.back();
@@ -72,6 +70,7 @@ export abstract class CrudFormComponent<T, ID> extends BaseFormComponent impleme
   }
 
   postSave(callback: Function): void {
+    callback();
   }
 
   initializeValues(): void {

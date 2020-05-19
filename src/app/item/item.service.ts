@@ -15,4 +15,8 @@ export class ItemService extends CrudService<Item, number> {
   completeItem(query: string, hasEstoque: boolean): Observable<Item[]> {
     return this.http.get<Item[]>(`${this.url}complete?query=${query}&hasEstoque=${hasEstoque}`);
   }
+
+  findAllImagesItem(idItem: number): Observable<string[]> {
+    return this.http.get<string[]>(this.url + `imagens/${idItem}`);
+  }
 }

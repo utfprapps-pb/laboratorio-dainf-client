@@ -7,6 +7,7 @@ import {Grupo} from '../grupo/grupo';
 import {GrupoService} from '../grupo/grupo.service';
 import {FileUpload, SelectItem} from 'primeng';
 import {environment} from '../../environments/environment';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form-item',
@@ -15,16 +16,15 @@ import {environment} from '../../environments/environment';
 })
 export class ItemFormComponent extends CrudFormComponent<Item, number> {
 
-  // tslint:disable-next-line:ban-types
-  callback: Function;
-  grupoList: Grupo[];
-  yesNoDropdown: SelectItem[];
   @ViewChild('fileUpload') fileUpload: FileUpload;
   @ViewChild('form', {static: true}) form: NgForm;
   uploadedFiles: any[] = [];
   responsiveOptions;
   images: any[];
   dialogImagens = false;
+  callback: Function;
+  grupoList: Grupo[];
+  yesNoDropdown: SelectItem[];
 
   constructor(protected itemService: ItemService,
               protected injector: Injector,
@@ -68,13 +68,8 @@ export class ItemFormComponent extends CrudFormComponent<Item, number> {
       });
   }
 
-  preSave() {
-    this.save();
-  }
-
   onUpload($event: any) {
     this.callback();
-    console.log('upload ok');
   }
 
   getUrlUploadImages(): string {
@@ -88,6 +83,18 @@ export class ItemFormComponent extends CrudFormComponent<Item, number> {
   }
 
   showDialogImagens() {
-    this.dialogImagens = true;
+    this.loaderService.display(true);
+    this.itemService.findAllImagesItem(this.object.id)
+      .subscribe(e => {
+        this.loaderService.display(false);
+        if (e.length > 0) {
+          this.images = e;
+          this.dialogImagens = true;
+        } else {
+          Swal.fire('Ops...', 'Esse item não possui imagens.', 'info');
+        }
+      }, error => {
+        this.loaderService.display(false);
+      });
   }
 }
