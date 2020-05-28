@@ -68,6 +68,7 @@
                               inputStyleClass="form-control"
                               [dropdown]="true"
                               (onSelect)="setQtdeDefaultItem()"
+                              (keyup.control.arrowRight)="setFocusQtdeToAdd()"
                               (keyup.control.enter)="insertItem()"
                               [(ngModel)]="saidaItem.item"
                               [suggestions]="itemList"
@@ -90,6 +91,7 @@
                      autocomplete="off"
                      #qtdeToAdd
                      onlyNumber
+                     (keyup.control.arrowLeft)="setFocusInputItem()"
                      (keyup.control.enter)="insertItem()"
                      [(ngModel)]="saidaItem.qtde"
                      name="qtde"

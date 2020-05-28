@@ -1,3 +1,7 @@
 mat-cell {
   cursor: pointer;
 }
+
+#table-reserva mat-cell {
+  cursor: default !important;
+}

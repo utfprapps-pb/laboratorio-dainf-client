@@ -53,14 +53,18 @@ export class LoginService {
 
   hasAnyRole(componentRoles: any) {
     const loggedUser = JSON.parse(localStorage.getItem('userLogged'));
-    let hasRole = false;
-    loggedUser.authorities.forEach(p => {
-      if (componentRoles.includes(p.nome)) {
-        hasRole = true;
-        return false;
-      }
-    });
-    return hasRole;
+    if (loggedUser != null) {
+      let hasRole = false;
+      loggedUser.authorities.forEach(p => {
+        if (componentRoles.includes(p.nome)) {
+          hasRole = true;
+          return false;
+        }
+      });
+      return hasRole;
+    } else {
+      this.logout();
+    }
   }
 
   userLoggedIsAlunoOrProfessor(): Promise<boolean> {

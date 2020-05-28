@@ -1,4 +1,4 @@
-import {Component, Injector, ViewChild} from '@angular/core';
+import {Component, ElementRef, Injector, ViewChild} from '@angular/core';
 import {Usuario} from './usuario';
 import {UsuarioService} from './usuario.service';
 import {NgForm} from '@angular/forms';

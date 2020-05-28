@@ -1,6 +1,7 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {LoginService} from '../login/login.service';
 import {SidenavService} from '../sidenav/sidenav.service';
+import {MenuItem} from 'primeng';
 
 @Component({
   selector: 'app-toolbar',
@@ -11,6 +12,7 @@ export class ToolbarComponent implements OnInit {
 
   widthScreen: number;
   sidenavIsOpen: boolean;
+  items: MenuItem[];
 
   constructor(private loginService: LoginService,
               private sidenavService: SidenavService) {
@@ -19,6 +21,7 @@ export class ToolbarComponent implements OnInit {
   ngOnInit() {
     this.getScreenSize();
     this.buildListenerCloseDrawer();
+    this.optionDropdown();
   }
 
   logout() {
@@ -66,25 +69,23 @@ export class ToolbarComponent implements OnInit {
     this.sidenavIsOpen = true;
   }
 
-  // hideSidenav() {
-  //   document.getElementById('sidenav').style.width = '0';
-  //   document.getElementById('content').style.width = '100%';
-  //   this.sidenavService.minimizar(true);
-  //   this.sidenavIsOpen = false;
-  // }
-  //
-  // showSidenav() {
-  //   this.sidenavService.minimizar(false);
-  //   document.getElementById('sidenav').style.width = '250px';
-  //   document.getElementById('content').style.width = 'calc(100% - 250px)';
-  //   this.sidenavIsOpen = true;
-  // }
-
   toogleSidenav() {
     if (this.sidenavIsOpen) {
       this.hideSidenav();
     } else {
       this.showSidenav(true);
     }
+  }
+
+  optionDropdown() {
+    this.items = [
+      {
+        label: 'Sair', icon: 'pi pi-external-link', command: () => this.logout()
+      }
+    ];
+  }
+
+  getUserLogado() {
+    return localStorage.getItem('username');
   }
 }

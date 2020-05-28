@@ -1,4 +1,4 @@
-import {Component, Injector, ViewChild} from '@angular/core';
+import {Component, ElementRef, Injector, ViewChild} from '@angular/core';
 import {CrudFormComponent} from '../framework/component/crud.form.component';
 import {Compra} from './compra';
 import {CompraService} from './compra.service';
@@ -27,6 +27,7 @@ export class CompraFormComponent extends CrudFormComponent<Compra, number> {
   maxDate = new Date();
   @ViewChild('table') table: MatTable<any>;
   @ViewChild('itemToAdd') itemToAdd: AutoComplete;
+  @ViewChild('qtdeToAdd') qtdeToAdd: ElementRef;
   localePt: any;
 
   constructor(protected compraService: CompraService,
@@ -135,5 +136,7 @@ export class CompraFormComponent extends CrudFormComponent<Compra, number> {
     super.save();
   }
 
-
+  setFocusInputQtde() {
+    this.qtdeToAdd.nativeElement.focus();
+  }
 }

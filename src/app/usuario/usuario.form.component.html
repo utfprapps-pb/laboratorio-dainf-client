@@ -11,7 +11,7 @@
                   (click)="showDialogChangeSenha()"
                   pTooltip="Redefinir senha"
                   mat-icon-button>
-            <mat-icon>verified_user</mat-icon>
+            <i class="fa fa-2x fa-lock"></i>
           </button>
         </div>
       </div>
@@ -131,6 +131,8 @@
               <input type="password"
                      id="confirmSenha"
                      name="confirmSenha"
+                     required
+                     validation
                      class="form-control"
                      pInputText>
             </div>

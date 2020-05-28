@@ -4,6 +4,11 @@
     <span mat-line>Copiar</span>
   </a>
 
+  <a mat-list-item (click)="click('D')">
+    <i class="fa fa-2x fa-paste" mat-list-icon></i>
+    <span mat-line>Reservas</span>
+  </a>
+
   <a mat-list-item (click)="click('E')">
     <i *ngIf="!isAlunoOrProfessor" class="fa fa-2x fa-edit" mat-list-icon></i>
     <span *ngIf="!isAlunoOrProfessor" mat-line>Editar</span>

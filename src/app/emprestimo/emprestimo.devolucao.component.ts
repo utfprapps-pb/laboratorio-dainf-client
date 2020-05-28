@@ -16,7 +16,6 @@ import Swal from 'sweetalert2';
 })
 export class EmprestimoDevolucaoComponent extends CrudFormComponent<Emprestimo, number> {
 
-
   @ViewChild('form') form: NgForm;
   @ViewChild('table') table: MatTable<any>;
   @ViewChild(MatMenuTrigger) contextMenu: MatMenuTrigger;
@@ -64,6 +63,7 @@ export class EmprestimoDevolucaoComponent extends CrudFormComponent<Emprestimo, 
 
   saveDevolucao() {
     if (this.itensPendentes.length === 0) {
+      this.loaderService.display(true);
       this.object.emprestimoDevolucaoItem.forEach(empDevItem => {
         this.itensPendentes.forEach(pendente => {
           if (empDevItem.id === pendente.id) {
@@ -83,9 +83,11 @@ export class EmprestimoDevolucaoComponent extends CrudFormComponent<Emprestimo, 
       });
       this.emprestimoService.saveDevolucao(this.object)
         .subscribe(e => {
+          this.loaderService.display(false);
           Swal.fire('Sucesso!', 'Devolução efetuada com sucesso!', 'success');
           this.back();
         }, error => {
+          this.loaderService.display(false);
           Swal.fire('Atenção!', 'Ocorreu um erro ao salvar a devolução!', 'error');
         });
     } else {

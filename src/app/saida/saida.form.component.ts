@@ -44,6 +44,10 @@ export class SaidaFormComponent extends CrudFormComponent<Saida, number> {
     this.itemToAdd.focusInput();
   }
 
+  setFocusQtdeToAdd() {
+    this.qtdeToAdd.nativeElement.focus();
+  }
+
   setQtdeDefaultItem() {
     this.saidaItem.qtde = 1;
   }

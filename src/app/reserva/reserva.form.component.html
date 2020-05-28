@@ -37,7 +37,7 @@
             </div>
           </div>
 
-          <div class="col-md-8">
+          <div class="col-md-6">
             <div class="form-group">
               <label for="usuario">Usuário</label>
               <input type="text"
@@ -49,7 +49,7 @@
             </div>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="form-group">
               <label for="dataReserva">Data da Reserva</label>
               <span class="field-required">*</span>
@@ -63,6 +63,24 @@
                           [locale]="localePt"
                           inputStyleClass="form-control"
                           [(ngModel)]="object.dataReserva">
+              </p-calendar>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="dataRetirada">Data da Retirada</label>
+              <span class="field-required">*</span>
+              <p-calendar name="dataRetirada"
+                          id="dataRetirada"
+                          required
+                          validation
+                          dataType="string"
+                          dateFormat="dd/mm/yy"
+                          [style]="{width: '100%'}"
+                          [locale]="localePt"
+                          inputStyleClass="form-control"
+                          [(ngModel)]="object.dataRetirada">
               </p-calendar>
             </div>
           </div>
@@ -82,6 +100,7 @@
                               [forceSelection]="true"
                               [dropdown]="true"
                               (onSelect)="reservaItem.qtde = 1"
+                              (keyup.control.arrowRight)="setFocusQtdeToAdd()"
                               (keyup.control.enter)="insertItem()"
                               [(ngModel)]="reservaItem.item"
                               [suggestions]="itemList"
@@ -104,6 +123,7 @@
                      autocomplete="off"
                      #qtdeToAdd
                      onlyNumber
+                     (keyup.control.arrowLeft)="setFocusInputItem()"
                      (keyup.control.enter)="insertItem()"
                      [(ngModel)]="reservaItem.qtde"
                      name="qtde"

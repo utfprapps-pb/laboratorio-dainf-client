@@ -67,14 +67,24 @@ export class EmprestimoListComponent extends CrudListComponent<Emprestimo, numbe
             return data[sortHeaderId];
         }
       };
-      this.dataSource.filterPredicate = (data, filter1) => {
-        switch (filter1) {
-          case 'usuarioEmprestimo':
-            return data.usuarioEmprestimo.nome;
-          default:
-            return data[filter1];
-        }
-      };
+
+      this.dataSource.filterPredicate = (data, filter) => {
+        return data.usuarioEmprestimo.nome.indexOf(filter) != -1;
+      }
+
+
+      // this.dataSource.filterPredicate = (data, filter) => {
+      //   const dataStr = data.id + data.usuarioEmprestimo.nome + data.dataEmprestimo + data.prazoDevolucao + data.status;
+      //   return dataStr.indexOf(filter) != -1;
+      // }
+      // this.dataSource.filterPredicate = (data, filter) => {
+      //   const dataStr = data.id + data.usuarioEmprestimo.nome + data.dataEmprestimo + data.prazoDevolucao;
+      //   // console.log(dataStr.toUpperCase());
+      //   console.log(data);
+      //   return JSON.stringify(data).includes(dataStr.toUpperCase());
+      // }
+
+
     }
   }
 

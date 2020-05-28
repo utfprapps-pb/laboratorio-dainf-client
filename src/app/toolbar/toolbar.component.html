@@ -7,7 +7,21 @@
     <a *ngIf="widthScreen >= 600" routerLinkActive="active" routerLink="/" style="margin-left: 10px; color: white; text-decoration: none">Sistema de Gerenciamento do DAINF</a>
     <a *ngIf="widthScreen < 600" routerLinkActive="active" routerLink="/" style="margin-left: 10px; color: white; text-decoration: none">Lab DAINF</a>
   </div>
-  <button class="btn-sidenav">
-    <a (click)="logout()" class="d-flex"><mat-icon style="color: #FFFFFF">exit_to_app</mat-icon></a>
-  </button>
+  <div>
+    <div *ngIf="widthScreen > 768">
+      <button type="button" pButton (click)="menu.toggle($event)" class="btn-sidenav text-white" style="font-size: 18px">
+        Olá, {{getUserLogado()}}
+        <i class="fa fa-caret-down" style="font-size: 15px"></i>
+      </button>
+      <p-tieredMenu #menu [model]="items" [popup]="true"></p-tieredMenu>
+    </div>
+    <div *ngIf="widthScreen <= 768">
+      <button class="btn-sidenav" pTooltip="Sair" tooltipPosition="bottom">
+        <a (click)="logout()"
+           class="d-flex">
+          <mat-icon class="text-white">exit_to_app</mat-icon>
+        </a>
+      </button>
+    </div>
+  </div>
 </mat-toolbar>

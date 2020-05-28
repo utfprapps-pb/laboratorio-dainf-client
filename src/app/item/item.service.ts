@@ -4,6 +4,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
+import {ItemImage} from './itemImage';
 
 @Injectable()
 export class ItemService extends CrudService<Item, number> {
@@ -16,7 +17,11 @@ export class ItemService extends CrudService<Item, number> {
     return this.http.get<Item[]>(`${this.url}complete?query=${query}&hasEstoque=${hasEstoque}`);
   }
 
-  findAllImagesItem(idItem: number): Observable<string[]> {
-    return this.http.get<string[]>(this.url + `imagens/${idItem}`);
+  findAllImagesItem(idItem: number): Observable<ItemImage[]> {
+    return this.http.get<ItemImage[]>(this.url + `imagens/${idItem}`);
+  }
+
+  deleteImage(itemImage: ItemImage, idItem: number): Observable<void> {
+    return this.http.post<void>(`${this.url}delete-image/${idItem}`, itemImage);
   }
 }

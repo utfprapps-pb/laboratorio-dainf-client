@@ -10,6 +10,7 @@ import {DateUtil} from '../framework/util/dateUtil';
 import {pt} from '../framework/constantes/calendarPt';
 import {Subject} from 'rxjs/internal/Subject';
 import {LoaderService} from '../framework/loader/loader.service';
+import {Language} from '@amcharts/amcharts4/core';
 
 am4core.useTheme(am4themes_animated);
 
@@ -194,7 +195,8 @@ export class HomeComponent implements OnInit {
   createXYChartLine(elementAppend, dados, dateX, valueY) {
     const chartLine = am4core.create(elementAppend, am4charts.XYChart);
     chartLine.data = dados;
-    chartLine.dateFormatter.inputDateFormat = 'dd-MM-yyyy';
+    console.log(chartLine.data);
+    //chartLine.dateFormatter.inputDateFormat = 'dd-MM-yyyy';
 
     const dateAxis = chartLine.xAxes.push(new am4charts.DateAxis());
     const valueAxis = chartLine.yAxes.push(new am4charts.ValueAxis());

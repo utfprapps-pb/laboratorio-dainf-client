@@ -45,3 +45,25 @@
   </mat-card>
 </div>
 
+<p-dialog header="Reservas do Item"
+          [(visible)]="dialogReservaitem"
+          [style]="{minWidth: '650px'}"
+          [baseZIndex]="10000">
+
+  <div class="example-container mat-elevation-z8">
+    <mat-table id="table-reserva" [dataSource]="reservasItem">
+      <ng-container matColumnDef="dataRetirada">
+        <mat-header-cell *matHeaderCellDef>Reservado para</mat-header-cell>
+        <mat-cell *matCellDef="let reserva"> {{reserva.dataRetirada}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="qtde">
+        <mat-header-cell *matHeaderCellDef>Qtde Reservada</mat-header-cell>
+        <mat-cell *matCellDef="let reserva"> {{reserva.reservaItem[0].qtde}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumnsReserva; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumnsReserva;"></mat-row>
+    </mat-table>
+  </div>
+</p-dialog>

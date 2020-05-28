@@ -5,6 +5,7 @@ export class Reserva {
   id: number;
   descricao: string;
   dataReserva: string;
+  dataRetirada: string;
   observacao: string;
   usuario: Usuario;
   reservaItem: ReservaItem[];

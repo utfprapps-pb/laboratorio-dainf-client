@@ -8,6 +8,7 @@ import {GrupoService} from '../grupo/grupo.service';
 import {FileUpload, SelectItem} from 'primeng';
 import {environment} from '../../environments/environment';
 import Swal from 'sweetalert2';
+import {ItemImage} from './itemImage';
 
 @Component({
   selector: 'app-form-item',
@@ -20,7 +21,7 @@ export class ItemFormComponent extends CrudFormComponent<Item, number> {
   @ViewChild('form', {static: true}) form: NgForm;
   uploadedFiles: any[] = [];
   responsiveOptions;
-  images: any[];
+  images: ItemImage[];
   dialogImagens = false;
   callback: Function;
   grupoList: Grupo[];
@@ -96,5 +97,31 @@ export class ItemFormComponent extends CrudFormComponent<Item, number> {
       }, error => {
         this.loaderService.display(false);
       });
+  }
+
+  deleteImage(image: ItemImage) {
+    Swal.fire({
+      title: `Tem certeza que deseja remover a imagem?`,
+      text: 'A ação não poderá ser desfeita.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Não'
+    }).then((result) => {
+      if (result.value) {
+        this.loaderService.display(true);
+        this.itemService.deleteImage(image, this.object.id)
+          .subscribe(e => {
+            this.loaderService.display(false);
+            this.dialogImagens = false;
+            Swal.fire('Sucesso!', 'Imagem removida com sucesso!', 'success');
+          }, error => {
+            this.loaderService.display(false);
+            Swal.fire('Atenção!', 'Ocorreu um erro ao remover a imagem', 'error');
+          });
+      }
+    });
   }
 }

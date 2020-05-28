@@ -18,6 +18,7 @@ import {SalvarModule} from '../geral/salvar/salvar.module';
 import {ValidationModule} from '../framework/validation/validation.module';
 import {ValidationService} from '../framework/validation/validation.service';
 import {MatSortModule} from '@angular/material/sort';
+import {BottomSheetReservaModule} from './bottomScheetReserva/bottomSheetReserva.module';
 
 @NgModule({
   imports: [
@@ -38,6 +39,7 @@ import {MatSortModule} from '@angular/material/sort';
     SalvarModule,
     InputTextModule,
     ValidationModule,
+    BottomSheetReservaModule
   ],
   declarations: [
     ReservaFormComponent,

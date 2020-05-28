@@ -274,27 +274,26 @@
           <input name="dtIni"
                  id="dtIni"
                  onlyNumber
+                 (keyup.enter)="duplicarItem()"
                  [(ngModel)]="qtdeItemDuplicado"
                  class="form-control"/>
         </div>
       </div>
     </div>
-    <p-footer>
-      <div class="row">
-        <div class="col-md-12 d-flex justify-content-end">
-          <button type="submit"
-                  class="mr-1 text-uppercase"
-                  (click)="dialogDuplicaItem = false"
-                  mat-button>Cancelar
-          </button>
-          <button type="submit"
-                  color="primary"
-                  [disabled]="disableBtnSaveDuplicar()"
-                  class="text-uppercase"
-                  mat-raised-button>Ok
-          </button>
-        </div>
+    <div class="row">
+      <div class="col-md-12 d-flex justify-content-end">
+        <button type="submit"
+                class="mr-1 text-uppercase"
+                (click)="dialogDuplicaItem = false"
+                mat-button>Cancelar
+        </button>
+        <button type="submit"
+                color="primary"
+                [disabled]="disableBtnSaveDuplicar()"
+                class="text-uppercase"
+                mat-raised-button>Ok
+        </button>
       </div>
-    </p-footer>
+    </div>
   </form>
 </p-dialog>

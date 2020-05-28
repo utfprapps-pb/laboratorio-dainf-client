@@ -1,0 +1,16 @@
+<mat-nav-list>
+  <a *ngIf="!isAlunoOrProfessor" mat-list-item (click)="click('F')">
+    <i class="fa fa-2x fa-handshake-o" mat-list-icon></i>
+    <span mat-line>Gerar Empréstimo</span>
+  </a>
+
+  <a mat-list-item (click)="click('E')">
+    <i class="fa fa-2x fa-edit" mat-list-icon></i>
+    <span mat-line>Editar</span>
+  </a>
+
+  <a mat-list-item (click)="click('R')">
+    <i class="fa fa-2x fa-trash-o" mat-list-icon></i>
+    <span mat-line>Remover</span>
+  </a>
+</mat-nav-list>

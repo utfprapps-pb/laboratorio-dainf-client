@@ -224,11 +224,18 @@
       <div class="car-details">
         <div class="p-grid p-nogutter">
           <div class="p-col-12">
-            <img src="data:image/png;base64,{{image}}" class="mw-100" style="width: 300px"/>
+            <img src="data:image/png;base64,{{image.base64}}" class="mw-100" style="width: 300px"/>
           </div>
           <div *ngIf="!isAlunosOrProfessor" class="p-col-12 car-data">
             <div class="car-buttons my-1">
-              <button pButton type="button" class="ui-button-secondary" icon="pi pi-trash"></button>
+              <button pButton
+                      type="button"
+                      class="ui-button-secondary"
+                      pTooltip="Remover Imagem"
+                      tooltipPosition="bottom"
+                      (click)="deleteImage(image)"
+                      icon="pi pi-trash">
+              </button>
             </div>
           </div>
         </div>

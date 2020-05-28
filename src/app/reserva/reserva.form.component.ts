@@ -109,6 +109,10 @@ export class ReservaFormComponent extends CrudFormComponent<Reserva, number> {
     this.itemToAdd.focusInput();
   }
 
+  setFocusQtdeToAdd() {
+    this.qtdeToAdd.nativeElement.focus();
+  }
+
   saldoItemIsValid(qtdeInserir) {
     const isValid = this.reservaItem.item.saldo > 0 && qtdeInserir <= this.reservaItem.item.saldo;
     if (!isValid) {

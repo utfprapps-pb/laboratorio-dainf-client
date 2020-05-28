@@ -89,6 +89,7 @@
                               inputStyleClass="form-control"
                               [dropdown]="true"
                               [(ngModel)]="compraItem.item"
+                              (keyup.control.arrowRight)="setFocusInputQtde()"
                               (keyup.control.enter)="insertItem()"
                               (onSelect)="setPrecoProduto()"
                               [suggestions]="itemList"
@@ -123,6 +124,8 @@
               <input type="number"
                      id="qtde"
                      autocomplete="off"
+                     #qtdeToAdd
+                     (keyup.control.arrowLeft)="setFocusInputItem()"
                      (keyup.control.enter)="insertItem()"
                      [(ngModel)]="compraItem.qtde"
                      onlyNumber
@@ -149,28 +152,28 @@
         <div *ngIf="object?.compraItem?.length > 0" class="example-container mat-elevation-z8">
           <mat-table #table="matTable" [dataSource]="object.compraItem">
             <ng-container matColumnDef="item">
-              <mat-header-cell *matHeaderCellDef> Item </mat-header-cell>
+              <mat-header-cell *matHeaderCellDef> Item</mat-header-cell>
               <mat-cell *matCellDef="let itemCompra">
                 <p>{{itemCompra?.item?.nome}}</p>
                 <p *ngIf="itemCompra?.item?.patrimonio" class="ml-2"> | {{itemCompra.item.patrimonio}}</p>
               </mat-cell>
-              <mat-footer-cell *matFooterCellDef> Total </mat-footer-cell>
+              <mat-footer-cell *matFooterCellDef> Total</mat-footer-cell>
             </ng-container>
 
             <ng-container matColumnDef="qtde">
-              <mat-header-cell *matHeaderCellDef> Qtde </mat-header-cell>
+              <mat-header-cell *matHeaderCellDef> Qtde</mat-header-cell>
               <mat-cell *matCellDef="let itemCompra"> {{itemCompra.qtde}} </mat-cell>
               <mat-footer-cell *matFooterCellDef> {{getQtdeTotal()}} </mat-footer-cell>
             </ng-container>
 
             <ng-container matColumnDef="valor">
-              <mat-header-cell *matHeaderCellDef> Valor </mat-header-cell>
+              <mat-header-cell *matHeaderCellDef> Valor</mat-header-cell>
               <mat-cell *matCellDef="let itemCompra"> {{itemCompra.valor | currency}} </mat-cell>
               <mat-footer-cell *matFooterCellDef> {{getTotalCompra() | currency}} </mat-footer-cell>
             </ng-container>
 
             <ng-container matColumnDef="actionsForm">
-              <mat-header-cell *matHeaderCellDef> Opções </mat-header-cell>
+              <mat-header-cell *matHeaderCellDef> Opções</mat-header-cell>
               <mat-cell *matCellDef="let itemCompra">
                 <button class="btn btn-outline-primary rounded"
                         type="button"

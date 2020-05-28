@@ -84,6 +84,7 @@
                               [dropdown]="true"
                               (onSelect)="solicitacaoCompraItem.qtde = 1"
                               (keyup.control.enter)="insertItem()"
+                              (keyup.control.arrowRight)="setFocusQtdeToAdd()"
                               [(ngModel)]="solicitacaoCompraItem.item"
                               [suggestions]="itemList"
                               (onClear)="solicitacaoCompraItem.item = null"
@@ -105,6 +106,7 @@
                      autocomplete="off"
                      #qtdeToAdd
                      onlyNumber
+                     (keyup.control.arrowLeft)="setFocusInputItem()"
                      (keyup.control.enter)="insertItem()"
                      [(ngModel)]="solicitacaoCompraItem.qtde"
                      name="qtde"

@@ -2,6 +2,8 @@ import {Component, Injector} from '@angular/core';
 import {CrudListComponent} from '../framework/component/crud.list.component';
 import {Reserva} from './reserva';
 import {ReservaService} from './reserva.service';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
+import {BottomSheetReservaComponent} from './bottomScheetReserva/bottomSheetReserva.component';
 
 @Component({
   selector: 'app-list-reserva',
@@ -11,15 +13,28 @@ import {ReservaService} from './reserva.service';
 export class ReservaListComponent extends CrudListComponent<Reserva, number> {
 
   constructor(protected reservaService: ReservaService,
-              protected injector: Injector) {
-    super(reservaService, injector, ['id', 'descricao', 'dataReserva', 'usuario', 'actions'], 'reserva/form');
+              protected injector: Injector,
+              private bottomSheetOptions: MatBottomSheet) {
+    super(reservaService, injector, ['id', 'descricao', 'dataReserva', 'dataRetirada', 'usuario'], 'reserva/form');
+    this.bottomSheetEnabled = false;
+    this.hostListenerColumnEnable = false;
   }
 
-  // tslint:disable-next-line:use-lifecycle-interface
   ngOnInit(): void {
     this.loginService.userLoggedIsAlunoOrProfessor().then(value => {
       this.isAlunoOrProfessor = value;
       this.isAlunoOrProfessor ? this.findAllByUsername() : this.findAll();
+    });
+  }
+
+  openOptions(id): void {
+    const sheet = this.bottomSheetOptions.open(BottomSheetReservaComponent);
+    sheet.afterDismissed().subscribe(action => {
+      if (action === 'E') {
+        this.edit(id);
+      } else if (action === 'R') {
+        this.delete(id);
+      }
     });
   }
 

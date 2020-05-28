@@ -103,4 +103,8 @@ export class SolicitacaoCompraFormComponent extends CrudFormComponent<Solicitaca
   setFocusInputItem() {
     this.itemToAdd.focusInput();
   }
+
+  setFocusQtdeToAdd() {
+    this.qtdeToAdd.nativeElement.focus();
+  }
 }
