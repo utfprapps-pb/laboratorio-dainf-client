@@ -1,15 +1,15 @@
-<mat-toolbar class="d-flex justify-content-between mat-elevation-z9" style="height: 50px; background-color: #222d43">
+<mat-toolbar class="d-flex justify-content-between" style="height: 50px; background-color: transparent">
   <div class="d-flex align-items-center">
     <button *ngIf="widthScreen < 1200" id="btn-sidenav" class="btn-icon btn-sidenav" (click)="toogleSidenav()">
-      <i class="fa fa fa-bars"></i>
+      <i class="fa fa fa-bars text-black-50"></i>
     </button>
-    <img src="../../assets/utfpr.jpg" alt="logo_constru" style="width: 40px">
-    <a *ngIf="widthScreen >= 600" routerLinkActive="active" routerLink="/" style="margin-left: 10px; color: white; text-decoration: none">Sistema de Gerenciamento do DAINF</a>
-    <a *ngIf="widthScreen < 600" routerLinkActive="active" routerLink="/" style="margin-left: 10px; color: white; text-decoration: none">Lab DAINF</a>
+    <img src="../../assets/logo.png" alt="logo_constru" style="width: 40px">
+    <a *ngIf="widthScreen >= 600" routerLinkActive="active" routerLink="/" style="margin-left: 10px;" class="text-black-50 text-uppercase font-poppins text-decoration-none">Sistema de Gerenciamento do DAINF</a>
+    <a *ngIf="widthScreen < 600" routerLinkActive="active" routerLink="/" style="margin-left: 10px;" class="text-black-50 text-uppercase font-poppins text-decoration-none">Lab DAINF</a>
   </div>
   <div>
     <div *ngIf="widthScreen > 768">
-      <button type="button" pButton (click)="menu.toggle($event)" class="btn-sidenav text-white" style="font-size: 18px">
+      <button type="button" pButton (click)="menu.toggle($event)" class="btn-sidenav text-black-50" style="font-size: 18px">
         Olá, {{getUserLogado()}}
         <i class="fa fa-caret-down" style="font-size: 15px"></i>
       </button>
@@ -25,3 +25,6 @@
     </div>
   </div>
 </mat-toolbar>
+
+
+<!-- #222d43-->

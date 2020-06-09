@@ -34,6 +34,8 @@ import {ReservaModule} from './reserva/reserva.module';
 import {SolicitacaoCompraModule} from './solicitacaoCompra/solicitacaoCompra.module';
 import {LoaderService} from './framework/loader/loader.service';
 import {LoaderModule} from './framework/loader/loader.module';
+import { RelatorioFormComponent } from './relatorio/relatorio.form.component';
+import {RelatorioModule} from './relatorio/relatorio.module';
 
 registerLocaleData(ptBr);
 
@@ -68,7 +70,8 @@ registerLocaleData(ptBr);
     ScrollPanelModule,
     ReservaModule,
     SolicitacaoCompraModule,
-    LoaderModule
+    LoaderModule,
+    RelatorioModule
   ],
   providers: [
     MessageService,

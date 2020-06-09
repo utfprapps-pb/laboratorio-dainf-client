@@ -1,0 +1,55 @@
+<div class="container-fluid my-3">
+  <mat-card>
+    <mat-card-title>
+      <div class="d-flex align-items-center justify-content-between">
+        <h4 class="m-0">Relatório</h4>
+        <app-novo (onClick)="openForm()"></app-novo>
+      </div>
+    </mat-card-title>
+    <mat-card-content>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
+      </mat-form-field>
+
+      <div class="mat-elevation-z8">
+        <mat-table [dataSource]="dataSource" matSort>
+
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Código</mat-header-cell>
+            <mat-cell *matCellDef="let row" (click)="openBottomSheet(row.id)">{{row.id}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="nome">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Nome</mat-header-cell>
+            <mat-cell *matCellDef="let row" (click)="openBottomSheet(row.nome)">{{row.nome}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> Opções </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <button class="btn btn-outline-secondary rounded mr-2"
+                      type="button"
+                      pTooltip="Editar"
+                      (click)="edit(row.id)">
+                <i class="fa fa-edit"></i>
+              </button>
+              <button class="btn btn-outline-primary rounded"
+                      type="button"
+                      pTooltip="Remover"
+                      (click)="delete(row.id)">
+                <i class="fa fa-trash-o"></i>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;">
+          </mat-row>
+        </mat-table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]"
+                       [pageSize]="100"></mat-paginator>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

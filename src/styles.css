@@ -6,6 +6,7 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  /*background-image: url("/assets/background - utfpr.png");*/
 }
 
 .w-100px {
@@ -186,3 +187,7 @@ mat-row:nth-child(even) {
   margin-right: 0.6em;
 }
 
+/**/
+.font-poppins {
+  font-family: 'Poppins', sans-serif;
+}

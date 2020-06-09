@@ -28,7 +28,6 @@ export class HttpClientInterceptor implements HttpInterceptor {
       return next.handle(authReqWithBearer).pipe(
         tap(() => {
         }, err => {
-          console.log('erroooooo ' + err);
           if (err.status === 403) {
             // this.router.navigate(['403']);
             this.messageService.add({severity: 'info', detail: 'Você não tem permissão para acessar este recurso'});

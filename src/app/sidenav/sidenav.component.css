@@ -19,5 +19,31 @@ mat-drawer-container {
 }
 
 .color-icons {
-  color: #222d43;
+  /*color: #222d43;*/
+  color: white;
+}
+
+a {
+  text-transform: uppercase;
+  font-family: 'Poppins', sans-serif;
+}
+
+.float-drawer {
+  margin: 15px;
+  border-radius: 10px;
+}
+
+.drawer {
+  width: 90% !important;
+  background: linear-gradient(0deg, #334873 0px, #222d43 100%);
+}
+
+#btn-sidenav > i {
+  color: #FFFFFF;
+}
+
+#btn-sidenav {
+  background-color: transparent;
+  border-color: transparent;
+  margin-right: 5px;
 }

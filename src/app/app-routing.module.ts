@@ -30,6 +30,8 @@ import {ReservaListComponent} from './reserva/reserva.list.component';
 import {SolicitacaoCompraListComponent} from './solicitacaoCompra/solicitacaoCompra.list.component';
 import {SolicitacaoCompraFormComponent} from './solicitacaoCompra/solicitacaoCompra.form.component';
 import {NotAuthorizedComponent} from './notAuthorized/notAuthorized.component';
+import {RelatorioFormComponent} from './relatorio/relatorio.form.component';
+import {RelatorioListComponent} from './relatorio/relatorio.list.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -72,6 +74,9 @@ const routes: Routes = [
   {path: 'solicitacao-compra', canActivate: [LoginService], component: SolicitacaoCompraListComponent},
   {path: 'solicitacao-compra/form', canActivate: [LoginService], component: SolicitacaoCompraFormComponent},
   {path: 'solicitacao-compra/form/:id', canActivate: [LoginService], component: SolicitacaoCompraFormComponent},
+  {path: 'relatorio', canActivate: [LoginService], component: RelatorioListComponent},
+  {path: 'relatorio/form', canActivate: [LoginService], component: RelatorioFormComponent},
+  {path: 'relatorio/form/:id', canActivate: [LoginService], component: RelatorioFormComponent},
   {path: '403', component: NotAuthorizedComponent},
   {path: '**', component: PageNotFoundComponent}
 ];

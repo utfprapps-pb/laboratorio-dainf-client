@@ -55,7 +55,7 @@ export const MENU_ITEM: MenuItem[] = [
     roles: ['ADMINISTRADOR', 'LABORATORISTA'],
     group: 'ITEM'},
   {
-    path: '/relatorios',
+    path: '/relatorio',
     title: 'Relatórios',
     icon: 'line-chart',
     id: 'relatorios',
@@ -110,6 +110,7 @@ export class SidenavComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildMenu();
+    this.changeStylesDrawer();
     this.changeColorMenuItem();
     this.initObservableDrawer();
     this.initObservableMenuItem();
@@ -151,6 +152,7 @@ export class SidenavComponent implements OnInit {
         } else {
           this.drawer.open();
         }
+        this.changeStylesDrawer();
       }
     });
   }
@@ -186,9 +188,18 @@ export class SidenavComponent implements OnInit {
 
   setColorMenuItem(menu: MenuItem, path) {
     if (menu.path === path) {
-      document.getElementById(menu.id).style.backgroundColor = '#d2d2d2d1';
+      document.getElementById(menu.id).style.backgroundColor = '#1b2231';
     } else {
-      document.getElementById(menu.id).style.backgroundColor = '#FFFFFF';
+      document.getElementById(menu.id).style.backgroundColor = 'transparent';
+    }
+  }
+
+
+  changeStylesDrawer() {
+    if (window.innerWidth < 1200) {
+      document.getElementById('drawer').classList.remove('float-drawer');
+    } else {
+      document.getElementById('drawer').classList.add('float-drawer');
     }
   }
 }
