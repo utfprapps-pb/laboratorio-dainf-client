@@ -24,9 +24,8 @@ export class ItemListComponent extends CrudListComponent<Item, number> {
               protected injector: Injector,
               private bottomSheetOptions: MatBottomSheet,
               private reservaService: ReservaService) {
-    super(itemService, injector, ['id', 'nome', 'localizacao', 'saldo'], 'item/form');
+    super(itemService, injector, ['id', 'nome', 'localizacao', 'saldo', 'actions'], 'item/form');
     this.bottomSheetEnabled = false;
-    this.hostListenerColumnEnable = false;
   }
 
   postFindAll(): void {

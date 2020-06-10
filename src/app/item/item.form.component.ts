@@ -25,16 +25,16 @@ export class ItemFormComponent extends CrudFormComponent<Item, number> {
   dialogImagens = false;
   callback: Function;
   grupoList: Grupo[];
-  yesNoDropdown: SelectItem[];
+  tipoItem: SelectItem[];
 
   constructor(protected itemService: ItemService,
               protected injector: Injector,
               private grupoService: GrupoService) {
     super(itemService, injector, '/item');
 
-    this.yesNoDropdown = [
-      {label: 'Sim', value: true},
-      {label: 'Não', value: false}
+    this.tipoItem = [
+      {label: 'Consumo', value: 'C'},
+      {label: 'Permanente', value: 'P'}
     ];
 
     this.responsiveOptions = [
@@ -52,7 +52,7 @@ export class ItemFormComponent extends CrudFormComponent<Item, number> {
   }
 
   initializeValues(): void {
-    this.object.devolver = this.yesNoDropdown[0].value;
+    this.object.tipoItem = this.tipoItem[0].value;
   }
 
   postEdit(): void {
@@ -114,6 +114,7 @@ export class ItemFormComponent extends CrudFormComponent<Item, number> {
         this.loaderService.display(true);
         this.itemService.deleteImage(image, this.object.id)
           .subscribe(e => {
+            this.deleteImageInObject(image);
             this.loaderService.display(false);
             this.dialogImagens = false;
             Swal.fire('Sucesso!', 'Imagem removida com sucesso!', 'success');
@@ -123,5 +124,25 @@ export class ItemFormComponent extends CrudFormComponent<Item, number> {
           });
       }
     });
+  }
+
+  deleteImageInObject(image: ItemImage) {
+    let index;
+    this.object?.imageItem.forEach(imagem => {
+      if (image.id === image.id) {
+        index = this.object.imageItem.indexOf(imagem);
+      }
+    });
+    this.object.imageItem.splice(index, 1);
+  }
+
+  setSaldoDefaultItem() {
+    if (this.object.patrimonio !== null && this.object.patrimonio !== undefined) {
+      this.object.saldo = 1;
+      this.object.qtdeMinima = 1;
+    } else {
+      this.object.saldo = null;
+      this.object.qtdeMinima = null;
+    }
   }
 }

@@ -93,7 +93,7 @@
             </div>
           </div>
 
-          <div class="col-md-6">
+          <div [ngClass]="!object?.id ? 'col-md-3' : 'col-md-6'">
             <div class="form-group">
               <label for="usuario">Usuário</label>
               <span class="field-required">*</span>
@@ -107,10 +107,8 @@
                      pInputText>
             </div>
           </div>
-        </div>
 
-        <div *ngIf="!object?.id" class="row">
-          <div class="col-md-6">
+          <div *ngIf="!object?.id" class="col-md-3">
             <div class="form-group">
               <label for="senha">Senha</label>
               <span class="field-required">*</span>
@@ -121,19 +119,6 @@
                      validation
                      class="form-control"
                      [(ngModel)]="object.password"
-                     pInputText>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="confirmSenha">Confirmação Senha</label>
-              <span class="field-required">*</span>
-              <input type="password"
-                     id="confirmSenha"
-                     name="confirmSenha"
-                     required
-                     validation
-                     class="form-control"
                      pInputText>
             </div>
           </div>

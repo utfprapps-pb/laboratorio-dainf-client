@@ -1,4 +1,5 @@
 import {Grupo} from '../grupo/grupo';
+import {ItemImage} from './itemImage';
 
 export class Item {
   id: number;
@@ -8,7 +9,8 @@ export class Item {
   valor: number;
   qtdeMinima: number;
   localizacao: string;
-  devolver: boolean;
+  tipoItem: string;
   saldo: number;
   grupo: Grupo;
+  imageItem: ItemImage[];
 }

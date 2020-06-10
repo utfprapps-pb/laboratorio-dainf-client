@@ -34,6 +34,24 @@
             <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{row.saldo}}</mat-cell>
           </ng-container>
 
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> Opções </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <button class="btn btn-outline-secondary rounded mr-2"
+                      type="button"
+                      pTooltip="Editar"
+                      (click)="edit(row.id)">
+                <i class="fa fa-edit"></i>
+              </button>
+              <button class="btn btn-outline-primary rounded"
+                      type="button"
+                      pTooltip="Remover"
+                      (click)="delete(row.id)">
+                <i class="fa fa-trash-o"></i>
+              </button>
+            </mat-cell>
+          </ng-container>
+
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>

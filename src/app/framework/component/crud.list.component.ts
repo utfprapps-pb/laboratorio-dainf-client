@@ -62,6 +62,7 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
     this.service.findAll()
       .subscribe(e => {
         this.objects = e;
+        console.log(this.objects);
         this.buildList();
         this.loaderService.display(false);
         this.postFindAll();

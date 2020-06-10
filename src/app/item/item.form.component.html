@@ -59,6 +59,7 @@
                      name="patrimonio"
                      class="form-control"
                      onlyNumber
+                     (keyup)="setSaldoDefaultItem()"
                      [disabled]="isAlunosOrProfessor"
                      [(ngModel)]="object.patrimonio"
                      pInputText>
@@ -101,7 +102,7 @@
                      required
                      validation
                      class="form-control"
-                     [disabled]="isAlunosOrProfessor"
+                     [disabled]="isAlunosOrProfessor || object.patrimonio != null"
                      [(ngModel)]="object.qtdeMinima"
                      pInputText>
             </div>
@@ -126,13 +127,13 @@
           </div>
           <div class="col-md-3">
             <div class="form-group">
-              <label for="devolver">Devolver</label>
-              <p-dropdown [options]="yesNoDropdown"
-                          [(ngModel)]="object.devolver"
+              <label for="tipoItem">Tipo do Item</label>
+              <p-dropdown [options]="tipoItem"
+                          [(ngModel)]="object.tipoItem"
                           [style]="{width: '100%'}"
                           [disabled]="isAlunosOrProfessor"
-                          id="devolver"
-                          name="devolver">
+                          id="tipoItem"
+                          name="tipoItem">
               </p-dropdown>
             </div>
           </div>
@@ -147,7 +148,7 @@
                      required
                      validation
                      class="form-control"
-                     [disabled]="isAlunosOrProfessor"
+                     [disabled]="isAlunosOrProfessor || object.patrimonio != null"
                      [(ngModel)]="object.saldo"
                      pInputText>
             </div>

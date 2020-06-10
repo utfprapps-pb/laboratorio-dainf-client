@@ -149,7 +149,11 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
 
   setDevolucaoItem() {
     if (this.emprestimoItem.item != null && typeof this.emprestimoItem.item === 'object') {
-      this.itemDevolver = this.emprestimoItem.item.devolver;
+      if (this.emprestimoItem.item.tipoItem === 'C') {
+        this.itemDevolver = true;
+      } else {
+        this.itemDevolver = false;
+      }
       this.emprestimoItem.qtde = 1;
     }
   }

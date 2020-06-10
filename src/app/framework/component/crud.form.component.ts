@@ -47,6 +47,7 @@ export abstract class CrudFormComponent<T, ID> extends BaseFormComponent impleme
   }
 
   save() {
+    console.log(this.object);
     this.loaderService.display(true);
     if (this.isValid() && this.validExtra) {
       this.service.save(this.object)

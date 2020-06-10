@@ -61,7 +61,7 @@ export class UsuarioFormComponent extends CrudFormComponent<Usuario, number> {
   redefinirSenha() {
     if (this.formChangeSenha.valid) {
       if (this.redNovaSenha !== this.redConfNovaSenha) {
-        this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Senhas não conferem!'});
+        this.messageService.add({severity: 'error', summary: 'Atenção', detail: 'Senhas não conferem!'});
       } else {
         this.object.password = this.redNovaSenha;
         this.usuarioService.changeSenha(this.object, this.redSenhaAtual)
