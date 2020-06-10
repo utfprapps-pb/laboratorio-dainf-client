@@ -13,10 +13,14 @@ import {MatInputModule} from '@angular/material/input';
 import {VoltarModule} from '../geral/voltar/voltar.module';
 import {SalvarModule} from '../geral/salvar/salvar.module';
 import {CancelarModule} from '../geral/cancelar/cancelar.module';
-import {DropdownModule, FieldsetModule, FileUploadModule, InputTextModule, TooltipModule} from 'primeng';
+import {CalendarModule, DialogModule, DropdownModule, FieldsetModule, FileUploadModule, InputTextModule, TooltipModule} from 'primeng';
 import {MatIconModule} from '@angular/material/icon';
 import {ValidationModule} from '../framework/validation/validation.module';
 import {ValidationService} from '../framework/validation/validation.service';
+import {RelatorioViewerComponent} from './relatorio.viewer.component';
+import {MatButtonModule} from '@angular/material/button';
+import {OnlyNumberModule} from '../framework/directives/onlyNumber/onlyNumber.module';
+import {HelpModule} from '../geral/help/help.module';
 
 @NgModule({
   imports: [
@@ -28,6 +32,7 @@ import {ValidationService} from '../framework/validation/validation.service';
     NovoModule,
     MatTableModule,
     MatPaginatorModule,
+    MatButtonModule,
     VoltarModule,
     SalvarModule,
     CancelarModule,
@@ -37,15 +42,21 @@ import {ValidationService} from '../framework/validation/validation.service';
     ValidationModule,
     InputTextModule,
     TooltipModule,
-    FieldsetModule
+    FieldsetModule,
+    DialogModule,
+    CalendarModule,
+    OnlyNumberModule,
+    HelpModule
   ],
   declarations: [
     RelatorioFormComponent,
-    RelatorioListComponent
+    RelatorioListComponent,
+    RelatorioViewerComponent
   ],
   exports: [
     RelatorioFormComponent,
-    RelatorioListComponent
+    RelatorioListComponent,
+    RelatorioViewerComponent
   ],
   providers: [
     RelatorioService,

@@ -12,7 +12,7 @@ export class RelatorioService extends CrudService<Relatorio, number> {
     super(`${environment.api_url}relatorio/`, http);
   }
 
-  saveWithFile(relatorio: Relatorio): Observable<void> {
-    return this.http.post<void>(`${this.url}save-with-file`, relatorio);
+  generateReport(map: any): Observable<any> {
+    return this.http.post<any>(this.url + `generate-report`, map, {responseType: 'arraybuffer' as 'json'});
   }
 }

@@ -32,6 +32,7 @@ import {SolicitacaoCompraFormComponent} from './solicitacaoCompra/solicitacaoCom
 import {NotAuthorizedComponent} from './notAuthorized/notAuthorized.component';
 import {RelatorioFormComponent} from './relatorio/relatorio.form.component';
 import {RelatorioListComponent} from './relatorio/relatorio.list.component';
+import {RelatorioViewerComponent} from './relatorio/relatorio.viewer.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -77,6 +78,7 @@ const routes: Routes = [
   {path: 'relatorio', canActivate: [LoginService], component: RelatorioListComponent},
   {path: 'relatorio/form', canActivate: [LoginService], component: RelatorioFormComponent},
   {path: 'relatorio/form/:id', canActivate: [LoginService], component: RelatorioFormComponent},
+  {path: 'relatorio/view/:id', canActivate: [LoginService], component: RelatorioViewerComponent},
   {path: '403', component: NotAuthorizedComponent},
   {path: '**', component: PageNotFoundComponent}
 ];

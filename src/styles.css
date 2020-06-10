@@ -191,3 +191,12 @@ mat-row:nth-child(even) {
 .font-poppins {
   font-family: 'Poppins', sans-serif;
 }
+
+/* fieldset */
+legend {
+  width: auto !important;
+}
+
+.ui-fieldset-legend-text {
+  font-size: 14px !important;
+}
