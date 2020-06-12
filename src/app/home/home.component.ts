@@ -195,7 +195,6 @@ export class HomeComponent implements OnInit {
   createXYChartLine(elementAppend, dados, dateX, valueY) {
     const chartLine = am4core.create(elementAppend, am4charts.XYChart);
     chartLine.data = dados;
-    console.log(chartLine.data);
     //chartLine.dateFormatter.inputDateFormat = 'dd-MM-yyyy';
 
     const dateAxis = chartLine.xAxes.push(new am4charts.DateAxis());

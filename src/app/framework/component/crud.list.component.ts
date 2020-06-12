@@ -62,13 +62,13 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
     this.service.findAll()
       .subscribe(e => {
         this.objects = e;
-        console.log(this.objects);
         this.buildList();
         this.loaderService.display(false);
         this.postFindAll();
       }, error => {
         this.loaderService.display(false);
       });
+    this.buildColumnsTable();
   }
 
   findAllByUsername() {
@@ -146,6 +146,7 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
   @HostListener('window:resize', ['$event'])
   buildColumnsTable() {
     if (this.hostListenerColumnEnable) {
+      console.log('teucu');
       if (window.innerWidth <= 1200) {
         this.columnsTable.forEach((value, index) => {
           if (value === 'actions') {

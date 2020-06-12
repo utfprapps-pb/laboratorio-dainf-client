@@ -39,7 +39,11 @@ export abstract class CrudFormComponent<T, ID> extends BaseFormComponent impleme
     this.preOnInit();
     this.route.params.subscribe(params => {
       if (params.id) {
-        this.edit(params.id);
+        if (isNaN(params.id)) {
+          this.initializeValues();
+        } else {
+          this.edit(params.id);
+        }
       } else {
         this.initializeValues();
       }
@@ -47,7 +51,6 @@ export abstract class CrudFormComponent<T, ID> extends BaseFormComponent impleme
   }
 
   save() {
-    console.log(this.object);
     this.loaderService.display(true);
     if (this.isValid() && this.validExtra) {
       this.service.save(this.object)

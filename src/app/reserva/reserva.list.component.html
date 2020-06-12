@@ -16,27 +16,27 @@
 
           <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Código</mat-header-cell>
-            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{row.id}}</mat-cell>
+            <mat-cell *matCellDef="let row" (click)="openOptions(row)">{{row.id}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="descricao">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Descrição</mat-header-cell>
-            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{row.descricao}}</mat-cell>
+            <mat-cell *matCellDef="let row" (click)="openOptions(row)">{{row.descricao}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="dataReserva">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Data Reserva</mat-header-cell>
-            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{row.dataReserva}}</mat-cell>
+            <mat-cell *matCellDef="let row" (click)="openOptions(row)">{{row.dataReserva}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="dataRetirada">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Data Retirada</mat-header-cell>
-            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{row.dataRetirada}}</mat-cell>
+            <mat-cell *matCellDef="let row" (click)="openOptions(row)">{{row.dataRetirada}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="usuario">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Usuário</mat-header-cell>
-            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{row.usuario.nome}}</mat-cell>
+            <mat-cell *matCellDef="let row" (click)="openOptions(row)">{{row.usuario.nome}}</mat-cell>
           </ng-container>
 
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

@@ -65,6 +65,7 @@ const routes: Routes = [
   {path: 'emprestimo', canActivate: [LoginService], component: EmprestimoListComponent},
   {path: 'emprestimo/form', canActivate: [LoginService], component: EmprestimoFormComponent},
   {path: 'emprestimo/form/:id', canActivate: [LoginService], component: EmprestimoFormComponent},
+  {path: 'emprestimo/form/reserva', canActivate: [LoginService], component: EmprestimoFormComponent},
   {path: 'emprestimo/devolucao/:id', canActivate: [LoginService], component: EmprestimoDevolucaoComponent},
   {path: 'saida', canActivate: [LoginService], component: SaidaListComponent},
   {path: 'saida/form', canActivate: [LoginService], component: SaidaFormComponent},

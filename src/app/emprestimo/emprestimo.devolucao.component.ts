@@ -47,7 +47,6 @@ export class EmprestimoDevolucaoComponent extends CrudFormComponent<Emprestimo, 
       switch (empDevItem.statusDevolucao) {
         case StatusDevolucao.P: {
           this.itensPendentes.push(empDevItem);
-          console.log(this.itensPendentes);
           break;
         }
         case StatusDevolucao.D: {

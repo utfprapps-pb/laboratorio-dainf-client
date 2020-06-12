@@ -72,7 +72,6 @@ export class RelatorioViewerComponent implements OnInit {
 
     this.relatorioService.generateReport(convMap)
       .subscribe(e => {
-        console.log(e);
         let file = new Blob([e], {type: 'application/pdf'});
         var fileURL = URL.createObjectURL(file);
         this.reportHTML = this.getSafeUrl(fileURL);
@@ -95,7 +94,6 @@ export class RelatorioViewerComponent implements OnInit {
   }
 
   updateParamsValue(tipoFiltro: string, nameFiltro: string, valueFiltro: any) {
-    console.log(tipoFiltro);
     this.relatorioParamValue.forEach(param => {
       if (param.nameParam === nameFiltro) {
         if (tipoFiltro === 'D') {

@@ -1,6 +1,7 @@
 .only-login {
   width: 100% !important;
   height: 100vh !important;
+  background-image: url('src/assets/background.png');
 }
 
 .content {

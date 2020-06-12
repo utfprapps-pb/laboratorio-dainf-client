@@ -27,16 +27,24 @@ export class ReservaListComponent extends CrudListComponent<Reserva, number> {
     });
   }
 
-  openOptions(id): void {
+  openOptions(reserva: Reserva): void {
     const sheet = this.bottomSheetOptions.open(BottomSheetReservaComponent);
     sheet.afterDismissed().subscribe(action => {
       if (action === 'E') {
-        this.edit(id);
+        this.edit(reserva.id);
       } else if (action === 'R') {
-        this.delete(id);
+        this.delete(reserva.id);
+      } else if (action === 'F') {
+        this.finalizarReserva(reserva);
       }
     });
   }
+
+  finalizarReserva(reserva) {
+    localStorage.setItem('reserva-to-emprestimo', JSON.stringify(reserva));
+    this.router.navigate(['emprestimo/form/reserva']);
+  }
+
 
   postFindAll(): void {
     if (this.dataSource != null) {

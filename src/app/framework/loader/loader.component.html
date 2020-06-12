@@ -1,10 +1,19 @@
-<div [hidden]="!display" class="loader">
-  <div [hidden]="!display" class="loader-content">
-    <mat-progress-spinner
-      class="example-margin"
-      color="primary"
-      mode="indeterminate">
-    </mat-progress-spinner>
-    <span>Carregando...</span>
+<!--<div [hidden]="!display" class="loader">-->
+<!--  <div [hidden]="!display" class="loader-content">-->
+<!--    <mat-progress-spinner-->
+<!--      class="example-margin"-->
+<!--      color="primary"-->
+<!--      mode="indeterminate">-->
+<!--    </mat-progress-spinner>-->
+<!--    <span>Carregando...</span>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div [hidden]="!display" class="loader-container">
+  <div class="loader-content">
+    <div class="text-center">
+      <div id="loader"></div>
+      <span class="my-5" id="span-loading">Carregando...</span>
+    </div>
   </div>
 </div>

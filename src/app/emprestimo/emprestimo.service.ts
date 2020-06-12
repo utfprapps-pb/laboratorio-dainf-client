@@ -13,6 +13,10 @@ export class EmprestimoService extends CrudService<Emprestimo, number> {
     super(`${environment.api_url}emprestimo/`, http);
   }
 
+  saveEmprestimo(emprestimo: Emprestimo, idReserva: number): Observable<Emprestimo> {
+    return this.http.post<Emprestimo>(this.getUrl() + `save-emprestimo?idReserva=${idReserva}`, emprestimo);
+  }
+
   saveDevolucao(emprestimo: Emprestimo): Observable<Emprestimo> {
     return this.http.post<Emprestimo>(this.getUrl() + 'save-devolucao', emprestimo);
   }

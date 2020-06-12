@@ -53,9 +53,7 @@ export class ItemListComponent extends CrudListComponent<Item, number> {
       .subscribe(e => {
         this.loaderService.display(false);
         if (e.length > 0) {
-          console.log(e);
           this.reservasItem = e;
-          console.log(this.reservasItem[0].reservaItem)
           this.dialogReservaitem = true;
         } else {
           Swal.fire('Ops...', 'Este item não possui nenhuma reserva.', 'info');

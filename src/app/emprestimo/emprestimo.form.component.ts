@@ -12,6 +12,7 @@ import {AutoComplete, SelectItem} from 'primeng';
 import {NgForm} from '@angular/forms';
 import {DateUtil} from '../framework/util/dateUtil';
 import {pt} from '../framework/constantes/calendarPt';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-form-emprestimo',
@@ -25,6 +26,7 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
   @ViewChild('itemToAdd') itemToAdd: AutoComplete;
   @ViewChild('qtdeToAdd') qtdeToAdd: ElementRef;
 
+  idReserva = 0;
   displayedColumns = ['item', 'devolver', 'qtde', 'actionsForm'];
   emprestimoItem: EmprestimoItem;
   itemList: Item[];
@@ -54,7 +56,11 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
     this.object.dataEmprestimo = new Date().toLocaleDateString();
     this.setDateMinPrazoDevolucao();
     this.setUsuarioResponsavel();
+    if (window.location.href.includes('reserva')) {
+      this.generateEmprestimoByReserva();
+    }
   }
+
 
   postEdit(): void {
     this.documentoUsuario = this.object.usuarioEmprestimo.documento;
@@ -65,7 +71,6 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
     const username = localStorage.getItem('username');
     this.usuarioService.findByUsername(username)
       .subscribe(e => {
-        console.log(e);
         this.object.usuarioResponsavel = e;
       });
   }
@@ -176,17 +181,52 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
   }
 
   save() {
+    this.loaderService.display(true);
     if (!this.object.emprestimoItem || this.object.emprestimoItem.length <= 0 || typeof this.object.usuarioEmprestimo !== 'object') {
       this.validExtra = false;
     } else {
       this.validExtra = true;
     }
-    super.save();
+
+    if (this.isValid() && this.validExtra) {
+      this.emprestimoService.saveEmprestimo(this.object, this.idReserva)
+        .subscribe(e => {
+          this.object = e;
+          this.postSave(value => {
+            this.loaderService.display(false);
+            Swal.fire('Sucesso!', 'Registro salvo com sucesso!', 'success');
+            this.back();
+          });
+        }, error => {
+          this.loaderService.display(false);
+          Swal.fire('Atenção!', 'Ocorreu um erro ao salvar o registro!', 'error');
+        });
+    } else {
+      this.loaderService.display(false);
+      this.messageService.add({severity: 'info', summary: 'Atenção', detail: 'Necessário preencher todos os campos corretamente!'});
+      this.validarFormulario();
+    }
   }
 
   verifyFormDisable() {
     if (this.isAlunosOrProfessor || this.object.dataDevolucao) {
       this.disableForm = true;
     }
+  }
+
+  generateEmprestimoByReserva() {
+    let reserva = JSON.parse(localStorage.getItem('reserva-to-emprestimo'));
+    this.idReserva = reserva.id;
+    this.object.usuarioEmprestimo = reserva.usuario;
+    this.object.observacao = reserva.observacao;
+    this.documentoUsuario = reserva.usuario.documento;
+    this.object.emprestimoItem = new Array();
+    reserva.reservaItem.forEach(reserva => {
+      let emprestimoItem = new EmprestimoItem();
+      emprestimoItem.item = reserva.item;
+      emprestimoItem.qtde = reserva.qtde;
+      this.object.emprestimoItem.push(emprestimoItem);
+    });
+    localStorage.removeItem('reserva-to-emprestimo');
   }
 }

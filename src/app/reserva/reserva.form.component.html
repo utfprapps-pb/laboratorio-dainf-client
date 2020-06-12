@@ -202,7 +202,7 @@
         <div class="row">
           <div class="col-md-12 d-flex justify-content-end">
             <app-cancelar (onClick)="back()"></app-cancelar>
-            <app-salvar (onClick)="save()"></app-salvar>
+            <app-salvar [typeButton]="'button'" (onClick)="save()"></app-salvar>
           </div>
         </div>
       </form>
