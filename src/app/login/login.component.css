@@ -12,3 +12,9 @@
   justify-content: center;
   font-size: 18px;
 }
+
+@media (max-width: 500px) {
+  .mat-card {
+    width: auto !important;
+  }
+}

@@ -30,7 +30,8 @@
 
           <ng-container matColumnDef="usuarioEmprestimo">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Aluno/Professor</mat-header-cell>
-            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{row?.usuarioEmprestimo?.nome}}</mat-cell>
+            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{row?.usuarioEmprestimo?.nome}}
+            </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="dataEmprestimo">
@@ -47,7 +48,8 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
             <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">
               <span *ngIf="getStatusEmprestimo(row) === 'P'" class="badge badge-primary" style="font-size: 85%">Em andamento</span>
-              <span *ngIf="getStatusEmprestimo(row) === 'A'" class="badge badge-danger" style="font-size: 85%">Em atraso</span>
+              <span *ngIf="getStatusEmprestimo(row) === 'A'" class="badge badge-danger"
+                    style="font-size: 85%">Em atraso</span>
               <span *ngIf="getStatusEmprestimo(row) === 'F'" class="badge badge-success" style="font-size: 85%">Finalizado</span>
             </mat-cell>
           </ng-container>
@@ -181,6 +183,15 @@
   </form>
 </p-dialog>
 
-<!--<div class="invisible">-->
-<!--  <p-calendar #novaData [baseZIndex]="99999" [touchUI]="true"></p-calendar>-->
-<!--</div>-->
+<div class="invisible">
+  <p-calendar #novaData
+              [touchUI]="true"
+              appendTo="body"
+              (onSelect)="changePrazoDevolucao()"
+              [readonlyInput]="false"
+              dataType="string"
+              dateFormat="dd/mm/yy"
+              [locale]="localePt"
+              [(ngModel)]="dtNovaData">
+  </p-calendar>
+</div>

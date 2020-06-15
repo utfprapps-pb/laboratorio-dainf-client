@@ -146,7 +146,6 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
   @HostListener('window:resize', ['$event'])
   buildColumnsTable() {
     if (this.hostListenerColumnEnable) {
-      console.log('teucu');
       if (window.innerWidth <= 1200) {
         this.columnsTable.forEach((value, index) => {
           if (value === 'actions') {

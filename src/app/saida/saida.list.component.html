@@ -37,8 +37,7 @@
 
           <ng-container matColumnDef="usuario">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Usuário Responsável</mat-header-cell>
-            <mat-cell *matCellDef="let row"
-                      (click)="openBottomSheet(row.id)">{{row?.usuarioResponsavel?.nome}}</mat-cell>
+            <mat-cell *matCellDef="let row" (click)="openBottomSheet(row.id)">{{row?.usuarioResponsavel?.nome}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="observacao">

@@ -44,7 +44,6 @@ export class ReservaFormComponent extends CrudFormComponent<Reserva, number> {
     this.usuarioService.findByUsername(username)
       .subscribe(e => {
         this.object.usuario = e;
-        console.log(e);
       });
   }
 

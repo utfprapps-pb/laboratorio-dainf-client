@@ -10,6 +10,7 @@ import {pt} from '../framework/constantes/calendarPt';
 import {EmprestimoFilter} from './emprestimo.filter';
 import {Usuario} from '../usuario/usuario';
 import {UsuarioService} from '../usuario/usuario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-emprestimo',
@@ -25,6 +26,8 @@ export class EmprestimoListComponent extends CrudListComponent<Emprestimo, numbe
   localePt = pt;
   usuarioEmprestimoList: Usuario[];
   usuarioResponsalvel: Usuario[];
+  dtNovaData: string;
+  idEmprestimoToChangePrazoDev: number;
 
   constructor(protected emprestimoService: EmprestimoService,
               protected injector: Injector,
@@ -82,6 +85,7 @@ export class EmprestimoListComponent extends CrudListComponent<Emprestimo, numbe
       } else if (action === 'R') {
         this.delete(id);
       } else if (action === 'P') {
+        this.idEmprestimoToChangePrazoDev = id;
         this.openCalendarNewDate();
       } else if (action === 'D') {
         this.openDevolucao(id);
@@ -159,6 +163,32 @@ export class EmprestimoListComponent extends CrudListComponent<Emprestimo, numbe
       u.username = localStorage.getItem('username');
       this.emprestimoFilter.usuarioEmprestimo = u;
       resolve();
+    });
+  }
+
+  changePrazoDevolucao() {
+    Swal.fire({
+      title: `Confirmação`,
+      text: `Você realmente deseja alterar o prazo de devolução para o dia ${this.dtNovaData}`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Não'
+    }).then((result) => {
+      if (result.value) {
+        this.loaderService.display(true);
+        this.emprestimoService.changePrazoDevolucao(this.idEmprestimoToChangePrazoDev, this.dtNovaData)
+          .subscribe(e => {
+            Swal.fire('Sucesso!', 'Prazo de devolução alterado com sucesso!', 'success');
+            this.findAll();
+            this.loaderService.display(false);
+          }, error => {
+            this.loaderService.display(false);
+            Swal.fire('Atenção!', 'Ocorreu um erro ao alterar a data do prazo de devolução!', 'error');
+          });
+      }
     });
   }
 }

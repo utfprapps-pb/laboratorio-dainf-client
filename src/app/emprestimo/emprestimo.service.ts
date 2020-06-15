@@ -24,4 +24,8 @@ export class EmprestimoService extends CrudService<Emprestimo, number> {
   filter(filter: EmprestimoFilter): Observable<Emprestimo[]> {
     return this.http.post<Emprestimo[]>(this.getUrl() + 'filter', filter);
   }
+
+  changePrazoDevolucao(id: number, novaData: string): Observable<void> {
+    return this.http.get<void>(this.getUrl() + `change-prazo-devolucao?id=${id}&novaData=${novaData}`);
+  }
 }

@@ -10,7 +10,6 @@ import {DateUtil} from '../framework/util/dateUtil';
 import {pt} from '../framework/constantes/calendarPt';
 import {Subject} from 'rxjs/internal/Subject';
 import {LoaderService} from '../framework/loader/loader.service';
-import {Language} from '@amcharts/amcharts4/core';
 
 am4core.useTheme(am4themes_animated);
 
