@@ -54,12 +54,15 @@
           <div class="col-md-3">
             <div class="form-group">
               <label for="patrimonio">Patrimônio</label>
+              <span *ngIf="object?.tipoItem === 'P'" class="field-required">*</span>
               <input type="number"
                      id="patrimonio"
                      name="patrimonio"
                      class="form-control"
                      onlyNumber
+                     validation
                      (keyup)="setSaldoDefaultItem()"
+                     [required]="object?.tipoItem === 'P'"
                      [disabled]="isAlunosOrProfessor"
                      [(ngModel)]="object.patrimonio"
                      pInputText>
@@ -102,7 +105,7 @@
                      required
                      validation
                      class="form-control"
-                     [disabled]="isAlunosOrProfessor || object.patrimonio != null"
+                     [disabled]="isAlunosOrProfessor || object.patrimonio != null || object?.tipoItem === 'P'"
                      [(ngModel)]="object.qtdeMinima"
                      pInputText>
             </div>
@@ -131,6 +134,7 @@
               <p-dropdown [options]="tipoItem"
                           [(ngModel)]="object.tipoItem"
                           [style]="{width: '100%'}"
+                          (onChange)="setSaldoDefaultItem()"
                           [disabled]="isAlunosOrProfessor"
                           id="tipoItem"
                           name="tipoItem">
@@ -148,7 +152,7 @@
                      required
                      validation
                      class="form-control"
-                     [disabled]="isAlunosOrProfessor || object.patrimonio != null"
+                     [disabled]="isAlunosOrProfessor || object.patrimonio != null || object?.tipoItem === 'P'"
                      [(ngModel)]="object.saldo"
                      pInputText>
             </div>

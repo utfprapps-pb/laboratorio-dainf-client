@@ -137,7 +137,9 @@ export class ItemFormComponent extends CrudFormComponent<Item, number> {
   }
 
   setSaldoDefaultItem() {
-    if (this.object.patrimonio !== null && this.object.patrimonio !== undefined) {
+    if (this.object.patrimonio !== null
+          && this.object.patrimonio !== undefined
+          || this.object?.tipoItem === 'P') {
       this.object.saldo = 1;
       this.object.qtdeMinima = 1;
     } else {

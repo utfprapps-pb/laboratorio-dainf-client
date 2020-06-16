@@ -1,9 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'app-help',
   templateUrl: './help.component.html',
-  styleUrls: ['./help.component.css']
+  styleUrls: ['./help.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class HelpComponent {
 

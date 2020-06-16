@@ -6,7 +6,6 @@
           <app-voltar (onClick)="back()"></app-voltar>
           <h4 class="m-0">Cadastro de Relatório</h4>
         </div>
-        <app-help [messageHelp]="'Verificar se irá precisar colocar uma mini documentação'"></app-help>
       </div>
     </mat-card-title>
     <mat-card-content>
@@ -30,6 +29,9 @@
             <div class="form-group">
               <label for="descricao">Nome</label>
               <span class="field-required">*</span>
+              <i class="fa fa-question-circle-o float-right"
+                 pTooltip="Campo responsável pelo nome que irá aparecer na parte superior da tela de geração do relatório">
+              </i>
               <input type="text"
                      id="descricao"
                      name="descricao"
