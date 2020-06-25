@@ -11,6 +11,7 @@ export class Item {
   localizacao: string;
   tipoItem: string;
   saldo: number;
+  descricao: string;
   grupo: Grupo;
   imageItem: ItemImage[];
 }

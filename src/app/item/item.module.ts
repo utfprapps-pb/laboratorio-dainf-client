@@ -1,7 +1,16 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {AutoCompleteModule, CarouselModule, DialogModule, DropdownModule, FileUploadModule, InputTextModule, TooltipModule} from 'primeng';
+import {
+    AutoCompleteModule,
+    CarouselModule,
+    DialogModule,
+    DropdownModule,
+    FileUploadModule,
+    InputTextareaModule,
+    InputTextModule,
+    TooltipModule
+} from 'primeng';
 import {ItemFormComponent} from './item.form.component';
 import {ItemListComponent} from './item.list.component';
 import {ItemService} from './item.service';
@@ -53,7 +62,8 @@ import {BottomSheetItemModule} from './bottomScheetItem/bottomSheetItem.module';
         OnlyNumberModule,
         BottomSheetItemModule,
         FileUploadModule,
-        CarouselModule
+        CarouselModule,
+        InputTextareaModule
     ],
   declarations: [
     ItemFormComponent,

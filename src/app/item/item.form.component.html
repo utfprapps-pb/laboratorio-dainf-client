@@ -35,11 +35,11 @@
 
           <div class="col-md-10">
             <div class="form-group">
-              <label for="descricao">Nome</label>
+              <label for="nome">Nome</label>
               <span class="field-required">*</span>
               <input type="text"
-                     id="descricao"
-                     name="descricao"
+                     id="nome"
+                     name="nome"
                      required
                      validation
                      class="form-control"
@@ -177,6 +177,24 @@
                               (onClear)="object.grupo = null"
                               (completeMethod)="findGrupos($event)">
               </p-autoComplete>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="descricao">Descrição</label>
+              <textarea type="number"
+                     id="descricao"
+                     name="descricao"
+                     maxlength="4000"
+                     class="form-control"
+                     rows="4"
+                     [disabled]="isAlunosOrProfessor"
+                     [(ngModel)]="object.descricao"
+                     pInputTextarea>
+              </textarea>
             </div>
           </div>
         </div>
