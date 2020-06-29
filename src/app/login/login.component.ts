@@ -34,8 +34,6 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', e);
         localStorage.setItem('username', this.usuario.username);
         this.setUserInLocalStorage();
-        this.showProgress = false;
-        this.router.navigate(['/']);
       }, error => {
         console.log(error);
         this.showProgress = false;
@@ -47,6 +45,8 @@ export class LoginComponent implements OnInit {
     this.usuarioService.findByUsername(this.usuario.username)
       .subscribe(user => {
         localStorage.setItem('userLogged', JSON.stringify(user));
+        this.showProgress = false;
+        this.router.navigate(['/']);
       });
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {LoginService} from './login/login.service';
 import {Subject, Subscription} from 'rxjs';
 import {NavigationCancel, NavigationEnd, NavigationStart, Router} from '@angular/router';
