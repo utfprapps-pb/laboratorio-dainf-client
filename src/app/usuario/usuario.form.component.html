@@ -32,7 +32,7 @@
             </div>
           </div>
 
-          <div class="col-md-5">
+          <div class="col-md-4">
             <div class="form-group">
               <label for="descricao">Nome</label>
               <span class="field-required">*</span>
@@ -47,7 +47,7 @@
             </div>
           </div>
 
-          <div class="col-md-5">
+          <div class="col-md-3">
             <div class="form-group">
               <label for="email">Email</label>
               <span class="field-required">*</span>
@@ -62,14 +62,33 @@
                      pInputText>
             </div>
           </div>
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="telefone">Telefone</label>
+              <span class="field-required">*</span>
+              <input type="telefone"
+                     id="telefone"
+                     name="telefone"
+                     required
+                     validation
+                     formatTelefone
+                     class="form-control"
+                     [(ngModel)]="object.telefone"
+                     pInputText>
+            </div>
+          </div>
         </div>
 
         <div class="row">
           <div class="col-md-3">
             <div class="form-group">
               <label for="grupo">Grupo de Acesso</label>
+              <span class="field-required">*</span>
               <p-multiSelect id="grupo"
                              name="grupo"
+                             required
+                             validation
                              [selectedItemsLabel]="'{0} itens selecionados'"
                              [emptyFilterMessage]="'Nenhum resultado encontrado'"
                              [defaultLabel]="'Nenhum Selecionado'"
@@ -83,7 +102,7 @@
 
           <div class="col-md-3">
             <div class="form-group">
-              <label for="documento">{{labelDocumento}}</label>
+              <label for="documento">RA/SIAPE</label>
               <input type="text"
                      id="documento"
                      name="documento"

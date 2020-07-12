@@ -22,7 +22,7 @@
             </div>
           </div>
 
-          <div class="col-md-10">
+          <div class="col-md-5">
             <div class="form-group">
               <label for="razaoSocial">Razão Social</label>
               <span class="field-required">*</span>
@@ -36,10 +36,8 @@
                      pInputText>
             </div>
           </div>
-        </div>
 
-        <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-5">
             <div class="form-group">
               <label for="nomeFantasia">Nome Fantasia</label>
               <span class="field-required">*</span>
@@ -53,7 +51,9 @@
                      pInputText>
             </div>
           </div>
+        </div>
 
+        <div class="row">
           <div class="col-md-3">
             <div class="form-group">
               <label for="cnpj">CNPJ</label>
@@ -85,6 +85,39 @@
                      onlyNumber
                      class="form-control"
                      [(ngModel)]="object.ie"
+                     pInputText>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="telefone">Telefone</label>
+              <span class="field-required">*</span>
+              <input type="text"
+                     id="telefone"
+                     name="telefone"
+                     formatTelefone
+                     required
+                     validation
+                     maxlength="15"
+                     class="form-control"
+                     [(ngModel)]="object.telefone"
+                     pInputText>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <span class="field-required">*</span>
+              <input type="text"
+                     id="email"
+                     name="email"
+                     validation
+                     required
+                     validateEmail
+                     class="form-control"
+                     [(ngModel)]="object.email"
                      pInputText>
             </div>
           </div>
@@ -153,6 +186,24 @@
             </div>
           </div>
         </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="observacao">Observação</label>
+              <textarea type="number"
+                        id="observacao"
+                        name="observacao"
+                        maxlength="2000"
+                        class="form-control"
+                        rows="4"
+                        [(ngModel)]="object.observacao"
+                        pInputTextarea>
+              </textarea>
+            </div>
+          </div>
+        </div>
+
         <div class="row">
           <div class="col-md-12 d-flex justify-content-end">
             <app-cancelar (onClick)="back()"></app-cancelar>

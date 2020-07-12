@@ -1,5 +1,4 @@
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {Router} from '@angular/router';
 import {LoginService} from './login/login.service';
 import {MessageService} from 'primeng/api';
 import {Observable} from 'rxjs';
@@ -9,8 +8,7 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class HttpClientInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router,
-              private messageService: MessageService,
+  constructor(private messageService: MessageService,
               private loginService: LoginService) {
   }
 
@@ -29,7 +27,6 @@ export class HttpClientInterceptor implements HttpInterceptor {
         tap(() => {
         }, err => {
           if (err.status === 403) {
-            this.router.navigate(['/']);
             this.messageService.add({severity: 'info', detail: 'Você não tem permissão para acessar este recurso'});
           } else if (err.status === 401) {
             this.loginService.logout();

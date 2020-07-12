@@ -23,6 +23,8 @@ import {MatSortModule} from '@angular/material/sort';
 import {CnpjModule} from '../framework/directives/cnpj/cnpj.module';
 import {CnpjValidatorModule} from '../framework/validator/cnpj/cnpj.validator.module';
 import {CpfCnpjPipeModule} from '../framework/pipe/cpfCnpj/cpfCnpj.pipe.module';
+import {EmailValidatorModule} from '../framework/validator/email/email.validator.module';
+import {TelefoneFormatModule} from '../framework/directives/telefone/telefone.format.module';
 
 @NgModule({
   imports: [
@@ -48,7 +50,9 @@ import {CpfCnpjPipeModule} from '../framework/pipe/cpfCnpj/cpfCnpj.pipe.module';
     InputMaskModule,
     CnpjModule,
     CnpjValidatorModule,
-    CpfCnpjPipeModule
+    CpfCnpjPipeModule,
+    EmailValidatorModule,
+    TelefoneFormatModule
   ],
   declarations: [
     FornecedorFormComponent,

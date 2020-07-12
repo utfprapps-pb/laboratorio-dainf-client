@@ -9,6 +9,8 @@ export class Fornecedor {
   ie: string;
   endereco: string;
   observacao: string;
+  telefone: string;
+  email: string;
   cidade: Cidade;
   estado: Estado;
 }

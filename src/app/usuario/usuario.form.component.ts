@@ -19,7 +19,6 @@ export class UsuarioFormComponent extends CrudFormComponent<Usuario, number> {
   redSenhaAtual: string;
   redConfNovaSenha: string;
   redNovaSenha: string;
-  labelDocumento: string;
 
   constructor(protected usuarioService: UsuarioService,
               protected injector: Injector) {
@@ -38,7 +37,6 @@ export class UsuarioFormComponent extends CrudFormComponent<Usuario, number> {
           if (!this.editando) {
             this.object.permissoes = [];
             this.object.permissoes.push(e[0]);
-            this.buildLabelDocumento();
           }
         }
       });
@@ -48,10 +46,6 @@ export class UsuarioFormComponent extends CrudFormComponent<Usuario, number> {
     let toReturn = nome.replace('ROLE_', '');
     toReturn = toReturn.charAt(0).toUpperCase() + toReturn.slice(1).toLowerCase();
     return toReturn;
-  }
-
-  postEdit(): void {
-    this.buildLabelDocumento();
   }
 
   showDialogChangeSenha() {
@@ -75,15 +69,6 @@ export class UsuarioFormComponent extends CrudFormComponent<Usuario, number> {
       }
     } else {
       this.validarFormulario(this.formChangeSenha);
-    }
-  }
-
-  buildLabelDocumento() {
-    const permissao = this.object.permissoes[0].nome;
-    if (permissao === 'ROLE_ALUNO') {
-      this.labelDocumento = 'RA';
-    } else {
-      this.labelDocumento = 'SIAPE';
     }
   }
 }
