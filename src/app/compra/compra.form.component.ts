@@ -11,6 +11,7 @@ import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {UsuarioService} from '../usuario/usuario.service';
 import {AutoComplete} from 'primeng';
 import {pt} from '../framework/constantes/calendarPt';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-form-compra',
@@ -19,6 +20,7 @@ import {pt} from '../framework/constantes/calendarPt';
 })
 export class CompraFormComponent extends CrudFormComponent<Compra, number> {
 
+  datepipe: DatePipe = new DatePipe('pt-BR');
   displayedColumns = ['item', 'qtde', 'valor', 'actionsForm'];
   fornecedorList: Fornecedor[];
   itemList: Item[];
@@ -41,7 +43,7 @@ export class CompraFormComponent extends CrudFormComponent<Compra, number> {
   }
 
   initializeValues(): void {
-    this.object.dataCompra = new Date().toLocaleDateString();
+    this.object.dataCompra = this.datepipe.transform(new Date().toLocaleDateString(), 'dd/MM/yyyy');
     this.setUsuarioResponsavel();
   }
 

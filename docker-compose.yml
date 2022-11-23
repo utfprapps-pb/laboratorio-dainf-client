@@ -1,0 +1,11 @@
+version: '3.8'
+services:    
+    dainf-labs-client-prod:        
+        image: dainf/dainf-labs-client:prod
+        container_name: dainf-labs-client-prod
+        build:
+            context: .
+            dockerfile: Dockerfile
+        restart: always
+        ports:
+            - "8098:8098"

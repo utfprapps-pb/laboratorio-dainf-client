@@ -13,6 +13,7 @@ import {NgForm} from '@angular/forms';
 import {DateUtil} from '../framework/util/dateUtil';
 import {pt} from '../framework/constantes/calendarPt';
 import Swal from "sweetalert2";
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-form-emprestimo',
@@ -26,6 +27,7 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
   @ViewChild('itemToAdd') itemToAdd: AutoComplete;
   @ViewChild('qtdeToAdd') qtdeToAdd: ElementRef;
 
+  datepipe: DatePipe = new DatePipe('pt-BR');
   idReserva = 0;
   displayedColumns = ['item', 'devolver', 'qtde', 'actionsForm'];
   emprestimoItem: EmprestimoItem;
@@ -52,8 +54,9 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
     this.localePt = pt;
   }
 
-  initializeValues(): void {
-    this.object.dataEmprestimo = new Date().toLocaleDateString();
+  initializeValues(): void {    
+    this.object.usuarioResponsavel = new Usuario();
+    this.object.dataEmprestimo = this.datepipe.transform(new Date().toLocaleDateString(), 'dd/MM/yyyy');
     this.setDateMinPrazoDevolucao();
     this.setUsuarioResponsavel();
     if (window.location.href.includes('reserva')) {
@@ -176,8 +179,8 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
     this.emprestimoItem.qtde = null;
   }
 
-  setDateMinPrazoDevolucao() {
-    this.minDatePrazoDevolucao = DateUtil.parseStringToDate(this.object.dataEmprestimo);
+  setDateMinPrazoDevolucao() {    
+    this.minDatePrazoDevolucao = DateUtil.parseStringToDate(this.datepipe.transform(this.object.dataEmprestimo, 'MM/dd/yyyy'));
   }
 
   save() {

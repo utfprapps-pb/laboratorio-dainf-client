@@ -134,5 +134,8 @@
       }
     }
   },
-  "defaultProject": "tcc-client"
+  "defaultProject": "tcc-client",
+  "cli": {
+    "analytics": false
+  }
 }

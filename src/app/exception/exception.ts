@@ -15,7 +15,7 @@ export class Exception {
   static getMessage(error: any): string {
     const message = error.error.message.toString().toUpperCase();
     if (message.includes('ConstraintViolationException'.toUpperCase())) {
-      return 'Erro ao remover o registro, o mesmo possui possui vínculo com outros registros.';
+      return 'Erro ao remover o registro, o mesmo possui vínculo com outros registros.';
     } else {
       return 'Ocorreu um erro ao remover o registro';
     }

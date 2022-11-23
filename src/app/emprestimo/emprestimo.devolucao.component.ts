@@ -61,7 +61,7 @@ export class EmprestimoDevolucaoComponent extends CrudFormComponent<Emprestimo, 
   }
 
   saveDevolucao() {
-    if (this.itensPendentes.length === 0) {
+    //if (this.itensPendentes.length === 0) {
       this.loaderService.display(true);
       this.object.emprestimoDevolucaoItem.forEach(empDevItem => {
         this.itensPendentes.forEach(pendente => {
@@ -89,9 +89,9 @@ export class EmprestimoDevolucaoComponent extends CrudFormComponent<Emprestimo, 
           this.loaderService.display(false);
           Swal.fire('Atenção!', 'Ocorreu um erro ao salvar a devolução!', 'error');
         });
-    } else {
-      Swal.fire('Atenção!', 'Ainda há ' + this.itensPendentes.length + ' itens pendentes para devolução!', 'error');
-    }
+    //} else {
+    //  Swal.fire('Atenção!', 'Ainda há ' + this.itensPendentes.length + ' itens pendentes para devolução!', 'error');
+    //}
   }
 
   drop(event: CdkDragDrop<EmprestimoDevolucaoItem[]>) {

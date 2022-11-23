@@ -21,7 +21,7 @@
 
           <ng-container matColumnDef="nome">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Descrição</mat-header-cell>
-            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{row.nome}}</mat-cell>
+            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{ row.patrimonio ? row.patrimonio + ' - ' : '' }} {{row.nome}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="localizacao">
@@ -36,14 +36,14 @@
 
           <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef> Opções </mat-header-cell>
-            <mat-cell *matCellDef="let row">
-              <button class="btn btn-outline-secondary rounded mr-2"
+            <mat-cell *matCellDef="let row">              
+              <button *ngIf="row.id!=1" class="btn btn-outline-secondary rounded mr-2"
                       type="button"
                       pTooltip="Editar"
                       (click)="edit(row.id)">
                 <i class="fa fa-edit"></i>
               </button>
-              <button class="btn btn-outline-primary rounded"
+              <button *ngIf="row.id!=1" class="btn btn-outline-primary rounded"
                       type="button"
                       pTooltip="Remover"
                       (click)="delete(row.id)">
