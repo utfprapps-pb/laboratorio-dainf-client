@@ -1,4 +1,4 @@
-import {HostListener, Injector, OnInit, ViewChild} from '@angular/core';
+import { HostListener, Injector, OnInit, ViewChild, Directive } from '@angular/core';
 import {Router} from '@angular/router';
 import {CrudService} from '../service/crud.service';
 import {ConfirmationService, MessageService} from 'primeng';
@@ -12,6 +12,7 @@ import {Exception} from '../../exception/exception';
 import {LoaderService} from '../loader/loader.service';
 import {LoginService} from '../../login/login.service';
 
+@Directive()
 export abstract class CrudListComponent<T, ID> implements OnInit {
 
   protected router: Router;
