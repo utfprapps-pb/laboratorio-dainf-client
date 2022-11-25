@@ -23,13 +23,11 @@ import { CidadeModule } from "./cidade/cidade.module";
 import { ItemModule } from "./item/item.module";
 import { PageNotFoundModule } from "./pageNotFound/pageNotFound.module";
 import { NotAuthorizedModule } from "./notAuthorized/notAuthorized.module";
-import {
-  ConfirmationService,
-  ConfirmDialogModule,
-  MessageService,
-  ScrollPanelModule,
-  ToastModule,
-} from "primeng";
+import {ConfirmationService} from "primeng/api";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {MessageService} from "primeng/api";
+import {ScrollPanelModule} from "primeng/scrollpanel";
+import {ToastModule} from "primeng/toast";
 import { CompraModule } from "./compra/compra.module";
 import { LoginService } from "./login/login.service";
 import { HttpClientInterceptor } from "./http-client.interceptor";

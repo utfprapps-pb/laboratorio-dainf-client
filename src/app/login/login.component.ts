@@ -3,7 +3,7 @@ import { LoginService } from "./login.service";
 import { Usuario } from "../usuario/usuario";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
-import { MessageService } from "primeng";
+import { MessageService } from "primeng/api";
 import { UsuarioService } from "../usuario/usuario.service";
 
 @Component({

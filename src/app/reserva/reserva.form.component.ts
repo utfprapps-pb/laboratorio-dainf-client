@@ -4,7 +4,7 @@ import {Reserva} from './reserva';
 import {ReservaService} from './reserva.service';
 import {ReservaItem} from './reservaItem';
 import {MatTable} from '@angular/material/table';
-import {AutoComplete} from 'primeng';
+import {AutoComplete} from 'primeng/autocomplete';
 import {Item} from '../item/item';
 import {ItemService} from '../item/item.service';
 import {UsuarioService} from '../usuario/usuario.service';

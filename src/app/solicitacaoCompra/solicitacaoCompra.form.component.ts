@@ -4,7 +4,7 @@ import {SolicitacaoCompra} from './solicitacaoCompra';
 import {SolicitacaoCompraService} from './solicitacaoCompra.service';
 import {SolicitacaoCompraItem} from './solicitacaoCompraItem';
 import {MatTable} from '@angular/material/table';
-import {AutoComplete} from 'primeng';
+import {AutoComplete} from 'primeng/autocomplete';
 import {ItemService} from '../item/item.service';
 import {UsuarioService} from '../usuario/usuario.service';
 import {Item} from '../item/item';

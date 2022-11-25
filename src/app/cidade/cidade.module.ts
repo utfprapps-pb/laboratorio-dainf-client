@@ -1,7 +1,9 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {AutoCompleteModule, InputTextModule, TooltipModule} from 'primeng';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import {InputTextModule} from 'primeng/inputtext';
+import {TooltipModule} from 'primeng/tooltip';
 import {CidadeFormComponent} from './cidade.form.component';
 import {CidadeListComponent} from './cidade.list.component';
 import {CidadeService} from './cidade.service';

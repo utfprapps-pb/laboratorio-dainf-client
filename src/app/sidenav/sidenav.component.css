@@ -10,7 +10,7 @@ mat-sidenav {
   width: 260px !important;
 }
 
-mat-drawer-container {
+mat-drawer-container {  
   background-color: transparent;
 }
 
@@ -46,4 +46,16 @@ a {
   background-color: transparent;
   border-color: transparent;
   margin-right: 5px;
+}
+
+#drawer > mat-nav-list > a > span > span {
+  color: #FFFFFF;
+}
+
+#link-menu > a > span > span {
+  color: #FFFFFF;
+}
+
+::ng-deep .fcolor > span > span {
+  color: #FFFFFF;
 }

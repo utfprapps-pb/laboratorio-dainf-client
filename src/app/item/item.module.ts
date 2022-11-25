@@ -1,16 +1,14 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {
-    AutoCompleteModule,
-    CarouselModule,
-    DialogModule,
-    DropdownModule,
-    FileUploadModule,
-    InputTextareaModule,
-    InputTextModule,
-    TooltipModule
-} from 'primeng';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import {CarouselModule} from 'primeng/carousel';
+import {DialogModule} from 'primeng/dialog';
+import {DropdownModule} from 'primeng/dropdown';
+import {FileUploadModule} from 'primeng/fileupload';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import {InputTextModule} from 'primeng/inputtext';
+import {TooltipModule} from 'primeng/tooltip';
 import {ItemFormComponent} from './item.form.component';
 import {ItemListComponent} from './item.list.component';
 import {ItemService} from './item.service';

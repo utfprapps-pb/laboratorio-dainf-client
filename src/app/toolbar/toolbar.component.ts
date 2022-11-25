@@ -1,7 +1,7 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {LoginService} from '../login/login.service';
 import {SidenavService} from '../sidenav/sidenav.service';
-import {MenuItem} from 'primeng';
+import {MenuItem} from 'primeng/api';
 
 @Component({
   selector: 'app-toolbar',

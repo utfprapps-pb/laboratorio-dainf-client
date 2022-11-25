@@ -7,7 +7,7 @@ import {SaidaItem} from './saidaItem';
 import {ItemService} from '../item/item.service';
 import {UsuarioService} from '../usuario/usuario.service';
 import {MatTable} from '@angular/material/table';
-import {AutoComplete} from 'primeng';
+import {AutoComplete} from 'primeng/autocomplete';
 import {pt} from '../framework/constantes/calendarPt';
 import { DatePipe } from '@angular/common';
 

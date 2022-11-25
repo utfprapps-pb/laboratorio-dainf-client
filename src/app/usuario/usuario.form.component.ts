@@ -3,7 +3,7 @@ import {Usuario} from './usuario';
 import {UsuarioService} from './usuario.service';
 import {NgForm} from '@angular/forms';
 import {CrudFormComponent} from '../framework/component/crud.form.component';
-import {SelectItem} from 'primeng';
+import {SelectItem} from 'primeng/api';
 
 @Component({
   selector: 'app-form-usuario',

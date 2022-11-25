@@ -77,7 +77,7 @@ export const MENU_ITEM: MenuItem[] = [
   },
   {
     path: "/solicitacao-compra",
-    title: "Solicitação de Compra",
+    title: "Sol. de Compra",
     icon: "list",
     id: "solicitacao",
     group: "ITEM",
@@ -197,7 +197,7 @@ export class SidenavComponent implements OnInit {
     }, 100);
   }
 
-  setColorMenuItem(menu: MenuItem, path) {
+  setColorMenuItem(menu: MenuItem, path) {    
     if (menu.path === path) {
       document.getElementById(menu.id).style.backgroundColor = "#1b2231";
     } else {

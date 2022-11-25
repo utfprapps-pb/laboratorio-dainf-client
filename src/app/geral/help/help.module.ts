@@ -4,7 +4,7 @@ import {HelpComponent} from './help.component';
 import {MatIconModule} from '@angular/material/icon';
 import {TooltipModule} from 'primeng/tooltip';
 import {MatButtonModule} from '@angular/material/button';
-import {DialogModule} from 'primeng';
+import {DialogModule} from 'primeng/dialog';
 
 @NgModule({
   imports: [

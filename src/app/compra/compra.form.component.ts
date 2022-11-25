@@ -9,7 +9,7 @@ import {Item} from '../item/item';
 import {CompraItem} from './compraItem';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {UsuarioService} from '../usuario/usuario.service';
-import {AutoComplete} from 'primeng';
+import {AutoComplete} from 'primeng/autocomplete';
 import {pt} from '../framework/constantes/calendarPt';
 import { DatePipe } from '@angular/common';
 
