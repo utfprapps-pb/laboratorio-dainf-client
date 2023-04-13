@@ -16,14 +16,13 @@ services:
     labels:
     # Traefik Config
       - "traefik.enable=true"
-      - "traefik.docker.network=web"
-      - "traefik.http.routers.dainflabs.rule=Host(`dainf-labs.app.pb.utfpr.edu.br`)"
-      - "traefik.frontend.headers.customresponseheaders.Access-Control-Allow-Origin = '*'"
-      - "traefik.http.routers.dainflabs.entrypoints=websecure"
-      - "traefik.http.routers.dainflabs.certresolver=letsencrypt"
+      - "traefik.http.routers.dainflabs-client.rule=Host(`dainf-labs.app.pb.utfpr.edu.br`)"
+      - "traefik.http.routers.dainflabs-client.entrypoints=websecure"
+      - "traefik.http.routers.dainflabs-client.certresolver=letsencrypt"
     restart: unless-stopped
     networks:
       - web
+      - database
 
 ########################### NETWORKS
 networks:
