@@ -20,7 +20,7 @@ services:
       - "traefik.http.routers.dainf-labs.tls=true"
       - "traefik.http.routers.dainf-labs.service=dainf-labs"
       - "traefik.http.routers.dainf-labs.rule=Host(`dainf-labs.app.pb.utfpr.edu.br`)"
-      - "traefik.http.routers.dainf-labs.certresolver=letsencrypt"
+      - "traefik.http.routers.dainf-labs.tls.certresolver=letsencrypt"
       - "traefik.http.routers.dainf-labs.entrypoints=websecure"      
     
     restart: unless-stopped
