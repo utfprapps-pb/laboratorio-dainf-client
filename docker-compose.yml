@@ -24,3 +24,11 @@ services:
     restart: unless-stopped
     networks:
       - web
+
+########################### NETWORKS
+networks:
+  web:
+    name: web
+    driver: bridge
+    external: true
+    attachable: true
