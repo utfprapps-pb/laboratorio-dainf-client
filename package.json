@@ -7,7 +7,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "build": "ng build --port 8098",
+    "build": "ng build --port 80",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
