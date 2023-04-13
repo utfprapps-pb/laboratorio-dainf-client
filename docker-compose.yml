@@ -16,6 +16,7 @@ services:
     labels:
     # Traefik Config
       - "traefik.enable=true"
+      - "traefik.docker.network=web"
       - "traefik.http.routers.dainflabs.rule=Host(`dainf-labs.app.pb.utfpr.edu.br`)"
       - "traefik.http.routers.dainflabs.entrypoints=websecure"
       - "traefik.http.routers.dainflabs.certresolver=letsencrypt"
