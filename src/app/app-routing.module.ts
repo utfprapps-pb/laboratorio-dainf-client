@@ -33,6 +33,7 @@ import {NotAuthorizedComponent} from './notAuthorized/notAuthorized.component';
 import {RelatorioFormComponent} from './relatorio/relatorio.form.component';
 import {RelatorioListComponent} from './relatorio/relatorio.list.component';
 import {RelatorioViewerComponent} from './relatorio/relatorio.viewer.component';
+import { UsuarioEditComponent } from './usuario/usuario.edit.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -43,6 +44,7 @@ const routes: Routes = [
   {path: 'usuario', canActivate: [LoginService], component: UsuarioListComponent},
   {path: 'usuario/form', canActivate: [LoginService], component: UsuarioFormComponent},
   {path: 'usuario/form/:id', canActivate: [LoginService], component: UsuarioFormComponent},
+  {path: 'usuario/edit/:id', canActivate: [LoginService], component: UsuarioEditComponent},
   {path: 'fornecedor', canActivate: [LoginService], component: FornecedorListComponent},
   {path: 'fornecedor/form', canActivate: [LoginService], component: FornecedorFormComponent},
   {path: 'fornecedor/form/:id', canActivate: [LoginService], component: FornecedorFormComponent},

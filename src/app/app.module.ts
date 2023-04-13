@@ -44,6 +44,9 @@ import { SolicitacaoCompraModule } from "./solicitacaoCompra/solicitacaoCompra.m
 import { LoaderService } from "./framework/loader/loader.service";
 import { LoaderModule } from "./framework/loader/loader.module";
 import { RelatorioModule } from "./relatorio/relatorio.module";
+import { SocialLoginModule } from "@abacritt/angularx-social-login";
+import { GoogleLoginProvider, SocialAuthServiceConfig } from "@abacritt/angularx-social-login";
+
 
 registerLocaleData(ptBr);
 
@@ -78,6 +81,7 @@ registerLocaleData(ptBr);
     SolicitacaoCompraModule,
     LoaderModule,
     RelatorioModule,
+    SocialLoginModule
   ],
   providers: [
     MessageService,
@@ -108,6 +112,21 @@ registerLocaleData(ptBr);
     {
       provide: CURRENCY_MASK_CONFIG,
       useValue: CustomCurrencyMaskConfig,
+    },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('310109923674-la5thl4s4t0b2ajp6acdhq7tra74dn31.apps.googleusercontent.com')
+          }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
     },
   ],
   bootstrap: [AppComponent],

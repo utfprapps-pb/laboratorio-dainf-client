@@ -5,7 +5,12 @@ import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 import { MessageService } from "primeng/api";
 import { UsuarioService } from "../usuario/usuario.service";
-
+import {
+  GoogleLoginProvider,
+  SocialAuthService,
+} from "@abacritt/angularx-social-login";
+import { SocialUser } from "@abacritt/angularx-social-login";
+import { TokenDto } from "./token-dto";
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
@@ -20,22 +25,54 @@ export class LoginComponent implements OnInit {
     private loginService: LoginService,
     private router: Router,
     private messageService: MessageService,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private socialAuthService: SocialAuthService
   ) {}
 
   ngOnInit() {
     this.usuario = new Usuario();
+    this.socialAuthService.authState.subscribe((user: SocialUser) => {
+      if (user && user.idToken) {
+        console.log(user);
+        this.showProgress = true;
+        this.loginService.loginWithGoogle(user.idToken).subscribe({
+          next: (e: TokenDto) => {
+            localStorage.setItem("token", e.token);
+            localStorage.setItem("social", "true");
+            localStorage.setItem("username", user.email);
+            this.usuarioService.findByUsername(user.email).subscribe((user) => {
+              localStorage.setItem("userLogged", JSON.stringify(user));
+              if (user.documento !== "" && user.telefone !== "") {
+                this.router.navigate(["/"]);
+              } else {
+                this.router.navigate([`/usuario/edit/${user.id}`]);
+              }
+            });
+            this.showProgress = false;
+          },
+          error: () => {
+            this.showProgress = false;
+            this.messageService.add({
+              severity: "error",
+              summary: "Atenção",
+              detail:
+                "É necessário utilizar um email UTFR (@alunos, @professores ou @administrativo.utfpr.edu.br)",
+            });
+          },
+        });
+      }
+    });
   }
 
   login() {
     this.showProgress = true;
-    this.loginService.login(this.usuario).subscribe(
-      (e) => {
+    this.loginService.login(this.usuario).subscribe({
+      next: (e) => {
         localStorage.setItem("token", e);
         localStorage.setItem("username", this.usuario.username);
         this.setUserInLocalStorage();
       },
-      (error) => {
+      error: (error) => {
         console.log(error);
         this.showProgress = false;
         this.messageService.add({
@@ -43,8 +80,8 @@ export class LoginComponent implements OnInit {
           summary: "Atenção",
           detail: "Usuário e/ou senha incorretos",
         });
-      }
-    );
+      },
+    });
   }
 
   setUserInLocalStorage() {

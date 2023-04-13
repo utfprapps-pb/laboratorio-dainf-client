@@ -1,7 +1,7 @@
 export class TokenDto {
-    value: string;
+    token: string;
 
-    constructor(value: string) {
-        this.value = value;
+    constructor(token: string) {
+        this.token = token;
     }
 }

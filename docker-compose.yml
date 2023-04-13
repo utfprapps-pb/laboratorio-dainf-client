@@ -1,11 +1,35 @@
-version: '3.8'
-services:    
-    dainf-labs-client-prod:        
-        image: dainf/dainf-labs-client:prod
-        container_name: dainf-labs-client-prod
-        build:
-            context: .
-            dockerfile: Dockerfile
-        restart: always
-        ports:
-            - "8098:8098"
+version: "3.9"
+
+########################### SERVICES
+services:
+  ########################### DAINF LABS CLIENT    
+  dainf-labs-client-prod:        
+    image: dainf/dainf-labs-client:prod
+    container_name: dainf-labs-client-prod
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8098:8098"
+    labels:
+    # Traefik Config
+      - "traefik.enable=true"
+      - "traefik.http.routers.dainflabsapi.rule=Host(`dainf-labs.app.pb.utfpr.edu.br`)"
+      - "traefik.http.routers.dainflabsapi.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.dainflabsapi.entrypoints=websecure"
+    restart: unless-stopped
+    networks:
+      - web
+
+########################### NETWORKS
+networks:
+  web:
+    name: web
+    driver: bridge
+    external: true
+    attachable: true
+  database:
+    name: database
+    driver: bridge
+    external: false
+    attachable: true

@@ -25,6 +25,7 @@ import {NovoModule} from '../geral/novo/novo.module';
 import {MatSortModule} from '@angular/material/sort';
 import {EmailValidatorModule} from '../framework/validator/email/email.validator.module';
 import {TelefoneFormatModule} from '../framework/directives/telefone/telefone.format.module';
+import { UsuarioEditComponent } from './usuario.edit.component';
 
 @NgModule({
     imports: [
@@ -53,11 +54,13 @@ import {TelefoneFormatModule} from '../framework/directives/telefone/telefone.fo
     ],
   declarations: [
     UsuarioFormComponent,
-    UsuarioListComponent
+    UsuarioListComponent,
+    UsuarioEditComponent
   ],
   exports: [
     UsuarioFormComponent,
-    UsuarioListComponent
+    UsuarioListComponent,
+    UsuarioEditComponent
   ],
   providers: [
     UsuarioService,

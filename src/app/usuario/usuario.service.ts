@@ -32,4 +32,8 @@ export class UsuarioService extends CrudService<Usuario, number> {
   completeCustomUsersLab(query: string): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(`${this.url}complete-users-lab?query=${query}`);
   }
+
+  updateUser(usuario: Usuario): Observable<Usuario> {
+    return this.http.post<Usuario>(this.url  + `update-user`, usuario);
+  }
 }

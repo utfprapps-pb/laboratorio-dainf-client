@@ -43,6 +43,9 @@ export class LoginService {
       map((e) => {
         this.isRunningRequest = false;
         this.isAuthenticated.next(true);
+        if (JSON.parse(localStorage.getItem("userLogged")).documento === "" && !route.url[0].path.includes("usuario")) {
+          this.router.navigate([`/usuario/edit/${JSON.parse(localStorage.getItem("userLogged")).id}`]);
+        }
         return true;
       }),
       catchError((err) => {
@@ -102,15 +105,17 @@ export class LoginService {
         })
       );
   }
-  oauthURL = "http://localhost:8099/oauth/";
-  cabecera = {
-    headers: new HttpHeaders({ "Content-Type": "application/json" }),
-  };
-  loginWithGoogle(tokenDto: TokenDto): Observable<TokenDto> {
+  
+  loginWithGoogle(idToken: string): Observable<TokenDto> {
+    const url = `${environment.api_url}auth`;
+    const headers = {
+      headers: new HttpHeaders({ "Auth-Id-Token": `Bearer ${idToken}`}),
+    };
+
     return this.http.post<TokenDto>(
-      this.oauthURL + "google",
-      tokenDto,
-      this.cabecera
+      url,
+      '',
+      headers
     );
   }
 }
