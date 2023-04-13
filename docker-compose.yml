@@ -28,7 +28,4 @@ services:
 ########################### NETWORKS
 networks:
   web:
-    name: web
-    driver: bridge
     external: true
-    attachable: true
