@@ -16,6 +16,7 @@ services:
     labels:
       # Traefik Config
       - "traefik.enable=true"
+      - "traefik.docker.network=web"
       - "traefik.http.routers.dainf-labs.rule=Host(`dainf-labs.app.pb.utfpr.edu.br`)"
       - "traefik.http.routers.dainf-labs.certresolver=letsencrypt"
       - "traefik.http.routers.dainf-labs.entrypoints=websecure"      
@@ -24,16 +25,3 @@ services:
     networks:
       - web
       - database
-########################### NETWORKS
-networks:
-  web:
-    name: web
-    driver: bridge
-    external: true
-    attachable: true
-  database:
-    name: database
-    driver: bridge
-    external: false
-    attachable: true
-    
