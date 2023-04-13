@@ -9,7 +9,7 @@ COPY package.json /app/package.json
 
 RUN npm install
 COPY . /app
-RUN ng build --prod --output-path=dist
+RUN ng build --output-path=dist
 
 # production environment
 FROM nginx:1.21.6-alpine
