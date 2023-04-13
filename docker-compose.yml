@@ -3,9 +3,9 @@ version: "3.9"
 ########################### SERVICES
 services:
   ########################### DAINF LABS CLIENT    
-  dainf-labs-client-prod:        
+  dainf-labs-client:        
     image: dainf/dainf-labs-client:prod
-    container_name: dainf-labs-client-prod
+    container_name: dainf-labs-client
     build:
       context: .
       dockerfile: Dockerfile
@@ -18,8 +18,6 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.dainflabs.rule=Host(`dainf-labs.app.pb.utfpr.edu.br`)"
       - "traefik.http.routers.dainflabs.entrypoints=websecure"
-      - "traefik.http.routers.dainflabs.tls.domains[0].main=app.pb.utfpr.edu.br"
-      - "traefik.http.routers.dainflabs.tls.domains[0].sans=*.app.pb.utfpr.edu.br"
       - "traefik.http.routers.dainflabs.certresolver=letsencrypt"
     restart: unless-stopped
     networks:
