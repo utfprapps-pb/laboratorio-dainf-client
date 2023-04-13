@@ -3,18 +3,18 @@ version: "3.9"
 ########################### SERVICES
 services:
   ########################### DAINF LABS CLIENT    
-  dainf-labs-client:        
-    image: dainf-labs-client
-    container_name: dainf-labs-client
+  dainf-labs:        
+    image: dainf-labs
+    container_name: dainf-labs
     build:
       context: ./
       dockerfile: Dockerfile
     labels:
     # Traefik Config
       - "traefik.enable=true"
-      - "traefik.http.routers.dainf-labs-client.rule=Host(`dainf-labs.app.pb.utfpr.edu.br`)"
-      - "traefik.http.routers.dainf-labs-client.entrypoints=websecure"
-      - "traefik.http.routers.dainf-labs-client.certresolver=letsencrypt"
+      - "traefik.http.routers.dainf-labs.rule=Host(`dainf-labs.app.pb.utfpr.edu.br`)"
+      - "traefik.http.routers.dainf-labs.entrypoints=websecure"
+      - "traefik.http.routers.dainf-labs.certresolver=letsencrypt"
     environment:
       - TZ=America/Sao_Paulo
     ports:
