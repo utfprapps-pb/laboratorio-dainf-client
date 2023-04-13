@@ -4,10 +4,10 @@ version: "3.9"
 services:
   ########################### DAINF LABS CLIENT    
   dainf-labs-client:        
-    image: dainf/dainf-labs-client:prod
+    image: dainf-labs-client
     container_name: dainf-labs-client
     build:
-      context: .
+      context: ./
       dockerfile: Dockerfile
     labels:
     # Traefik Config
