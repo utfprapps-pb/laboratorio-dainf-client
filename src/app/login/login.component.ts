@@ -39,8 +39,8 @@ export class LoginComponent implements OnInit {
           next: (e: TokenDto) => {
             localStorage.setItem("token", e.token);
             localStorage.setItem("social", "true");
-            localStorage.setItem("username", user.email);
-            this.usuarioService.findByUsername(user.email).subscribe((user) => {
+            localStorage.setItem("username", e.email);
+            this.usuarioService.findByUsername(e.email).subscribe((user) => {
               localStorage.setItem("userLogged", JSON.stringify(user));
               if (user.documento !== "" && user.telefone !== "") {
                 this.router.navigate(["/"]);
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
               severity: "error",
               summary: "Atenção",
               detail:
-                "É necessário utilizar um email UTFR (@alunos, @professores ou @administrativo.utfpr.edu.br)",
+                "É necessário utilizar um email @utfpr.edu.br (@alunos, @professores ou @administrativo.utfpr.edu.br)",
             });
           },
         });

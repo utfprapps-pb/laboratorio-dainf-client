@@ -27,12 +27,13 @@ export class ItemFormComponent extends CrudFormComponent<Item, number> {
   callback: Function;
   grupoList: Grupo[];
   tipoItem: SelectItem[];
+  minioUrl: String;
 
   constructor(protected itemService: ItemService,
               protected injector: Injector,
               private grupoService: GrupoService) {
     super(itemService, injector, '/item');
-
+    this.minioUrl = environment.minio_url;
     this.tipoItem = [
       {label: 'Consumo', value: 'C'},
       {label: 'Permanente', value: 'P'}
