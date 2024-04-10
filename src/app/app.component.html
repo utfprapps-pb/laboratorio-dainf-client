@@ -1,9 +1,10 @@
 <section>
   <div class="row" style="min-height: 100vh">
-    <div *ngIf="isAuthenticated" class="col-12">
-      <app-toolbar></app-toolbar>
-    </div>
-
+    
+      <div *ngIf="isAuthenticated" class="col-12">
+        <app-toolbar></app-toolbar>
+      </div>
+    
     <div
       *ngIf="isAuthenticated"
       class="col-2"
@@ -24,7 +25,7 @@
         <router-outlet></router-outlet>
         <app-loader></app-loader>
       </p-scrollPanel>
-    </div>
+    </div>    
   </div>
 </section>
 <p-toast></p-toast>

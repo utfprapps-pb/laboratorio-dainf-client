@@ -120,7 +120,7 @@ registerLocaleData(ptBr);
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider('726155933363-am0vqngulv5soqerhhprndt5kj4judtl.apps.googleusercontent.com')
+            provider: new GoogleLoginProvider('80739592554-lgpadsbj9gjql2ssdq414fu58takgfdl.apps.googleusercontent.com')
           }
         ],
         onError: (err) => {
