@@ -84,6 +84,18 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  cadastrar() {
+    this.router.navigate(["/cadastrar-usuario"]);
+  }
+
+  reenviarEmailConfirmacao() {
+    this.router.navigate(["/reenviar-email-confirmacao"]);
+  }
+
+  recuperarSenha() {
+    this.router.navigate(["/recupear-senha"]);
+  }
+
   setUserInLocalStorage() {
     this.usuarioService
       .findByUsername(this.usuario.username)

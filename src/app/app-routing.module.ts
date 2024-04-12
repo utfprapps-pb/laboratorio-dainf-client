@@ -34,9 +34,18 @@ import {RelatorioFormComponent} from './relatorio/relatorio.form.component';
 import {RelatorioListComponent} from './relatorio/relatorio.list.component';
 import {RelatorioViewerComponent} from './relatorio/relatorio.viewer.component';
 import { UsuarioEditComponent } from './usuario/usuario.edit.component';
+import { CadastrarUsuarioComponent } from './cadastrarUsuario/cadastrarUsuario.component';
+import { ReenviarEmailConfirmacaoUsuarioComponent } from './cadastrarUsuario/reenviarEmailConfirmacaoUsuario.component';
+import { RecuperarSenhaComponent } from './cadastrarUsuario/recuperarSenha.component';
+import { ConfirmarEmailComponent } from './cadastrarUsuario/confirmarEmail.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
+  {path: 'cadastrar-usuario', component: CadastrarUsuarioComponent},
+  {path: 'reenviar-email-confirmacao', component: ReenviarEmailConfirmacaoUsuarioComponent},
+  {path: 'recupear-senha', component: RecuperarSenhaComponent},
+  {path: 'recupear-senha/:code', component: RecuperarSenhaComponent},
+  {path: 'confirmar-email/:code', component: ConfirmarEmailComponent},
   {path: '', canActivate: [LoginService], component: HomeComponent},
   {path: 'grupo', canActivate: [LoginService], component: GrupoListComponent},
   {path: 'grupo/form', canActivate: [LoginService], component: GrupoFormComponent},

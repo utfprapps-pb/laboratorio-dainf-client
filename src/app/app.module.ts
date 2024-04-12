@@ -23,11 +23,11 @@ import { CidadeModule } from "./cidade/cidade.module";
 import { ItemModule } from "./item/item.module";
 import { PageNotFoundModule } from "./pageNotFound/pageNotFound.module";
 import { NotAuthorizedModule } from "./notAuthorized/notAuthorized.module";
-import {ConfirmationService} from "primeng/api";
-import {ConfirmDialogModule} from "primeng/confirmdialog";
-import {MessageService} from "primeng/api";
-import {ScrollPanelModule} from "primeng/scrollpanel";
-import {ToastModule} from "primeng/toast";
+import { ConfirmationService } from "primeng/api";
+import { ConfirmDialogModule } from "primeng/confirmdialog";
+import { MessageService } from "primeng/api";
+import { ScrollPanelModule } from "primeng/scrollpanel";
+import { ToastModule } from "primeng/toast";
 import { CompraModule } from "./compra/compra.module";
 import { LoginService } from "./login/login.service";
 import { HttpClientInterceptor } from "./http-client.interceptor";
@@ -45,8 +45,11 @@ import { LoaderService } from "./framework/loader/loader.service";
 import { LoaderModule } from "./framework/loader/loader.module";
 import { RelatorioModule } from "./relatorio/relatorio.module";
 import { SocialLoginModule } from "@abacritt/angularx-social-login";
-import { GoogleLoginProvider, SocialAuthServiceConfig } from "@abacritt/angularx-social-login";
-
+import {
+  GoogleLoginProvider,
+  SocialAuthServiceConfig,
+} from "@abacritt/angularx-social-login";
+import { CadastrarUsuarioModule } from "./cadastrarUsuario/cadastrarUsuario.module";
 
 registerLocaleData(ptBr);
 
@@ -81,7 +84,8 @@ registerLocaleData(ptBr);
     SolicitacaoCompraModule,
     LoaderModule,
     RelatorioModule,
-    SocialLoginModule
+    SocialLoginModule,
+    CadastrarUsuarioModule,
   ],
   providers: [
     MessageService,
@@ -114,18 +118,20 @@ registerLocaleData(ptBr);
       useValue: CustomCurrencyMaskConfig,
     },
     {
-      provide: 'SocialAuthServiceConfig',
+      provide: "SocialAuthServiceConfig",
       useValue: {
         autoLogin: false,
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider('80739592554-lgpadsbj9gjql2ssdq414fu58takgfdl.apps.googleusercontent.com')
-          }
+            provider: new GoogleLoginProvider(
+              "80739592554-lgpadsbj9gjql2ssdq414fu58takgfdl.apps.googleusercontent.com"
+            ),
+          },
         ],
         onError: (err) => {
           console.error(err);
-        }
+        },
       } as SocialAuthServiceConfig,
     },
   ],
