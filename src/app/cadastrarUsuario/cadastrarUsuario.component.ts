@@ -4,7 +4,6 @@ import { Router } from "@angular/router";
 import { MessageService } from "primeng/api";
 import { UsuarioCadastro } from "./usuarioCadastro";
 import { CadastrarUsuarioService } from "./cadastrarUsuario.service";
-import { t } from "chart.js/dist/chunks/helpers.core";
 
 @Component({
   selector: "app-cadastrar-usuario",
