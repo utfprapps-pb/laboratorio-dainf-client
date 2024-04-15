@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.usuario = new Usuario();
+    /* Login com redes sociais - será implementado futuramente
     this.socialAuthService.authState.subscribe((user: SocialUser) => {
       if (user && user.idToken) {
         console.log(user);
@@ -62,6 +63,7 @@ export class LoginComponent implements OnInit {
         });
       }
     });
+    */
   }
 
   login() {
