@@ -4,11 +4,13 @@ import {Reserva} from './reserva';
 import {ReservaService} from './reserva.service';
 import {ReservaItem} from './reservaItem';
 import {MatTable} from '@angular/material/table';
-import {AutoComplete} from 'primeng';
+import {AutoComplete} from 'primeng/autocomplete';
 import {Item} from '../item/item';
 import {ItemService} from '../item/item.service';
 import {UsuarioService} from '../usuario/usuario.service';
 import {pt} from '../framework/constantes/calendarPt';
+import { DatePipe } from '@angular/common';
+import { Usuario } from '../usuario/usuario';
 
 @Component({
   selector: 'app-form-reserva',
@@ -20,6 +22,8 @@ export class ReservaFormComponent extends CrudFormComponent<Reserva, number> {
   @ViewChild('table') table: MatTable<any>;
   @ViewChild('itemToAdd') itemToAdd: AutoComplete;
   @ViewChild('qtdeToAdd') qtdeToAdd: ElementRef;
+
+  datepipe: DatePipe = new DatePipe('pt-BR')
   displayedColumns = ['item', 'qtde', 'actionsForm'];
   reservaItem: ReservaItem;
   itemList: Item[];
@@ -34,8 +38,9 @@ export class ReservaFormComponent extends CrudFormComponent<Reserva, number> {
     this.localePt = pt;
   }
 
-  initializeValues(): void {
-    this.object.dataReserva = new Date().toLocaleDateString();
+  initializeValues(): void {   
+    this.object.usuario = new Usuario();
+    this.object.dataReserva = this.datepipe.transform(new Date().toLocaleDateString(), 'dd/MM/yyyy');
     this.setUsuarioResponsavel();
   }
 

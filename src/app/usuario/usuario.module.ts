@@ -3,7 +3,11 @@ import {UsuarioFormComponent} from './usuario.form.component';
 import {UsuarioListComponent} from './usuario.list.component';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {DialogModule, DropdownModule, InputTextModule, MultiSelectModule, TooltipModule} from 'primeng';
+import {DialogModule} from 'primeng/dialog';
+import {DropdownModule} from 'primeng/dropdown';
+import {InputTextModule} from 'primeng/inputtext';
+import {MultiSelectModule} from 'primeng/multiselect';
+import {TooltipModule} from 'primeng/tooltip';
 import {UsuarioService} from './usuario.service';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -21,6 +25,7 @@ import {NovoModule} from '../geral/novo/novo.module';
 import {MatSortModule} from '@angular/material/sort';
 import {EmailValidatorModule} from '../framework/validator/email/email.validator.module';
 import {TelefoneFormatModule} from '../framework/directives/telefone/telefone.format.module';
+import { UsuarioEditComponent } from './usuario.edit.component';
 
 @NgModule({
     imports: [
@@ -49,11 +54,13 @@ import {TelefoneFormatModule} from '../framework/directives/telefone/telefone.fo
     ],
   declarations: [
     UsuarioFormComponent,
-    UsuarioListComponent
+    UsuarioListComponent,
+    UsuarioEditComponent
   ],
   exports: [
     UsuarioFormComponent,
-    UsuarioListComponent
+    UsuarioListComponent,
+    UsuarioEditComponent
   ],
   providers: [
     UsuarioService,

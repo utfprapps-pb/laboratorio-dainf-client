@@ -7,29 +7,32 @@
           <h4 class="m-0">Cadastro de Item</h4>
         </div>
         <div *ngIf="object.id != null">
-          <button type="button"
-                  pTooltip="Imagens"
-                  (click)="showDialogImagens()"
-                  mat-icon-button>
+          <button
+            type="button"
+            pTooltip="Imagens"
+            (click)="showDialogImagens()"
+            mat-icon-button
+          >
             <i class="fa fa-2x fa-image"></i>
           </button>
         </div>
       </div>
     </mat-card-title>
     <mat-card-content>
-      <form #form="ngForm" (submit)="save()"
-            enctype="multipart/form-data">
+      <form #form="ngForm" (submit)="save()" enctype="multipart/form-data">
         <div class="row">
           <div class="col-md-2">
             <div class="form-group">
               <label for="id">Código</label>
-              <input type="text"
-                     id="id"
-                     name="id"
-                     disabled
-                     class="form-control"
-                     [(ngModel)]="object.id"
-                     pInputText>
+              <input
+                type="text"
+                id="id"
+                name="id"
+                disabled
+                class="form-control"
+                [(ngModel)]="object.id"
+                pInputText
+              />
             </div>
           </div>
 
@@ -37,15 +40,17 @@
             <div class="form-group">
               <label for="nome">Nome</label>
               <span class="field-required">*</span>
-              <input type="text"
-                     id="nome"
-                     name="nome"
-                     required
-                     validation
-                     class="form-control"
-                     [disabled]="isAlunosOrProfessor"
-                     [(ngModel)]="object.nome"
-                     pInputText>
+              <input
+                type="text"
+                id="nome"
+                name="nome"
+                required
+                validation
+                class="form-control"
+                [disabled]="isAlunosOrProfessor"
+                [(ngModel)]="object.nome"
+                pInputText
+              />
             </div>
           </div>
         </div>
@@ -54,60 +59,74 @@
           <div class="col-md-3">
             <div class="form-group">
               <label for="patrimonio">Patrimônio</label>
-              <span *ngIf="object?.tipoItem === 'P'" class="field-required">*</span>
-              <input type="number"
-                     id="patrimonio"
-                     name="patrimonio"
-                     class="form-control"
-                     onlyNumber
-                     validation
-                     (keyup)="setSaldoDefaultItem()"
-                     [required]="object?.tipoItem === 'P'"
-                     [disabled]="isAlunosOrProfessor"
-                     [(ngModel)]="object.patrimonio"
-                     pInputText>
+              <span *ngIf="object?.tipoItem === 'P'" class="field-required"
+                >*</span
+              >
+              <input
+                type="number"
+                id="patrimonio"
+                name="patrimonio"
+                class="form-control"
+                onlyNumber
+                validation
+                (keyup)="setSaldoDefaultItem()"
+                [required]="object?.tipoItem === 'P'"
+                [disabled]="isAlunosOrProfessor"
+                [(ngModel)]="object.patrimonio"
+                pInputText
+              />
             </div>
           </div>
           <div class="col-md-3">
             <div class="form-group">
               <label for="siorg">Siorg</label>
-              <input type="number"
-                     id="siorg"
-                     name="siorg"
-                     class="form-control"
-                     onlyNumber
-                     [disabled]="isAlunosOrProfessor"
-                     [(ngModel)]="object.siorg"
-                     pInputText>
+              <input
+                type="number"
+                id="siorg"
+                name="siorg"
+                class="form-control"
+                onlyNumber
+                [disabled]="isAlunosOrProfessor"
+                [(ngModel)]="object.siorg"
+                pInputText
+              />
             </div>
           </div>
           <div class="col-md-3">
             <div class="form-group">
               <label for="valor">Valor</label>
-              <input type="string"
-                     id="valor"
-                     currencyMask
-                     name="valor"
-                     class="form-control"
-                     [disabled]="isAlunosOrProfessor"
-                     [(ngModel)]="object.valor"
-                     pInputText>
+              <input
+                type="string"
+                id="valor"
+                currencyMask
+                name="valor"
+                class="form-control"
+                [disabled]="isAlunosOrProfessor"
+                [(ngModel)]="object.valor"
+                pInputText
+              />
             </div>
           </div>
           <div class="col-md-3">
             <div class="form-group">
               <label for="qtdeMinima">Qtde Mínima</label>
               <span class="field-required">*</span>
-              <input type="number"
-                     id="qtdeMinima"
-                     name="qtdeMinima"
-                     onlyNumber
-                     required
-                     validation
-                     class="form-control"
-                     [disabled]="isAlunosOrProfessor || object.patrimonio != null || object?.tipoItem === 'P'"
-                     [(ngModel)]="object.qtdeMinima"
-                     pInputText>
+              <input
+                type="number"
+                id="qtdeMinima"
+                name="qtdeMinima"
+                onlyNumber
+                required
+                validation
+                class="form-control"
+                [disabled]="
+                  isAlunosOrProfessor ||
+                  object.patrimonio != null ||
+                  object?.tipoItem === 'P'
+                "
+                [(ngModel)]="object.qtdeMinima"
+                pInputText
+              />
             </div>
           </div>
         </div>
@@ -117,27 +136,31 @@
             <div class="form-group">
               <label for="localizacao">Localização</label>
               <span class="field-required">*</span>
-              <input type="text"
-                     id="localizacao"
-                     name="localizacao"
-                     required
-                     validation
-                     class="form-control"
-                     [disabled]="isAlunosOrProfessor"
-                     [(ngModel)]="object.localizacao"
-                     pInputText>
+              <input
+                type="text"
+                id="localizacao"
+                name="localizacao"
+                required
+                validation
+                class="form-control"
+                [disabled]="isAlunosOrProfessor"
+                [(ngModel)]="object.localizacao"
+                pInputText
+              />
             </div>
           </div>
           <div class="col-md-3">
             <div class="form-group">
               <label for="tipoItem">Tipo do Item</label>
-              <p-dropdown [options]="tipoItem"
-                          [(ngModel)]="object.tipoItem"
-                          [style]="{width: '100%'}"
-                          (onChange)="setSaldoDefaultItem()"
-                          [disabled]="isAlunosOrProfessor"
-                          id="tipoItem"
-                          name="tipoItem">
+              <p-dropdown
+                [options]="tipoItem"
+                [(ngModel)]="object.tipoItem"
+                [style]="{ width: '100%' }"
+                (onChange)="setSaldoDefaultItem()"
+                [disabled]="isAlunosOrProfessor"
+                id="tipoItem"
+                name="tipoItem"
+              >
               </p-dropdown>
             </div>
           </div>
@@ -145,37 +168,48 @@
             <div class="form-group">
               <label for="saldo">Saldo</label>
               <span class="field-required">*</span>
-              <input type="number"
-                     id="saldo"
-                     name="saldo"
-                     onlyNumber
-                     required
-                     validation
-                     class="form-control"
-                     [disabled]="isAlunosOrProfessor || object.patrimonio != null || object?.tipoItem === 'P'"
-                     [(ngModel)]="object.saldo"
-                     pInputText>
+              <input
+                type="number"
+                id="saldo"
+                name="saldo"
+                onlyNumber
+                required
+                validation
+                class="form-control"
+                [disabled]="
+                  isAlunosOrProfessor ||
+                  object.patrimonio != null ||
+                  object?.tipoItem === 'P'
+                "
+                [(ngModel)]="object.saldo"
+                pInputText
+              />
             </div>
           </div>
           <div class="col-md-3">
             <div class="form-group">
               <label for="grupo">Grupo</label>
               <span class="field-required">*</span>
-              <app-cadastroRapido href="/grupo/form" [id]="object?.grupo?.id"></app-cadastroRapido>
-              <p-autoComplete id="grupo"
-                              name="grupo"
-                              appendTo="body"
-                              field="descricao"
-                              required
-                              validation
-                              inputStyleClass="form-control"
-                              [disabled]="isAlunosOrProfessor"
-                              [forceSelection]="true"
-                              [dropdown]="true"
-                              [suggestions]="grupoList"
-                              [(ngModel)]="object.grupo"
-                              (onClear)="object.grupo = null"
-                              (completeMethod)="findGrupos($event)">
+              <app-cadastroRapido
+                href="/grupo/form"
+                [id]="object?.grupo?.id"
+              ></app-cadastroRapido>
+              <p-autoComplete
+                id="grupo"
+                name="grupo"
+                appendTo="body"
+                field="descricao"
+                required
+                validation
+                inputStyleClass="form-control"
+                [disabled]="isAlunosOrProfessor"
+                [forceSelection]="true"
+                [dropdown]="true"
+                [suggestions]="grupoList"
+                [(ngModel)]="object.grupo"
+                (onClear)="object.grupo = null"
+                (completeMethod)="findGrupos($event)"
+              >
               </p-autoComplete>
             </div>
           </div>
@@ -185,15 +219,17 @@
           <div class="col-md-12">
             <div class="form-group">
               <label for="descricao">Descrição</label>
-              <textarea type="number"
-                     id="descricao"
-                     name="descricao"
-                     maxlength="4000"
-                     class="form-control"
-                     rows="4"
-                     [disabled]="isAlunosOrProfessor"
-                     [(ngModel)]="object.descricao"
-                     pInputTextarea>
+              <textarea
+                type="number"
+                id="descricao"
+                name="descricao"
+                maxlength="4000"
+                class="form-control"
+                rows="4"
+                [disabled]="isAlunosOrProfessor"
+                [(ngModel)]="object.descricao"
+                pInputTextarea
+              >
               </textarea>
             </div>
           </div>
@@ -201,19 +237,23 @@
 
         <div *ngIf="!isAlunosOrProfessor" class="row mb-3">
           <div class="col-md-12">
-            <p-fileUpload name="anexos[]"
-                          #fileUpload
-                          [url]="getUrlUploadImages()"
-                          (onUpload)="onUpload($event)"
-                          multiple="multiple"
-                          [showUploadButton]="false"
-                          chooseLabel="Inserir Imagens"
-                          cancelLabel="Remover"
-                          accept="image/*"
-                          maxFileSize="1000000">
+            <p-fileUpload
+              name="anexos[]"
+              #fileUpload
+              [url]="getUrlUploadImages()"
+              (onUpload)="onUpload($event)"
+              multiple="multiple"
+              [showUploadButton]="false"
+              chooseLabel="Inserir Imagens"
+              cancelLabel="Remover"
+              accept="image/png, image/jpeg, image/jpg, image/webp"
+              maxFileSize="1000000"
+            >
               <ng-template pTemplate="content">
                 <ul *ngIf="uploadedFiles.length">
-                  <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                  <li *ngFor="let file of uploadedFiles">
+                    {{ file.name }} - {{ file.size }} bytes
+                  </li>
                 </ul>
               </ng-template>
             </p-fileUpload>
@@ -231,34 +271,42 @@
   </mat-card>
 </div>
 
-<p-dialog header="Imagens do Item"
-          [modal]="true"
-          [(visible)]="dialogImagens"
-          [style]="{minWidth: '400px', maxWidth: '80%'}"
-          [baseZIndex]="10000">
-
-  <p-carousel [value]="images"
-              styleClass="custom-carousel"
-              [numVisible]="3"
-              [numScroll]="1"
-              [circular]="true"
-              [responsiveOptions]="responsiveOptions">
+<p-dialog
+  header="Imagens do Item"
+  [modal]="true"
+  [(visible)]="dialogImagens"
+  [style]="{ minWidth: '400px', maxWidth: '80%' }"
+  [baseZIndex]="10000"
+>
+  <p-carousel
+    [value]="images"
+    styleClass="custom-carousel"
+    [numVisible]="3"
+    [numScroll]="1"
+    [circular]="true"
+    [responsiveOptions]="responsiveOptions"
+  >
     <ng-template let-image pTemplate="item">
       <div class="car-details">
         <div class="p-grid p-nogutter">
           <div class="p-col-12">
-            <img src="data:image/png;base64,{{image.base64}}" class="mw-100" style="width: 300px"/>
+            <img
+              src="{{ minioUrl + image.nameImage }}"
+              class="mw-100"
+              style="width: 300px"
+            />
           </div>
           <div *ngIf="!isAlunosOrProfessor" class="p-col-12 car-data">
             <div class="car-buttons my-1">
-              <button pButton
-                      type="button"
-                      class="ui-button-secondary"
-                      pTooltip="Remover Imagem"
-                      tooltipPosition="bottom"
-                      (click)="deleteImage(image)"
-                      icon="pi pi-trash">
-              </button>
+              <button
+                pButton
+                type="button"
+                class="ui-button-secondary"
+                pTooltip="Remover Imagem"
+                tooltipPosition="bottom"
+                (click)="deleteImage(image)"
+                icon="pi pi-trash"
+              ></button>
             </div>
           </div>
         </div>

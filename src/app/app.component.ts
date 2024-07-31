@@ -15,15 +15,21 @@ export class AppComponent {
   title = 'tcc-client';
   isAuthenticated = false;
   subscription: Subscription;
-
+  
   constructor(private loginService: LoginService,
               private router: Router,
               private loaderService: LoaderService) {
     loginService.isAuthenticated.asObservable()
       .subscribe(e => this.isAuthenticated = e);
     this.buildSubscriptionEvent();
+
+    
   }
 
+  verifyAccess(role: string): boolean {
+    return this.loginService.hasAnyRole(role);
+  }
+  
   buildSubscriptionEvent() {
     this.subscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {

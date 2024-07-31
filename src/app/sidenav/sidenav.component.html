@@ -1,23 +1,23 @@
 <mat-drawer-container class="example-sidenav" style="height: calc(100vh - 50px)">
   <mat-drawer #drawer id="drawer" [opened]="true" mode="side" style="width: 100%" [disableClose]="true" class="drawer float-drawer">
-    <mat-nav-list>
+    <mat-nav-list id="link-menu">
       <a *ngFor="let menuItem of menuItems" mat-list-item [id]="[menuItem.id]" [routerLink]="[menuItem.path]"
-         routerLinkActive="active" class="text-white" style="font-size: 0.9rem !important;">
+         routerLinkActive="active" class="text-white fcolor" style="height: 50px; font-size: 0.7rem !important;">
         <i class="fa fa-{{menuItem.icon}} mr-2 color-icons" mat-list-icon></i>
         {{menuItem.title}}
         <mat-divider style="background-color: rgba(255, 255, 255, 0.2) !important;"></mat-divider>
       </a>
 
-      <a mat-list-item (click)="toggleSubMenuCadastro()" class="text-white">
+      <a mat-list-item (click)="toggleSubMenuCadastro()" class="text-white fcolor" style="height: 50px; font-size: 0.7rem !important;">
         <i class="fa fa-pencil mr-2 color-icons" mat-list-icon></i>
         Cadastros
         <mat-icon *ngIf="!showSubMenuCadastro">chevron_right</mat-icon>
-        <mat-icon *ngIf="showSubMenuCadastro">expand_more</mat-icon>
+        <mat-icon *ngIf="showSubMenuCadastro">chevron_right</mat-icon>
       </a>
 
       <mat-nav-list class="sidenav-submenu" *ngIf="showSubMenuCadastro" style="margin-left: 25px !important;">
         <a *ngFor="let menuItem of menuCadastros" mat-list-item [id]="[menuItem.id]" [routerLink]="[menuItem.path]"
-           routerLinkActive="active" class="text-white">
+           routerLinkActive="active" class="text-white fcolor" style="height: 50px; font-size: 0.7rem !important;">
           <i class="fa fa-{{menuItem.icon}} mr-2 color-icons" mat-list-icon></i>
           {{menuItem.title}}
           <mat-divider style="background-color: rgba(255, 255, 255, 0.2) !important;"></mat-divider>

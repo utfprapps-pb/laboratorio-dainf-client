@@ -10,3 +10,7 @@ td, th {
 mat-cell {
   cursor: pointer;
 }
+
+::ng-deep .ui-datepicker-touch-ui {
+  min-width: 30% !important;
+}
