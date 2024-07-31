@@ -4,90 +4,133 @@
       <div class="d-flex align-items-center justify-content-between">
         <h4 class="m-0">Empréstimo</h4>
         <div>
-          <button type="button"
-                  (click)="openDialogFiltro()"
-                  pTooltip="Filtro"
-                  tooltipPosition="left"
-                  mat-icon-button>
+          <button
+            type="button"
+            (click)="openDialogFiltro()"
+            pTooltip="Filtro"
+            tooltipPosition="left"
+            mat-icon-button
+          >
             <mat-icon>search</mat-icon>
           </button>
-          <app-novo *ngIf="!isAlunoOrProfessor" (onClick)="openForm()"></app-novo>
+          <app-novo
+            *ngIf="!isAlunoOrProfessor"
+            (onClick)="openForm()"
+          ></app-novo>
         </div>
       </div>
     </mat-card-title>
     <mat-card-content>
       <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
+        <input
+          matInput
+          (keyup)="applyFilter($event.target.value)"
+          placeholder="Filtro"
+        />
       </mat-form-field>
 
       <div class="mat-elevation-z8">
         <mat-table [dataSource]="dataSource" matSort>
-
           <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Código</mat-header-cell>
-            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{row.id}}</mat-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header
+              >Código</mat-header-cell
+            >
+            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{
+              row.id
+            }}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="usuarioEmprestimo">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Aluno/Professor</mat-header-cell>
-            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{row?.usuarioEmprestimo?.nome}}
+            <mat-header-cell *matHeaderCellDef mat-sort-header
+              >Aluno/Professor</mat-header-cell
+            >
+            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)"
+              >{{ row?.usuarioEmprestimo?.nome }}
             </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="dataEmprestimo">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Data do Empréstimo</mat-header-cell>
-            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{row?.dataEmprestimo}}</mat-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header
+              >Data do Empréstimo</mat-header-cell
+            >
+            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{
+              row?.dataEmprestimo
+            }}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="prazoDevolucao">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Prazo de Devolução</mat-header-cell>
-            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{row?.prazoDevolucao}}</mat-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header
+              >Prazo de Devolução</mat-header-cell
+            >
+            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{
+              row?.prazoDevolucao
+            }}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="status">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header
+              >Status</mat-header-cell
+            >
             <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">
-              <span *ngIf="getStatusEmprestimo(row) === 'P'" class="badge badge-primary" style="font-size: 85%">Em andamento</span>
-              <span *ngIf="getStatusEmprestimo(row) === 'A'" class="badge badge-danger"
-                    style="font-size: 85%">Em atraso</span>
-              <span *ngIf="getStatusEmprestimo(row) === 'F'" class="badge badge-success" style="font-size: 85%">Finalizado</span>
+              <span
+                *ngIf="getStatusEmprestimo(row) === 'P'"
+                class="badge badge-primary"
+                style="font-size: 85%"
+                >Em andamento</span
+              >
+              <span
+                *ngIf="getStatusEmprestimo(row) === 'A'"
+                class="badge badge-danger"
+                style="font-size: 85%"
+                >Em atraso</span
+              >
+              <span
+                *ngIf="getStatusEmprestimo(row) === 'F'"
+                class="badge badge-success"
+                style="font-size: 85%"
+                >Finalizado</span
+              >
             </mat-cell>
           </ng-container>
 
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
         </mat-table>
 
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]"
-                       [pageSize]="100"></mat-paginator>
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 25, 50, 100]"
+          [pageSize]="100"
+        ></mat-paginator>
       </div>
     </mat-card-content>
   </mat-card>
 </div>
 
-<p-dialog header="Filtro"
-          [(visible)]="dialogFiltroEmprestimo"
-          [style]="{minWidth: '400px', maxWidth: '400px'}"
-          [modal]="true"
-          [baseZIndex]="10000">
-
+<p-dialog
+  header="Filtro"
+  [(visible)]="dialogFiltroEmprestimo"
+  [style]="{ minWidth: '400px', maxWidth: '400px' }"
+  [modal]="true"
+  [baseZIndex]="10000"
+>
   <form>
-
     <div class="row" *ngIf="!isAlunoOrProfessor">
       <div class="col-md-12">
         <div class="form-group">
           <label for="usuarioEmprestimo">Aluno/Professor</label>
-          <p-autoComplete id="usuarioEmprestimo"
-                          name="usuarioEmprestimo"
-                          appendTo="body"
-                          field="nome"
-                          inputStyleClass="form-control"
-                          [forceSelection]="true"
-                          [dropdown]="true"
-                          [(ngModel)]="emprestimoFilter.usuarioEmprestimo"
-                          [suggestions]="usuarioEmprestimoList"
-                          (onClear)="emprestimoFilter.usuarioEmprestimo = null"
-                          (completeMethod)="findUsuarios($event)">
+          <p-autoComplete
+            id="usuarioEmprestimo"
+            name="usuarioEmprestimo"
+            appendTo="body"
+            field="nome"
+            inputStyleClass="form-control"
+            [forceSelection]="true"
+            [dropdown]="true"
+            [(ngModel)]="emprestimoFilter.usuarioEmprestimo"
+            [suggestions]="usuarioEmprestimoList"
+            (onClear)="emprestimoFilter.usuarioEmprestimo = null"
+            (completeMethod)="findUsuarios($event)"
+          >
           </p-autoComplete>
         </div>
       </div>
@@ -97,17 +140,19 @@
       <div class="col-md-12">
         <div class="form-group">
           <label for="usuarioResponsavel">Usuário Responsável</label>
-          <p-autoComplete id="usuarioResponsavel"
-                          name="usuarioResponsavel"
-                          appendTo="body"
-                          field="nome"
-                          inputStyleClass="form-control"
-                          [forceSelection]="true"
-                          [dropdown]="true"
-                          [(ngModel)]="emprestimoFilter.usuarioResponsalvel"
-                          [suggestions]="usuarioResponsalvel"
-                          (onClear)="emprestimoFilter.usuarioResponsalvel = null"
-                          (completeMethod)="findUsuarioResponsavel($event)">
+          <p-autoComplete
+            id="usuarioResponsavel"
+            name="usuarioResponsavel"
+            appendTo="body"
+            field="nome"
+            inputStyleClass="form-control"
+            [forceSelection]="true"
+            [dropdown]="true"
+            [(ngModel)]="emprestimoFilter.usuarioResponsalvel"
+            [suggestions]="usuarioResponsalvel"
+            (onClear)="emprestimoFilter.usuarioResponsalvel = null"
+            (completeMethod)="findUsuarioResponsavel($event)"
+          >
           </p-autoComplete>
         </div>
       </div>
@@ -117,30 +162,34 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="dtIni">Data Inicial</label>
-          <p-calendar name="dtIni"
-                      id="dtIni"
-                      appendTo="body"
-                      dataType="string"
-                      dateFormat="dd/mm/yy"
-                      [style]="{width: '100%'}"
-                      [locale]="localePt"
-                      [(ngModel)]="emprestimoFilter.dtIniEmp"
-                      inputStyleClass="form-control">
+          <p-calendar
+            name="dtIni"
+            id="dtIni"
+            appendTo="body"
+            dataType="string"
+            dateFormat="dd/mm/yy"
+            [style]="{ width: '100%' }"
+            [locale]="localePt"
+            [(ngModel)]="emprestimoFilter.dtIniEmp"
+            inputStyleClass="form-control"
+          >
           </p-calendar>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
           <label for="dtFim">Data Final</label>
-          <p-calendar name="dtFim"
-                      id="dtFim"
-                      appendTo="body"
-                      dataType="string"
-                      dateFormat="dd/mm/yy"
-                      [style]="{width: '100%'}"
-                      [locale]="localePt"
-                      [(ngModel)]="emprestimoFilter.dtFimEmp"
-                      inputStyleClass="form-control">
+          <p-calendar
+            name="dtFim"
+            id="dtFim"
+            appendTo="body"
+            dataType="string"
+            dateFormat="dd/mm/yy"
+            [style]="{ width: '100%' }"
+            [locale]="localePt"
+            [(ngModel)]="emprestimoFilter.dtFimEmp"
+            inputStyleClass="form-control"
+          >
           </p-calendar>
         </div>
       </div>
@@ -150,12 +199,14 @@
       <div class="col-md-12">
         <div class="form-group">
           <label for="status">Status</label>
-          <p-dropdown [options]="statusDropdown"
-                      [style]="{width: '100%'}"
-                      appendTo="body"
-                      id="status"
-                      [(ngModel)]="emprestimoFilter.status"
-                      name="status">
+          <p-dropdown
+            [options]="statusDropdown"
+            [style]="{ width: '100%' }"
+            appendTo="body"
+            id="status"
+            [(ngModel)]="emprestimoFilter.status"
+            name="status"
+          >
           </p-dropdown>
         </div>
       </div>
@@ -164,17 +215,21 @@
     <p-footer>
       <div class="row">
         <div class="col-md-12 d-flex justify-content-end">
-          <button type="button"
-                  class="mr-2 text-uppercase"
-                  (click)="clearFilter()"
-                  mat-raised-button>
+          <button
+            type="button"
+            class="mr-2 text-uppercase"
+            (click)="clearFilter()"
+            mat-raised-button
+          >
             Limpar
           </button>
-          <button type="submit"
-                  color="primary"
-                  class="text-uppercase"
-                  (click)="filter()"
-                  mat-raised-button>
+          <button
+            type="submit"
+            color="primary"
+            class="text-uppercase"
+            (click)="filter()"
+            mat-raised-button
+          >
             Filtrar
           </button>
         </div>
@@ -184,14 +239,16 @@
 </p-dialog>
 
 <div class="invisible">
-  <p-calendar #novaData
-              [touchUI]="true"
-              appendTo="body"
-              (onSelect)="changePrazoDevolucao()"
-              [readonlyInput]="false"
-              dataType="string"
-              dateFormat="dd/mm/yy"
-              [locale]="localePt"
-              [(ngModel)]="dtNovaData">
+  <p-calendar
+    #novaData
+    [touchUI]="true"
+    appendTo="body"
+    (onSelect)="changePrazoDevolucao()"
+    [readonlyInput]="false"
+    dataType="string"
+    dateFormat="dd/mm/yy"
+    [locale]="localePt"
+    [(ngModel)]="dtNovaData"
+  >
   </p-calendar>
 </div>

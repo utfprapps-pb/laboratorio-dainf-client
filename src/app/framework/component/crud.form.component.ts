@@ -1,12 +1,13 @@
 import {ActivatedRoute, Router} from '@angular/router';
 import {CrudService} from '../service/crud.service';
-import {Injector, OnInit} from '@angular/core';
-import {MessageService} from 'primeng';
+import { Injector, OnInit, Directive } from '@angular/core';
+import {MessageService} from 'primeng/api';
 import {BaseFormComponent} from './base.form.component';
 import Swal from 'sweetalert2';
 import {LoaderService} from '../loader/loader.service';
 import {LoginService} from '../../login/login.service';
 
+@Directive()
 export abstract class CrudFormComponent<T, ID> extends BaseFormComponent implements OnInit {
 
   protected router: Router;

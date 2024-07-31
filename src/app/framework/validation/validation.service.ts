@@ -44,8 +44,8 @@ export class ValidationService {
     this.removeValidationSubject.next(id);
   }
 
-  clearValidations() {
-    this.clearValidationsSubject.next();
+  clearValidations(id: string) {
+    this.clearValidationsSubject.next(id);
   }
 
 }

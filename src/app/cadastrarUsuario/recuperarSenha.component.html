@@ -1,0 +1,95 @@
+<mat-progress-bar *ngIf="showProgress" mode="indeterminate"></mat-progress-bar>
+<div
+  class="container w-100 h-100 d-flex justify-content-center align-items-center"
+>
+  <div class="col-md-5">
+    <mat-card
+      style="width: 400px; height: 350px"
+      class="d-flex justify-content-between flex-column"
+    >
+      <div class="div-header">
+        <img
+          src="assets/utfpr.jpg"
+          alt="Logo UTFPR"
+          width="50px"
+          style="margin-right: 10px"
+        />
+        <span>Sistema Laboratório - Recuperar Senha</span>
+      </div>
+      <mat-card-content class="h-100">
+        <form #form class="d-flex flex-column justify-content-around h-100">
+          <div class="d-flex flex-column justify-content-center h-100">
+            <div
+              *ngIf="this.recuperarSenha.code === null"
+              class="row"
+              style="margin: 5px 0"
+            >
+              <div class="col-md-12">
+                <mat-form-field style="width: 100%">
+                  <mat-label for="emailConfirmacao">Email</mat-label>
+                  <input
+                    type="text"
+                    id="emailConfirmacao"
+                    name="emailConfirmacao"
+                    [(ngModel)]="emailConfirmacao.email"
+                    matInput
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+            <div
+              *ngIf="this.recuperarSenha.code !== null"
+              class="row"
+              style="margin: 5px 0"
+            >
+              <div class="col-md-12">
+                <mat-form-field style="width: 100%">
+                  <mat-label for="password">Senha</mat-label>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    [(ngModel)]="recuperarSenha.password"
+                    matInput
+                  />
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-12">
+                <mat-form-field style="width: 100%">
+                  <mat-label for="repeatPassword">Confirmar Senha</mat-label>
+                  <input
+                    type="password"
+                    id="repeatPassword"
+                    name="repeatPassword"
+                    [(ngModel)]="recuperarSenha.repeatPassword"
+                    matInput
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+            <a
+              (click)="goToLogin()"
+              class="text-center"
+              style="color: #222d43; cursor: pointer"
+              >Voltar para a tela de autenticação</a
+            >
+          </div>
+          <div class="row justify-content-center mb-2">
+            <div class="col-md-6 d-flex justify-content-center">
+              <button
+                mat-stroked-button
+                type="submit"
+                class="w-100 br-25px"
+                color="primary"
+                (click)="submit()"
+              >
+                Enviar
+              </button>
+            </div>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

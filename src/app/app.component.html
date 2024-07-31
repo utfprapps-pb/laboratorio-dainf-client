@@ -1,22 +1,38 @@
 <section>
-  <div class="ui-grid" style="min-height: 100vh">
-    <div *ngIf="isAuthenticated" class="ui-grid-col-12">
-      <app-toolbar></app-toolbar>
-    </div>
-    <div *ngIf="isAuthenticated" class="ui-grid-col-2" style="width: 250px; height: 100%; min-height: 100%" id="sidenav">
+  <div class="row" style="min-height: 100vh">
+    
+      <div *ngIf="isAuthenticated" class="col-12">
+        <app-toolbar></app-toolbar>
+      </div>
+    
+    <div
+      *ngIf="isAuthenticated"
+      class="col-2"
+      style="width: 250px; height: 100%; min-height: 100%"
+      id="sidenav"
+    >
       <app-sidenav></app-sidenav>
     </div>
-    <div class="ui-grid-col-10" [ngClass]="isAuthenticated ? 'content' : 'only-login'" id="content">
-      <p-scrollPanel [style]="{width: '100%', height: 'calc(100vh - 50px)'}" styleClass="scrool-table-dash">
+    <div
+      class="col-10"
+      [ngClass]="isAuthenticated ? 'content' : 'only-login'"
+      id="content"
+    >
+      <p-scrollPanel
+        [style]="{ width: '100%', height: 'calc(100vh - 40px)' }"
+        styleClass="scrool-table-dash"
+      >
         <router-outlet></router-outlet>
         <app-loader></app-loader>
       </p-scrollPanel>
-    </div>
+    </div>    
   </div>
 </section>
 <p-toast></p-toast>
-<p-confirmDialog [closeOnEscape]="true"
-                 [closable]="true"
-                 [baseZIndex]="999"
-                 acceptLabel="Sim"
-                 rejectLabel="Não"></p-confirmDialog>
+<p-confirmDialog
+  [closeOnEscape]="true"
+  [closable]="true"
+  [baseZIndex]="999"
+  acceptLabel="Sim"
+  rejectLabel="Não"
+></p-confirmDialog>

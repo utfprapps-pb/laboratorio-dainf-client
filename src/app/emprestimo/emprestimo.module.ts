@@ -8,16 +8,14 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
-import {
-  AutoCompleteModule,
-  CalendarModule,
-  DialogModule,
-  DropdownModule,
-  InputTextareaModule,
-  InputTextModule,
-  ScrollPanelModule,
-  TooltipModule
-} from 'primeng';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import {CalendarModule} from 'primeng/calendar';
+import {DialogModule} from 'primeng/dialog';
+import {DropdownModule} from 'primeng/dropdown';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import {InputTextModule} from 'primeng/inputtext';
+import {ScrollPanelModule} from 'primeng/scrollpanel';
+import {TooltipModule} from 'primeng/tooltip';
 import {EmprestimoFormComponent} from './emprestimo.form.component';
 import {EmprestimoListComponent} from './emprestimo.list.component';
 import {EmprestimoService} from './emprestimo.service';

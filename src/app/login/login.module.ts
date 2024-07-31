@@ -8,6 +8,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { SocialLoginModule } from '@abacritt/angularx-social-login';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatCardModule,
     MatButtonModule,
     FormsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    SocialLoginModule
   ],
   declarations: [
     LoginComponent
