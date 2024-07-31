@@ -82,21 +82,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "tcc-client:build"
+            "buildTarget": "tcc-client:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "tcc-client:build:production"
+              "buildTarget": "tcc-client:build:production"
             },
             "development": {
-              "browserTarget": "tcc-client:build:development"
+              "buildTarget": "tcc-client:build:development"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "tcc-client:build"
+            "buildTarget": "tcc-client:build"
           }
         },
         "test": {
