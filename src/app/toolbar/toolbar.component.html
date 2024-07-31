@@ -1,36 +1,58 @@
-<mat-toolbar class="d-flex justify-content-between" style="height: 50px; background-color: transparent">
+<mat-toolbar
+  class="d-flex justify-content-between"
+  style="height: 50px; background-color: transparent"
+>
   <div class="d-flex align-items-center">
-    <button *ngIf="widthScreen < 1200" id="btn-sidenav" class="btn-icon btn-sidenav" (click)="toogleSidenav()">
+    <button
+      *ngIf="widthScreen < 1200"
+      id="btn-sidenav"
+      class="btn-icon btn-sidenav"
+      (click)="toogleSidenav()"
+    >
       <i class="fa fa fa-bars text-black-50"></i>
     </button>
-    <img src="../../assets/logo.png" alt="logo_constru" style="width: 40px">
-    <a *ngIf="widthScreen >= 600"
-       routerLinkActive="active"
-       routerLink="/"
-       style="margin-left: 10px;"
-       class="text-black-50 text-uppercase font-poppins text-decoration-none">Sistema de Gerenciamento da Sala de Apoio do DAINF
+    <img src="../../assets/logo.png" alt="logo_constru" style="width: 40px" />
+    <a
+      *ngIf="widthScreen >= 600"
+      routerLinkActive="active"
+      routerLink="/"
+      style="margin-left: 10px"
+      class="text-black-50 text-uppercase font-poppins text-decoration-none"
+      >Sistema de Gerenciamento da Sala de Apoio do DAINF
     </a>
-    <a *ngIf="widthScreen < 600"
-       routerLinkActive="active"
-       routerLink="/" style="margin-left: 10px;"
-       class="text-black-50 text-uppercase font-poppins text-decoration-none">Lab DAINF
+    <a
+      *ngIf="widthScreen < 600"
+      routerLinkActive="active"
+      routerLink="/"
+      style="margin-left: 10px"
+      class="text-black-50 text-uppercase font-poppins text-decoration-none"
+      >Lab DAINF
     </a>
   </div>
-  <div>
+  <div class="row">
     <div *ngIf="widthScreen > 768">
-      <button type="button" pButton (click)="menu.toggle($event)" class="btn-sidenav text-black-50" style="font-size: 18px">
-        Olá, {{getUserLogado()}}
+      <button
+        type="button"
+        pButton
+        (click)="menu.toggle($event)"
+        class="btn-sidenav text-black-50"
+        style="font-size: 18px"
+      >
+        Olá, {{ getUserLogado() }}
         <i class="fa fa-caret-down" style="font-size: 15px"></i>
       </button>
       <p-tieredMenu #menu [model]="items" [popup]="true"></p-tieredMenu>
+      <img src="{{this.fotoUrl}}" alt="" style="width: 40px" />
     </div>
-    <div *ngIf="widthScreen <= 768">
+    <div *ngIf="widthScreen <= 768" class="col-md-2">
       <button class="btn-sidenav" pTooltip="Sair" tooltipPosition="bottom">
-        <a (click)="logout()"
-           class="d-flex">
+        <a (click)="logout()" class="d-flex">
           <mat-icon class="text-black-50">exit_to_app</mat-icon>
         </a>
       </button>
+      <img src="{{this.fotoUrl ? this.fotoUrl : ''}}" alt="" style="width: 40px" />
+    </div>
+    <div class="col-md-1">      
     </div>
   </div>
 </mat-toolbar>

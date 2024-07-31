@@ -1,23 +1,35 @@
 <mat-progress-bar *ngIf="showProgress" mode="indeterminate"></mat-progress-bar>
-<div class="container w-100 h-100 d-flex justify-content-center align-items-center">
+<div
+  class="container w-100 h-100 d-flex justify-content-center align-items-center"
+>
   <div class="col-md-5">
-    <mat-card style="width: 400px; height: 400px;" class="d-flex justify-content-between flex-column">
+    <mat-card
+      style="width: 400px; height: 400px"
+      class="d-flex justify-content-between flex-column"
+    >
       <div class="div-header">
-        <img src="assets/utfpr.jpg" alt="Logo UTFPR" width="50px" style="margin-right: 10px">
-        <span>Sistema Laboratório</span>
+        <img
+          src="assets/utfpr.jpg"
+          alt="Logo UTFPR"
+          width="50px"
+          style="margin-right: 10px"
+        />
+        <span>Sistema Laboratório - Login</span>
       </div>
       <mat-card-content class="h-100">
-        <form #form (submit)="login()" class="d-flex flex-column justify-content-around h-100">
+        <form #form class="d-flex flex-column justify-content-around h-100">
           <div class="d-flex flex-column justify-content-center h-100">
             <div class="row" style="margin: 10px 0">
               <div class="col-md-12">
                 <mat-form-field style="width: 100%">
-                  <mat-label for="username">Usuário</mat-label>
-                  <input type="text"
-                         id="username"
-                         name="username"
-                         [(ngModel)]="usuario.username"
-                         matInput>
+                  <mat-label for="username">Email</mat-label>
+                  <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    [(ngModel)]="usuario.username"
+                    matInput
+                  />
                 </mat-form-field>
               </div>
             </div>
@@ -26,26 +38,59 @@
               <div class="col-md-12">
                 <mat-form-field style="width: 100%">
                   <mat-label for="password">Senha</mat-label>
-                  <input type="password"
-                         id="password"
-                         name="password"
-                         [(ngModel)]="usuario.password"
-                         matInput>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    [(ngModel)]="usuario.password"
+                    matInput
+                  />
                 </mat-form-field>
               </div>
             </div>
-            <a href="#/login"  class="text-center" style="color: #222d43">Esqueceu sua senha?</a>
+            <a
+              (click)="recuperarSenha()"
+              class="text-center" style="color: #222d43; cursor: pointer"
+              >Esqueceu sua senha?</a
+            >
+            <a
+              (click)="cadastrar()"
+              class="text-center"
+              style="color: #222d43; cursor: pointer"
+              >Ainda não possui cadastro? Cadastrar-se.</a
+            >
+            <a
+              (click)="reenviarEmailConfirmacao()"
+              class="text-center"
+              style="color: #222d43; cursor: pointer"
+              >Solicitar novo email de confirmacao.</a
+            >
           </div>
-
-          <div class="row justify-content-center">
+          <div class="row justify-content-center mb-2">
             <div class="col-md-6 d-flex justify-content-center">
-              <button mat-stroked-button
-                      type="submit"
-                      class="w-100 br-25px"
-                      color="primary">Acessar
+              <button
+                mat-stroked-button
+                type="submit"
+                class="w-100 br-25px"
+                color="primary"
+                (click)="login()"
+              >
+                Acessar
               </button>
             </div>
           </div>
+          <!-- <div class="row justify-content-center mb-2">
+            <div class="col-md-6 d-flex justify-content-center">
+              <asl-google-signin-button
+                type="standard"
+                theme="filled_blue"
+                size="medium"
+                shape="pill"
+                locale="pt-BR"
+                class="mx-5"
+              ></asl-google-signin-button>
+            </div>
+          </div> -->
         </form>
       </mat-card-content>
     </mat-card>

@@ -1,7 +1,10 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {AutoCompleteModule, InputMaskModule, InputTextModule, TooltipModule} from 'primeng';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import {InputMaskModule} from 'primeng/inputmask';
+import {InputTextModule} from 'primeng/inputtext';
+import {TooltipModule} from 'primeng/tooltip';
 import {FornecedorFormComponent} from './fornecedor.form.component';
 import {FornecedorListComponent} from './fornecedor.list.component';
 import {FornecedorService} from './fornecedor.service';

@@ -7,8 +7,9 @@ import {SaidaItem} from './saidaItem';
 import {ItemService} from '../item/item.service';
 import {UsuarioService} from '../usuario/usuario.service';
 import {MatTable} from '@angular/material/table';
-import {AutoComplete} from 'primeng';
+import {AutoComplete} from 'primeng/autocomplete';
 import {pt} from '../framework/constantes/calendarPt';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-form-saida',
@@ -17,6 +18,7 @@ import {pt} from '../framework/constantes/calendarPt';
 })
 export class SaidaFormComponent extends CrudFormComponent<Saida, number> {
 
+  datepipe: DatePipe = new DatePipe('pt-BR');
   itemList: Item[];
   saidaItem: SaidaItem;
   maxDate = new Date();
@@ -36,7 +38,7 @@ export class SaidaFormComponent extends CrudFormComponent<Saida, number> {
   }
 
   initializeValues(): void {
-    this.object.dataSaida = new Date().toLocaleDateString();
+    this.object.dataSaida = this.datepipe.transform(new Date().toLocaleDateString(), 'dd/MM/yyyy');
     this.setUsuarioResponsavel();
   }
 

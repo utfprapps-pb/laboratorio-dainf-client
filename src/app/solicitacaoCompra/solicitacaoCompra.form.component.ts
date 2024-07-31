@@ -4,11 +4,12 @@ import {SolicitacaoCompra} from './solicitacaoCompra';
 import {SolicitacaoCompraService} from './solicitacaoCompra.service';
 import {SolicitacaoCompraItem} from './solicitacaoCompraItem';
 import {MatTable} from '@angular/material/table';
-import {AutoComplete} from 'primeng';
+import {AutoComplete} from 'primeng/autocomplete';
 import {ItemService} from '../item/item.service';
 import {UsuarioService} from '../usuario/usuario.service';
 import {Item} from '../item/item';
 import {pt} from '../framework/constantes/calendarPt';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-form-solicitacao-compra',
@@ -20,6 +21,7 @@ export class SolicitacaoCompraFormComponent extends CrudFormComponent<Solicitaca
   @ViewChild('table') table: MatTable<any>;
   @ViewChild('itemToAdd') itemToAdd: AutoComplete;
   @ViewChild('qtdeToAdd') qtdeToAdd: ElementRef;
+  datepipe: DatePipe = new DatePipe('pt-BR');
   displayedColumns = ['item', 'qtde', 'actionsForm'];
   solicitacaoCompraItem: SolicitacaoCompraItem;
   itemList: Item[];
@@ -35,7 +37,7 @@ export class SolicitacaoCompraFormComponent extends CrudFormComponent<Solicitaca
   }
 
   initializeValues(): void {
-    this.object.dataSolicitacao = new Date().toLocaleDateString();
+    this.object.dataSolicitacao = this.datepipe.transform(new Date().toLocaleDateString(), 'dd/MM/yyyy');
     this.setUsuarioResponsavel();
   }
 

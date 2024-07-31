@@ -134,7 +134,7 @@
         </div>
 
         <div class="row" *ngIf="!disableForm">
-          <div class="col-md-7">
+          <div class="col-md-6">
             <div class="form-group">
               <label for="item">Item</label>
               <app-cadastroRapido [href]="'/item/form'" [id]="emprestimoItem?.item?.id"></app-cadastroRapido>
@@ -182,6 +182,7 @@
                      autocomplete="off"
                      #qtdeToAdd
                      onlyNumber
+                     [disabled]="emprestimoItem?.item?.patrimonio != null"
                      [(ngModel)]="emprestimoItem.qtde"
                      (keyup.control.arrowLeft)="setFocusInputItem()"
                      (keyup.control.enter)="insertItem()"
@@ -191,15 +192,15 @@
             </div>
           </div>
 
-          <div class="col-md-1">
+          <div class="col-md-2">
             <div class="form-group">
               <label class="invisible">Action</label>
               <button type="button"
-                      style="height: 35px"
+                      style="height: 35px; justify-content: center;display: flex; align-items: center;"
                       class="form-control"
                       (click)="insertItem()"
                       mat-stroked-button>
-                <mat-icon>done</mat-icon>
+                <mat-icon>done</mat-icon> <span>Adicionar</span>
               </button>
             </div>
           </div>

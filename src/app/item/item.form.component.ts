@@ -5,7 +5,8 @@ import {Item} from './item';
 import {ItemService} from './item.service';
 import {Grupo} from '../grupo/grupo';
 import {GrupoService} from '../grupo/grupo.service';
-import {FileUpload, SelectItem} from 'primeng';
+import {FileUpload} from 'primeng/fileupload';
+import {SelectItem} from 'primeng/api';
 import {environment} from '../../environments/environment';
 import Swal from 'sweetalert2';
 import {ItemImage} from './itemImage';
@@ -26,12 +27,13 @@ export class ItemFormComponent extends CrudFormComponent<Item, number> {
   callback: Function;
   grupoList: Grupo[];
   tipoItem: SelectItem[];
+  minioUrl: String;
 
   constructor(protected itemService: ItemService,
               protected injector: Injector,
               private grupoService: GrupoService) {
     super(itemService, injector, '/item');
-
+    this.minioUrl = environment.minio_url;
     this.tipoItem = [
       {label: 'Consumo', value: 'C'},
       {label: 'Permanente', value: 'P'}

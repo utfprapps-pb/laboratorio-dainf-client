@@ -1,9 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {SidenavService} from './sidenav.service';
-import {MatDrawer} from '@angular/material/sidenav';
-import {browserChange} from '../app.component';
-import {LoginService} from '../login/login.service';
-import {UsuarioService} from '../usuario/usuario.service';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { SidenavService } from "./sidenav.service";
+import { MatDrawer } from "@angular/material/sidenav";
+import { browserChange } from "../app.component";
+import { LoginService } from "../login/login.service";
+import { UsuarioService } from "../usuario/usuario.service";
 
 export interface MenuItem {
   path: string;
@@ -16,97 +16,107 @@ export interface MenuItem {
 
 export const MENU_ITEM: MenuItem[] = [
   {
-    path: '/',
-    title: 'Home',
-    icon: 'home',
-    id: 'home',
-    group: 'ITEM'
+    path: "/",
+    title: "Home",
+    icon: "home",
+    id: "home",
+    group: "ITEM",
   },
   {
-    path: '/emprestimo',
-    title: 'Empréstimo',
-    icon: 'handshake-o',
-    id: 'emprestimo',
-    group: 'ITEM'},
+    path: "/emprestimo",
+    title: "Empréstimo",
+    icon: "handshake-o",
+    id: "emprestimo",
+    group: "ITEM",
+  },
   {
-    path: '/reserva',
-    title: 'Reserva',
-    icon: 'paste',
-    id: 'reserva',
-    group: 'ITEM'},
+    path: "/item",
+    title: "Item",
+    icon: "microchip",
+    id: "item",
+    group: "CADASTRO",
+  },
   {
-    path: '/solicitacao-compra',
-    title: 'Solicitação de Compra',
-    icon: 'list',
-    id: 'solicitacao',
-    group: 'ITEM'},
+    path: "/grupo",
+    title: "Grupo",
+    icon: "sitemap",
+    id: "grupo",
+    roles: ["ADMINISTRADOR", "LABORATORISTA"],
+    group: "CADASTRO",
+  },
   {
-    path: '/saida',
-    title: 'Saída',
-    icon: 'arrow-down',
-    id: 'saida',
-    roles: ['ADMINISTRADOR', 'LABORATORISTA'],
-    group: 'ITEM'},
+    path: "/fornecedor",
+    title: "Fornecedor",
+    icon: "briefcase",
+    id: "fornecedor",
+    roles: ["ADMINISTRADOR", "LABORATORISTA"],
+    group: "CADASTRO",
+  },
   {
-    path: '/compra',
-    title: 'Compra',
-    icon: 'shopping-cart',
-    id: 'compra',
-    roles: ['ADMINISTRADOR', 'LABORATORISTA'],
-    group: 'ITEM'},
+    path: "/usuario",
+    title: "Usuário",
+    icon: "users",
+    id: "usuario",
+    roles: ["ADMINISTRADOR"],
+    group: "CADASTRO",
+  },
   {
-    path: '/relatorio',
-    title: 'Relatórios',
-    icon: 'line-chart',
-    id: 'relatorios',
-    roles: ['ADMINISTRADOR', 'LABORATORISTA'],
-    group: 'ITEM'},
+    path: "/saida",
+    title: "Saída",
+    icon: "arrow-down",
+    id: "saida",
+    roles: ["ADMINISTRADOR", "LABORATORISTA"],
+    group: "ITEM",
+  },
   {
-    path: '/item',
-    title: 'Item',
-    icon: 'microchip',
-    id: 'item',
-    group: 'CADASTRO'},
+    path: "/reserva",
+    title: "Reserva",
+    icon: "paste",
+    id: "reserva",
+    group: "ITEM",
+  },
   {
-    path: '/grupo',
-    title: 'Grupo',
-    icon: 'sitemap',
-    id: 'grupo',
-    roles: ['ADMINISTRADOR', 'LABORATORISTA'],
-    group: 'CADASTRO'},
+    path: "/solicitacao-compra",
+    title: "Sol. de Compra",
+    icon: "list",
+    id: "solicitacao",
+    group: "ITEM",
+  },
   {
-    path: '/fornecedor',
-    title: 'Fornecedor',
-    icon: 'briefcase',
-    id: 'fornecedor',
-    roles: ['ADMINISTRADOR', 'LABORATORISTA'],
-    group: 'CADASTRO'},
+    path: "/compra",
+    title: "Compra",
+    icon: "shopping-cart",
+    id: "compra",
+    roles: ["ADMINISTRADOR", "LABORATORISTA"],
+    group: "ITEM",
+  },
   {
-    path: '/usuario',
-    title: 'Usuário',
-    icon: 'users',
-    id: 'usuario',
-    roles: ['ADMINISTRADOR'],
-    group: 'CADASTRO'},
+    path: "/relatorio",
+    title: "Relatórios",
+    icon: "line-chart",
+    id: "relatorios",
+    roles: ["ADMINISTRADOR", "LABORATORISTA"],
+    group: "ITEM",
+  },
 ];
 
 @Component({
-  selector: 'app-sidenav',
-  templateUrl: './sidenav.component.html',
-  styleUrls: ['./sidenav.component.css']
+  selector: "app-sidenav",
+  templateUrl: "./sidenav.component.html",
+  styleUrls: ["./sidenav.component.css"],
 })
 export class SidenavComponent implements OnInit {
-
   public menuItems: any[];
   public menuCadastros: any[];
   display = false;
   showSubMenuCadastro = false;
-  @ViewChild('drawer') drawer: MatDrawer;
+  @ViewChild("drawer") drawer: MatDrawer;
 
-  constructor(private sidenavService: SidenavService,
-              private loginService: LoginService,
-              private usuarioService: UsuarioService) {
-  }
+  constructor(
+    private sidenavService: SidenavService,
+    private loginService: LoginService,
+    private usuarioService: UsuarioService
+  ) {}
 
   ngOnInit(): void {
     this.buildMenu();
@@ -119,33 +129,33 @@ export class SidenavComponent implements OnInit {
   buildMenu() {
     this.menuItems = new Array();
     this.menuCadastros = new Array();
-    this.loginService.getPermissoesUser()
-      .subscribe(permissoes => {
-        const userRoles = permissoes.map((x: any) =>
-          x.nome.replace('ROLE_', '')
-        );
-        const items = [];
-        MENU_ITEM.forEach((menu: any) => {
-          if (menu.roles != null) {
-            if (menu.roles.filter(value => -1 !== userRoles.indexOf(value)).length > 0) {
-              items.push(menu);
-            }
-          } else {
+    this.loginService.getPermissoesUser().subscribe((permissoes) => {
+      const userRoles = permissoes.map((x: any) => x.nome.replace("ROLE_", ""));
+      const items = [];
+      MENU_ITEM.forEach((menu: any) => {
+        if (menu.roles != null) {
+          if (
+            menu.roles.filter((value) => -1 !== userRoles.indexOf(value))
+              .length > 0
+          ) {
             items.push(menu);
           }
-        });
-        items.forEach(value => {
-          if (value.group === 'ITEM') {
-            this.menuItems.push(value);
-          } else if (value.group === 'CADASTRO') {
-            this.menuCadastros.push(value);
-          }
-        });
+        } else {
+          items.push(menu);
+        }
       });
+      items.forEach((value) => {
+        if (value.group === "ITEM") {
+          this.menuItems.push(value);
+        } else if (value.group === "CADASTRO") {
+          this.menuCadastros.push(value);
+        }
+      });
+    });
   }
 
   initObservableDrawer() {
-    this.sidenavService.observable().subscribe(hide => {
+    this.sidenavService.observable().subscribe((hide) => {
       if (this.drawer != null) {
         if (hide) {
           this.drawer.close();
@@ -158,7 +168,7 @@ export class SidenavComponent implements OnInit {
   }
 
   initObservableMenuItem() {
-    browserChange.asObservable().subscribe(value => {
+    browserChange.asObservable().subscribe((value) => {
       if (value) {
         this.changeColorMenuItem();
       }
@@ -172,13 +182,14 @@ export class SidenavComponent implements OnInit {
   changeColorMenuItem() {
     const that = this;
     setTimeout(() => {
-      const pathCurrent = '/' + window.location.href.split('#')[1].split('/')[1];
-      if (pathCurrent !== '/login') {
-        that.menuItems.forEach(menu => {
+      const pathCurrent =
+        "/" + window.location.href.split("#")[1].split("/")[1];
+      if (pathCurrent !== "/login") {
+        that.menuItems.forEach((menu) => {
           that.setColorMenuItem(menu, pathCurrent);
         });
         if (that.showSubMenuCadastro) {
-          that.menuCadastros.forEach(menu => {
+          that.menuCadastros.forEach((menu) => {
             that.setColorMenuItem(menu, pathCurrent);
           });
         }
@@ -186,20 +197,19 @@ export class SidenavComponent implements OnInit {
     }, 100);
   }
 
-  setColorMenuItem(menu: MenuItem, path) {
+  setColorMenuItem(menu: MenuItem, path) {    
     if (menu.path === path) {
-      document.getElementById(menu.id).style.backgroundColor = '#1b2231';
+      document.getElementById(menu.id).style.backgroundColor = "#1b2231";
     } else {
-      document.getElementById(menu.id).style.backgroundColor = 'transparent';
+      document.getElementById(menu.id).style.backgroundColor = "transparent";
     }
   }
 
-
   changeStylesDrawer() {
     if (window.innerWidth < 1200) {
-      document.getElementById('drawer').classList.remove('float-drawer');
+      document.getElementById("drawer").classList.remove("float-drawer");
     } else {
-      document.getElementById('drawer').classList.add('float-drawer');
+      document.getElementById("drawer").classList.add("float-drawer");
     }
   }
 }
