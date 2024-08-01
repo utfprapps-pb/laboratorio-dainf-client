@@ -15,7 +15,7 @@ import {Reserva} from '../reserva/reserva';
 })
 export class ItemListComponent extends CrudListComponent<Item, number> {
 
-  isAlunoOrProfessor;
+  isAlunoOrProfessor = false;
   reservasItem: Reserva[];
   dialogReservaitem = false;
   displayedColumnsReserva = ['dataRetirada', 'qtde'];

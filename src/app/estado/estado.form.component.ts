@@ -14,7 +14,7 @@ import {PaisService} from '../pais/pais.service';
 export class EstadoFormComponent extends CrudFormComponent<Estado, number> {
 
   paisList: Pais[];
-  @ViewChild('form', {static: true}) form: NgForm;
+  @ViewChild('form', {static: true}) frm: NgForm;
 
   constructor(protected estadoService: EstadoService,
               protected injector: Injector,

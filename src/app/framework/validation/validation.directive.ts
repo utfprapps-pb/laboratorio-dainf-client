@@ -1,6 +1,6 @@
 import {Directive, ElementRef, Input, OnInit} from '@angular/core';
 import {NgControl} from '@angular/forms';
-import * as $ from 'jquery';
+import $ from 'jquery';
 import {ValidationService} from './validation.service';
 
 @Directive({

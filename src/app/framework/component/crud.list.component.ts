@@ -22,7 +22,7 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
   protected bottom: MatBottomSheet;
   protected loaderService: LoaderService;
   protected loginService: LoginService;
-  public displayedColumns: string[] = this.columnsTable;
+  public displayedColumns: string[]; // = this.columnsTable;
   public dataSource: MatTableDataSource<T>;
   public bottomSheetEnabled = true;
   public hostListenerColumnEnable = true;
@@ -47,6 +47,7 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
     this.bottom = injector.get(MatBottomSheet);
     this.loaderService = injector.get(LoaderService);
     this.loginService = injector.get(LoginService);
+    this.displayedColumns = this.columnsTable;
   }
 
   applyFilter(filterValue: string) {

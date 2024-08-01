@@ -19,7 +19,7 @@ import {ItemImage} from './itemImage';
 export class ItemFormComponent extends CrudFormComponent<Item, number> {
 
   @ViewChild('fileUpload') fileUpload: FileUpload;
-  @ViewChild('form', {static: true}) form: NgForm;
+  @ViewChild('form', {static: true}) frm: NgForm;
   uploadedFiles: any[] = [];
   responsiveOptions;
   images: ItemImage[];

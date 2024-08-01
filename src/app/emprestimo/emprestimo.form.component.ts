@@ -23,7 +23,7 @@ import { DatePipe } from '@angular/common';
 })
 export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, number> {
 
-  @ViewChild('form') form: NgForm;
+  @ViewChild('form') frm: NgForm;
   @ViewChild('table') table: MatTable<any>;
   @ViewChild('itemToAdd') itemToAdd: ElementRef;
   @ViewChild('qtdeToAdd') qtdeToAdd: ElementRef;
