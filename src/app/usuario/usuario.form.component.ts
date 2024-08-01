@@ -12,7 +12,7 @@ import {SelectItem} from 'primeng/api';
 })
 export class UsuarioFormComponent extends CrudFormComponent<Usuario, number> {
 
-  @ViewChild('form', {static: true}) form: NgForm;
+  @ViewChild('form', {static: true}) frm: NgForm;
   @ViewChild('formChangeSenha', {static: true}) formChangeSenha: NgForm;
   grupoAcessoDropdown: SelectItem[];
   dialogChangeSenha = false;

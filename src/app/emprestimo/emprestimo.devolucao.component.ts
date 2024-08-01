@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
 })
 export class EmprestimoDevolucaoComponent extends CrudFormComponent<Emprestimo, number> {
 
-  @ViewChild('form') form: NgForm;
+  @ViewChild('form') frm: NgForm;
   @ViewChild('table') table: MatTable<any>;
   @ViewChild(MatMenuTrigger) contextMenu: MatMenuTrigger;
 

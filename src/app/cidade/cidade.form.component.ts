@@ -15,7 +15,7 @@ export class CidadeFormComponent extends CrudFormComponent<Cidade, number> {
 
   estadosList: Estado[];
 
-  @ViewChild('form', {static: true}) form: NgForm;
+  @ViewChild('form', {static: true}) frm: NgForm;
 
   constructor(protected cidadeService: CidadeService,
               protected injector: Injector,

@@ -11,7 +11,7 @@ import {CrudFormComponent} from '../framework/component/crud.form.component';
 })
 export class PaisFormComponent extends CrudFormComponent<Pais, number> {
 
-  @ViewChild('form', {static: true}) form: NgForm;
+  @ViewChild('form', {static: true}) frm: NgForm;
 
   constructor(protected paisService: PaisService,
               protected injector: Injector) {

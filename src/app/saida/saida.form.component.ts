@@ -24,7 +24,7 @@ export class SaidaFormComponent extends CrudFormComponent<Saida, number> {
   maxDate = new Date();
   displayedColumns = ['item', 'qtde', 'actionsForm'];
   @ViewChild('table') table: MatTable<any>;
-  @ViewChild('itemToAdd') itemToAdd: AutoComplete;
+  @ViewChild('itemToAdd') itemToAdd: ElementRef;
   @ViewChild('qtdeToAdd') qtdeToAdd: ElementRef;
   localePt: any;
 
@@ -43,7 +43,7 @@ export class SaidaFormComponent extends CrudFormComponent<Saida, number> {
   }
 
   setFocusInputItem() {
-    this.itemToAdd.focusInput();
+    this.itemToAdd.nativeElement.focus();
   }
 
   setFocusQtdeToAdd() {

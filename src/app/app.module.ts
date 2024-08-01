@@ -6,7 +6,11 @@ import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HomeModule } from "./home/home.module";
 import { ToolbarModule } from "./toolbar/toolbar.module";
-import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import {
+  HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from "@angular/common/http";
 import { SidenavModule } from "./sidenav/sidenav.module";
 import { GrupoModule } from "./grupo/grupo.module";
 import {
@@ -55,6 +59,7 @@ registerLocaleData(ptBr);
 
 @NgModule({
   declarations: [AppComponent],
+  bootstrap: [AppComponent],
   imports: [
     BrowserModule,
     CommonModule,
@@ -62,7 +67,6 @@ registerLocaleData(ptBr);
     AppRoutingModule,
     HomeModule,
     ToolbarModule,
-    HttpClientModule,
     ToastModule,
     SidenavModule,
     GrupoModule,
@@ -134,7 +138,7 @@ registerLocaleData(ptBr);
         },
       } as SocialAuthServiceConfig,
     },
+    provideHttpClient(withInterceptorsFromDi()),
   ],
-  bootstrap: [AppComponent],
 })
 export class AppModule {}

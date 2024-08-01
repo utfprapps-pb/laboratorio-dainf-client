@@ -19,7 +19,7 @@ import { DatePipe } from '@angular/common';
 export class SolicitacaoCompraFormComponent extends CrudFormComponent<SolicitacaoCompra, number> {
 
   @ViewChild('table') table: MatTable<any>;
-  @ViewChild('itemToAdd') itemToAdd: AutoComplete;
+  @ViewChild('itemToAdd') itemToAdd: ElementRef;
   @ViewChild('qtdeToAdd') qtdeToAdd: ElementRef;
   datepipe: DatePipe = new DatePipe('pt-BR');
   displayedColumns = ['item', 'qtde', 'actionsForm'];
@@ -103,7 +103,8 @@ export class SolicitacaoCompraFormComponent extends CrudFormComponent<Solicitaca
   }
 
   setFocusInputItem() {
-    this.itemToAdd.focusInput();
+    // this.itemToAdd.focusInput();
+    this.itemToAdd.nativeElement.focus();
   }
 
   setFocusQtdeToAdd() {

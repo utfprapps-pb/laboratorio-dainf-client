@@ -1,6 +1,6 @@
 import {FormControl, NgForm} from '@angular/forms';
 import { ViewChild, Directive } from '@angular/core';
-import * as $ from 'jquery';
+import $ from 'jquery';
 
 @Directive()
 export abstract class BaseFormComponent {

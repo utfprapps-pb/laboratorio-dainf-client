@@ -20,7 +20,7 @@ import { Usuario } from '../usuario/usuario';
 export class ReservaFormComponent extends CrudFormComponent<Reserva, number> {
 
   @ViewChild('table') table: MatTable<any>;
-  @ViewChild('itemToAdd') itemToAdd: AutoComplete;
+  @ViewChild('itemToAdd') itemToAdd: ElementRef;
   @ViewChild('qtdeToAdd') qtdeToAdd: ElementRef;
 
   datepipe: DatePipe = new DatePipe('pt-BR')
@@ -38,7 +38,7 @@ export class ReservaFormComponent extends CrudFormComponent<Reserva, number> {
     this.localePt = pt;
   }
 
-  initializeValues(): void {   
+  initializeValues(): void {
     this.object.usuario = new Usuario();
     this.object.dataReserva = this.datepipe.transform(new Date().toLocaleDateString(), 'dd/MM/yyyy');
     this.setUsuarioResponsavel();
@@ -110,7 +110,7 @@ export class ReservaFormComponent extends CrudFormComponent<Reserva, number> {
   }
 
   setFocusInputItem() {
-    this.itemToAdd.focusInput();
+    this.itemToAdd.nativeElement.focus();
   }
 
   setFocusQtdeToAdd() {

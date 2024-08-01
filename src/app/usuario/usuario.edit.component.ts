@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
   styleUrls: ["./usuario.edit.component.css"],
 })
 export class UsuarioEditComponent extends CrudFormComponent<Usuario, number> {
-  @ViewChild("form", { static: true }) form: NgForm;
+  @ViewChild("form", { static: true }) frm: NgForm;
   @ViewChild("formChangeSenha", { static: true }) formChangeSenha: NgForm;
   grupoAcessoDropdown: SelectItem[];
   dialogChangeSenha = false;
@@ -99,8 +99,8 @@ export class UsuarioEditComponent extends CrudFormComponent<Usuario, number> {
       this.usuarioService.updateUser(this.object).subscribe({
         next: (e) => {
           localStorage.setItem("userLogged", JSON.stringify(this.object));
-          this.loaderService.display(false);            
-          Swal.fire("Sucesso!", "Registro salvo com sucesso!", "success");            
+          this.loaderService.display(false);
+          Swal.fire("Sucesso!", "Registro salvo com sucesso!", "success");
         },
         error: (error) => {
           this.loaderService.display(false);
@@ -108,7 +108,7 @@ export class UsuarioEditComponent extends CrudFormComponent<Usuario, number> {
             "Atenção!",
             "Ocorreu um erro ao salvar o registro!",
             "error"
-          );          
+          );
         },
       });
     } else {
