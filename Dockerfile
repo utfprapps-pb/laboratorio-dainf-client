@@ -1,5 +1,6 @@
 # build environment
-FROM node:20-alpine as build
+FROM node:21 as build
+RUN npm install -g @angular/cli
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json /app/package.json
