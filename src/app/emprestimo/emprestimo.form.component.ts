@@ -23,9 +23,9 @@ import { DatePipe } from '@angular/common';
 })
 export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, number> {
 
-  @ViewChild('form') form: NgForm;
+  @ViewChild('form') frm: NgForm;
   @ViewChild('table') table: MatTable<any>;
-  @ViewChild('itemToAdd') itemToAdd: AutoComplete;
+  @ViewChild('itemToAdd') itemToAdd: ElementRef;
   @ViewChild('qtdeToAdd') qtdeToAdd: ElementRef;
 
   datepipe: DatePipe = new DatePipe('pt-BR');
@@ -55,7 +55,7 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
     this.localePt = pt;
   }
 
-  initializeValues(): void {    
+  initializeValues(): void {
     this.object.usuarioResponsavel = new Usuario();
     this.object.dataEmprestimo = this.datepipe.transform(new Date().toLocaleDateString(), 'dd/MM/yyyy');
     this.setDateMinPrazoDevolucao();
@@ -168,7 +168,7 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
   }
 
   setFocusInputItem() {
-    this.itemToAdd.focusInput();
+    this.itemToAdd.nativeElement.focus();
   }
 
   setFocusInputQtde() {
@@ -180,7 +180,7 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
     this.emprestimoItem.qtde = null;
   }
 
-  setDateMinPrazoDevolucao() {    
+  setDateMinPrazoDevolucao() {
     this.minDatePrazoDevolucao = DateUtil.parseStringToDate(this.datepipe.transform(this.object.dataEmprestimo, 'MM/dd/yyyy'));
   }
 

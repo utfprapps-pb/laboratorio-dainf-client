@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {Inject, Injectable} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
 import {DashboardEmprestimoCountRange} from './dashboard/dashboardEmprestimoCountRange';
@@ -13,7 +13,7 @@ export class HomeService {
 
   url: string;
 
-  constructor(private http: HttpClient) {
+  constructor(@Inject(HttpClient) private http: HttpClient) {
     this.url = `${environment.api_url}dashboard/`;
   }
 

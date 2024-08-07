@@ -18,7 +18,7 @@ export class FornecedorFormComponent extends CrudFormComponent<Fornecedor, numbe
   cidadeList: Cidade[];
   estadoList: Estado[];
 
-  @ViewChild('form', {static: true}) form: NgForm;
+  @ViewChild('form', {static: true}) frm: NgForm;
 
   constructor(protected fornecedorService: FornecedorService,
               protected injector: Injector,

@@ -28,7 +28,7 @@ export class CompraFormComponent extends CrudFormComponent<Compra, number> {
   dataSource: MatTableDataSource<CompraItem>;
   maxDate = new Date();
   @ViewChild('table') table: MatTable<any>;
-  @ViewChild('itemToAdd') itemToAdd: AutoComplete;
+  @ViewChild('itemToAdd') itemToAdd: ElementRef;
   @ViewChild('qtdeToAdd') qtdeToAdd: ElementRef;
   localePt: any;
 
@@ -126,7 +126,7 @@ export class CompraFormComponent extends CrudFormComponent<Compra, number> {
   }
 
   setFocusInputItem() {
-    this.itemToAdd.focusInput();
+    this.itemToAdd.nativeElement.focus;
   }
 
   save() {
