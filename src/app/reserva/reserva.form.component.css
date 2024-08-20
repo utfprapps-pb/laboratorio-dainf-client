@@ -9,3 +9,15 @@
 .mat-column-qtde {
   max-width: 5% !important;
 }
+
+.link-imagens {
+  color: #292929;
+  float: right;
+  font-size: 1em;
+  position: relative;
+  top: 6px;
+  padding-right: 10px;
+}
+.link-imagens:hover {
+  text-decoration: none;
+}

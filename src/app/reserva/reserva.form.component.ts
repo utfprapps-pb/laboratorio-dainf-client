@@ -1,67 +1,89 @@
-import {Component, ElementRef, Injector, ViewChild} from '@angular/core';
-import {CrudFormComponent} from '../framework/component/crud.form.component';
-import {Reserva} from './reserva';
-import {ReservaService} from './reserva.service';
-import {ReservaItem} from './reservaItem';
-import {MatTable} from '@angular/material/table';
-import {AutoComplete} from 'primeng/autocomplete';
-import {Item} from '../item/item';
-import {ItemService} from '../item/item.service';
-import {UsuarioService} from '../usuario/usuario.service';
-import {pt} from '../framework/constantes/calendarPt';
-import { DatePipe } from '@angular/common';
-import { Usuario } from '../usuario/usuario';
+import { Component, ElementRef, Injector, ViewChild } from "@angular/core";
+import { CrudFormComponent } from "../framework/component/crud.form.component";
+import { Reserva } from "./reserva";
+import { ReservaService } from "./reserva.service";
+import { ReservaItem } from "./reservaItem";
+import { MatTable } from "@angular/material/table";
+import { AutoComplete } from "primeng/autocomplete";
+import { Item } from "../item/item";
+import { ItemService } from "../item/item.service";
+import { UsuarioService } from "../usuario/usuario.service";
+import { pt } from "../framework/constantes/calendarPt";
+import { DatePipe } from "@angular/common";
+import { Usuario } from "../usuario/usuario";
+import { ItemImage } from "../item/itemImage";
+import { environment } from "src/environments/environment";
+import Swal from "sweetalert2";
 
 @Component({
-  selector: 'app-form-reserva',
-  templateUrl: './reserva.form.component.html',
-  styleUrls: ['./reserva.form.component.css']
+  selector: "app-form-reserva",
+  templateUrl: "./reserva.form.component.html",
+  styleUrls: ["./reserva.form.component.css"],
 })
 export class ReservaFormComponent extends CrudFormComponent<Reserva, number> {
+  @ViewChild("table") table: MatTable<any>;
+  @ViewChild("itemToAdd") itemToAdd: ElementRef;
+  @ViewChild("qtdeToAdd") qtdeToAdd: ElementRef;
 
-  @ViewChild('table') table: MatTable<any>;
-  @ViewChild('itemToAdd') itemToAdd: ElementRef;
-  @ViewChild('qtdeToAdd') qtdeToAdd: ElementRef;
-
-  datepipe: DatePipe = new DatePipe('pt-BR')
-  displayedColumns = ['item', 'qtde', 'actionsForm'];
+  datepipe: DatePipe = new DatePipe("pt-BR");
+  displayedColumns = ["item", "qtde", "actionsForm"];
   reservaItem: ReservaItem;
   itemList: Item[];
   localePt: any;
+  images: ItemImage[];
+  dialogImagens = false;
+  minioUrl: String;
+  responsiveOptions;
 
-  constructor(protected reservaService: ReservaService,
-              protected injector: Injector,
-              private itemService: ItemService,
-              private usuarioService: UsuarioService) {
-    super(reservaService, injector, '/reserva');
+  constructor(
+    protected reservaService: ReservaService,
+    protected injector: Injector,
+    private itemService: ItemService,
+    private usuarioService: UsuarioService
+  ) {
+    super(reservaService, injector, "/reserva");
+    this.minioUrl = environment.minio_url;
     this.reservaItem = new ReservaItem();
     this.localePt = pt;
+    this.responsiveOptions = [
+      {
+        breakpoint: "768px",
+        numVisible: 2,
+        numScroll: 2,
+      },
+      {
+        breakpoint: "560px",
+        numVisible: 1,
+        numScroll: 1,
+      },
+    ];
   }
 
   initializeValues(): void {
     this.object.usuario = new Usuario();
-    this.object.dataReserva = this.datepipe.transform(new Date().toLocaleDateString(), 'dd/MM/yyyy');
+    this.object.dataReserva = this.datepipe.transform(
+      new Date().toLocaleDateString(),
+      "dd/MM/yyyy"
+    );
     this.setUsuarioResponsavel();
   }
 
   setUsuarioResponsavel() {
-    const username = localStorage.getItem('username');
-    this.usuarioService.findByUsername(username)
-      .subscribe(e => {
-        this.object.usuario = e;
-      });
+    const username = localStorage.getItem("username");
+    this.usuarioService.findByUsername(username).subscribe((e) => {
+      this.object.usuario = e;
+    });
   }
 
   findProdutos($event) {
-    this.itemService.completeItem($event.query, true)
-      .subscribe(e => {
-        this.itemList = e;
-      });
+    this.itemService.completeItem($event.query, true).subscribe((e) => {
+      this.itemList = e;
+    });
   }
 
   removeItem(id: number) {
     let index;
-    this.object.reservaItem.forEach(empItem => {
+    this.object.reservaItem.forEach((empItem) => {
       if (empItem.item.id === id) {
         index = this.object.reservaItem.indexOf(empItem);
       }
@@ -73,7 +95,9 @@ export class ReservaFormComponent extends CrudFormComponent<Reserva, number> {
   getQtdeTotal() {
     const valid = this?.object?.reservaItem;
     if (valid) {
-      return this.object.reservaItem.map(t => t.qtde).reduce((acc, value) => Number(acc) + Number(value), 0);
+      return this.object.reservaItem
+        .map((t) => t.qtde)
+        .reduce((acc, value) => Number(acc) + Number(value), 0);
     }
   }
 
@@ -83,11 +107,14 @@ export class ReservaFormComponent extends CrudFormComponent<Reserva, number> {
         if (!this.object.reservaItem) {
           this.object.reservaItem = new Array();
         }
-        const upQtde = this.object.reservaItem.some(value => value.item.id === this.reservaItem.item.id);
+        const upQtde = this.object.reservaItem.some(
+          (value) => value.item.id === this.reservaItem.item.id
+        );
         if (upQtde) {
-          this.object.reservaItem.forEach(empItem => {
+          this.object.reservaItem.forEach((empItem) => {
             if (empItem.item.id === this.reservaItem.item.id) {
-              const novaQtde = Number(empItem.qtde) + Number(this.reservaItem.qtde);
+              const novaQtde =
+                Number(empItem.qtde) + Number(this.reservaItem.qtde);
               if (this.saldoItemIsValid(novaQtde)) {
                 empItem.qtde = novaQtde;
               }
@@ -99,7 +126,10 @@ export class ReservaFormComponent extends CrudFormComponent<Reserva, number> {
         this.postInsertItemList();
       }
     } else {
-      this.messageService.add({severity: 'info', detail: 'Necessário informar o item e a quantidade.'});
+      this.messageService.add({
+        severity: "info",
+        detail: "Necessário informar o item e a quantidade.",
+      });
     }
   }
 
@@ -118,9 +148,14 @@ export class ReservaFormComponent extends CrudFormComponent<Reserva, number> {
   }
 
   saldoItemIsValid(qtdeInserir) {
-    const isValid = this.reservaItem.item.saldo > 0 && qtdeInserir <= this.reservaItem.item.saldo;
+    const isValid =
+      this.reservaItem.item.saldo > 0 &&
+      qtdeInserir <= this.reservaItem.item.saldo;
     if (!isValid) {
-      this.messageService.add({severity: 'info', detail: 'A quantidade é maior do que o saldo atual do item.'});
+      this.messageService.add({
+        severity: "info",
+        detail: "A quantidade é maior do que o saldo atual do item.",
+      });
       return false;
     }
     return true;
@@ -133,5 +168,22 @@ export class ReservaFormComponent extends CrudFormComponent<Reserva, number> {
       this.validExtra = true;
     }
     super.save();
+  }
+
+  showDialogImagens() {
+    this.loaderService.display(true);
+    console.log(this.reservaItem.item.imageItem[0]);
+    this.itemService.findAllImagesItem(this.reservaItem.item.id)
+      .subscribe(e => {
+        this.loaderService.display(false);
+        if (e.length > 0) {
+          this.images = e;
+          this.dialogImagens = true;
+        } else {
+          Swal.fire('Ops...', 'Esse item não possui imagens.', 'info');
+        }
+      }, error => {
+        this.loaderService.display(false);
+      });
   }
 }
