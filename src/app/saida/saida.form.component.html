@@ -65,7 +65,7 @@
                               appendTo="body"
                               field="nome"
                               #itemToAdd
-                              inputStyleClass="form-control"
+                              [style]="{'width':'100%'}" [inputStyle]="{'width':'95%'}"
                               [dropdown]="true"
                               (onSelect)="setQtdeDefaultItem()"
                               (keyup.control.arrowRight)="setFocusQtdeToAdd()"

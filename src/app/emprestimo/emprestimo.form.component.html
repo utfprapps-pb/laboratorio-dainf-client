@@ -1,285 +1,345 @@
-<div class="container-fluid my-3">
-  <mat-card>
-    <mat-card-title>
+<div class="container" style="margin-bottom: 500px;">
+  <p-card>
+    <ng-template pTemplate="header">
       <div class="d-flex align-items-center justify-content-between">
         <div class="d-flex align-items-center">
           <app-voltar (onClick)="back()"></app-voltar>
           <h4 class="m-0">Cadastro de Empréstimo</h4>
         </div>
-        <span *ngIf="object.dataDevolucao" class="badge badge-success float-right" style="font-size: 15px">Empréstimo Finalizado</span>
+        <span
+          *ngIf="object.dataDevolucao"
+          class="badge badge-success float-right"
+          style="font-size: 15px"
+          >Empréstimo Finalizado</span
+        >
       </div>
-    </mat-card-title>
-    <mat-card-content>
-      <form #form="ngForm">
-        <div class="row">
-          <div class="col-md-2">
-            <div class="form-group">
-              <label for="id">Código</label>
-              <input type="text"
-                     id="id"
-                     name="id"
-                     disabled
-                     class="form-control"
-                     [(ngModel)]="object.id"
-                     pInputText>
-            </div>
-          </div>
+    </ng-template>
 
-          <div class="col-md-8">
-            <div class="form-group">
-              <label for="usuarioEmprestimo">Aluno/Professor</label>
-              <span class="field-required">*</span>
-              <p-autoComplete id="usuarioEmprestimo"
-                              name="usuarioEmprestimo"
-                              required
-                              validation
-                              appendTo="body"
-                              field="nome"
-                              inputStyleClass="form-control"
-                              [forceSelection]="true"
-                              [dropdown]="true"
-                              [(ngModel)]="object.usuarioEmprestimo"
-                              (ngModelChange)="documentoUsuario = object.usuarioEmprestimo.documento"
-                              [suggestions]="usuarioList"
-                              [disabled]="disableForm"
-                              (onClear)="object.usuarioEmprestimo = null"
-                              (completeMethod)="findUsuarios($event)">
-              </p-autoComplete>
-            </div>
-          </div>
-
-          <div class="col-md-2">
-            <div class="form-group">
-              <label for="documento">RA/SIAPE</label>
-              <input type="text"
-                     id="documento"
-                     name="documento"
-                     class="form-control"
-                     pInputText
-                     [(ngModel)]="documentoUsuario"
-                     disabled>
-            </div>
+    <form #form="ngForm">
+      <div class="row">
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="id">Código</label>
+            <input
+              type="text"
+              id="id"
+              name="id"
+              disabled
+              class="form-control"
+              [(ngModel)]="object.id"
+              pInputText
+            />
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="usuarioResponsavel">Usuário Responsável</label>
-              <input type="text"
-                     id="usuarioResponsavel"
-                     name="usuarioResponsavel"
-                     class="form-control"
-                     pInputText
-                     [(ngModel)]="object.usuarioResponsavel.nome"
-                     disabled>
-            </div>
-          </div>
-
-          <div class="col-md-2">
-            <div class="form-group">
-              <label for="dataEmprestimo">Data do Empréstimo</label>
-              <span class="field-required">*</span>
-              <p-calendar name="dataEmprestimo"
-                          id="dataEmprestimo"
-                          required
-                          validation
-                          dataType="string"
-                          dateFormat="dd/mm/yy"
-                          inputStyleClass="form-control"
-                          (onSelect)="setDateMinPrazoDevolucao()"
-                          [disabled]="disableForm"
-                          [maxDate]="maxDateEmprestimo"
-                          [locale]="localePt"
-                          [style]="{width: '100%'}"
-                          [(ngModel)]="object.dataEmprestimo">
-              </p-calendar>
-            </div>
-          </div>
-
-          <div class="col-md-2">
-            <div class="form-group">
-              <label for="prazoDevolucao">Prazo de Devolução</label>
-              <span class="field-required">*</span>
-              <p-calendar name="prazoDevolucao"
-                          id="prazoDevolucao"
-                          required
-                          validation
-                          dataType="string"
-                          dateFormat="dd/mm/yy"
-                          inputStyleClass="form-control"
-                          [disabled]="disableForm"
-                          [minDate]="minDatePrazoDevolucao"
-                          [locale]="localePt"
-                          [style]="{width: '100%'}"
-                          [(ngModel)]="object.prazoDevolucao">
-              </p-calendar>
-            </div>
-          </div>
-
-          <div class="col-md-2">
-            <div class="form-group">
-              <label for="dataDevolucao">Data de Devolução</label>
-              <p-calendar name="dataDevolucao"
-                          id="dataDevolucao"
-                          dataType="string"
-                          dateFormat="dd/mm/yy"
-                          inputStyleClass="form-control"
-                          disabled
-                          [style]="{width: '100%'}"
-                          [(ngModel)]="object.dataDevolucao">
-              </p-calendar>
-            </div>
+        <div class="col-md-8">
+          <div class="form-group">
+            <label for="usuarioEmprestimo">Aluno/Professor</label>
+            <span class="field-required">*</span>
+            <p-autoComplete
+              id="usuarioEmprestimo"
+              name="usuarioEmprestimo"
+              required
+              validation
+              appendTo="body"
+              field="nome"
+              [style]="{'width':'100%'}" [inputStyle]="{'width':'95%'}"
+              [forceSelection]="true"
+              [dropdown]="true"
+              [(ngModel)]="object.usuarioEmprestimo"
+              (ngModelChange)="
+                documentoUsuario = object.usuarioEmprestimo.documento
+              "
+              [suggestions]="usuarioList"
+              [disabled]="disableForm"
+              (onClear)="object.usuarioEmprestimo = null"
+              (completeMethod)="findUsuarios($event)"
+            >
+            </p-autoComplete>
           </div>
         </div>
 
-        <div class="row" *ngIf="!disableForm">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="item">Item</label>
-              <app-cadastroRapido [href]="'/item/form'" [id]="emprestimoItem?.item?.id"></app-cadastroRapido>
-              <p-autoComplete id="item"
-                              name="item"
-                              appendTo="body"
-                              field="nome"
-                              #itemToAdd
-                              inputStyleClass="form-control"
-                              [dropdown]="true"
-                              (keyup.control.arrowRight)="setFocusInputQtde()"
-                              (keyup.control.enter)="insertItem()"
-                              [(ngModel)]="emprestimoItem.item"
-                              (onSelect)="setDevolucaoItem()"
-                              [suggestions]="itemList"
-                              (onClear)="clearNewItem()"
-                              (completeMethod)="findProdutos($event)">
-                <ng-template let-item pTemplate="item">
-                  <span>{{item.nome}}</span>
-                  <span class="autocomplete-separator-field">{{item.patrimonio}}</span>
-                </ng-template>
-              </p-autoComplete>
-            </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="documento">RA/SIAPE</label>
+            <input
+              type="text"
+              id="documento"
+              name="documento"
+              class="form-control"
+              pInputText
+              [(ngModel)]="documentoUsuario"
+              disabled
+            />
           </div>
+        </div>
+      </div>
 
-          <div class="col-md-2">
-            <div class="form-group">
-              <label for="devolvido">Devolver</label>
-              <p-dropdown [options]="yesNoDropdown"
-                          [(ngModel)]="itemDevolver"
-                          [style]="{width: '100%'}"
-                          [disabled]="true"
-                          id="devolvido"
-                          name="devolvido">
-              </p-dropdown>
-            </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="usuarioResponsavel">Usuário Responsável</label>
+            <input
+              type="text"
+              id="usuarioResponsavel"
+              name="usuarioResponsavel"
+              class="form-control"
+              pInputText
+              [(ngModel)]="object.usuarioResponsavel.nome"
+              disabled
+            />
           </div>
+        </div>
 
-          <div class="col-md-2">
-            <div class="form-group">
-              <label for="qtde">Quantidade</label>
-              <span *ngIf="emprestimoItem?.item" class="float-right">Saldo: {{emprestimoItem?.item?.saldo}}</span>
-              <input type="number"
-                     id="qtde"
-                     autocomplete="off"
-                     #qtdeToAdd
-                     onlyNumber
-                     [disabled]="emprestimoItem?.item?.patrimonio != null"
-                     [(ngModel)]="emprestimoItem.qtde"
-                     (keyup.control.arrowLeft)="setFocusInputItem()"
-                     (keyup.control.enter)="insertItem()"
-                     name="qtde"
-                     class="form-control"
-                     pInputText>
-            </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="dataEmprestimo">Data do Empréstimo</label>
+            <span class="field-required">*</span>
+            <p-calendar
+              name="dataEmprestimo"
+              id="dataEmprestimo"
+              required
+              validation
+              dataType="string"
+              dateFormat="dd/mm/yy"
+              inputStyleClass="form-control"
+              (onSelect)="setDateMinPrazoDevolucao()"
+              [disabled]="disableForm"
+              [maxDate]="maxDateEmprestimo"
+              [locale]="localePt"
+              [style]="{ width: '100%' }"
+              [(ngModel)]="object.dataEmprestimo"
+            >
+            </p-calendar>
           </div>
+        </div>
 
-          <div class="col-md-2">
-            <div class="form-group">
-              <label class="invisible">Action</label>
-              <button type="button"
-                      style="height: 35px; justify-content: center;display: flex; align-items: center;"
-                      class="form-control"
-                      (click)="insertItem()"
-                      mat-stroked-button>
-                <mat-icon>done</mat-icon> <span>Adicionar</span>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="prazoDevolucao">Prazo de Devolução</label>
+            <span class="field-required">*</span>
+            <p-calendar
+              name="prazoDevolucao"
+              id="prazoDevolucao"
+              required
+              validation
+              dataType="string"
+              dateFormat="dd/mm/yy"
+              inputStyleClass="form-control"
+              [disabled]="disableForm"
+              [minDate]="minDatePrazoDevolucao"
+              [locale]="localePt"
+              [style]="{ width: '100%' }"
+              [(ngModel)]="object.prazoDevolucao"
+            >
+            </p-calendar>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="dataDevolucao">Data de Devolução</label>
+            <p-calendar
+              name="dataDevolucao"
+              id="dataDevolucao"
+              dataType="string"
+              dateFormat="dd/mm/yy"
+              inputStyleClass="form-control"
+              disabled
+              [style]="{ width: '100%' }"
+              [(ngModel)]="object.dataDevolucao"
+            >
+            </p-calendar>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3" *ngIf="!disableForm">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="item">Item</label>
+            <app-cadastroRapido
+              [href]="'/item/form'"
+              [id]="emprestimoItem?.item?.id"
+            ></app-cadastroRapido>
+            <p-autoComplete
+              id="item"
+              name="item"
+              appendTo="body"
+              field="nome"
+              #itemToAdd
+              [style]="{'width':'100%'}" [inputStyle]="{'width':'95%'}"
+              [dropdown]="true"
+              (keyup.control.arrowRight)="setFocusInputQtde()"
+              (keyup.control.enter)="insertItem()"
+              [(ngModel)]="emprestimoItem.item"
+              (onSelect)="setDevolucaoItem()"
+              [suggestions]="itemList"
+              (onClear)="clearNewItem()"
+              (completeMethod)="findProdutos($event)"
+            >
+              <ng-template let-item pTemplate="item">
+                <span>{{ item.nome }}</span>
+                <span class="autocomplete-separator-field">{{
+                  item.patrimonio
+                }}</span>
+              </ng-template>
+            </p-autoComplete>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="devolvido">Devolver</label>
+            <p-dropdown
+              [options]="yesNoDropdown"
+              [(ngModel)]="itemDevolver"
+              [style]="{ width: '100%' }"
+              [disabled]="true"
+              id="devolvido"
+              name="devolvido"
+            >
+            </p-dropdown>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="qtde">Quantidade</label>
+            <span *ngIf="emprestimoItem?.item" class="float-right"
+              >Saldo: {{ emprestimoItem?.item?.saldo }}</span
+            >
+            <input
+              type="number"
+              id="qtde"
+              autocomplete="off"
+              #qtdeToAdd
+              onlyNumber
+              [disabled]="emprestimoItem?.item?.patrimonio != null"
+              [(ngModel)]="emprestimoItem.qtde"
+              (keyup.control.arrowLeft)="setFocusInputItem()"
+              (keyup.control.enter)="insertItem()"
+              name="qtde"
+              class="form-control"
+              pInputText
+            />
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class="form-group">
+            <label class="invisible">Action</label>
+            <button
+              type="button"
+              style="
+                height: 35px;
+                justify-content: center;
+                display: flex;
+                align-items: center;
+              "
+              class="form-control"
+              (click)="insertItem()"
+              mat-stroked-button
+            >
+              <mat-icon>done</mat-icon> <span>Adicionar</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        *ngIf="object?.emprestimoItem?.length > 0"
+        class="example-container mat-elevation-z8"
+      >
+        <mat-table #table="matTable" [dataSource]="object.emprestimoItem">
+          <ng-container matColumnDef="item">
+            <mat-header-cell *matHeaderCellDef> Item</mat-header-cell>
+            <mat-cell *matCellDef="let itemEmprestimo">
+              <p>{{ itemEmprestimo?.item?.nome }}</p>
+              <p *ngIf="itemEmprestimo?.item?.patrimonio" class="ml-2">
+                | {{ itemEmprestimo.item.patrimonio }}
+              </p>
+            </mat-cell>
+            <mat-footer-cell *matFooterCellDef class="font-weight-bolder">
+              Total</mat-footer-cell
+            >
+          </ng-container>
+
+          <ng-container matColumnDef="devolver">
+            <mat-header-cell *matHeaderCellDef> Devolver</mat-header-cell>
+            <mat-cell *matCellDef="let itemEmprestimo">
+              <span *ngIf="itemEmprestimo.item.tipoItem === 'C'">Sim</span>
+              <span *ngIf="itemEmprestimo.item.tipoItem === 'P'">Não</span>
+            </mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="qtde">
+            <mat-header-cell *matHeaderCellDef> Qtde</mat-header-cell>
+            <mat-cell *matCellDef="let itemEmprestimo">
+              {{ itemEmprestimo.qtde }}
+            </mat-cell>
+            <mat-footer-cell *matFooterCellDef>
+              {{ getQtdeTotal() }}
+            </mat-footer-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="actionsForm">
+            <mat-header-cell *matHeaderCellDef> Opções</mat-header-cell>
+            <mat-cell *matCellDef="let itemEmprestimo">
+              <button
+                class="btn btn-outline-primary rounded"
+                type="button"
+                pTooltip="Remover"
+                [disabled]="disableForm"
+                (click)="removeItem(itemEmprestimo.item.id)"
+              >
+                <i class="fa fa-trash-o"></i>
               </button>
-            </div>
+            </mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+          </ng-container>
+
+          <mat-header-row
+            *matHeaderRowDef="displayedColumns; sticky: true"
+          ></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+          <mat-footer-row
+            *matFooterRowDef="displayedColumns; sticky: true"
+            class="font-weight-bolder"
+          ></mat-footer-row>
+        </mat-table>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="observacao">Observação</label>
+            <textarea
+              id="observacao"
+              name="observacao"
+              rows="1"
+              class="form-control"
+              pInputTextarea
+              [disabled]="disableForm"
+              [(ngModel)]="object.observacao"
+              autoResize="autoResize"
+            >
+            </textarea>
           </div>
         </div>
+      </div>
 
-        <div *ngIf="object?.emprestimoItem?.length > 0" class="example-container mat-elevation-z8">
-          <mat-table #table="matTable" [dataSource]="object.emprestimoItem">
-            <ng-container matColumnDef="item">
-              <mat-header-cell *matHeaderCellDef> Item</mat-header-cell>
-              <mat-cell *matCellDef="let itemEmprestimo">
-                <p>{{itemEmprestimo?.item?.nome}}</p>
-                <p *ngIf="itemEmprestimo?.item?.patrimonio" class="ml-2"> | {{itemEmprestimo.item.patrimonio}}</p>
-              </mat-cell>
-              <mat-footer-cell *matFooterCellDef class="font-weight-bolder"> Total</mat-footer-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="devolver">
-              <mat-header-cell *matHeaderCellDef> Devolver</mat-header-cell>
-              <mat-cell *matCellDef="let itemEmprestimo">
-                <span *ngIf="itemEmprestimo.item.tipoItem === 'C'">Sim</span>
-                <span *ngIf="itemEmprestimo.item.tipoItem === 'P'">Não</span>
-              </mat-cell>
-              <mat-footer-cell *matFooterCellDef></mat-footer-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="qtde">
-              <mat-header-cell *matHeaderCellDef> Qtde</mat-header-cell>
-              <mat-cell *matCellDef="let itemEmprestimo"> {{itemEmprestimo.qtde}} </mat-cell>
-              <mat-footer-cell *matFooterCellDef> {{getQtdeTotal()}} </mat-footer-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="actionsForm">
-              <mat-header-cell *matHeaderCellDef> Opções</mat-header-cell>
-              <mat-cell *matCellDef="let itemEmprestimo">
-                <button class="btn btn-outline-primary rounded"
-                        type="button"
-                        pTooltip="Remover"
-                        [disabled]="disableForm"
-                        (click)="removeItem(itemEmprestimo.item.id)">
-                  <i class="fa fa-trash-o"></i>
-                </button>
-              </mat-cell>
-              <mat-footer-cell *matFooterCellDef></mat-footer-cell>
-            </ng-container>
-
-            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-            <mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"
-                            class="font-weight-bolder"></mat-footer-row>
-          </mat-table>
+      <div *ngIf="!disableForm" class="row">
+        <div class="col-md-12 d-flex justify-content-end">
+          <app-cancelar (onClick)="back()"></app-cancelar>
+          <app-salvar
+            (onClick)="save()"
+            [typeButton]="'button'"
+            [disabled]="object.dataDevolucao"
+          ></app-salvar>
         </div>
-
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group">
-              <label for="observacao">Observação</label>
-              <textarea id="observacao"
-                        name="observacao"
-                        rows="1"
-                        class="form-control"
-                        pInputTextarea
-                        [disabled]="disableForm"
-                        [(ngModel)]="object.observacao"
-                        autoResize="autoResize">
-              </textarea>
-            </div>
-          </div>
-        </div>
-
-
-        <div *ngIf="!disableForm" class="row">
-          <div class="col-md-12 d-flex justify-content-end">
-            <app-cancelar (onClick)="back()"></app-cancelar>
-            <app-salvar (onClick)="save()" [typeButton]="'button'" [disabled]="object.dataDevolucao"></app-salvar>
-          </div>
-        </div>
-      </form>
-
-    </mat-card-content>
-  </mat-card>
+      </div>
+    </form>
+  </p-card>
 </div>
-

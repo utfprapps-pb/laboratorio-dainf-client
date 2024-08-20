@@ -2,218 +2,215 @@
 <div
   class="container w-100 h-100 d-flex justify-content-center align-items-center"
 >
-  <div class="col-md-5">
-    <mat-card
-      style="width: 700px; height: 450px"
-      class="d-flex justify-content-between flex-column"
-    >
-      <div class="div-header">
-        <img
-          src="assets/utfpr.jpg"
-          alt="Logo UTFPR"
-          width="50px"
-          style="margin-right: 10px"
-        />
-        <span>Sistema Laboratório - Cadastro</span>
-      </div>
-      <mat-card-content class="h-100">
-        <form
-          #form="ngForm"
-          (submit)="submit()"
-          class="d-flex flex-column justify-content-around h-100"
-        >
-          <div class="d-flex flex-column justify-content-center h-100">
-            <div class="row" style="margin: 5px 0">
-              <div class="col-md-6">
-                <mat-form-field style="width: 100%">
-                  <mat-label for="nome">Nome</mat-label>
-                  <input
-                    type="text"
-                    id="nome"
-                    name="nome"
-                    required="true"
-                    [(ngModel)]="usuario.nome"
-                    matInput
-                  />
-                </mat-form-field>
-                <div
-                  class="invalid-feedback"
-                  style="display: block; margin-top: -20px"
-                  *ngIf="
-                    form.controls['nome']?.touched &&
-                    form.controls['nome']?.hasError
-                  "
-                >
-                  <div *ngIf="form.controls['nome'].errors?.['required']">
-                    <mat-error>Nome é obrigatório.</mat-error>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <mat-form-field style="width: 100%">
-                  <mat-label for="email"
-                    >Email (&#64;utfpr ou &#64;alunos.utfpr)</mat-label
-                  >
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required="true"
-                    length="6"
-                    [(ngModel)]="usuario.email"
-                    matInput
-                  />
-                </mat-form-field>
-                <div
-                  style="display: block; margin-top: -20px"
-                  *ngIf="
-                    form.controls['email']?.touched &&
-                    form.controls['email']?.hasError
-                  "
-                >
-                  <div *ngIf="form.controls['email'].errors">
-                    <mat-error>Digite um email válido da UTFPR</mat-error>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row" style="margin: 5px 0">
-              <div class="col-md-6">
-                <mat-form-field style="width: 100%">
-                  <mat-label for="documento">RA/SIAPE</mat-label>
-                  <input
-                    type="text"
-                    id="documento"
-                    name="documento"
-                    required="true"
-                    [(ngModel)]="usuario.documento"
-                    matInput
-                  />
-                </mat-form-field>
-                <div
-                  class="invalid-feedback"
-                  style="display: block; margin-top: -20px"
-                  *ngIf="
-                    form.controls['documento']?.touched &&
-                    form.controls['documento']?.hasError
-                  "
-                >
-                  <div *ngIf="form.controls['documento'].errors?.['required']">
-                    <mat-error
-                      >Informe seu RA (aluno) ou SIAPE (servidor).</mat-error
-                    >
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <mat-form-field style="width: 100%">
-                  <mat-label for="telefone">Telefone</mat-label>
-                  <input
-                    type="text"
-                    id="telefone"
-                    name="telefone"
-                    required="true"
-                    [(ngModel)]="usuario.telefone"
-                    matInput
-                  />
-                </mat-form-field>
-                <div
-                  class="invalid-feedback"
-                  style="display: block; margin-top: -20px"
-                  *ngIf="
-                    form.controls['telefone']?.touched &&
-                    form.controls['telefone']?.hasError
-                  "
-                >
-                  <div *ngIf="form.controls['telefone'].errors?.['required']">
-                    <mat-error>Informe seu telefone.</mat-error>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row" style="margin: 5px 0">
-              <div class="col-md-6">
-                <mat-form-field style="width: 100%">
-                  <mat-label for="password">Senha</mat-label>
-                  <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    required="true"
-                    [(ngModel)]="usuario.password"
-                    matInput
-                  />
-                </mat-form-field>
-                <div
-                  class="invalid-feedback"
-                  style="display: block; margin-top: -20px"
-                  *ngIf="
-                    form.controls['password']?.touched &&
-                    form.controls['password']?.hasError
-                  "
-                >
-                  <div *ngIf="form.controls['password'].errors">
-                    <mat-error>As senhas devem ser iguais.</mat-error>
-                    <mat-error
-                      >As senhas devem ter pelo menos 6 caracteres.</mat-error
-                    >
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <mat-form-field style="width: 100%">
-                  <mat-label for="confirmPassword">Confirmar Senha</mat-label>
-                  <input
-                    type="password"
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    required="true"
-                    [(ngModel)]="usuario.confirmPassword"
-                    matInput
-                  />
-                </mat-form-field>
-                <div
-                  class="invalid-feedback"
-                  style="display: block; margin-top: -20px"
-                  *ngIf="
-                    form.controls['confirmPassword']?.touched &&
-                    form.controls['confirmPassword']?.hasError
-                  "
-                >
-                  <div *ngIf="form.controls['password'].errors">
-                    <mat-error>As senhas devem ser iguais.</mat-error>
-                    <mat-error
-                      >As senhas devem ter pelo menos 6 caracteres.</mat-error
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-            <a
-              (click)="goToLogin()"
-              class="text-center mb-3"
-              style="color: #222d43; cursor: pointer"
-              >Já possui cadastro? voltar para a tela de autenticação</a
+  <mat-card
+    style="width: 700px;"
+    class="d-flex justify-content-between flex-column"
+  >
+    <div class="div-header">
+      <img
+        src="assets/utfpr.jpg"
+        alt="Logo UTFPR"
+        width="50px"
+        style="margin-right: 10px"
+      />
+      <span>Sistema Laboratório - Cadastro</span>
+    </div>
+    <mat-card-content>
+      <form #form="ngForm" (submit)="submit()">
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field style="width: 100%">
+              <mat-label for="nome">Nome</mat-label>
+              <input
+                type="text"
+                id="nome"
+                name="nome"
+                required="true"
+                [(ngModel)]="usuario.nome"
+                matInput
+              />
+            </mat-form-field>
+            <div
+              class="invalid-feedback"
+              style="display: block; margin-top: -20px"
+              *ngIf="
+                form.controls['nome']?.touched &&
+                form.controls['nome']?.hasError
+              "
             >
+              <div *ngIf="form.controls['nome'].errors?.['required']">
+                <mat-error>Nome é obrigatório.</mat-error>
+              </div>
+            </div>
           </div>
-          <div class="row justify-content-center mb-2">
-            <div class="col-md-6 d-flex justify-content-center">
-              <button
-                mat-stroked-button
-                type="submit"
-                class="w-100 br-25px"
-                color="primary"
+          <div class="col-md-6">
+            <mat-form-field style="width: 100%">
+              <mat-label for="email"
+                >Email (&#64;utfpr ou &#64;alunos.utfpr)</mat-label
               >
-                Cadastrar
-              </button>
-            </div>
-            <span class="text-center small" style="color: #222d43; cursor: pointer">
-              *Após finalizar o cadastro será enviado um email de confirmação. <br />
-              Verifique a caixa de entrada do seu email.</span
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required="true"
+                length="6"
+                [(ngModel)]="usuario.email"
+                matInput
+              />
+            </mat-form-field>
+            <div
+              style="display: block; margin-top: -20px"
+              *ngIf="
+                form.controls['email']?.touched &&
+                form.controls['email']?.hasError
+              "
             >
+              <div *ngIf="form.controls['email'].errors">
+                <mat-error>Digite um email válido da UTFPR</mat-error>
+              </div>
+            </div>
           </div>
-        </form>
-      </mat-card-content>
-    </mat-card>
-  </div>
+        </div>
+        <div class="row" style="margin: 5px 0">
+          <div class="col-md-6">
+            <mat-form-field style="width: 100%">
+              <mat-label for="documento">RA/SIAPE</mat-label>
+              <input
+                type="text"
+                id="documento"
+                name="documento"
+                required="true"
+                [(ngModel)]="usuario.documento"
+                matInput
+              />
+            </mat-form-field>
+            <div
+              class="invalid-feedback"
+              style="display: block; margin-top: -20px"
+              *ngIf="
+                form.controls['documento']?.touched &&
+                form.controls['documento']?.hasError
+              "
+            >
+              <div *ngIf="form.controls['documento'].errors?.['required']">
+                <mat-error
+                  >Informe seu RA (aluno) ou SIAPE (servidor).</mat-error
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field style="width: 100%">
+              <mat-label for="telefone">Telefone</mat-label>
+              <input
+                type="text"
+                id="telefone"
+                name="telefone"
+                required="true"
+                [(ngModel)]="usuario.telefone"
+                matInput
+              />
+            </mat-form-field>
+            <div
+              class="invalid-feedback"
+              style="display: block; margin-top: -20px"
+              *ngIf="
+                form.controls['telefone']?.touched &&
+                form.controls['telefone']?.hasError
+              "
+            >
+              <div *ngIf="form.controls['telefone'].errors?.['required']">
+                <mat-error>Informe seu telefone.</mat-error>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin: 5px 0">
+          <div class="col-md-6">
+            <mat-form-field style="width: 100%">
+              <mat-label for="password">Senha</mat-label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                required="true"
+                [(ngModel)]="usuario.password"
+                matInput
+              />
+            </mat-form-field>
+            <div
+              class="invalid-feedback"
+              style="display: block; margin-top: -20px"
+              *ngIf="
+                form.controls['password']?.touched &&
+                form.controls['password']?.hasError
+              "
+            >
+              <div *ngIf="form.controls['password'].errors">
+                <mat-error>As senhas devem ser iguais.</mat-error>
+                <mat-error
+                  >As senhas devem ter pelo menos 6 caracteres.</mat-error
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field style="width: 100%">
+              <mat-label for="confirmPassword">Confirmar Senha</mat-label>
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                required="true"
+                [(ngModel)]="usuario.confirmPassword"
+                matInput
+              />
+            </mat-form-field>
+            <div
+              class="invalid-feedback"
+              style="display: block; margin-top: -20px"
+              *ngIf="
+                form.controls['confirmPassword']?.touched &&
+                form.controls['confirmPassword']?.hasError
+              "
+            >
+              <div *ngIf="form.controls['password'].errors">
+                <mat-error>As senhas devem ser iguais.</mat-error>
+                <mat-error
+                  >As senhas devem ter pelo menos 6 caracteres.</mat-error
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <a
+          (click)="goToLogin()"
+          class="text-center mb-3"
+          style="color: #222d43; cursor: pointer"
+          >Já possui cadastro? voltar para a tela de autenticação</a
+        >
+
+        <div class="row justify-content-center mb-2">
+          <div class="col-md-6 d-flex justify-content-center">
+            <button
+              mat-stroked-button
+              type="submit"
+              class="w-100 br-25px"
+              color="primary"
+            >
+              Cadastrar
+            </button>
+          </div>
+          <span
+            class="text-center small"
+            style="color: #222d43; cursor: pointer"
+          >
+            *Após finalizar o cadastro será enviado um email de confirmação.
+            <br />
+            Verifique a caixa de entrada do seu email.</span
+          >
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
 </div>

@@ -13,7 +13,7 @@
   font-size: 18px;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 700px) {
   .mat-card {
     width: auto !important;
   }

@@ -100,17 +100,31 @@
           <div class="col-md-7">
             <div class="form-group">
               <label for="item">Item</label>
+              <span *ngIf="reservaItem?.item" class="float-right"
+                >&nbsp;(Saldo: {{ reservaItem?.item?.saldo }})</span
+              >
               <app-cadastroRapido
                 [href]="'/item/form'"
                 [id]="reservaItem?.item?.id"
               ></app-cadastroRapido>
+
+              <a
+                *ngIf="reservaItem?.item"
+                pTooltip="Imagens"
+                (click)="showDialogImagens()"
+                class="link-imagens"
+              >
+                <i class="fa fa-image"></i>
+              </a>
+
               <p-autoComplete
                 id="item"
                 name="item"
                 appendTo="body"
                 field="nome"
                 #itemToAdd
-                inputStyleClass="form-control"
+                [style]="{ width: '100%' }"
+                [inputStyle]="{ width: '70%' }"
                 [forceSelection]="true"
                 [dropdown]="true"
                 (onSelect)="reservaItem.qtde = 1"
@@ -122,6 +136,12 @@
                 (completeMethod)="findProdutos($event)"
               >
                 <ng-template let-item pTemplate="item">
+                  <img
+                    src="{{ (item.imageItem.length > 0) ? (minioUrl + item.imageItem[0].nameImage) : '' }}"
+                    [class]="'mr-2 flag'"
+                    style="width: 40px"
+                  />
+                  &nbsp;
                   <span>{{ item.nome }}</span>
                   <span class="autocomplete-separator-field">{{
                     item.patrimonio
@@ -134,9 +154,6 @@
           <div class="col-md-3">
             <div class="form-group">
               <label for="qtde">Quantidade</label>
-              <span *ngIf="reservaItem?.item" class="float-right"
-                >Saldo: {{ reservaItem?.item?.saldo }}</span
-              >
               <input
                 type="number"
                 id="qtde"
@@ -159,12 +176,17 @@
               <label class="invisible">Action</label>
               <button
                 type="button"
-                style="height: 35px; justify-content: center;display: flex; align-items: center;"
+                style="
+                  height: 35px;
+                  justify-content: center;
+                  display: flex;
+                  align-items: center;
+                "
                 class="form-control"
                 (click)="insertItem()"
                 mat-stroked-button
               >
-                <mat-icon>done</mat-icon> <span > Adicionar </span>
+                <mat-icon>done</mat-icon> <span> Adicionar </span>
               </button>
             </div>
           </div>
@@ -252,3 +274,34 @@
     </mat-card-content>
   </mat-card>
 </div>
+
+<p-dialog
+  header="Imagens do Item"
+  [modal]="true"
+  [(visible)]="dialogImagens"
+  [style]="{ minWidth: '400px', maxWidth: '80%' }"
+  [baseZIndex]="10000"
+>
+  <p-carousel
+    [value]="images"
+    styleClass="custom-carousel"
+    [numVisible]="3"
+    [numScroll]="1"
+    [circular]="true"
+    [responsiveOptions]="responsiveOptions"
+  >
+    <ng-template let-image pTemplate="item">
+      <div class="car-details">
+        <div class="p-grid p-nogutter">
+          <div class="p-col-12">
+            <img
+              src="{{ minioUrl + image.nameImage }}"
+              class="mw-100"
+              style="width: 300px"
+            />
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-carousel>
+</p-dialog>

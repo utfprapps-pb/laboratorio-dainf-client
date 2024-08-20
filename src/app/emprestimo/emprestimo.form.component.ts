@@ -8,7 +8,6 @@ import {ItemService} from '../item/item.service';
 import {UsuarioService} from '../usuario/usuario.service';
 import {Usuario} from '../usuario/usuario';
 import {MatTable} from '@angular/material/table';
-import {AutoComplete} from 'primeng/autocomplete';
 import {SelectItem} from 'primeng/api';
 import {NgForm} from '@angular/forms';
 import {DateUtil} from '../framework/util/dateUtil';
