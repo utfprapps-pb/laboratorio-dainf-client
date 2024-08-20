@@ -74,19 +74,19 @@
             <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">
               <span
                 *ngIf="getStatusEmprestimo(row) === 'P'"
-                class="badge badge-primary"
+                class="badge text-bg-primary"
                 style="font-size: 85%"
                 >Em andamento</span
               >
               <span
                 *ngIf="getStatusEmprestimo(row) === 'A'"
-                class="badge badge-danger"
+                class="badge text-bg-danger"
                 style="font-size: 85%"
                 >Em atraso</span
               >
               <span
                 *ngIf="getStatusEmprestimo(row) === 'F'"
-                class="badge badge-success"
+                class="badge text-bg-success"
                 style="font-size: 85%"
                 >Finalizado</span
               >

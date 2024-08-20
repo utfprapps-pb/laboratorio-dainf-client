@@ -34,6 +34,7 @@ export const MENU_ITEM: MenuItem[] = [
     title: "Item",
     icon: "microchip",
     id: "item",
+    roles: ["ADMINISTRADOR", "LABORATORISTA"],
     group: "CADASTRO",
   },
   {
@@ -76,6 +77,14 @@ export const MENU_ITEM: MenuItem[] = [
     group: "ITEM",
   },
   {
+    path: "/item",
+    title: "Itens",
+    icon: "microchip",
+    id: "item",
+    roles: ["ALUNO"],
+    group: "ITEM",
+  },
+  {
     path: "/solicitacao-compra",
     title: "Sol. de Compra",
     icon: "list",
@@ -110,6 +119,7 @@ export class SidenavComponent implements OnInit {
   public menuCadastros: any[];
   display = false;
   showSubMenuCadastro = false;
+  showCadastros = true;
   @ViewChild("drawer") drawer: MatDrawer;
 
   constructor(
@@ -131,6 +141,7 @@ export class SidenavComponent implements OnInit {
     this.menuCadastros = new Array();
     this.loginService.getPermissoesUser().subscribe((permissoes) => {
       const userRoles = permissoes.map((x: any) => x.nome.replace("ROLE_", ""));
+      this.showCadastros = userRoles.indexOf("ALUNO") < 0 ? true : false;
       const items = [];
       MENU_ITEM.forEach((menu: any) => {
         if (menu.roles != null) {
@@ -197,7 +208,7 @@ export class SidenavComponent implements OnInit {
     }, 100);
   }
 
-  setColorMenuItem(menu: MenuItem, path) {    
+  setColorMenuItem(menu: MenuItem, path) {
     if (menu.path === path) {
       document.getElementById(menu.id).style.backgroundColor = "#1b2231";
     } else {

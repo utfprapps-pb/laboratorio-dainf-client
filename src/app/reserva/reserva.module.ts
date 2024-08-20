@@ -23,6 +23,7 @@ import {MatSortModule} from '@angular/material/sort';
 import {BottomSheetReservaModule} from './bottomScheetReserva/bottomSheetReserva.module';
 import { DialogModule } from 'primeng/dialog';
 import { CarouselModule } from 'primeng/carousel';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
   imports: [
@@ -45,7 +46,8 @@ import { CarouselModule } from 'primeng/carousel';
     ValidationModule,
     BottomSheetReservaModule,
     DialogModule,
-    CarouselModule
+    CarouselModule,
+    CardModule
   ],
   declarations: [
     ReservaFormComponent,

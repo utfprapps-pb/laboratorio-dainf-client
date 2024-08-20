@@ -135,7 +135,7 @@ export class ReservaFormComponent extends CrudFormComponent<Reserva, number> {
 
   postInsertItemList() {
     this.reservaItem = new ReservaItem();
-    this.setFocusInputItem();
+    // this.setFocusInputItem();
     this.table.renderRows();
   }
 
