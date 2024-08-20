@@ -1,278 +1,280 @@
 <div class="container-fluid my-3">
-  <mat-card>
-    <mat-card-title>
+  <p-card>
+    <ng-template pTemplate="header">
       <div class="d-flex align-items-center">
         <app-voltar (onClick)="back()"></app-voltar>
         <h4 class="m-0">Cadastro de Reserva</h4>
       </div>
-    </mat-card-title>
-    <mat-card-content>
-      <form #form="ngForm">
-        <div class="row">
-          <div class="col-md-2">
-            <div class="form-group">
-              <label for="id">Código</label>
-              <input
-                type="text"
-                id="id"
-                name="id"
-                disabled
-                class="form-control"
-                [(ngModel)]="object.id"
-                pInputText
-              />
-            </div>
-          </div>
-
-          <div class="col-md-10">
-            <div class="form-group">
-              <label for="descricao">Descrição</label>
-              <span class="field-required">*</span>
-              <input
-                type="text"
-                id="descricao"
-                name="descricao"
-                class="form-control"
-                required
-                validation
-                [(ngModel)]="object.descricao"
-                pInputText
-              />
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="usuario">Usuário</label>
-              <input
-                type="text"
-                id="usuario"
-                name="usuario"
-                class="form-control"
-                [(ngModel)]="object.usuario.nome"
-                disabled
-              />
-            </div>
-          </div>
-
-          <div class="col-md-3">
-            <div class="form-group">
-              <label for="dataReserva">Data da Reserva</label>
-              <span class="field-required">*</span>
-              <p-calendar
-                name="dataReserva"
-                id="dataReserva"
-                required
-                validation
-                dataType="string"
-                dateFormat="dd/mm/yy"
-                [style]="{ width: '100%' }"
-                [locale]="localePt"
-                inputStyleClass="form-control"
-                [(ngModel)]="object.dataReserva"
-              >
-              </p-calendar>
-            </div>
-          </div>
-
-          <div class="col-md-3">
-            <div class="form-group">
-              <label for="dataRetirada">Data da Retirada</label>
-              <span class="field-required">*</span>
-              <p-calendar
-                name="dataRetirada"
-                id="dataRetirada"
-                required
-                validation
-                dataType="string"
-                dateFormat="dd/mm/yy"
-                [style]="{ width: '100%' }"
-                [locale]="localePt"
-                inputStyleClass="form-control"
-                [(ngModel)]="object.dataRetirada"
-              >
-              </p-calendar>
-            </div>
+    </ng-template>
+    <form #form="ngForm">
+      <div class="row">
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="id">Código</label>
+            <input
+              type="text"
+              id="id"
+              name="id"
+              disabled
+              class="form-control"
+              [(ngModel)]="object.id"
+              pInputText
+            />
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-md-7">
-            <div class="form-group">
-              <label for="item">Item</label>
-              <span *ngIf="reservaItem?.item" class="float-right"
-                >&nbsp;(Saldo: {{ reservaItem?.item?.saldo }})</span
-              >
-              <app-cadastroRapido
-                [href]="'/item/form'"
-                [id]="reservaItem?.item?.id"
-              ></app-cadastroRapido>
-
-              <a
-                *ngIf="reservaItem?.item"
-                pTooltip="Imagens"
-                (click)="showDialogImagens()"
-                class="link-imagens"
-              >
-                <i class="fa fa-image"></i>
-              </a>
-
-              <p-autoComplete
-                id="item"
-                name="item"
-                appendTo="body"
-                field="nome"
-                #itemToAdd
-                [style]="{ width: '100%' }"
-                [inputStyle]="{ width: '70%' }"
-                [forceSelection]="true"
-                [dropdown]="true"
-                (onSelect)="reservaItem.qtde = 1"
-                (keyup.control.arrowRight)="setFocusQtdeToAdd()"
-                (keyup.control.enter)="insertItem()"
-                [(ngModel)]="reservaItem.item"
-                [suggestions]="itemList"
-                (onClear)="reservaItem.item = null"
-                (completeMethod)="findProdutos($event)"
-              >
-                <ng-template let-item pTemplate="item">
-                  <img
-                    src="{{ (item.imageItem.length > 0) ? (minioUrl + item.imageItem[0].nameImage) : '' }}"
-                    [class]="'mr-2 flag'"
-                    style="width: 40px"
-                  />
-                  &nbsp;
-                  <span>{{ item.nome }}</span>
-                  <span class="autocomplete-separator-field">{{
-                    item.patrimonio
-                  }}</span>
-                </ng-template>
-              </p-autoComplete>
-            </div>
+        <div class="col-md-10">
+          <div class="form-group">
+            <label for="descricao">Descrição</label>
+            <span class="field-required">*</span>
+            <input
+              type="text"
+              id="descricao"
+              name="descricao"
+              class="form-control"
+              required
+              validation
+              [(ngModel)]="object.descricao"
+              pInputText
+            />
           </div>
+        </div>
 
-          <div class="col-md-3">
-            <div class="form-group">
-              <label for="qtde">Quantidade</label>
-              <input
-                type="number"
-                id="qtde"
-                autocomplete="off"
-                #qtdeToAdd
-                onlyNumber
-                [disabled]="reservaItem?.item?.patrimonio != null"
-                (keyup.control.arrowLeft)="setFocusInputItem()"
-                (keyup.control.enter)="insertItem()"
-                [(ngModel)]="reservaItem.qtde"
-                name="qtde"
-                class="form-control"
-                pInputText
-              />
-            </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="usuario">Usuário</label>
+            <input
+              type="text"
+              id="usuario"
+              name="usuario"
+              class="form-control"
+              [(ngModel)]="object.usuario.nome"
+              disabled
+            />
           </div>
+        </div>
 
-          <div class="col-md-2">
-            <div class="form-group">
-              <label class="invisible">Action</label>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="dataReserva">Data da Reserva</label>
+            <span class="field-required">*</span>
+            <p-calendar
+              name="dataReserva"
+              id="dataReserva"
+              required
+              validation
+              dataType="string"
+              dateFormat="dd/mm/yy"
+              [style]="{ width: '100%' }"
+              [locale]="localePt"
+              inputStyleClass="form-control"
+              [(ngModel)]="object.dataReserva"
+            >
+            </p-calendar>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="dataRetirada">Data da Retirada</label>
+            <span class="field-required">*</span>
+            <p-calendar
+              name="dataRetirada"
+              id="dataRetirada"
+              required
+              validation
+              dataType="string"
+              dateFormat="dd/mm/yy"
+              [style]="{ width: '100%' }"
+              [locale]="localePt"
+              inputStyleClass="form-control"
+              [(ngModel)]="object.dataRetirada"
+            >
+            </p-calendar>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-7">
+          <div class="form-group">
+            <label for="item">Item</label>
+            <span *ngIf="reservaItem?.item" class="float-right"
+              >&nbsp;(Saldo: {{ reservaItem?.item?.saldo }})</span
+            >
+            <app-cadastroRapido
+              [href]="'/item/form'"
+              [id]="reservaItem?.item?.id"
+            ></app-cadastroRapido>
+
+            <a
+              *ngIf="reservaItem?.item"
+              pTooltip="Imagens"
+              (click)="showDialogImagens()"
+              class="link-imagens"
+            >
+              <i class="fa fa-image"></i>
+            </a>
+
+            <p-autoComplete
+              id="item"
+              name="item"
+              appendTo="body"
+              field="nome"
+              #itemToAdd
+              [style]="{ width: '100%' }"
+              [inputStyle]="{ width: '70%' }"
+              [forceSelection]="true"
+              [dropdown]="true"
+              (onSelect)="reservaItem.qtde = 1"
+              (keyup.control.arrowRight)="setFocusQtdeToAdd()"
+              (keyup.control.enter)="insertItem()"
+              [(ngModel)]="reservaItem.item"
+              [suggestions]="itemList"
+              (onClear)="reservaItem.item = null"
+              (completeMethod)="findProdutos($event)"
+            >
+              <ng-template let-item pTemplate="item">
+                <img
+                  src="{{
+                    item.imageItem.length > 0
+                      ? minioUrl + item.imageItem[0].nameImage
+                      : ''
+                  }}"
+                  [class]="'mr-2 flag'"
+                  style="width: 70px"
+                />
+                &nbsp;
+                <span>{{ item.nome }}</span>
+                <span class="autocomplete-separator-field">{{
+                  item.patrimonio
+                }}</span>
+              </ng-template>
+            </p-autoComplete>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="qtde">Quantidade</label>
+            <input
+              type="number"
+              id="qtde"
+              autocomplete="off"
+              #qtdeToAdd
+              onlyNumber
+              [disabled]="reservaItem?.item?.patrimonio != null"
+              (keyup.control.arrowLeft)="setFocusInputItem()"
+              (keyup.control.enter)="insertItem()"
+              [(ngModel)]="reservaItem.qtde"
+              name="qtde"
+              class="form-control"
+              pInputText
+            />
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class="form-group">
+            <label class="invisible">Action</label>
+            <button
+              type="button"
+              style="
+                height: 35px;
+                justify-content: center;
+                display: flex;
+                align-items: center;
+              "
+              class="form-control"
+              (click)="insertItem()"
+              mat-stroked-button
+            >
+              <mat-icon>done</mat-icon> <span> Adicionar </span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        *ngIf="object?.reservaItem?.length > 0"
+        class="example-container mat-elevation-z8"
+      >
+        <mat-table #table="matTable" [dataSource]="object.reservaItem">
+          <ng-container matColumnDef="item">
+            <mat-header-cell *matHeaderCellDef> Item</mat-header-cell>
+            <mat-cell *matCellDef="let itemReserva">
+              <p>{{ itemReserva?.item?.nome }}</p>
+              <p *ngIf="itemReserva?.item?.patrimonio" class="ml-2">
+                | {{ itemReserva.item.patrimonio }}
+              </p>
+            </mat-cell>
+            <mat-footer-cell *matFooterCellDef class="font-weight-bolder">
+              Total</mat-footer-cell
+            >
+          </ng-container>
+
+          <ng-container matColumnDef="qtde">
+            <mat-header-cell *matHeaderCellDef> Qtde</mat-header-cell>
+            <mat-cell *matCellDef="let itemReserva">
+              {{ itemReserva.qtde }}
+            </mat-cell>
+            <mat-footer-cell *matFooterCellDef>
+              {{ getQtdeTotal() }}
+            </mat-footer-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="actionsForm">
+            <mat-header-cell *matHeaderCellDef> Opções</mat-header-cell>
+            <mat-cell *matCellDef="let itemReserva">
               <button
+                class="btn btn-outline-primary rounded"
                 type="button"
-                style="
-                  height: 35px;
-                  justify-content: center;
-                  display: flex;
-                  align-items: center;
-                "
-                class="form-control"
-                (click)="insertItem()"
-                mat-stroked-button
+                pTooltip="Remover"
+                (click)="removeItem(itemReserva.item.id)"
               >
-                <mat-icon>done</mat-icon> <span> Adicionar </span>
+                <i class="fa fa-trash-o"></i>
               </button>
-            </div>
+            </mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+          </ng-container>
+
+          <mat-header-row
+            *matHeaderRowDef="displayedColumns; sticky: true"
+          ></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+          <mat-footer-row
+            *matFooterRowDef="displayedColumns; sticky: true"
+            class="font-weight-bolder"
+          ></mat-footer-row>
+        </mat-table>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="observacao">Observação</label>
+            <textarea
+              id="observacao"
+              name="observacao"
+              rows="1"
+              class="form-control"
+              pInputTextarea
+              [(ngModel)]="object.observacao"
+              autoResize="autoResize"
+            >
+            </textarea>
           </div>
         </div>
+      </div>
 
-        <div
-          *ngIf="object?.reservaItem?.length > 0"
-          class="example-container mat-elevation-z8"
-        >
-          <mat-table #table="matTable" [dataSource]="object.reservaItem">
-            <ng-container matColumnDef="item">
-              <mat-header-cell *matHeaderCellDef> Item</mat-header-cell>
-              <mat-cell *matCellDef="let itemReserva">
-                <p>{{ itemReserva?.item?.nome }}</p>
-                <p *ngIf="itemReserva?.item?.patrimonio" class="ml-2">
-                  | {{ itemReserva.item.patrimonio }}
-                </p>
-              </mat-cell>
-              <mat-footer-cell *matFooterCellDef class="font-weight-bolder">
-                Total</mat-footer-cell
-              >
-            </ng-container>
-
-            <ng-container matColumnDef="qtde">
-              <mat-header-cell *matHeaderCellDef> Qtde</mat-header-cell>
-              <mat-cell *matCellDef="let itemReserva">
-                {{ itemReserva.qtde }}
-              </mat-cell>
-              <mat-footer-cell *matFooterCellDef>
-                {{ getQtdeTotal() }}
-              </mat-footer-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="actionsForm">
-              <mat-header-cell *matHeaderCellDef> Opções</mat-header-cell>
-              <mat-cell *matCellDef="let itemReserva">
-                <button
-                  class="btn btn-outline-primary rounded"
-                  type="button"
-                  pTooltip="Remover"
-                  (click)="removeItem(itemReserva.item.id)"
-                >
-                  <i class="fa fa-trash-o"></i>
-                </button>
-              </mat-cell>
-              <mat-footer-cell *matFooterCellDef></mat-footer-cell>
-            </ng-container>
-
-            <mat-header-row
-              *matHeaderRowDef="displayedColumns; sticky: true"
-            ></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-            <mat-footer-row
-              *matFooterRowDef="displayedColumns; sticky: true"
-              class="font-weight-bolder"
-            ></mat-footer-row>
-          </mat-table>
+      <div class="row">
+        <div class="col-md-12 d-flex justify-content-end">
+          <app-cancelar (onClick)="back()"></app-cancelar>
+          <app-salvar [typeButton]="'button'" (onClick)="save()"></app-salvar>
         </div>
-
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group">
-              <label for="observacao">Observação</label>
-              <textarea
-                id="observacao"
-                name="observacao"
-                rows="1"
-                class="form-control"
-                pInputTextarea
-                [(ngModel)]="object.observacao"
-                autoResize="autoResize"
-              >
-              </textarea>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-12 d-flex justify-content-end">
-            <app-cancelar (onClick)="back()"></app-cancelar>
-            <app-salvar [typeButton]="'button'" (onClick)="save()"></app-salvar>
-          </div>
-        </div>
-      </form>
-    </mat-card-content>
-  </mat-card>
+      </div>
+    </form>
+  </p-card>
 </div>
 
 <p-dialog

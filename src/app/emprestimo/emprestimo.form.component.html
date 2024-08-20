@@ -1,4 +1,4 @@
-<div class="container" style="margin-bottom: 500px;">
+<div class="container" style="margin-bottom: 500px">
   <p-card>
     <ng-template pTemplate="header">
       <div class="d-flex align-items-center justify-content-between">
@@ -43,7 +43,8 @@
               validation
               appendTo="body"
               field="nome"
-              [style]="{'width':'100%'}" [inputStyle]="{'width':'95%'}"
+              [style]="{ width: '100%' }"
+              [inputStyle]="{ width: '95%' }"
               [forceSelection]="true"
               [dropdown]="true"
               [(ngModel)]="object.usuarioEmprestimo"
@@ -158,6 +159,10 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="item">Item</label>
+            &nbsp;
+            <span *ngIf="emprestimoItem?.item" class="float-right"
+              >Saldo: {{ emprestimoItem?.item?.saldo }}</span
+            >
             <app-cadastroRapido
               [href]="'/item/form'"
               [id]="emprestimoItem?.item?.id"
@@ -168,7 +173,8 @@
               appendTo="body"
               field="nome"
               #itemToAdd
-              [style]="{'width':'100%'}" [inputStyle]="{'width':'95%'}"
+              [style]="{ width: '100%' }"
+              [inputStyle]="{ width: '95%' }"
               [dropdown]="true"
               (keyup.control.arrowRight)="setFocusInputQtde()"
               (keyup.control.enter)="insertItem()"
@@ -179,6 +185,16 @@
               (completeMethod)="findProdutos($event)"
             >
               <ng-template let-item pTemplate="item">
+                <img
+                  src="{{
+                    item.imageItem.length > 0
+                      ? minioUrl + item.imageItem[0].nameImage
+                      : ''
+                  }}"
+                  [class]="'mr-2 flag'"
+                  style="width: 70px"
+                />
+                &nbsp;
                 <span>{{ item.nome }}</span>
                 <span class="autocomplete-separator-field">{{
                   item.patrimonio
@@ -206,9 +222,6 @@
         <div class="col-md-2">
           <div class="form-group">
             <label for="qtde">Quantidade</label>
-            <span *ngIf="emprestimoItem?.item" class="float-right"
-              >Saldo: {{ emprestimoItem?.item?.saldo }}</span
-            >
             <input
               type="number"
               id="qtde"

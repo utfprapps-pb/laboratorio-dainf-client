@@ -14,6 +14,7 @@ import {DateUtil} from '../framework/util/dateUtil';
 import {pt} from '../framework/constantes/calendarPt';
 import Swal from "sweetalert2";
 import { DatePipe } from '@angular/common';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-form-emprestimo',
@@ -40,6 +41,7 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
   documentoUsuario: string;
   disableForm = false;
   localePt: any;
+  minioUrl: String;
 
   constructor(protected emprestimoService: EmprestimoService,
               protected injector: Injector,
@@ -52,11 +54,12 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
       {label: 'Não', value: false}
     ];
     this.localePt = pt;
+    this.minioUrl = environment.minio_url;
   }
 
   initializeValues(): void {
     this.object.usuarioResponsavel = new Usuario();
-    this.object.dataEmprestimo = this.datepipe.transform(new Date().toLocaleDateString(), 'dd/MM/yyyy');
+    this.object.dataEmprestimo = this.datepipe.transform(new Date(), 'dd/MM/yyyy');
     this.setDateMinPrazoDevolucao();
     this.setUsuarioResponsavel();
     if (window.location.href.includes('reserva')) {
@@ -133,7 +136,7 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
 
   postInsertItemList() {
     this.emprestimoItem = new EmprestimoItem();
-    this.setFocusInputItem();
+    // this.setFocusInputItem();
     this.table.renderRows();
   }
 
@@ -180,7 +183,7 @@ export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, numbe
   }
 
   setDateMinPrazoDevolucao() {
-    this.minDatePrazoDevolucao = DateUtil.parseStringToDate(this.datepipe.transform(this.object.dataEmprestimo, 'MM/dd/yyyy'));
+    //this.minDatePrazoDevolucao = DateUtil.parseStringToDate(this.datepipe.transform(this.object.dataEmprestimo, 'MM/dd/yyyy'));
   }
 
   save() {
