@@ -33,6 +33,7 @@ import {BottomSheetEmprestimoModule} from './bottomScheetEmprestimo/bottomSheetE
 import {EmprestimoDevolucaoComponent} from './emprestimo.devolucao.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatMenuModule} from '@angular/material/menu';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
   imports: [
@@ -64,7 +65,8 @@ import {MatMenuModule} from '@angular/material/menu';
     DragDropModule,
     ScrollPanelModule,
     DialogModule,
-    MatMenuModule
+    MatMenuModule,
+    CardModule,
   ],
   declarations: [
     EmprestimoFormComponent,

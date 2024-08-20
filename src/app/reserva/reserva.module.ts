@@ -21,6 +21,8 @@ import {ValidationModule} from '../framework/validation/validation.module';
 import {ValidationService} from '../framework/validation/validation.service';
 import {MatSortModule} from '@angular/material/sort';
 import {BottomSheetReservaModule} from './bottomScheetReserva/bottomSheetReserva.module';
+import { DialogModule } from 'primeng/dialog';
+import { CarouselModule } from 'primeng/carousel';
 
 @NgModule({
   imports: [
@@ -41,7 +43,9 @@ import {BottomSheetReservaModule} from './bottomScheetReserva/bottomSheetReserva
     SalvarModule,
     InputTextModule,
     ValidationModule,
-    BottomSheetReservaModule
+    BottomSheetReservaModule,
+    DialogModule,
+    CarouselModule
   ],
   declarations: [
     ReservaFormComponent,

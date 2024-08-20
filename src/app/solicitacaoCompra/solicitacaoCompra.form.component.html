@@ -12,13 +12,15 @@
           <div class="col-md-2">
             <div class="form-group">
               <label for="id">Código</label>
-              <input type="text"
-                     id="id"
-                     name="id"
-                     disabled
-                     class="form-control"
-                     [(ngModel)]="object.id"
-                     pInputText>
+              <input
+                type="text"
+                id="id"
+                name="id"
+                disabled
+                class="form-control"
+                [(ngModel)]="object.id"
+                pInputText
+              />
             </div>
           </div>
 
@@ -26,27 +28,31 @@
             <div class="form-group">
               <label for="descricao">Descrição</label>
               <span class="field-required">*</span>
-              <input type="text"
-                     id="descricao"
-                     name="descricao"
-                     class="form-control"
-                     required
-                     validation
-                     [(ngModel)]="object.descricao"
-                     pInputText>
+              <input
+                type="text"
+                id="descricao"
+                name="descricao"
+                class="form-control"
+                required
+                validation
+                [(ngModel)]="object.descricao"
+                pInputText
+              />
             </div>
           </div>
 
           <div class="col-md-8">
             <div class="form-group">
               <label for="usuario">Usuário</label>
-              <input type="text"
-                     id="usuario"
-                     name="usuario"
-                     class="form-control"
-                     [(ngModel)]="object.usuario.nome"
-                     pInputText
-                     disabled>
+              <input
+                type="text"
+                id="usuario"
+                name="usuario"
+                class="form-control"
+                [(ngModel)]="object.usuario.nome"
+                pInputText
+                disabled
+              />
             </div>
           </div>
 
@@ -54,16 +60,18 @@
             <div class="form-group">
               <label for="dataReserva">Data da Solicitação</label>
               <span class="field-required">*</span>
-              <p-calendar name="dataReserva"
-                          id="dataReserva"
-                          required
-                          validation
-                          dataType="string"
-                          dateFormat="dd/mm/yy"
-                          [style]="{width: '100%'}"
-                          [locale]="localePt"
-                          inputStyleClass="form-control"
-                          [(ngModel)]="object.dataSolicitacao">
+              <p-calendar
+                name="dataReserva"
+                id="dataReserva"
+                required
+                validation
+                dataType="string"
+                dateFormat="dd/mm/yy"
+                [style]="{ width: '100%' }"
+                [locale]="localePt"
+                inputStyleClass="form-control"
+                [(ngModel)]="object.dataSolicitacao"
+              >
               </p-calendar>
             </div>
           </div>
@@ -73,25 +81,33 @@
           <div class="col-md-7">
             <div class="form-group">
               <label for="item">Item</label>
-              <app-cadastroRapido [href]="'/item/form'" [id]="solicitacaoCompraItem?.item?.id"></app-cadastroRapido>
-              <p-autoComplete id="item"
-                              name="item"
-                              appendTo="body"
-                              field="nome"
-                              #itemToAdd
-                              inputStyleClass="form-control"
-                              [forceSelection]="true"
-                              [dropdown]="true"
-                              (onSelect)="solicitacaoCompraItem.qtde = 1"
-                              (keyup.control.enter)="insertItem()"
-                              (keyup.control.arrowRight)="setFocusQtdeToAdd()"
-                              [(ngModel)]="solicitacaoCompraItem.item"
-                              [suggestions]="itemList"
-                              (onClear)="solicitacaoCompraItem.item = null"
-                              (completeMethod)="findProdutos($event)">
+              <app-cadastroRapido
+                [href]="'/item/form'"
+                [id]="solicitacaoCompraItem?.item?.id"
+              ></app-cadastroRapido>
+              <p-autoComplete
+                id="item"
+                name="item"
+                appendTo="body"
+                field="nome"
+                #itemToAdd
+                [style]="{ width: '100%' }"
+                [inputStyle]="{ width: '95%' }"
+                [forceSelection]="true"
+                [dropdown]="true"
+                (onSelect)="solicitacaoCompraItem.qtde = 1"
+                (keyup.control.enter)="insertItem()"
+                (keyup.control.arrowRight)="setFocusQtdeToAdd()"
+                [(ngModel)]="solicitacaoCompraItem.item"
+                [suggestions]="itemList"
+                (onClear)="solicitacaoCompraItem.item = null"
+                (completeMethod)="findProdutos($event)"
+              >
                 <ng-template let-item pTemplate="item">
-                  <span>{{item.nome}}</span>
-                  <span class="autocomplete-separator-field">{{item.patrimonio}}</span>
+                  <span>{{ item.nome }}</span>
+                  <span class="autocomplete-separator-field">{{
+                    item.patrimonio
+                  }}</span>
                 </ng-template>
               </p-autoComplete>
             </div>
@@ -100,69 +116,92 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="qtde">Quantidade</label>
-              <span *ngIf="solicitacaoCompraItem?.item" class="float-right">Saldo: {{solicitacaoCompraItem?.item?.saldo}}</span>
-              <input type="number"
-                     id="qtde"
-                     autocomplete="off"
-                     #qtdeToAdd
-                     onlyNumber
-                     (keyup.control.arrowLeft)="setFocusInputItem()"
-                     (keyup.control.enter)="insertItem()"
-                     [(ngModel)]="solicitacaoCompraItem.qtde"
-                     name="qtde"
-                     class="form-control"
-                     pInputText>
+              <span *ngIf="solicitacaoCompraItem?.item" class="float-right"
+                >Saldo: {{ solicitacaoCompraItem?.item?.saldo }}</span
+              >
+              <input
+                type="number"
+                id="qtde"
+                autocomplete="off"
+                #qtdeToAdd
+                onlyNumber
+                (keyup.control.arrowLeft)="setFocusInputItem()"
+                (keyup.control.enter)="insertItem()"
+                [(ngModel)]="solicitacaoCompraItem.qtde"
+                name="qtde"
+                class="form-control"
+                pInputText
+              />
             </div>
           </div>
 
           <div class="col-md-1">
             <div class="form-group">
               <label class="invisible">Action</label>
-              <button type="button"
-                      style="height: 35px"
-                      class="form-control"
-                      (click)="insertItem()"
-                      mat-stroked-button>
+              <button
+                type="button"
+                style="height: 35px"
+                class="form-control"
+                (click)="insertItem()"
+                mat-stroked-button
+              >
                 <mat-icon>done</mat-icon>
               </button>
             </div>
           </div>
         </div>
 
-        <div *ngIf="object?.solicitacaoItem?.length > 0" class="example-container mat-elevation-z8">
+        <div
+          *ngIf="object?.solicitacaoItem?.length > 0"
+          class="example-container mat-elevation-z8"
+        >
           <mat-table #table="matTable" [dataSource]="object.solicitacaoItem">
             <ng-container matColumnDef="item">
               <mat-header-cell *matHeaderCellDef> Item</mat-header-cell>
               <mat-cell *matCellDef="let itemReserva">
-                <p>{{itemReserva?.item?.nome}}</p>
-                <p *ngIf="itemReserva?.item?.patrimonio" class="ml-2"> | {{itemReserva.item.patrimonio}}</p>
+                <p>{{ itemReserva?.item?.nome }}</p>
+                <p *ngIf="itemReserva?.item?.patrimonio" class="ml-2">
+                  | {{ itemReserva.item.patrimonio }}
+                </p>
               </mat-cell>
-              <mat-footer-cell *matFooterCellDef class="font-weight-bolder"> Total</mat-footer-cell>
+              <mat-footer-cell *matFooterCellDef class="font-weight-bolder">
+                Total</mat-footer-cell
+              >
             </ng-container>
 
             <ng-container matColumnDef="qtde">
               <mat-header-cell *matHeaderCellDef> Qtde</mat-header-cell>
-              <mat-cell *matCellDef="let itemReserva"> {{itemReserva.qtde}} </mat-cell>
-              <mat-footer-cell *matFooterCellDef> {{getQtdeTotal()}} </mat-footer-cell>
+              <mat-cell *matCellDef="let itemReserva">
+                {{ itemReserva.qtde }}
+              </mat-cell>
+              <mat-footer-cell *matFooterCellDef>
+                {{ getQtdeTotal() }}
+              </mat-footer-cell>
             </ng-container>
 
             <ng-container matColumnDef="actionsForm">
               <mat-header-cell *matHeaderCellDef> Opções</mat-header-cell>
               <mat-cell *matCellDef="let itemReserva">
-                <button class="btn btn-outline-primary rounded"
-                        type="button"
-                        pTooltip="Remover"
-                        (click)="removeItem(itemReserva.item.id)">
+                <button
+                  class="btn btn-outline-primary rounded"
+                  type="button"
+                  pTooltip="Remover"
+                  (click)="removeItem(itemReserva.item.id)"
+                >
                   <i class="fa fa-trash-o"></i>
                 </button>
               </mat-cell>
               <mat-footer-cell *matFooterCellDef></mat-footer-cell>
             </ng-container>
 
-            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-            <mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"
-                            class="font-weight-bolder"></mat-footer-row>
+            <mat-header-row
+              *matHeaderRowDef="displayedColumns; sticky: true"
+            ></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+            <mat-footer-row
+              *matFooterRowDef="displayedColumns; sticky: true"
+              class="font-weight-bolder"
+            ></mat-footer-row>
           </mat-table>
         </div>
 
@@ -170,13 +209,15 @@
           <div class="col-md-12">
             <div class="form-group">
               <label for="observacao">Observação</label>
-              <textarea id="observacao"
-                        name="observacao"
-                        rows="1"
-                        class="form-control"
-                        pInputTextarea
-                        [(ngModel)]="object.observacao"
-                        autoResize="autoResize">
+              <textarea
+                id="observacao"
+                name="observacao"
+                rows="1"
+                class="form-control"
+                pInputTextarea
+                [(ngModel)]="object.observacao"
+                autoResize="autoResize"
+              >
               </textarea>
             </div>
           </div>
@@ -189,9 +230,6 @@
           </div>
         </div>
       </form>
-
     </mat-card-content>
   </mat-card>
 </div>
-
-
