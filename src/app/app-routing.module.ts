@@ -38,6 +38,7 @@ import { CadastrarUsuarioComponent } from './cadastrarUsuario/cadastrarUsuario.c
 import { ReenviarEmailConfirmacaoUsuarioComponent } from './cadastrarUsuario/reenviarEmailConfirmacaoUsuario.component';
 import { RecuperarSenhaComponent } from './cadastrarUsuario/recuperarSenha.component';
 import { ConfirmarEmailComponent } from './cadastrarUsuario/confirmarEmail.component';
+import { ItemViewComponent } from './item/item.view.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -70,6 +71,7 @@ const routes: Routes = [
   {path: 'item/form', canActivate: [LoginService], component: ItemFormComponent},
   {path: 'item/form/:id', canActivate: [LoginService], component: ItemFormComponent},
   {path: 'item/form/copy/:id', canActivate: [LoginService], component: ItemFormComponent},
+  {path: 'item/view', canActivate: [LoginService], component: ItemViewComponent},
   {path: 'compra', canActivate: [LoginService], component: CompraListComponent},
   {path: 'compra/form', canActivate: [LoginService], component: CompraFormComponent},
   {path: 'compra/form/:id', canActivate: [LoginService], component: CompraFormComponent},
