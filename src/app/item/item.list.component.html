@@ -15,8 +15,17 @@
         <mat-table [dataSource]="dataSource" matSort>
 
           <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Código</mat-header-cell>
-            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{row.id}}</mat-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+            <mat-cell  *matCellDef="let row" (click)="openOptions(row.id)">{{row.id}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="imagem">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Imagem</mat-header-cell>
+            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">
+              <img style="width: 100px" class=""
+                   [src]="row.imageItem.length > 0 ? minioUrl + row.imageItem[0].nameImage : ''"
+                   [alt]="">
+            </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="nome">
@@ -36,18 +45,26 @@
 
           <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef> Opções </mat-header-cell>
-            <mat-cell *matCellDef="let row">              
-              <button *ngIf="row.id!=1" class="btn btn-outline-secondary rounded mr-2"
+            <mat-cell *matCellDef="let row">
+
+              <button *ngIf="row.id!=1 && !isAlunoOrProfessor" class="btn btn-outline-secondary rounded mr-2"
                       type="button"
                       pTooltip="Editar"
                       (click)="edit(row.id)">
                 <i class="fa fa-edit"></i>
               </button>
-              <button *ngIf="row.id!=1" class="btn btn-outline-primary rounded"
+              <button *ngIf="row.id!=1 && !isAlunoOrProfessor" class="btn btn-outline-primary rounded"
                       type="button"
                       pTooltip="Remover"
                       (click)="delete(row.id)">
                 <i class="fa fa-trash-o"></i>
+              </button>
+
+              <button *ngIf="row.id!=1 && isAlunoOrProfessor" class="btn btn-outline-secondary rounded mr-2"
+                      type="button"
+                      pTooltip="Visualizar"
+                      (click)="edit(row.id)">
+                <i class="fa fa-eye"></i>
               </button>
             </mat-cell>
           </ng-container>
@@ -57,7 +74,7 @@
         </mat-table>
 
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]"
-                       [pageSize]="100"></mat-paginator>
+                       [pageSize]="10"></mat-paginator>
       </div>
     </mat-card-content>
   </mat-card>
