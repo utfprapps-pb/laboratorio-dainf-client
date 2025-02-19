@@ -1,0 +1,10 @@
+pipeline {
+    agent any
+    stages {
+        stage('Docker Compose UP') {
+            steps {
+                sh 'docker compose -f docker-compose-robotnik.yml up -d --build'
+            }
+        }
+    }
+}
