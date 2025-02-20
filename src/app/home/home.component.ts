@@ -41,9 +41,11 @@ export class HomeComponent implements OnInit {
     this.loginService.userLoggedIsAlunoOrProfessor().then(value => {
       if (!value) {
         document.getElementById('container-dashboard').style.display = 'block';
+        document.getElementById('container-dashboard-aluno').style.display = 'none';
         this.buildDashboards();
       } else {
         document.getElementById('container-dashboard').style.display = 'none';
+        document.getElementById('container-dashboard-aluno').style.display = 'block';
       }
     });
   }
@@ -120,7 +122,7 @@ export class HomeComponent implements OnInit {
 
   getDateIni() {
     let dtIni = localStorage.getItem('dash_dt_ini');
-    if (!dtIni) {      
+    if (!dtIni) {
       dtIni = this.datepipe.transform(DateUtil.removeDays(new Date(), 90).toLocaleDateString(), 'dd/MM/yyyy');
       localStorage.setItem('dash_dt_ini', dtIni);
     }
