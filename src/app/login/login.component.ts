@@ -75,7 +75,6 @@ export class LoginComponent implements OnInit {
         this.setUserInLocalStorage();
       },
       error: (error) => {
-        console.log(error);
         this.showProgress = false;
         this.messageService.add({
           severity: "error",

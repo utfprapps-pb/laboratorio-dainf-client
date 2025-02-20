@@ -27,7 +27,6 @@ export class CadastrarUsuarioComponent implements OnInit {
 
   submit() {
     if (this.isFormValid()) {
-      console.log(this.usuario);
       this.showProgress = true;
       this.cadastrarUsuarioService.saveUser(this.usuario).subscribe({
         next: (e) => {
@@ -41,7 +40,6 @@ export class CadastrarUsuarioComponent implements OnInit {
           this.router.navigate(["/login"]);
         },
         error: (error) => {
-          console.log(error);
           this.showProgress = false;
           this.messageService.add({
             severity: "error",
@@ -53,7 +51,6 @@ export class CadastrarUsuarioComponent implements OnInit {
       });
     } else {
       console.log("Formulário inválido");
-      console.log(this.usuario);
     }
   }
 
