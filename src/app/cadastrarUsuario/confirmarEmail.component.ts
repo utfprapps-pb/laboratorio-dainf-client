@@ -27,10 +27,7 @@ export class ConfirmarEmailComponent implements OnInit {
 
     this.route.params.subscribe((params) => {
       if (params.code) {
-        console.log(params.code);
         this.emailConfirmacao.code = params.code;
-      } else {
-        console.log(params);
       }
     });
   }
@@ -51,7 +48,6 @@ export class ConfirmarEmailComponent implements OnInit {
           this.router.navigate(["/login"]);
         },
         error: (error) => {
-          console.log(error);
           this.showProgress = false;
           this.messageService.add({
             severity: "error",

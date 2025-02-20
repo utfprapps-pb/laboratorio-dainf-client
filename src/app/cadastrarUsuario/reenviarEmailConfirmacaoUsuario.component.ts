@@ -39,7 +39,6 @@ export class ReenviarEmailConfirmacaoUsuarioComponent implements OnInit {
         this.router.navigate(["/login"]);
       },
       error: (error) => {
-        console.log(error);
         this.showProgress = false;
         this.messageService.add({
           severity: "error",
