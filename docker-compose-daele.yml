@@ -10,7 +10,7 @@ services:
     environment:
       - TZ=America/Sao_Paulo
     ports:
-      - "8111:80"
+      - "8131:80"
     labels:
       # Traefik Config
       - "traefik.enable=true"
