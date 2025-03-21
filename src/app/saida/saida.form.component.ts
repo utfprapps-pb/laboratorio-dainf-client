@@ -38,7 +38,7 @@ export class SaidaFormComponent extends CrudFormComponent<Saida, number> {
   }
 
   initializeValues(): void {
-    this.object.dataSaida = this.datepipe.transform(new Date().toLocaleDateString(), 'dd/MM/yyyy');
+    this.object.dataSaida = this.datepipe.transform(new Date(), 'dd/MM/yyyy');
     this.setUsuarioResponsavel();
   }
 

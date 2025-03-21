@@ -55,28 +55,24 @@ export class HomeComponent implements OnInit {
 
   buildDashboards() {
     try {
-      let dtIni = localStorage.getItem("dash_dt_ini");
-      let dtFim = localStorage.getItem("dash_dt_fim");
-      if (dtIni != null && dtFim != null) {
-        this.loaderService.display(true);
-        this.findCountEmprestimoDashboard();
-        this.findEmprestimoByDayDashboard();
-        this.findItensMaisEmprestados();
-        this.findItensMaisAdquiridos();
-        this.findItensMaisSaidas();
-        this.count.asObservable().subscribe(
-          (value) => {
-            this.loaderService.display(false);
-            if (value === 5) {
-              this.countAux = 0;
-              this.count.next(this.countAux);
-            }
-          },
-          (error) => {
-            this.loaderService.display(false);
+      this.loaderService.display(true);
+      this.findCountEmprestimoDashboard();
+      this.findEmprestimoByDayDashboard();
+      this.findItensMaisEmprestados();
+      this.findItensMaisAdquiridos();
+      this.findItensMaisSaidas();
+      this.count.asObservable().subscribe(
+        (value) => {
+          this.loaderService.display(false);
+          if (value === 5) {
+            this.countAux = 0;
+            this.count.next(this.countAux);
           }
-        );
-      }
+        },
+        (error) => {
+          this.loaderService.display(false);
+        }
+      );
     } catch (error) {
       this.loaderService.display(false);
     }
@@ -144,15 +140,11 @@ export class HomeComponent implements OnInit {
   getDateIni() {
     let dtIni = localStorage.getItem("dash_dt_ini");
     if (!dtIni) {
-      // dtIni = this.datepipe.transform(
-      //   DateUtil.removeDays(new Date(), 90).toLocaleDateString(),
-      //   "dd/MM/yyyy"
-      // );
-      // dtIni = this.datepipe.transform(
-      //   new Date().toLocaleDateString(),
-      //   "dd/MM/yyyy"
-      // );
-      // localStorage.setItem("dash_dt_ini", dtIni);
+      dtIni = this.datepipe.transform(
+        DateUtil.removeDays(new Date(), 90),
+        "dd/MM/yyyy"
+      );
+      localStorage.setItem("dash_dt_ini", dtIni);
     }
     return dtIni;
   }
@@ -160,11 +152,8 @@ export class HomeComponent implements OnInit {
   getDateFim() {
     let dtFim = localStorage.getItem("dash_dt_fim");
     if (!dtFim) {
-      // dtFim = this.datepipe.transform(
-      //   new Date().toLocaleDateString(),
-      //   "dd/MM/yyyy"
-      // );
-      // localStorage.setItem("dash_dt_fim", dtFim);
+      dtFim = this.datepipe.transform(new Date(), "dd/MM/yyyy");
+      localStorage.setItem("dash_dt_fim", dtFim);
     }
     return dtFim;
   }

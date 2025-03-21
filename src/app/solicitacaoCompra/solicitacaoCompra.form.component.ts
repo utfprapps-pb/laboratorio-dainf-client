@@ -37,7 +37,7 @@ export class SolicitacaoCompraFormComponent extends CrudFormComponent<Solicitaca
   }
 
   initializeValues(): void {
-    this.object.dataSolicitacao = this.datepipe.transform(new Date().toLocaleDateString(), 'dd/MM/yyyy');
+    this.object.dataSolicitacao = this.datepipe.transform(new Date(), 'dd/MM/yyyy');
     this.setUsuarioResponsavel();
   }
 
