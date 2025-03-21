@@ -25,9 +25,9 @@ export class LoginComponent implements OnInit {
     private loginService: LoginService,
     private router: Router,
     private messageService: MessageService,
-    private usuarioService: UsuarioService,
-    private socialAuthService: SocialAuthService
-  ) {}
+    private usuarioService: UsuarioService
+  ) // private socialAuthService: SocialAuthService
+  {}
 
   ngOnInit() {
     this.usuario = new Usuario();

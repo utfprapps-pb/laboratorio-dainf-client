@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit } from "@angular/core";
 import { LoginService } from "../login/login.service";
 import { SidenavService } from "../sidenav/sidenav.service";
 import { MenuItem } from "primeng/api";
-import { SocialAuthService } from "@abacritt/angularx-social-login";
+// import { SocialAuthService } from "@abacritt/angularx-social-login";
 import { Router } from "@angular/router";
 import { Usuario } from "../usuario/usuario";
 
@@ -20,7 +20,7 @@ export class ToolbarComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private sidenavService: SidenavService,
-    private socialAuthService: SocialAuthService,
+    // private socialAuthService: SocialAuthService,
     private router: Router
   ) {}
 
@@ -31,8 +31,8 @@ export class ToolbarComponent implements OnInit {
     this.fotoUrl = JSON.parse(localStorage.getItem("userLogged")).fotoUrl;
   }
 
-  logout() {    
-    this.socialAuthService.signOut();
+  logout() {
+    // this.socialAuthService.signOut();
     this.loginService.logout();
   }
 
