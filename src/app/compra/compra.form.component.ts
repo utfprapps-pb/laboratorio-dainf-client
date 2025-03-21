@@ -43,14 +43,16 @@ export class CompraFormComponent extends CrudFormComponent<Compra, number> {
   }
 
   initializeValues(): void {
-    this.object.dataCompra = this.datepipe.transform(new Date().toLocaleDateString(), 'dd/MM/yyyy');
+    this.object.dataCompra = this.datepipe.transform(new Date(), 'dd/MM/yyyy');
     this.setUsuarioResponsavel();
   }
 
   setUsuarioResponsavel() {
     const userLogado = localStorage.getItem('username');
+    console.log(userLogado);
     this.usuarioService.findByUsername(userLogado)
       .subscribe(e => {
+        console.log(e);
         this.object.usuario = e;
       });
   }
