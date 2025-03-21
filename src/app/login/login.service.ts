@@ -105,17 +105,17 @@ export class LoginService {
         })
       );
   }
-  
-  loginWithGoogle(idToken: string): Observable<TokenDto> {
-    const url = `${environment.api_url}auth`;
-    const headers = {
-      headers: new HttpHeaders({ "Auth-Id-Token": `Bearer ${idToken}`}),
-    };
 
-    return this.http.post<TokenDto>(
-      url,
-      '',
-      headers
-    );
-  }
+  // loginWithGoogle(idToken: string): Observable<TokenDto> {
+  //   const url = `${environment.api_url}auth`;
+  //   const headers = {
+  //     headers: new HttpHeaders({ "Auth-Id-Token": `Bearer ${idToken}`}),
+  //   };
+
+  //   return this.http.post<TokenDto>(
+  //     url,
+  //     '',
+  //     headers
+  //   );
+  // }
 }

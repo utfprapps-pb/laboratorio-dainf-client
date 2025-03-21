@@ -121,23 +121,23 @@ registerLocaleData(ptBr);
       provide: CURRENCY_MASK_CONFIG,
       useValue: CustomCurrencyMaskConfig,
     },
-    {
-      provide: "SocialAuthServiceConfig",
-      useValue: {
-        autoLogin: false,
-        providers: [
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(
-              "80739592554-lgpadsbj9gjql2ssdq414fu58takgfdl.apps.googleusercontent.com"
-            ),
-          },
-        ],
-        onError: (err) => {
-          console.error(err);
-        },
-      } as SocialAuthServiceConfig,
-    },
+    // {
+    //   provide: "SocialAuthServiceConfig",
+    //   useValue: {
+    //     autoLogin: false,
+    //     providers: [
+    //       {
+    //         id: GoogleLoginProvider.PROVIDER_ID,
+    //         provider: new GoogleLoginProvider(
+    //           "80739592554-lgpadsbj9gjql2ssdq414fu58takgfdl.apps.googleusercontent.com"
+    //         ),
+    //       },
+    //     ],
+    //     onError: (err) => {
+    //       console.error(err);
+    //     },
+    //   } as SocialAuthServiceConfig,
+    // },
     provideHttpClient(withInterceptorsFromDi()),
   ],
 })
