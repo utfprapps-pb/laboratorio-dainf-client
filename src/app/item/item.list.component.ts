@@ -8,6 +8,7 @@ import { ReservaService } from "../reserva/reserva.service";
 import Swal from "sweetalert2";
 import { Reserva } from "../reserva/reserva";
 import { environment } from "src/environments/environment";
+import { catchError, of, tap } from "rxjs";
 
 @Component({
   selector: "app-list-item",
@@ -58,23 +59,24 @@ export class ItemListComponent extends CrudListComponent<Item, number> {
     });
   }
 
-  findReservasItem(id) {
+  findReservasItem(id: number): void {
     this.loaderService.display(true);
-    this.reservaService.findAllByIdItem(id).subscribe(
-      (e) => {
+    this.reservaService.findAllByIdItem(id).pipe(
+      tap((reservas) => {
         this.loaderService.display(false);
-        if (e.length > 0) {
-          this.reservasItem = e;
+        if (reservas.length > 0) {
+          this.reservasItem = reservas;
           this.dialogReservaitem = true;
         } else {
           Swal.fire("Ops...", "Este item não possui nenhuma reserva.", "info");
         }
-      },
-      (error) => {
-        console.log(error);
+      }),
+      catchError((error) => {
+        console.error(error);
         this.loaderService.display(false);
-      }
-    );
+        return of([]);
+      })
+    ).subscribe();
   }
 
   copyItem(id) {

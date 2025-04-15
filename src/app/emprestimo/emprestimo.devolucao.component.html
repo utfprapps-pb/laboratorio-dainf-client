@@ -138,21 +138,23 @@
                 </span>
               </div>
 
-              <p-scrollPanel [style]="{width: '100%', height: '450px'}">
-                <div class="card-item-kanban border-primary mat-elevation-z5"
-                     *ngFor="let item of itensPendentes"
-                     (contextmenu)="onContextMenu($event, item)"
-                     #item
-                     cdkDrag>
-                  <span>{{item?.item?.nome}}</span>
-                  <span class="badge badge-secondary size-badge">{{item.qtde}}</span>
-                </div>
 
-                <div [ngClass]="itensPendentes?.length === 0 ? 'flex-message' : null"
-                     *ngIf="itensPendentes?.length === 0">
-                  <span class="font-weight-bolder">Não há nenhum item pendente para devolução.</span>
-                </div>
-              </p-scrollPanel>
+              <!--TODO amanha testar se isso vai funcionar-->
+          <div style="width: 100%; height: 450px; overflow-y: auto;">
+            <div class="card-item-kanban border-primary mat-elevation-z5"
+                *ngFor="let item of itensPendentes"
+                (contextmenu)="onContextMenu($event, item)"
+                #item
+                cdkDrag>
+              <span>{{item?.item?.nome}}</span>
+              <span class="badge badge-secondary size-badge">{{item.qtde}}</span>
+            </div>
+
+            <div [ngClass]="itensPendentes?.length === 0 ? 'flex-message' : null"
+                *ngIf="itensPendentes?.length === 0">
+              <span class="font-weight-bolder">Não há nenhum item pendente para devolução.</span>
+            </div>
+          </div>
 
               <div class="invisible position-fixed"
                    [style.left]="contextMenuPosition.x"
