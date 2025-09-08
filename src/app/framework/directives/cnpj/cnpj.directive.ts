@@ -2,7 +2,8 @@ import {Directive, DoCheck, ElementRef, HostListener} from '@angular/core';
 import {NgControl} from '@angular/forms';
 
 @Directive({
-  selector: '[formatCnpj]'
+    selector: '[formatCnpj]',
+    standalone: false
 })
 export class CnpjDirective implements DoCheck {
 

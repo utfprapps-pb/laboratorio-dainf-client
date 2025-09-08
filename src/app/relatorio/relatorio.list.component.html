@@ -47,8 +47,13 @@
           </mat-row>
         </mat-table>
 
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]"
-                       [pageSize]="100"></mat-paginator>
+        <mat-paginator
+            [length]="totalElements"
+            [pageSize]="pageSize"
+            [pageIndex]="pageIndex"
+            [pageSizeOptions]="[5, 10, 25, 50, 100]"
+            (page)="onPageChange($event)">
+      </mat-paginator>
       </div>
     </mat-card-content>
   </mat-card>

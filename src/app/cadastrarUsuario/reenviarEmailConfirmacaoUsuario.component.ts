@@ -6,9 +6,10 @@ import { CadastrarUsuarioService } from "./cadastrarUsuario.service";
 import { EmailConfirmacao } from "./emailConfirmacao";
 
 @Component({
-  selector: "app-reenviar-email-confirmacao-usuario",
-  templateUrl: "./reenviarEmailConfirmacaoUsuario.component.html",
-  styleUrls: ["./reenviarEmailConfirmacaoUsuario.component.css"],
+    selector: "app-reenviar-email-confirmacao-usuario",
+    templateUrl: "./reenviarEmailConfirmacaoUsuario.component.html",
+    styleUrls: ["./reenviarEmailConfirmacaoUsuario.component.css"],
+    standalone: false
 })
 export class ReenviarEmailConfirmacaoUsuarioComponent implements OnInit {
   emailConfirmacao: EmailConfirmacao;

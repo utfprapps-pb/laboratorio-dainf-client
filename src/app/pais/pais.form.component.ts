@@ -5,9 +5,10 @@ import {NgForm} from '@angular/forms';
 import {CrudFormComponent} from '../framework/component/crud.form.component';
 
 @Component({
-  selector: 'app-form-pais',
-  templateUrl: './pais.form.component.html',
-  styleUrls: ['./pais.form.component.css']
+    selector: 'app-form-pais',
+    templateUrl: './pais.form.component.html',
+    styleUrls: ['./pais.form.component.css'],
+    standalone: false
 })
 export class PaisFormComponent extends CrudFormComponent<Pais, number> {
 

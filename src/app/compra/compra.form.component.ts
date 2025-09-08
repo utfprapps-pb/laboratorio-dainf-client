@@ -14,9 +14,10 @@ import {pt} from '../framework/constantes/calendarPt';
 import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-form-compra',
-  templateUrl: './compra.form.component.html',
-  styleUrls: ['./compra.form.component.css']
+    selector: 'app-form-compra',
+    templateUrl: './compra.form.component.html',
+    styleUrls: ['./compra.form.component.css'],
+    standalone: false
 })
 export class CompraFormComponent extends CrudFormComponent<Compra, number> {
 

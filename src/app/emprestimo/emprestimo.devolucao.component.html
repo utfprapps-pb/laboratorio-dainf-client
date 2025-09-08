@@ -6,7 +6,9 @@
           <app-voltar (onClick)="back()"></app-voltar>
           <h4 class="m-0">Devolução do Empréstimo</h4>
         </div>
-        <span *ngIf="object.dataDevolucao" class="badge badge-success float-right" style="font-size: 15px">Devolução Finalizada</span>
+        @if (object.dataDevolucao) {
+          <span class="badge badge-success float-right" style="font-size: 15px">Devolução Finalizada</span>
+        }
       </div>
     </mat-card-title>
     <mat-card-content>
@@ -16,225 +18,236 @@
             <div class="form-group">
               <label for="id">Código</label>
               <input type="text"
-                     id="id"
-                     name="id"
-                     disabled
-                     class="form-control"
-                     [(ngModel)]="object.id"
-                     pInputText>
+                id="id"
+                name="id"
+                disabled
+                class="form-control"
+                [(ngModel)]="object.id"
+                pInputText>
+              </div>
             </div>
-          </div>
 
-          <div class="col-md-8">
-            <div class="form-group">
-              <label for="usuarioEmprestimo">Aluno/Professor</label>
-              <span class="field-required">*</span>
-              <input type="text"
-                     id="usuarioEmprestimo"
-                     name="usuarioEmprestimo"
-                     disabled
-                     class="form-control"
-                     [(ngModel)]="object.usuarioEmprestimo.nome"
-                     pInputText>
-            </div>
-          </div>
-
-          <div class="col-md-2">
-            <div class="form-group">
-              <label for="documento">RA/SIAPE</label>
-              <input type="text"
-                     id="documento"
-                     name="documento"
-                     class="form-control"
-                     [(ngModel)]="documentoUsuario"
-                     disabled
-                     pInputText>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="usuarioResponsavel">Usuário Responsável</label>
-              <input type="text"
-                     id="usuarioResponsavel"
-                     name="usuarioResponsavel"
-                     class="form-control"
-                     [(ngModel)]="object.usuarioResponsavel.nome"
-                     pInputText
-                     disabled>
-            </div>
-          </div>
-
-          <div class="col-md-2">
-            <div class="form-group">
-              <label for="dataCompra">Data do Empréstimo</label>
-              <span class="field-required">*</span>
-              <p-calendar name="dataCompra"
-                          id="dataCompra"
-                          required
-                          validation
-                          dataType="string"
-                          dateFormat="dd/mm/yy"
-                          inputStyleClass="form-control"
-                          disabled
-                          [style]="{width: '100%'}"
-                          [(ngModel)]="object.dataEmprestimo">
-              </p-calendar>
-            </div>
-          </div>
-
-          <div class="col-md-2">
-            <div class="form-group">
-              <label for="prazoDevolucao">Prazo de Devolução</label>
-              <span class="field-required">*</span>
-              <p-calendar name="prazoDevolucao"
-                          id="prazoDevolucao"
-                          required
-                          validation
-                          dataType="string"
-                          dateFormat="dd/mm/yy"
-                          inputStyleClass="form-control"
-                          disabled
-                          [style]="{width: '100%'}"
-                          [(ngModel)]="object.prazoDevolucao">
-              </p-calendar>
-            </div>
-          </div>
-
-          <div class="col-md-2">
-            <div class="form-group">
-              <label for="dataDevolucao">Data de Devolução</label>
-              <span class="field-required">*</span>
-              <p-calendar name="dataDevolucao"
-                          id="dataDevolucao"
-                          required
-                          validation
-                          dataType="string"
-                          dateFormat="dd/mm/yy"
-                          inputStyleClass="form-control"
-                          disabled
-                          [style]="{width: '100%'}"
-                          [(ngModel)]="object.dataDevolucao">
-              </p-calendar>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-4">
-            <div cdkDropList
-                 #pendentesList="cdkDropList"
-                 class="container-kanban border-primary"
-                 [cdkDropListData]="itensPendentes"
-                 [cdkDropListConnectedTo]="[devolvidosList, saidasList]"
-                 (cdkDropListDropped)="drop($event)">
-
-              <div class="d-flex justify-content-between container-title-kanban">
-                <h4 class="m-0">Pendentes</h4>
-                <span class="badge badge-primary float-right" style="font-size: 15px">
-                  {{itensPendentes?.length != null ? itensPendentes?.length : 0}}
-                </span>
+            <div class="col-md-8">
+              <div class="form-group">
+                <label for="usuarioEmprestimo">Aluno/Professor</label>
+                <span class="field-required">*</span>
+                <input type="text"
+                  id="usuarioEmprestimo"
+                  name="usuarioEmprestimo"
+                  disabled
+                  class="form-control"
+                  [(ngModel)]="object.usuarioEmprestimo.nome"
+                  pInputText>
+                </div>
               </div>
 
-              <p-scrollPanel [style]="{width: '100%', height: '450px'}">
-                <div class="card-item-kanban border-primary mat-elevation-z5"
-                     *ngFor="let item of itensPendentes"
-                     (contextmenu)="onContextMenu($event, item)"
-                     #item
-                     cdkDrag>
-                  <span>{{item?.item?.nome}}</span>
-                  <span class="badge badge-secondary size-badge">{{item.qtde}}</span>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label for="documento">RA/SIAPE</label>
+                  <input type="text"
+                    id="documento"
+                    name="documento"
+                    class="form-control"
+                    [(ngModel)]="documentoUsuario"
+                    disabled
+                    pInputText>
+                  </div>
                 </div>
-
-                <div [ngClass]="itensPendentes?.length === 0 ? 'flex-message' : null"
-                     *ngIf="itensPendentes?.length === 0">
-                  <span class="font-weight-bolder">Não há nenhum item pendente para devolução.</span>
-                </div>
-              </p-scrollPanel>
-
-              <div class="invisible position-fixed"
-                   [style.left]="contextMenuPosition.x"
-                   [style.top]="contextMenuPosition.y"
-                   [matMenuTriggerFor]="contextMenu">
-              </div>
-              <mat-menu #contextMenu="matMenu">
-                <ng-template matMenuContent let-item="item">
-                  <button mat-menu-item [disabled]="optionDuplicateDisable" (click)="onClickMenuDuplicateItem(item)">Duplicar Item</button>
-                  <button mat-menu-item [disabled]="optionRemoveDuplicateDisable" (click)="onClickMenuRemoveDuplicates(item)">Remover Itens Duplicados</button>
-                </ng-template>
-              </mat-menu>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div cdkDropList
-                 #devolvidosList="cdkDropList"
-                 class="container-kanban border-success"
-                 [cdkDropListData]="itensDevolvidos"
-                 [cdkDropListConnectedTo]="[pendentesList, saidasList]"
-                 (cdkDropListDropped)="drop($event)">
-
-              <div class="d-flex justify-content-between container-title-kanban" style="place-items: center; padding: 20px 10px 0 10px;">
-                <h4 class="m-0">Devolvidos</h4>
-                <span class="badge badge-success float-right size-badge-total-item">
-                  {{itensDevolvidos?.length != null ? itensDevolvidos?.length : 0}}
-                </span>
               </div>
 
-              <p-scrollPanel [style]="{width: '100%', height: '450px'}">
-                <div class="card-item-kanban border-success mat-elevation-z5" *ngFor="let item of itensDevolvidos"
-                     [cdkDragDisabled]="object.dataDevolucao"
-                     cdkDrag>
-                  <span>{{item.item.nome}}</span>
-                  <span class="badge badge-secondary size-badge">{{item.qtde}}</span>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="usuarioResponsavel">Usuário Responsável</label>
+                    <input type="text"
+                      id="usuarioResponsavel"
+                      name="usuarioResponsavel"
+                      class="form-control"
+                      [(ngModel)]="object.usuarioResponsavel.nome"
+                      pInputText
+                      disabled>
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label for="dataCompra">Data do Empréstimo</label>
+                      <span class="field-required">*</span>
+                      <p-datePicker name="dataCompra"
+                        id="dataCompra"
+                        required
+                        validation
+                        dataType="string"
+                        dateFormat="dd/mm/yy"
+                        inputStyleClass="form-control"
+                        disabled
+                        [style]="{width: '100%'}"
+                        [(ngModel)]="object.dataEmprestimo">
+                      </p-datePicker>
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label for="prazoDevolucao">Prazo de Devolução</label>
+                      <span class="field-required">*</span>
+                      <p-datePicker name="prazoDevolucao"
+                        id="prazoDevolucao"
+                        required
+                        validation
+                        dataType="string"
+                        dateFormat="dd/mm/yy"
+                        inputStyleClass="form-control"
+                        disabled
+                        [style]="{width: '100%'}"
+                        [(ngModel)]="object.prazoDevolucao">
+                      </p-datePicker>
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label for="dataDevolucao">Data de Devolução</label>
+                      <span class="field-required">*</span>
+                      <p-datePicker name="dataDevolucao"
+                        id="dataDevolucao"
+                        required
+                        validation
+                        dataType="string"
+                        dateFormat="dd/mm/yy"
+                        inputStyleClass="form-control"
+                        disabled
+                        [style]="{width: '100%'}"
+                        [(ngModel)]="object.dataDevolucao">
+                      </p-datePicker>
+                    </div>
+                  </div>
                 </div>
 
-                <div [ngClass]="itensDevolvidos?.length === 0 ? 'flex-message' : null"
-                     *ngIf="itensDevolvidos?.length === 0">
-                  <span class="font-weight-bolder">Arraste até aqui os itens que serão devolvidos.</span>
+                <div class="row">
+                  <div class="col-md-4">
+                    <div cdkDropList
+                      #pendentesList="cdkDropList"
+                      class="container-kanban border-primary"
+                      [cdkDropListData]="itensPendentes"
+                      [cdkDropListConnectedTo]="[devolvidosList, saidasList]"
+                      (cdkDropListDropped)="drop($event)">
+
+                      <div class="d-flex justify-content-between container-title-kanban">
+                        <h4 class="m-0">Pendentes</h4>
+                        <span class="badge badge-primary float-right" style="font-size: 15px">
+                          {{itensPendentes?.length != null ? itensPendentes?.length : 0}}
+                        </span>
+                      </div>
+
+                      <p-scrollPanel [style]="{width: '100%', height: '450px'}">
+                        @for (item of itensPendentes; track item) {
+                          <div class="card-item-kanban border-primary mat-elevation-z5"
+                            (contextmenu)="onContextMenu($event, item)"
+                            #item
+                            cdkDrag>
+                            <span>{{item?.item?.nome}}</span>
+                            <span class="badge badge-secondary size-badge">{{item.qtde}}</span>
+                          </div>
+                        }
+
+                        @if (itensPendentes?.length === 0) {
+                          <div [ngClass]="itensPendentes?.length === 0 ? 'flex-message' : null"
+                            >
+                            <span class="font-weight-bolder">Não há nenhum item pendente para devolução.</span>
+                          </div>
+                        }
+                      </p-scrollPanel>
+
+                      <div class="invisible position-fixed"
+                        [style.left]="contextMenuPosition.x"
+                        [style.top]="contextMenuPosition.y"
+                        [matMenuTriggerFor]="contextMenu">
+                      </div>
+                      <mat-menu #contextMenu="matMenu">
+                        <ng-template matMenuContent let-item="item">
+                          <button mat-menu-item [disabled]="optionDuplicateDisable" (click)="onClickMenuDuplicateItem(item)">Duplicar Item</button>
+                          <button mat-menu-item [disabled]="optionRemoveDuplicateDisable" (click)="onClickMenuRemoveDuplicates(item)">Remover Itens Duplicados</button>
+                        </ng-template>
+                      </mat-menu>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div cdkDropList
+                      #devolvidosList="cdkDropList"
+                      class="container-kanban border-success"
+                      [cdkDropListData]="itensDevolvidos"
+                      [cdkDropListConnectedTo]="[pendentesList, saidasList]"
+                      (cdkDropListDropped)="drop($event)">
+
+                      <div class="d-flex justify-content-between container-title-kanban" style="place-items: center; padding: 20px 10px 0 10px;">
+                        <h4 class="m-0">Devolvidos</h4>
+                        <span class="badge badge-success float-right size-badge-total-item">
+                          {{itensDevolvidos?.length != null ? itensDevolvidos?.length : 0}}
+                        </span>
+                      </div>
+
+                      <p-scrollPanel [style]="{width: '100%', height: '450px'}">
+                        @for (item of itensDevolvidos; track item) {
+                          <div class="card-item-kanban border-success mat-elevation-z5"
+                            [cdkDragDisabled]="object.dataDevolucao"
+                            cdkDrag>
+                            <span>{{item.item.nome}}</span>
+                            <span class="badge badge-secondary size-badge">{{item.qtde}}</span>
+                          </div>
+                        }
+
+                        @if (itensDevolvidos?.length === 0) {
+                          <div [ngClass]="itensDevolvidos?.length === 0 ? 'flex-message' : null"
+                            >
+                            <span class="font-weight-bolder">Arraste até aqui os itens que serão devolvidos.</span>
+                          </div>
+                        }
+                      </p-scrollPanel>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div cdkDropList
+                      #saidasList="cdkDropList"
+                      [cdkDropListData]="itensSaida"
+                      [cdkDropListConnectedTo]="[pendentesList, devolvidosList]"
+                      class="container-kanban border-danger"
+                      (cdkDropListDropped)="drop($event)">
+
+                      <div class="d-flex justify-content-between container-title-kanban">
+                        <h4 class="m-0">Saída</h4>
+                        <span class="badge badge-danger float-right size-badge-total-item">
+                          {{itensSaida?.length != null ? itensSaida?.length : 0}}
+                        </span>
+                      </div>
+
+                      <p-scrollPanel [style]="{width: '100%', height: '450px'}">
+                        @for (item of itensSaida; track item) {
+                          <div
+                            class="card-item-kanban border-danger mat-elevation-z5"
+                            [cdkDragDisabled]="object.dataDevolucao"
+                            cdkDrag>
+                            <span>{{item.item.nome}}</span>
+                            <span class="badge badge-secondary size-badge">{{item.qtde}}</span>
+                          </div>
+                        }
+                        @if (itensSaida?.length === 0) {
+                          <div [ngClass]="itensSaida?.length === 0 ? 'flex-message' : null">
+                            <span class="font-weight-bolder">Arraste até aqui os itens que terão saídas permanentes.</span>
+                          </div>
+                        }
+                      </p-scrollPanel>
+                    </div>
+                  </div>
                 </div>
-              </p-scrollPanel>
-            </div>
-          </div>
 
-          <div class="col-md-4">
-            <div cdkDropList
-                 #saidasList="cdkDropList"
-                 [cdkDropListData]="itensSaida"
-                 [cdkDropListConnectedTo]="[pendentesList, devolvidosList]"
-                 class="container-kanban border-danger"
-                 (cdkDropListDropped)="drop($event)">
-
-              <div class="d-flex justify-content-between container-title-kanban">
-                <h4 class="m-0">Saída</h4>
-                <span class="badge badge-danger float-right size-badge-total-item">
-                  {{itensSaida?.length != null ? itensSaida?.length : 0}}
-                </span>
-              </div>
-
-              <p-scrollPanel [style]="{width: '100%', height: '450px'}">
-                <div *ngFor="let item of itensSaida"
-                     class="card-item-kanban border-danger mat-elevation-z5"
-                     [cdkDragDisabled]="object.dataDevolucao"
-                     cdkDrag>
-                  <span>{{item.item.nome}}</span>
-                  <span class="badge badge-secondary size-badge">{{item.qtde}}</span>
-                </div>
-                <div [ngClass]="itensSaida?.length === 0 ? 'flex-message' : null" *ngIf="itensSaida?.length === 0">
-                  <span class="font-weight-bolder">Arraste até aqui os itens que terão saídas permanentes.</span>
-                </div>
-              </p-scrollPanel>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group">
-              <label for="observacao">Observação</label>
-              <textarea id="observacao"
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="observacao">Observação</label>
+                      <textarea id="observacao"
                         name="observacao"
                         rows="1"
                         class="form-control"
@@ -242,58 +255,58 @@
                         pInputTextarea
                         [(ngModel)]="object.observacao"
                         autoResize="autoResize">
-              </textarea>
-            </div>
-          </div>
+                      </textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12 d-flex justify-content-end">
+                    <app-cancelar (onClick)="back()"></app-cancelar>
+                    <app-salvar (onClick)="saveDevolucao()" [typeButton]="'button'" [disabled]="object.dataDevolucao"></app-salvar>
+                  </div>
+                </div>
+              </form>
+
+            </mat-card-content>
+          </mat-card>
         </div>
 
-        <div class="row">
-          <div class="col-md-12 d-flex justify-content-end">
-            <app-cancelar (onClick)="back()"></app-cancelar>
-            <app-salvar (onClick)="saveDevolucao()" [typeButton]="'button'" [disabled]="object.dataDevolucao"></app-salvar>
-          </div>
-        </div>
-      </form>
-
-    </mat-card-content>
-  </mat-card>
-</div>
-
-<p-dialog header="Duplicar Item"
+        <p-dialog header="Duplicar Item"
           [(visible)]="dialogDuplicaItem"
           [style]="{minWidth: '400px'}"
           [modal]="true"
           [baseZIndex]="10000">
 
-  <form (submit)="duplicarItem()">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="form-group">
-          <label for="dtIni">Informe a nova quantidade</label>
-          <span class="float-right font-weight-bolder">Max.: {{itemIsEditing?.qtde - 1}}</span>
-          <input name="dtIni"
-                 id="dtIni"
-                 onlyNumber
-                 (keyup.enter)="duplicarItem()"
-                 [(ngModel)]="qtdeItemDuplicado"
-                 class="form-control"/>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12 d-flex justify-content-end">
-        <button type="submit"
-                class="mr-1 text-uppercase"
-                (click)="dialogDuplicaItem = false"
-                mat-button>Cancelar
-        </button>
-        <button type="submit"
-                color="primary"
-                [disabled]="disableBtnSaveDuplicar()"
-                class="text-uppercase"
-                mat-raised-button>Ok
-        </button>
-      </div>
-    </div>
-  </form>
-</p-dialog>
+          <form (submit)="duplicarItem()">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="dtIni">Informe a nova quantidade</label>
+                  <span class="float-right font-weight-bolder">Max.: {{itemIsEditing?.qtde - 1}}</span>
+                  <input name="dtIni"
+                    id="dtIni"
+                    onlyNumber
+                    (keyup.enter)="duplicarItem()"
+                    [(ngModel)]="qtdeItemDuplicado"
+                    class="form-control"/>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 d-flex justify-content-end">
+                  <button type="submit"
+                    class="mr-1 text-uppercase"
+                    (click)="dialogDuplicaItem = false"
+                    mat-button>Cancelar
+                  </button>
+                  <button type="submit"
+                    color="primary"
+                    [disabled]="disableBtnSaveDuplicar()"
+                    class="text-uppercase"
+                    mat-raised-button>Ok
+                  </button>
+                </div>
+              </div>
+            </form>
+          </p-dialog>

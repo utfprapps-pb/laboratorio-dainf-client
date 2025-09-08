@@ -12,9 +12,10 @@ import {pt} from '../framework/constantes/calendarPt';
 import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-form-solicitacao-compra',
-  templateUrl: './solicitacaoCompra.form.component.html',
-  styleUrls: ['./solicitacaoCompra.form.component.css']
+    selector: 'app-form-solicitacao-compra',
+    templateUrl: './solicitacaoCompra.form.component.html',
+    styleUrls: ['./solicitacaoCompra.form.component.css'],
+    standalone: false
 })
 export class SolicitacaoCompraFormComponent extends CrudFormComponent<SolicitacaoCompra, number> {
 

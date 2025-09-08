@@ -10,9 +10,10 @@ import {StringUtils} from '../framework/util/string.utils';
 import {DateUtil} from '../framework/util/dateUtil';
 
 @Component({
-  selector: 'app-viewer-relatorio',
-  templateUrl: './relatorio.viewer.component.html',
-  styleUrls: ['./relatorio.viewer.component.css']
+    selector: 'app-viewer-relatorio',
+    templateUrl: './relatorio.viewer.component.html',
+    styleUrls: ['./relatorio.viewer.component.css'],
+    standalone: false
 })
 export class RelatorioViewerComponent implements OnInit {
 

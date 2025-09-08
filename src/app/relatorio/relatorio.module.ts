@@ -13,9 +13,7 @@ import {MatInputModule} from '@angular/material/input';
 import {VoltarModule} from '../geral/voltar/voltar.module';
 import {SalvarModule} from '../geral/salvar/salvar.module';
 import {CancelarModule} from '../geral/cancelar/cancelar.module';
-import {CalendarModule} from 'primeng/calendar';
 import {DialogModule} from 'primeng/dialog';
-import {DropdownModule} from 'primeng/dropdown';
 import {FieldsetModule} from 'primeng/fieldset';
 import {FileUploadModule} from 'primeng/fileupload';
 import {InputTextModule} from 'primeng/inputtext';
@@ -27,6 +25,8 @@ import {RelatorioViewerComponent} from './relatorio.viewer.component';
 import {MatButtonModule} from '@angular/material/button';
 import {OnlyNumberModule} from '../framework/directives/onlyNumber/onlyNumber.module';
 import {HelpModule} from '../geral/help/help.module';
+import {DatePickerModule} from "primeng/datepicker";
+import {SelectModule} from "primeng/select";
 
 @NgModule({
   imports: [
@@ -43,14 +43,14 @@ import {HelpModule} from '../geral/help/help.module';
     SalvarModule,
     CancelarModule,
     FileUploadModule,
-    DropdownModule,
+    DatePickerModule,
     MatIconModule,
     ValidationModule,
     InputTextModule,
     TooltipModule,
     FieldsetModule,
     DialogModule,
-    CalendarModule,
+    SelectModule,
     OnlyNumberModule,
     HelpModule
   ],

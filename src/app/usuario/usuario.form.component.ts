@@ -6,9 +6,10 @@ import {CrudFormComponent} from '../framework/component/crud.form.component';
 import {SelectItem} from 'primeng/api';
 
 @Component({
-  selector: 'app-form-usuario',
-  templateUrl: './usuario.form.component.html',
-  styleUrls: ['./usuario.form.component.css']
+    selector: 'app-form-usuario',
+    templateUrl: './usuario.form.component.html',
+    styleUrls: ['./usuario.form.component.css'],
+    standalone: false
 })
 export class UsuarioFormComponent extends CrudFormComponent<Usuario, number> {
 

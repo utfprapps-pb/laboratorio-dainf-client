@@ -12,9 +12,10 @@ import {pt} from '../framework/constantes/calendarPt';
 import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-form-saida',
-  templateUrl: './saida.form.component.html',
-  styleUrls: ['./saida.form.component.css']
+    selector: 'app-form-saida',
+    templateUrl: './saida.form.component.html',
+    styleUrls: ['./saida.form.component.css'],
+    standalone: false
 })
 export class SaidaFormComponent extends CrudFormComponent<Saida, number> {
 

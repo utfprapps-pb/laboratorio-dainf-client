@@ -2,7 +2,8 @@ import {Directive, DoCheck, ElementRef, HostListener} from '@angular/core';
 import {NgControl} from '@angular/forms';
 
 @Directive({
-  selector: '[formatTelefone]'
+    selector: '[formatTelefone]',
+    standalone: false
 })
 export class TelefoneFormatDirective implements DoCheck {
 

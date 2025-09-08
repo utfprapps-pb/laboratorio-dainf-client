@@ -17,9 +17,10 @@ import { DatePipe } from '@angular/common';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-form-emprestimo',
-  templateUrl: './emprestimo.form.component.html',
-  styleUrls: ['./emprestimo.form.component.css']
+    selector: 'app-form-emprestimo',
+    templateUrl: './emprestimo.form.component.html',
+    styleUrls: ['./emprestimo.form.component.css'],
+    standalone: false
 })
 export class EmprestimoFormComponent extends CrudFormComponent<Emprestimo, number> {
 

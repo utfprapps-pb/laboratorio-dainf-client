@@ -7,9 +7,10 @@ import {LoaderService} from './framework/loader/loader.service';
 export let browserChange = new Subject<boolean>();
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    standalone: false
 })
 export class AppComponent {
   title = 'tcc-client';

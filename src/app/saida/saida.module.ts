@@ -12,9 +12,6 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {AutoCompleteModule} from 'primeng/autocomplete';
-import {CalendarModule} from 'primeng/calendar';
-import {DropdownModule} from 'primeng/dropdown';
-import {InputTextareaModule} from 'primeng/inputtextarea';
 import {InputTextModule} from 'primeng/inputtext';
 import {TooltipModule} from 'primeng/tooltip';
 import {ValidationModule} from '../framework/validation/validation.module';
@@ -24,6 +21,8 @@ import {SalvarModule} from '../geral/salvar/salvar.module';
 import {CadastroRapidoModule} from '../geral/cadastroRapido/cadastroRapido.module';
 import {OnlyNumberModule} from '../framework/directives/onlyNumber/onlyNumber.module';
 import {MatSortModule} from '@angular/material/sort';
+import {DatePickerModule} from "primeng/datepicker";
+import {SelectModule} from "primeng/select";
 
 @NgModule({
   imports: [
@@ -40,10 +39,9 @@ import {MatSortModule} from '@angular/material/sort';
     InputTextModule,
     TooltipModule,
     AutoCompleteModule,
-    CalendarModule,
-    DropdownModule,
+    DatePickerModule,
+    SelectModule,
     ValidationModule,
-    InputTextareaModule,
     VoltarModule,
     CancelarModule,
     SalvarModule,

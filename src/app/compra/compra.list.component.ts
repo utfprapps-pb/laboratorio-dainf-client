@@ -4,9 +4,10 @@ import {Compra} from './compra';
 import {CompraService} from './compra.service';
 
 @Component({
-  selector: 'app-list-compra',
-  templateUrl: './compra.list.component.html',
-  styleUrls: ['./compra.list.component.css']
+    selector: 'app-list-compra',
+    templateUrl: './compra.list.component.html',
+    styleUrls: ['./compra.list.component.css'],
+    standalone: false
 })
 export class CompraListComponent extends CrudListComponent<Compra, number> {
 

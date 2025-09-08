@@ -4,7 +4,7 @@ import {CrudService} from '../service/crud.service';
 import {ConfirmationService} from 'primeng/api';
 import {MessageService} from 'primeng/api';
 import {MatTableDataSource} from '@angular/material/table';
-import {MatPaginator} from '@angular/material/paginator';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {BottomSheetComponent} from '../../geral/bottomScheet/bottomSheet.component';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
@@ -24,9 +24,13 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
   protected loginService: LoginService;
   public displayedColumns: string[]; // = this.columnsTable;
   public dataSource: MatTableDataSource<T>;
+  public totalElements = 0;
+  public pageSize = 10;
+  public pageIndex = 0;
   public bottomSheetEnabled = true;
   public hostListenerColumnEnable = true;
   public isAlunoOrProfessor = false;
+  public filterValue: string = ''; // Add this property to store the current filter value
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   objects: T[];
@@ -49,12 +53,40 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
     this.loginService = injector.get(LoginService);
     this.displayedColumns = this.columnsTable;
   }
-
+  onPageChange(event: PageEvent) {
+    this.loaderService.display(true);
+    this.buildColumnsTable();
+    this.service.findAllPaged(event.pageIndex, event.pageSize, this.filterValue)
+      .subscribe(
+        e => {
+          this.objects = e.content;
+          this.totalElements = e.totalElements;
+          this.pageSize = e.size;
+          this.pageIndex = e.number;
+          this.buildList();
+          this.loaderService.display(false);
+          this.postFindAll();
+        },
+        error => {
+          this.loaderService.display(false);
+          this.showError(error);
+        }
+      );
+  }
   applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+    this.service.findAllPaged(this.pageIndex,this.pageSize,filterValue)
+      .subscribe(e => {
+        this.objects = e.content;
+        this.totalElements = e.totalElements;
+        this.pageSize = e.size;
+        this.pageIndex = e.number;
+        this.buildList();
+        this.loaderService.display(false);
+        this.postFindAll();
+      }, error => {
+        this.loaderService.display(false);
+      });
+    this.buildColumnsTable();
   }
 
   findAllCustom(): void {
@@ -62,9 +94,12 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
 
   findAll() {
     this.loaderService.display(true);
-    this.service.findAll()
+    this.service.findAllPaged(this.pageIndex,this.pageSize,'')
       .subscribe(e => {
-        this.objects = e;
+        this.objects = e.content;
+        this.totalElements = e.totalElements;
+        this.pageSize = e.size;
+        this.pageIndex = e.number;
         this.buildList();
         this.loaderService.display(false);
         this.postFindAll();
@@ -91,8 +126,6 @@ export abstract class CrudListComponent<T, ID> implements OnInit {
   buildList() {
     if (this.objects != null) {
       this.dataSource = new MatTableDataSource(this.objects);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
     }
   }
 

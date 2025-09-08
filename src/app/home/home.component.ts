@@ -1,7 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import {Component, Injector, OnInit, ViewChild} from "@angular/core";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
-import { DatePipe } from "@angular/common";
+import { DatePipe } from '@angular/common';
+import { inject } from '@angular/core';
 
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import { DashboardEmprestimoCountRange } from "./dashboard/dashboardEmprestimoCountRange";
@@ -15,12 +16,13 @@ import { LoaderService } from "../framework/loader/loader.service";
 am4core.useTheme(am4themes_animated);
 
 @Component({
-  selector: "app-home",
-  templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.css"],
+    selector: "app-home",
+    templateUrl: "./home.component.html",
+    styleUrls: ["./home.component.css"],
+    standalone: false
 })
 export class HomeComponent implements OnInit {
-  datepipe: DatePipe = new DatePipe("pt-BR");
+  datepipe: DatePipe = inject(DatePipe);
   dashEmprestimoCount: DashboardEmprestimoCountRange;
   dialodFiltroData = false;
   dtIniFiltro: string;

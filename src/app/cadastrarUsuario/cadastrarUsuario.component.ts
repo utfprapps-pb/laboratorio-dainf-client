@@ -6,9 +6,10 @@ import { UsuarioCadastro } from "./usuarioCadastro";
 import { CadastrarUsuarioService } from "./cadastrarUsuario.service";
 
 @Component({
-  selector: "app-cadastrar-usuario",
-  templateUrl: "./cadastrarUsuario.component.html",
-  styleUrls: ["./cadastrarUsuario.component.css"],
+    selector: "app-cadastrar-usuario",
+    templateUrl: "./cadastrarUsuario.component.html",
+    styleUrls: ["./cadastrarUsuario.component.css"],
+    standalone: false
 })
 export class CadastrarUsuarioComponent implements OnInit {
   usuario: UsuarioCadastro;

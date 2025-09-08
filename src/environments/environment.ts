@@ -7,7 +7,7 @@ export const environment = {
   //api_url: 'https://tcc-server-utfpr.herokuapp.com/server/'
   //api_url: 'http://172.20.190.22:8099/server/'
   // api_url: 'http://localhost:8099/server/',
-  api_url: 'http://localhost:8099/',
+  api_url: 'https://test-labs-api.app.pb.utfpr.edu.br/',
   google_client_id: '726155933363-am0vqngulv5soqerhhprndt5kj4judtl.apps.googleusercontent.com',
   minio_url: 'http://localhost:9000/dainf-labs/',
 };

@@ -10,9 +10,10 @@ import {StringUtils} from '../framework/util/string.utils';
 import {MatTable} from '@angular/material/table';
 
 @Component({
-  selector: 'app-form-relatorio',
-  templateUrl: './relatorio.form.component.html',
-  styleUrls: ['./relatorio.form.component.css']
+    selector: 'app-form-relatorio',
+    templateUrl: './relatorio.form.component.html',
+    styleUrls: ['./relatorio.form.component.css'],
+    standalone: false
 })
 export class RelatorioFormComponent extends CrudFormComponent<Relatorio, number> {
 

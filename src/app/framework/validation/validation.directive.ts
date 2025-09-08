@@ -4,7 +4,8 @@ import $ from 'jquery';
 import {ValidationService} from './validation.service';
 
 @Directive({
-  selector: '[validation]',
+    selector: '[validation]',
+    standalone: false
 })
 export class ValidationDirective implements OnInit {
 

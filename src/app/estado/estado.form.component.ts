@@ -7,9 +7,10 @@ import {CrudFormComponent} from '../framework/component/crud.form.component';
 import {PaisService} from '../pais/pais.service';
 
 @Component({
-  selector: 'app-form-estado',
-  templateUrl: './estado.form.component.html',
-  styleUrls: ['./estado.form.component.css']
+    selector: 'app-form-estado',
+    templateUrl: './estado.form.component.html',
+    styleUrls: ['./estado.form.component.css'],
+    standalone: false
 })
 export class EstadoFormComponent extends CrudFormComponent<Estado, number> {
 

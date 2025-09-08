@@ -4,6 +4,7 @@ import { MatDrawer } from "@angular/material/sidenav";
 import { browserChange } from "../app.component";
 import { LoginService } from "../login/login.service";
 import { UsuarioService } from "../usuario/usuario.service";
+import { Router } from "@angular/router";
 
 export interface MenuItem {
   path: string;
@@ -110,9 +111,10 @@ export const MENU_ITEM: MenuItem[] = [
 ];
 
 @Component({
-  selector: "app-sidenav",
-  templateUrl: "./sidenav.component.html",
-  styleUrls: ["./sidenav.component.css"],
+    selector: "app-sidenav",
+    templateUrl: "./sidenav.component.html",
+    styleUrls: ["./sidenav.component.css"],
+    standalone: false
 })
 export class SidenavComponent implements OnInit {
   public menuItems: any[];
@@ -123,9 +125,10 @@ export class SidenavComponent implements OnInit {
   @ViewChild("drawer") drawer: MatDrawer;
 
   constructor(
-    private sidenavService: SidenavService,
-    private loginService: LoginService,
-    private usuarioService: UsuarioService
+    private readonly sidenavService: SidenavService,
+    private readonly loginService: LoginService,
+    private readonly usuarioService: UsuarioService,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {
@@ -141,7 +144,7 @@ export class SidenavComponent implements OnInit {
     this.menuCadastros = new Array();
     this.loginService.getPermissoesUser().subscribe((permissoes) => {
       const userRoles = permissoes.map((x: any) => x.nome.replace("ROLE_", ""));
-      this.showCadastros = userRoles.indexOf("ALUNO") < 0 ? true : false;
+      this.showCadastros = userRoles.indexOf("ALUNO") < 0;
       const items = [];
       MENU_ITEM.forEach((menu: any) => {
         if (menu.roles != null) {
@@ -193,14 +196,13 @@ export class SidenavComponent implements OnInit {
   changeColorMenuItem() {
     const that = this;
     setTimeout(() => {
-      const pathCurrent =
-        "/" + window.location.href.split("#")[1].split("/")[1];
+      const pathCurrent = that.getCurrentPath();
       if (pathCurrent !== "/login") {
-        that.menuItems.forEach((menu) => {
+        (that.menuItems || []).forEach((menu) => {
           that.setColorMenuItem(menu, pathCurrent);
         });
         if (that.showSubMenuCadastro) {
-          that.menuCadastros.forEach((menu) => {
+          (that.menuCadastros || []).forEach((menu) => {
             that.setColorMenuItem(menu, pathCurrent);
           });
         }
@@ -208,19 +210,43 @@ export class SidenavComponent implements OnInit {
     }, 100);
   }
 
+  private getCurrentPath(): string {
+    let current = this.router?.url || "";
+
+    if (!current) {
+      const { hash, pathname } = window.location;
+      if (hash?.startsWith("#/")) {
+        current = hash.substring(1); // remove o '#'
+      } else {
+        current = pathname || "/";
+      }
+    }
+
+    const firstSegment = (current.split("?")[0] || "").split("/")[1] || "";
+    return "/" + firstSegment;
+  }
+
   setColorMenuItem(menu: MenuItem, path) {
+    const el = document.getElementById(menu.id);
+    if (!el) {
+      return;
+    }
     if (menu.path === path) {
-      document.getElementById(menu.id).style.backgroundColor = "#1b2231";
+      el.style.backgroundColor = "#1b2231";
     } else {
-      document.getElementById(menu.id).style.backgroundColor = "transparent";
+      el.style.backgroundColor = "transparent";
     }
   }
 
   changeStylesDrawer() {
+    const el = document.getElementById("drawer");
+    if (!el) {
+      return;
+    }
     if (window.innerWidth < 1200) {
-      document.getElementById("drawer").classList.remove("float-drawer");
+      el.classList.remove("float-drawer");
     } else {
-      document.getElementById("drawer").classList.add("float-drawer");
+      el.classList.add("float-drawer");
     }
   }
 }

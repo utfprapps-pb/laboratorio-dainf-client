@@ -13,193 +13,194 @@
             <div class="form-group">
               <label for="id">Código</label>
               <input type="text"
-                     id="id"
-                     name="id"
-                     disabled
-                     class="form-control"
-                     [(ngModel)]="object.id"
-                     pInputText>
+                id="id"
+                name="id"
+                disabled
+                class="form-control"
+                [(ngModel)]="object.id"
+                pInputText>
+              </div>
             </div>
-          </div>
 
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="descricao">Fornecedor</label>
-              <span class="field-required">*</span>
-              <app-cadastroRapido [href]="'/fornecedor/form'" [id]="object?.fornecedor?.id"></app-cadastroRapido>
-              <p-autoComplete id="descricao"
-                              name="descricao"
-                              required
-                              validation
-                              appendTo="body"
-                              field="razaoSocial"
-                              inputStyleClass="form-control"
-                              [forceSelection]="true"
-                              [dropdown]="true"
-                              [(ngModel)]="object.fornecedor"
-                              [suggestions]="fornecedorList"
-                              (onClear)="object.fornecedor = null"
-                              (completeMethod)="findFornecedores($event)">
-              </p-autoComplete>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="descricao">Fornecedor</label>
+                <span class="field-required">*</span>
+                <app-cadastroRapido [href]="'/fornecedor/form'" [id]="object?.fornecedor?.id"></app-cadastroRapido>
+                <p-autoComplete id="descricao"
+                  name="descricao"
+                  required
+                  validation
+                  appendTo="body"
+                  field="razaoSocial"
+                  inputStyleClass="form-control"
+                  [forceSelection]="true"
+                  [dropdown]="true"
+                  [(ngModel)]="object.fornecedor"
+                  [suggestions]="fornecedorList"
+                  (onClear)="object.fornecedor = null"
+                  (completeMethod)="findFornecedores($event)">
+                </p-autoComplete>
+              </div>
             </div>
-          </div>
 
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="usuarioResponsavel">Usuário Responsável</label>
-              <input type="text"
-                     id="usuarioResponsavel"
-                     name="usuarioResponsavel"
-                     class="form-control"
-                     [(ngModel)]="object.usuario.nome"
-                     disabled>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="usuarioResponsavel">Usuário Responsável</label>
+                <input type="text"
+                  id="usuarioResponsavel"
+                  name="usuarioResponsavel"
+                  class="form-control"
+                  [(ngModel)]="object.usuario.nome"
+                  disabled>
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label for="dataCompra">Data da Compra</label>
+                  <span class="field-required">*</span>
+                  <p-datePicker name="dataCompra"
+                    id="dataCompra"
+                    required
+                    validation
+                    dataType="string"
+                    dateFormat="dd/mm/yy"
+                    [style]="{width: '100%'}"
+                    [maxDate]="maxDate"
+                    inputStyleClass="form-control"
+                    [(ngModel)]="object.dataCompra">
+                  </p-datePicker>
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div class="col-md-2">
-            <div class="form-group">
-              <label for="dataCompra">Data da Compra</label>
-              <span class="field-required">*</span>
-              <p-calendar name="dataCompra"
-                          id="dataCompra"
-                          required
-                          validation
-                          dataType="string"
-                          dateFormat="dd/mm/yy"
-                          [style]="{width: '100%'}"
-                          [maxDate]="maxDate"
-                          [locale]="localePt"
-                          inputStyleClass="form-control"
-                          [(ngModel)]="object.dataCompra">
-              </p-calendar>
-            </div>
-          </div>
-        </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="item">Item</label>
+                  <app-cadastroRapido [href]="'/item/form'" [id]="compraItem?.item?.id"></app-cadastroRapido>
+                  <p-autoComplete id="item"
+                    name="item"
+                    appendTo="body"
+                    field="nome"
+                    #itemToAdd
+                    inputStyleClass="form-control"
+                    [dropdown]="true"
+                    [(ngModel)]="compraItem.item"
+                    (keyup.control.arrowRight)="setFocusInputQtde()"
+                    (keyup.control.enter)="insertItem()"
+                    (onSelect)="setPrecoProduto()"
+                    [suggestions]="itemList"
+                    (onClear)="compraItem.item = null"
+                    (completeMethod)="findProdutos($event)">
+                    <ng-template let-item pTemplate="item">
+                      <span>{{item.nome}}</span>
+                      <span class="autocomplete-separator-field">{{item.patrimonio}}</span>
+                    </ng-template>
+                  </p-autoComplete>
+                </div>
+              </div>
 
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="item">Item</label>
-              <app-cadastroRapido [href]="'/item/form'" [id]="compraItem?.item?.id"></app-cadastroRapido>
-              <p-autoComplete id="item"
-                              name="item"
-                              appendTo="body"
-                              field="nome"
-                              #itemToAdd
-                              inputStyleClass="form-control"
-                              [dropdown]="true"
-                              [(ngModel)]="compraItem.item"
-                              (keyup.control.arrowRight)="setFocusInputQtde()"
-                              (keyup.control.enter)="insertItem()"
-                              (onSelect)="setPrecoProduto()"
-                              [suggestions]="itemList"
-                              (onClear)="compraItem.item = null"
-                              (completeMethod)="findProdutos($event)">
-                <ng-template let-item pTemplate="item">
-                  <span>{{item.nome}}</span>
-                  <span class="autocomplete-separator-field">{{item.patrimonio}}</span>
-                </ng-template>
-              </p-autoComplete>
-            </div>
-          </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="valor">Valor</label>
+                  <input type="text"
+                    id="valor"
+                    name="valor"
+                    (keyup.control.enter)="insertItem()"
+                    [(ngModel)]="compraItem.valor"
+                    disabled
+                    class="form-control"
+                    pInputText>
+                  </div>
+                </div>
 
-          <div class="col-md-3">
-            <div class="form-group">
-              <label for="valor">Valor</label>
-              <input type="text"
-                     id="valor"
-                     name="valor"
-                     (keyup.control.enter)="insertItem()"
-                     [(ngModel)]="compraItem.valor"
-                     disabled
-                     class="form-control"
-                     pInputText>
-            </div>
-          </div>
-
-          <div class="col-md-2">
-            <div class="form-group">
-              <label for="qtde">Quantidade</label>
-              <span *ngIf="compraItem?.item" class="float-right">Saldo: {{compraItem?.item?.saldo}}</span>
-              <input type="number"
-                     id="qtde"
-                     autocomplete="off"
-                     #qtdeToAdd
-                     (keyup.control.arrowLeft)="setFocusInputItem()"
-                     (keyup.control.enter)="insertItem()"
-                     [(ngModel)]="compraItem.qtde"
-                     onlyNumber
-                     name="qtde"
-                     class="form-control"
-                     pInputText>
-            </div>
-          </div>
-
-          <div class="col-md-1">
-            <div class="form-group">
-              <label class="invisible">Inserir</label>
-              <button type="button"
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <label for="qtde">Quantidade</label>
+                    @if (compraItem?.item) {
+                      <span class="float-right">Saldo: {{compraItem?.item?.saldo}}</span>
+                    }
+                    <input type="number"
+                      id="qtde"
+                      autocomplete="off"
+                      #qtdeToAdd
+                      (keyup.control.arrowLeft)="setFocusInputItem()"
+                      (keyup.control.enter)="insertItem()"
+                      [(ngModel)]="compraItem.qtde"
+                      onlyNumber
+                      name="qtde"
                       class="form-control"
-                      style="height: 35px"
-                      (click)="insertItem()"
-                      mat-stroked-button>
-                <mat-icon>done</mat-icon>
-              </button>
-            </div>
-          </div>
+                      pInputText>
+                    </div>
+                  </div>
+
+                  <div class="col-md-1">
+                    <div class="form-group">
+                      <label class="invisible">Inserir</label>
+                      <button type="button"
+                        class="form-control"
+                        style="height: 35px"
+                        (click)="insertItem()"
+                        mat-stroked-button>
+                        <mat-icon>done</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                @if (object?.compraItem?.length > 0) {
+                  <div class="example-container mat-elevation-z8">
+                    <mat-table #table="matTable" [dataSource]="object.compraItem">
+                      <ng-container matColumnDef="item">
+                        <mat-header-cell *matHeaderCellDef> Item</mat-header-cell>
+                        <mat-cell *matCellDef="let itemCompra">
+                          <p>{{itemCompra?.item?.nome}}</p>
+                          @if (itemCompra?.item?.patrimonio) {
+                            <p class="ml-2"> | {{itemCompra.item.patrimonio}}</p>
+                          }
+                        </mat-cell>
+                        <mat-footer-cell *matFooterCellDef> Total</mat-footer-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="qtde">
+                        <mat-header-cell *matHeaderCellDef> Qtde</mat-header-cell>
+                        <mat-cell *matCellDef="let itemCompra"> {{itemCompra.qtde}} </mat-cell>
+                        <mat-footer-cell *matFooterCellDef> {{getQtdeTotal()}} </mat-footer-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="valor">
+                        <mat-header-cell *matHeaderCellDef> Valor</mat-header-cell>
+                        <mat-cell *matCellDef="let itemCompra"> {{itemCompra.valor | currency}} </mat-cell>
+                        <mat-footer-cell *matFooterCellDef> {{getTotalCompra() | currency}} </mat-footer-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="actionsForm">
+                        <mat-header-cell *matHeaderCellDef> Opções</mat-header-cell>
+                        <mat-cell *matCellDef="let itemCompra">
+                          <button class="btn btn-outline-primary rounded"
+                            type="button"
+                            pTooltip="Remover"
+                            (click)="removeItem(itemCompra.item.id)">
+                            <i class="fa fa-trash-o"></i>
+                          </button>
+                        </mat-cell>
+                        <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                      </ng-container>
+                      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                      <mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></mat-footer-row>
+                    </mat-table>
+                  </div>
+                }
+
+                <div class="row">
+                  <div class="col-md-12 d-flex justify-content-end">
+                    <app-cancelar (onClick)="back()"></app-cancelar>
+                    <app-salvar (onClick)="save()" [typeButton]="'button'"></app-salvar>
+                  </div>
+                </div>
+              </form>
+
+            </mat-card-content>
+          </mat-card>
         </div>
-
-        <div *ngIf="object?.compraItem?.length > 0" class="example-container mat-elevation-z8">
-          <mat-table #table="matTable" [dataSource]="object.compraItem">
-            <ng-container matColumnDef="item">
-              <mat-header-cell *matHeaderCellDef> Item</mat-header-cell>
-              <mat-cell *matCellDef="let itemCompra">
-                <p>{{itemCompra?.item?.nome}}</p>
-                <p *ngIf="itemCompra?.item?.patrimonio" class="ml-2"> | {{itemCompra.item.patrimonio}}</p>
-              </mat-cell>
-              <mat-footer-cell *matFooterCellDef> Total</mat-footer-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="qtde">
-              <mat-header-cell *matHeaderCellDef> Qtde</mat-header-cell>
-              <mat-cell *matCellDef="let itemCompra"> {{itemCompra.qtde}} </mat-cell>
-              <mat-footer-cell *matFooterCellDef> {{getQtdeTotal()}} </mat-footer-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="valor">
-              <mat-header-cell *matHeaderCellDef> Valor</mat-header-cell>
-              <mat-cell *matCellDef="let itemCompra"> {{itemCompra.valor | currency}} </mat-cell>
-              <mat-footer-cell *matFooterCellDef> {{getTotalCompra() | currency}} </mat-footer-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="actionsForm">
-              <mat-header-cell *matHeaderCellDef> Opções</mat-header-cell>
-              <mat-cell *matCellDef="let itemCompra">
-                <button class="btn btn-outline-primary rounded"
-                        type="button"
-                        pTooltip="Remover"
-                        (click)="removeItem(itemCompra.item.id)">
-                  <i class="fa fa-trash-o"></i>
-                </button>
-              </mat-cell>
-              <mat-footer-cell *matFooterCellDef></mat-footer-cell>
-            </ng-container>
-
-            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-            <mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></mat-footer-row>
-          </mat-table>
-        </div>
-
-        <div class="row">
-          <div class="col-md-12 d-flex justify-content-end">
-            <app-cancelar (onClick)="back()"></app-cancelar>
-            <app-salvar (onClick)="save()" [typeButton]="'button'"></app-salvar>
-          </div>
-        </div>
-      </form>
-
-    </mat-card-content>
-  </mat-card>
-</div>
 

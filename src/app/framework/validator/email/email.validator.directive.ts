@@ -4,10 +4,11 @@ import {StringUtils} from '../../util/string.utils';
 import {EmailUtil} from '../../util/email.util';
 
 @Directive({
-  selector: '[validateEmail][ngModel],[validateEmail][formControl]',
-  providers: [
-    {provide: NG_VALIDATORS, useExisting: forwardRef(() => EmailValidatorDirective), multi: true}
-  ]
+    selector: '[validateEmail][ngModel],[validateEmail][formControl]',
+    providers: [
+        { provide: NG_VALIDATORS, useExisting: forwardRef(() => EmailValidatorDirective), multi: true }
+    ],
+    standalone: false
 })
 export class EmailValidatorDirective implements Validator {
 

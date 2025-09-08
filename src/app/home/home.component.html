@@ -109,16 +109,15 @@
       <div class="col-md-12">
         <div class="form-group">
           <label for="dtIni">Data Inicial</label>
-          <p-calendar name="dtIni"
+          <p-datePicker name="dtIni"
                       id="dtIni"
                       appendTo="body"
                       dataType="string"
                       dateFormat="dd/mm/yy"
-                      [locale]="localePt"
                       [(ngModel)]="dtIniFiltro"
                       [style]="{width: '100%'}"
                       inputStyleClass="form-control">
-          </p-calendar>
+          </p-datePicker>
         </div>
       </div>
     </div>
@@ -126,16 +125,15 @@
       <div class="col-md-12">
         <div class="form-group">
           <label for="dtFim">Data Final</label>
-          <p-calendar name="dtFim"
+          <p-datePicker name="dtFim"
                       id="dtFim"
                       appendTo="body"
                       dataType="string"
                       dateFormat="dd/mm/yy"
-                      [locale]="localePt"
                       [(ngModel)]="dtFimFiltro"
                       [style]="{width: '100%'}"
                       inputStyleClass="form-control">
-          </p-calendar>
+          </p-datePicker>
         </div>
       </div>
     </div>

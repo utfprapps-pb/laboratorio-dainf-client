@@ -9,9 +9,10 @@ import {EstadoService} from '../estado/estado.service';
 import {Cidade} from '../cidade/cidade';
 
 @Component({
-  selector: 'app-form-fornecedor',
-  templateUrl: './fornecedor.form.component.html',
-  styleUrls: ['./fornecedor.form.component.css']
+    selector: 'app-form-fornecedor',
+    templateUrl: './fornecedor.form.component.html',
+    styleUrls: ['./fornecedor.form.component.css'],
+    standalone: false
 })
 export class FornecedorFormComponent extends CrudFormComponent<Fornecedor, number> {
 

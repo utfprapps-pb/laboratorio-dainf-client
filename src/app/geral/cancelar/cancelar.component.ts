@@ -1,9 +1,10 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 
 @Component({
-  selector: 'app-cancelar',
-  templateUrl: './cancelar.component.html',
-  styleUrls: ['./cancelar.component.css']
+    selector: 'app-cancelar',
+    templateUrl: './cancelar.component.html',
+    styleUrls: ['./cancelar.component.css'],
+    standalone: false
 })
 export class CancelarComponent {
 

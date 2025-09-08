@@ -7,9 +7,10 @@ import {Estado} from '../estado/estado';
 import {EstadoService} from '../estado/estado.service';
 
 @Component({
-  selector: 'app-form-cidade',
-  templateUrl: './cidade.form.component.html',
-  styleUrls: ['./cidade.form.component.css']
+    selector: 'app-form-cidade',
+    templateUrl: './cidade.form.component.html',
+    styleUrls: ['./cidade.form.component.css'],
+    standalone: false
 })
 export class CidadeFormComponent extends CrudFormComponent<Cidade, number> {
 
