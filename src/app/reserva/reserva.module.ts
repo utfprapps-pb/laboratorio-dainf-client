@@ -11,7 +11,6 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {VoltarModule} from '../geral/voltar/voltar.module';
 import {FormsModule} from '@angular/forms';
 import {AutoCompleteModule} from 'primeng/autocomplete';
-import {CalendarModule} from 'primeng/calendar';
 import {InputTextModule} from 'primeng/inputtext';
 import {CadastroRapidoModule} from '../geral/cadastroRapido/cadastroRapido.module';
 import {MatIconModule} from '@angular/material/icon';
@@ -24,6 +23,7 @@ import {BottomSheetReservaModule} from './bottomScheetReserva/bottomSheetReserva
 import { DialogModule } from 'primeng/dialog';
 import { CarouselModule } from 'primeng/carousel';
 import { CardModule } from 'primeng/card';
+import {DatePickerModule} from "primeng/datepicker";
 
 @NgModule({
   imports: [
@@ -36,7 +36,7 @@ import { CardModule } from 'primeng/card';
     MatSortModule,
     MatPaginatorModule,
     VoltarModule,
-    CalendarModule,
+    DatePickerModule,
     CadastroRapidoModule,
     AutoCompleteModule,
     MatIconModule,

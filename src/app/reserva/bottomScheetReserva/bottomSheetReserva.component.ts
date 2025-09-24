@@ -3,9 +3,10 @@ import {MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {LoginService} from '../../login/login.service';
 
 @Component({
-  selector: 'app-bottom-sheet-reserva',
-  templateUrl: './bottomSheetReserva.component.html',
-  styleUrls: ['./bottomSheetReserva.component.css']
+    selector: 'app-bottom-sheet-reserva',
+    templateUrl: './bottomSheetReserva.component.html',
+    styleUrls: ['./bottomSheetReserva.component.css'],
+    standalone: false
 })
 export class BottomSheetReservaComponent {
 

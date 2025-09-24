@@ -6,9 +6,10 @@ import {Item} from '../item/item';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-form-grupo',
-  templateUrl: './grupo.form.component.html',
-  styleUrls: ['./grupo.form.component.css']
+    selector: 'app-form-grupo',
+    templateUrl: './grupo.form.component.html',
+    styleUrls: ['./grupo.form.component.css'],
+    standalone: false
 })
 export class GrupoFormComponent extends CrudFormComponent<Grupo, number> {
 

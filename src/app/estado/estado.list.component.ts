@@ -4,9 +4,10 @@ import {EstadoService} from './estado.service';
 import {CrudListComponent} from '../framework/component/crud.list.component';
 
 @Component({
-  selector: 'app-list-estado',
-  templateUrl: './estado.list.component.html',
-  styleUrls: ['./estado.list.component.css']
+    selector: 'app-list-estado',
+    templateUrl: './estado.list.component.html',
+    styleUrls: ['./estado.list.component.css'],
+    standalone: false
 })
 export class EstadoListComponent extends CrudListComponent<Estado, number> {
 

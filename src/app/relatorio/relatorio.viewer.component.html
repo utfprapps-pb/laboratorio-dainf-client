@@ -6,14 +6,16 @@
           <app-voltar (onClick)="back()"></app-voltar>
           <h4 class="m-0">{{relatorioCurrent?.nome}}</h4>
         </div>
-        <div *ngIf="relatorioCurrent?.paramsList.length > 0">
-          <button type="button"
-                  pTooltip="Filtro"
-                  (click)="dialogFiltroRelatorio = true"
-                  mat-icon-button>
-            <i class="fa fa-2x fa-filter"></i>
-          </button>
-        </div>
+        @if (relatorioCurrent?.paramsList.length > 0) {
+          <div>
+            <button type="button"
+              pTooltip="Filtro"
+              (click)="dialogFiltroRelatorio = true"
+              mat-icon-button>
+              <i class="fa fa-2x fa-filter"></i>
+            </button>
+          </div>
+        }
       </div>
     </mat-card-title>
     <mat-card-content style="height: 95%;">
@@ -22,69 +24,71 @@
   </mat-card>
 </div>
 
-<p-dialog header="Filtro"
-          *ngIf="relatorioCurrent?.paramsList.length > 0"
-          [(visible)]="dialogFiltroRelatorio"
-          [style]="{minWidth: '400px'}"
-          [modal]="true"
-          [baseZIndex]="10000">
-
-  <form #formFiltro="ngForm">
-    <div *ngFor="let param of relatorioCurrent?.paramsList" class="row">
-      <div class="col-md-12">
-        <div class="form-group">
-          <label>{{param.aliasParam}}</label>
-          <p-calendar [name]="param.nameParam"
-                      [id]="param.nameParam"
-                      appendTo="body"
-                      dataType="string"
-                      (onSelect)="onChangeValueParam($event, 'D', param.nameParam)"
-                      dateFormat="dd/mm/yy"
-                      *ngIf="param.tipoParam === 'D'"
-                      [locale]="localePt"
-                      [style]="{width: '100%'}"
-                      inputStyleClass="form-control">
-          </p-calendar>
-
-          <input type="text"
-                 [name]="param.nameParam"
-                 [id]="param.nameParam"
-                 *ngIf="param.tipoParam === 'S'"
-                 (keyup)="onChangeValueParam($event, 'S', param.nameParam)"
-                 class="form-control"
-                 pInputText>
-
-          <input type="number"
-                 [name]="param.nameParam"
-                 [id]="param.nameParam"
-                 *ngIf="param.tipoParam === 'N'"
-                 (keyup)="onChangeValueParam($event, 'N', param.nameParam)"
-                 class="form-control"
-                 onlyNumber
-                 pInputText>
+@if (relatorioCurrent?.paramsList.length > 0) {
+  <p-dialog header="Filtro"
+    [(visible)]="dialogFiltroRelatorio"
+    [style]="{minWidth: '400px'}"
+    [modal]="true"
+    [baseZIndex]="10000">
+    <form #formFiltro="ngForm">
+      @for (param of relatorioCurrent?.paramsList; track param) {
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>{{param.aliasParam}}</label>
+              @if (param.tipoParam === 'D') {
+                <p-datePicker [name]="param.nameParam"
+                  [id]="param.nameParam"
+                  appendTo="body"
+                  dataType="string"
+                  (onSelect)="onChangeValueParam($event, 'D', param.nameParam)"
+                  dateFormat="dd/mm/yy"
+                  [style]="{width: '100%'}"
+                  inputStyleClass="form-control">
+                </p-datePicker>
+              }
+              @if (param.tipoParam === 'S') {
+                <input type="text"
+                  [name]="param.nameParam"
+                  [id]="param.nameParam"
+                  (keyup)="onChangeValueParam($event, 'S', param.nameParam)"
+                  class="form-control"
+                  pInputText>
+              }
+              @if (param.tipoParam === 'N') {
+                <input type="number"
+                  [name]="param.nameParam"
+                  [id]="param.nameParam"
+                  (keyup)="onChangeValueParam($event, 'N', param.nameParam)"
+                  class="form-control"
+                  onlyNumber
+                  pInputText>
+              }
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    <p-footer>
-      <div class="row">
-        <div class="col-md-12 d-flex justify-content-end">
-          <button type="button"
-                  class="mr-2 text-uppercase"
-                  (click)="dialogFiltroRelatorio = false"
-                  mat-raised-button>
-            Cancelar
-          </button>
-          <button type="submit"
-                  color="primary"
-                  class="text-uppercase"
-                  (click)="filtrar()"
-                  [disabled]="!filtroIsValid()"
-                  mat-raised-button>
-            Filtrar
-          </button>
+      }
+      <p-footer>
+        <div class="row">
+          <div class="col-md-12 d-flex justify-content-end">
+            <button type="button"
+              class="mr-2 text-uppercase"
+              (click)="dialogFiltroRelatorio = false"
+              mat-raised-button>
+              Cancelar
+            </button>
+            <button type="submit"
+              color="primary"
+              class="text-uppercase"
+              (click)="filtrar()"
+              [disabled]="!filtroIsValid()"
+              mat-raised-button>
+              Filtrar
+            </button>
+          </div>
         </div>
-      </div>
-    </p-footer>
-  </form>
-</p-dialog>
+      </p-footer>
+    </form>
+  </p-dialog>
+}
 

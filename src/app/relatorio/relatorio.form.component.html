@@ -10,168 +10,176 @@
     </mat-card-title>
     <mat-card-content>
       <form #form="ngForm" (submit)="preSave()"
-            enctype="multipart/form-data">
+        enctype="multipart/form-data">
         <div class="row">
           <div class="col-md-2">
             <div class="form-group">
               <label for="id">Código</label>
               <input type="text"
-                     id="id"
-                     name="id"
-                     disabled
-                     [(ngModel)]="object.id"
-                     class="form-control"
-                     pInputText>
+                id="id"
+                name="id"
+                disabled
+                [(ngModel)]="object.id"
+                class="form-control"
+                pInputText>
+              </div>
             </div>
-          </div>
 
-          <div class="col-md-10">
-            <div class="form-group">
-              <label for="descricao">Nome</label>
-              <span class="field-required">*</span>
-              <i class="fa fa-question-circle-o float-right"
-                 pTooltip="Campo responsável pelo nome que irá aparecer na parte superior da tela de geração do relatório">
-              </i>
-              <input type="text"
-                     id="descricao"
-                     name="descricao"
-                     required
-                     validation
-                     [(ngModel)]="object.nome"
-                     class="form-control"
-                     pInputText>
+            <div class="col-md-10">
+              <div class="form-group">
+                <label for="descricao">Nome</label>
+                <span class="field-required">*</span>
+                <i class="fa fa-question-circle-o float-right"
+                  pTooltip="Campo responsável pelo nome que irá aparecer na parte superior da tela de geração do relatório">
+                </i>
+                <input type="text"
+                  id="descricao"
+                  name="descricao"
+                  required
+                  validation
+                  [(ngModel)]="object.nome"
+                  class="form-control"
+                  pInputText>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        <div class="row">
-          <div class="col-md-12">
-            <p-fileUpload name="anexo"
-                          #fileUpload
-                          [url]="getUrlUploadImages()"
-                          (onUpload)="onUpload($event)"
-                          [showUploadButton]="false"
-                          chooseLabel="Inserir Arquivo Jrxml"
-                          cancelLabel="Remover"
-                          accept=".jrxml"
-                          maxFileSize="1000000">
-              <ng-template pTemplate="content">
-                <ul *ngIf="uploadedFiles.length">
-                  <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-                </ul>
-              </ng-template>
-            </p-fileUpload>
-          </div>
-        </div>
-
-        <p-fieldset legend="Parâmetros">
-          <form (submit)="insertParam()">
             <div class="row">
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="nameParam">Nome do Parâmetro</label>
-                  <i class="fa fa-question-circle-o float-right"
-                     pTooltip="O nome do parâmetro deverá ser exatamente igual ao informado na criação do relatório Jasper.">
-                  </i>
-                  <input type="text"
-                         id="nameParam"
-                         name="nameParam"
-                         #nomeParam
-                         [(ngModel)]="relatorioParams.nameParam"
-                         class="form-control"
-                         pInputText>
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="aliasParam">Alias do Parâmetro</label>
-                  <i class="fa fa-question-circle-o float-right"
-                     pTooltip="O alias é o nome que será utilizado no filtro do relatório, ao executá-lo no sistema.">
-                  </i>
-                  <input type="text"
-                         id="aliasParam"
-                         name="aliasParam"
-                         [(ngModel)]="relatorioParams.aliasParam"
-                         class="form-control"
-                         pInputText>
-                </div>
-              </div>
-
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label for="aliasParam">Tipo do Parâmetro</label>
-                  <p-dropdown [options]="tipoParamDropdown"
-                              [style]="{width: '100%'}"
-                              [(ngModel)]="relatorioParams.tipoParam"
-                              id="devolver"
-                              name="devolver">
-                  </p-dropdown>
-                </div>
-              </div>
-
-              <div class="col-md-1">
-                <div class="form-group">
-                  <label class="invisible">Action</label>
-                  <button type="submit"
-                          style="height: 35px"
-                          class="form-control"
-                          mat-stroked-button>
-                    <mat-icon>done</mat-icon>
-                  </button>
-                </div>
+              <div class="col-md-12">
+                <p-fileUpload name="anexo"
+                  #fileUpload
+                  [url]="getUrlUploadImages()"
+                  (onUpload)="onUpload($event)"
+                  [showUploadButton]="false"
+                  chooseLabel="Inserir Arquivo Jrxml"
+                  cancelLabel="Remover"
+                  accept=".jrxml"
+                  maxFileSize="1000000">
+                  <ng-template pTemplate="content">
+                    @if (uploadedFiles.length) {
+                      <ul>
+                        @for (file of uploadedFiles; track file) {
+                          <li>{{file.name}} - {{file.size}} bytes</li>
+                        }
+                      </ul>
+                    }
+                  </ng-template>
+                </p-fileUpload>
               </div>
             </div>
-          </form>
 
-          <div *ngIf="object?.paramsList?.length > 0" class="example-container mat-elevation-z8 mb-1">
-            <mat-table #table="matTable" [dataSource]="object.paramsList">
-              <ng-container matColumnDef="nameParam">
-                <mat-header-cell *matHeaderCellDef>Nome Parâmetro</mat-header-cell>
-                <mat-cell *matCellDef="let param"> {{param.nameParam}} </mat-cell>
-              </ng-container>
+            <p-fieldset legend="Parâmetros">
+              <form (submit)="insertParam()">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="nameParam">Nome do Parâmetro</label>
+                      <i class="fa fa-question-circle-o float-right"
+                        pTooltip="O nome do parâmetro deverá ser exatamente igual ao informado na criação do relatório Jasper.">
+                      </i>
+                      <input type="text"
+                        id="nameParam"
+                        name="nameParam"
+                        #nomeParam
+                        [(ngModel)]="relatorioParams.nameParam"
+                        class="form-control"
+                        pInputText>
+                      </div>
+                    </div>
 
-              <ng-container matColumnDef="aliasParam">
-                <mat-header-cell *matHeaderCellDef>Alias Parâmetro</mat-header-cell>
-                <mat-cell *matCellDef="let param"> {{param.aliasParam}} </mat-cell>
-              </ng-container>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="aliasParam">Alias do Parâmetro</label>
+                        <i class="fa fa-question-circle-o float-right"
+                          pTooltip="O alias é o nome que será utilizado no filtro do relatório, ao executá-lo no sistema.">
+                        </i>
+                        <input type="text"
+                          id="aliasParam"
+                          name="aliasParam"
+                          [(ngModel)]="relatorioParams.aliasParam"
+                          class="form-control"
+                          pInputText>
+                        </div>
+                      </div>
 
-              <ng-container matColumnDef="tipoParam">
-                <mat-header-cell *matHeaderCellDef>Tipo Parâmetro</mat-header-cell>
-                <mat-cell *matCellDef="let param">
-                  <span *ngIf="param.tipoParam === 'S'">String</span>
-                  <span *ngIf="param.tipoParam === 'N'">Number</span>
-                  <span *ngIf="param.tipoParam === 'D'">Date</span>
-                </mat-cell>
-              </ng-container>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label for="aliasParam">Tipo do Parâmetro</label>
+                          <p-select [options]="tipoParamDropdown"
+                            [style]="{width: '100%'}"
+                            [(ngModel)]="relatorioParams.tipoParam"
+                            id="devolver"
+                            name="devolver">
+                          </p-select>
+                        </div>
+                      </div>
 
-              <ng-container matColumnDef="actionsForm">
-                <mat-header-cell *matHeaderCellDef> Opções</mat-header-cell>
-                <mat-cell *matCellDef="let param">
-                  <button class="btn btn-outline-primary rounded"
-                          type="button"
-                          (click)="removeParam(param.nomeParam)"
-                          pTooltip="Remover">
-                    <i class="fa fa-trash-o"></i>
-                  </button>
-                </mat-cell>
-              </ng-container>
+                      <div class="col-md-1">
+                        <div class="form-group">
+                          <label class="invisible">Action</label>
+                          <button type="submit"
+                            style="height: 35px"
+                            class="form-control"
+                            mat-stroked-button>
+                            <mat-icon>done</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
 
-              <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-            </mat-table>
-          </div>
-        </p-fieldset>
+                  @if (object?.paramsList?.length > 0) {
+                    <div class="example-container mat-elevation-z8 mb-1">
+                      <mat-table #table="matTable" [dataSource]="object.paramsList">
+                        <ng-container matColumnDef="nameParam">
+                          <mat-header-cell *matHeaderCellDef>Nome Parâmetro</mat-header-cell>
+                          <mat-cell *matCellDef="let param"> {{param.nameParam}} </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="aliasParam">
+                          <mat-header-cell *matHeaderCellDef>Alias Parâmetro</mat-header-cell>
+                          <mat-cell *matCellDef="let param"> {{param.aliasParam}} </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="tipoParam">
+                          <mat-header-cell *matHeaderCellDef>Tipo Parâmetro</mat-header-cell>
+                          <mat-cell *matCellDef="let param">
+                            @if (param.tipoParam === 'S') {
+                              <span>String</span>
+                            }
+                            @if (param.tipoParam === 'N') {
+                              <span>Number</span>
+                            }
+                            @if (param.tipoParam === 'D') {
+                              <span>Date</span>
+                            }
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="actionsForm">
+                          <mat-header-cell *matHeaderCellDef> Opções</mat-header-cell>
+                          <mat-cell *matCellDef="let param">
+                            <button class="btn btn-outline-primary rounded"
+                              type="button"
+                              (click)="removeParam(param.nomeParam)"
+                              pTooltip="Remover">
+                              <i class="fa fa-trash-o"></i>
+                            </button>
+                          </mat-cell>
+                        </ng-container>
+                        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                      </mat-table>
+                    </div>
+                  }
+                </p-fieldset>
 
-        <div class="row mt-3">
-          <div class="col-md-12 d-flex justify-content-end">
-            <app-cancelar (onClick)="back()"></app-cancelar>
-            <app-salvar [typeButton]="'submit'"></app-salvar>
-          </div>
+                <div class="row mt-3">
+                  <div class="col-md-12 d-flex justify-content-end">
+                    <app-cancelar (onClick)="back()"></app-cancelar>
+                    <app-salvar [typeButton]="'submit'"></app-salvar>
+                  </div>
+                </div>
+              </form>
+            </mat-card-content>
+          </mat-card>
         </div>
-      </form>
-    </mat-card-content>
-  </mat-card>
-</div>
 
 

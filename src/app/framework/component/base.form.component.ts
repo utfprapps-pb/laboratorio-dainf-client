@@ -17,11 +17,11 @@ export abstract class BaseFormComponent {
       (form.controls[eachControl] as FormControl).updateValueAndValidity();
     }
     setTimeout(() => {
-      const erro = $('p-tabview .ng-invalid:eq(0)');
+      const erro = $('p-tabs .ng-invalid:eq(0)');
       if (erro.length > 0) {
-        const $tabView = erro.closest('p-tabview');
-        const $tabPanel = erro.closest('p-tabpanel');
-        const index = $tabPanel.parent().find('p-tabpanel').index($tabPanel);
+        const $tabView = erro.closest('p-tabs');
+        const $tabPanel = erro.closest('p-tab');
+        const index = $tabPanel.parent().find('p-tab').index($tabPanel);
         $tabView.find('.ui-tabview-nav li').eq(index).click();
       }
     }, 0);

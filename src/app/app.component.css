@@ -1,9 +1,9 @@
+/* Convertido para usar classes Tailwind quando possível */
 .only-login {
-  width: 100% !important;
-  height: 100vh !important;
-  background-image: url('src/assets/background.png');
+  @apply w-full h-screen;
+  background-image: url('../assets/background.png');
 }
 
-.content {
-  width: calc(100% - 250px)
-}
+/* Removido cálculo fixo; layout agora usa flex */
+
+.sidenav-transition { transition: width .25s ease, transform .25s ease; }

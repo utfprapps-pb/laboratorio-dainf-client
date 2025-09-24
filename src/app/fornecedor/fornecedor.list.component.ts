@@ -4,9 +4,10 @@ import {Fornecedor} from './fornecedor';
 import {FornecedorService} from './fornecedor.service';
 
 @Component({
-  selector: 'app-list-fornecedor',
-  templateUrl: './fornecedor.list.component.html',
-  styleUrls: ['./fornecedor.list.component.css']
+    selector: 'app-list-fornecedor',
+    templateUrl: './fornecedor.list.component.html',
+    styleUrls: ['./fornecedor.list.component.css'],
+    standalone: false
 })
 export class FornecedorListComponent extends CrudListComponent<Fornecedor, number> {
 

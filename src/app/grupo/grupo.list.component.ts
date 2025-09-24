@@ -4,9 +4,10 @@ import {GrupoService} from './grupo.service';
 import {CrudListComponent} from '../framework/component/crud.list.component';
 
 @Component({
-  selector: 'app-list-grupo',
-  templateUrl: './grupo.list.component.html',
-  styleUrls: ['./grupo.list.component.css']
+    selector: 'app-list-grupo',
+    templateUrl: './grupo.list.component.html',
+    styleUrls: ['./grupo.list.component.css'],
+    standalone: false
 })
 export class GrupoListComponent extends CrudListComponent<Grupo, number> {
 

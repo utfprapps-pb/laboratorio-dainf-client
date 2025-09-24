@@ -12,9 +12,10 @@ import Swal from 'sweetalert2';
 import {ItemImage} from './itemImage';
 
 @Component({
-  selector: 'app-form-item',
-  templateUrl: './item.form.component.html',
-  styleUrls: ['./item.form.component.css']
+    selector: 'app-form-item',
+    templateUrl: './item.form.component.html',
+    styleUrls: ['./item.form.component.css'],
+    standalone: false
 })
 export class ItemFormComponent extends CrudFormComponent<Item, number> {
 

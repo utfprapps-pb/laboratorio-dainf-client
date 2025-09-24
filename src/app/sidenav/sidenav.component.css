@@ -10,7 +10,7 @@ mat-sidenav {
   width: 260px !important;
 }
 
-mat-drawer-container {  
+mat-drawer-container {
   background-color: transparent;
 }
 
@@ -19,7 +19,6 @@ mat-drawer-container {
 }
 
 .color-icons {
-  /*color: #222d43;*/
   color: white;
 }
 

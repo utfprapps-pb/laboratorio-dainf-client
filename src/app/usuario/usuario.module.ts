@@ -3,11 +3,13 @@ import {UsuarioFormComponent} from './usuario.form.component';
 import {UsuarioListComponent} from './usuario.list.component';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {DialogModule} from 'primeng/dialog';
-import {DropdownModule} from 'primeng/dropdown';
-import {InputTextModule} from 'primeng/inputtext';
-import {MultiSelectModule} from 'primeng/multiselect';
-import {TooltipModule} from 'primeng/tooltip';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { FileUploadModule } from 'primeng/fileupload';
+import { CarouselModule } from 'primeng/carousel';
+import { DialogModule } from 'primeng/dialog';
+import { TooltipModule } from 'primeng/tooltip';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 import {UsuarioService} from './usuario.service';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -26,6 +28,8 @@ import {MatSortModule} from '@angular/material/sort';
 import {EmailValidatorModule} from '../framework/validator/email/email.validator.module';
 import {TelefoneFormatModule} from '../framework/directives/telefone/telefone.format.module';
 import { UsuarioEditComponent } from './usuario.edit.component';
+import {MultiSelectModule} from "primeng/multiselect";
+import {SelectModule} from "primeng/select";
 
 @NgModule({
     imports: [
@@ -41,9 +45,14 @@ import { UsuarioEditComponent } from './usuario.edit.component';
         MatSortModule,
         InputTextModule,
         TooltipModule,
-        DropdownModule,
+        SelectModule,
         DialogModule,
         ValidationModule,
+        AutoCompleteModule,
+        FileUploadModule,
+        CarouselModule,
+        ButtonModule,
+        InputTextModule,
         VoltarModule,
         CancelarModule,
         SalvarModule,

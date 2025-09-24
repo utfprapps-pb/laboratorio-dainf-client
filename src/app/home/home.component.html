@@ -1,163 +1,135 @@
-<div class="container-fluid my-3" id="container-dashboard-aluno" style="display: none">
-  <h1>Bem vindo!</h1>
-</div>
-<div class="container-fluid my-3" id="container-dashboard" style="display: none">
-
-  <div class="row m-0">
-    <div class="col-md-12 container-info mat-elevation-z5">
-      <div class="w-100 d-flex justify-content-center align-items-center">
-        <span class="font-weight-bolder text-center mr-2 font-size-18px">Dados dos dias {{this.getDateIni()}}
-          a {{this.getDateFim()}}</span>
-        <button type="button"
-                pTooltip="Filtrar"
-                (click)="dialodFiltroData = true"
-                class="btn">
-          <i class="fa fa-filter font-size-18px"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <div class="row m-0">
-    <div class="d-flex w-100 justify-content-between container-body">
-      <div class="col-md-3 p-0 container-card mat-elevation-z5 border-secondary">
-        <div class="d-flex flex-row text-center body-card">
-          <i class="fa fa-5x fa-handshake-o text-secondary" style="width: 30%"></i>
-          <div style="width: 70%">
-            <h6>Total de Empréstimos</h6>
-            <p class="content-card text-secondary">{{dashEmprestimoCount?.total}}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 p-0 container-card mat-elevation-z5 border-primary">
-        <div class="d-flex flex-row text-center body-card">
-          <i class="fa fa-5x fa-ellipsis-h text-primary" style="width: 30%"></i>
-          <div style="width: 70%">
-            <h6>Empréstimos em Andamento</h6>
-            <p class="content-card text-primary">{{dashEmprestimoCount?.emAndamento}}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 p-0 container-card mat-elevation-z5 border-danger">
-        <div class="d-flex flex-row text-center body-card">
-          <i class="fa fa-5x fa-calendar-times-o text-danger" style="width: 30%"></i>
-          <div style="width: 70%">
-            <h6>Empréstimos em Atraso</h6>
-            <p class="content-card text-danger">{{dashEmprestimoCount?.emAtraso}}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 p-0 container-card mat-elevation-z5 border-success">
-        <div class="d-flex flex-row text-center body-card">
-          <i class="fa fa-5x fa-check text-success" style="width: 30%"></i>
-          <div style="width: 70%">
-            <h6>Empréstimos Finalizados</h6>
-            <p class="content-card text-success">{{dashEmprestimoCount?.finalizado}}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <br>
-
-  <div class="row m-0">
-    <div class="col-md-12 mat-elevation-z5 container-charts">
-      <h6 class="font-weight-bolder text-center">Total de Empréstimos Realizados por Dia</h6>
-      <div class="chartdiv2" style="height: 450px"></div>
-    </div>
-  </div>
-
-  <br>
-
-  <div class="row m-0">
-    <div class="col-md-12 mat-elevation-z5 container-charts">
-      <h6 class="font-weight-bolder text-center">Top 10 | Itens Emprestados</h6>
-      <div class="chartdiv4" style="height: 450px"></div>
-    </div>
-  </div>
-
-  <br>
-
-  <div class="row m-0 d-flex justify-content-between container-body">
-    <div class="col-md-6 mat-elevation-z5 container-charts container-chart-col-6">
-      <h6 class="font-weight-bolder text-center">Top 10 | Itens Adquiridos</h6>
-      <div class="chartdivPie1" style="height: 450px"></div>
-    </div>
-
-    <div class="col-md-6 mat-elevation-z5 container-charts container-chart-col-6">
-      <h6 class="font-weight-bolder text-center">Top 10 | Itens com Saídas</h6>
-      <div class="chartdivPie2" style="height: 450px"></div>
-    </div>
-  </div>
-
-
+<div class="p-3" id="container-dashboard-aluno" *ngIf="showDashboardAluno">
+  <h1 class="text-xl font-semibold">Bem vindo!</h1>
 </div>
 
+<div class="p-3 space-y-6" id="container-dashboard" *ngIf="!showDashboardAluno">
+
+  <p-panel class="mb-3">
+    <div class="flex justify-center items-center gap-2">
+      <span class="font-bold text-center text-base md:text-lg">Dados dos dias {{ getDateIni() }} a {{ getDateFim() }}</span>
+      <p-button
+        icon="pi pi-filter"
+        variant="text"
+        pTooltip="Filtrar"
+        (onClick)="dialodFiltroData = true">
+      </p-button>
+    </div>
+  </p-panel>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <app-stat-card
+      title="Total de Empréstimos"
+      [value]="dashEmprestimoCount?.total"
+      icon="sync"
+      iconLibrary="pi"
+      accentColor="#3B82F6">
+    </app-stat-card>
+
+    <app-stat-card
+      title="Empréstimos em Andamento"
+      [value]="dashEmprestimoCount?.emAndamento"
+      icon="clock"
+      iconLibrary="pi"
+      accentColor="#F97316">
+    </app-stat-card>
+
+    <app-stat-card
+      title="Empréstimos em Atraso"
+      [value]="dashEmprestimoCount?.emAtraso"
+      icon="exclamation-triangle"
+      iconLibrary="pi"
+      accentColor="#EF4444">
+    </app-stat-card>
+
+    <app-stat-card
+      title="Empréstimos Finalizados"
+      [value]="dashEmprestimoCount?.finalizado"
+      icon="check"
+      iconLibrary="pi"
+      accentColor="#22C55E">
+    </app-stat-card>
+  </div>
+
+  <p-panel class="mb-3">
+    <ng-template pTemplate="header">
+      <h6 class="font-bold text-center m-0">Total de Empréstimos Realizados por Dia</h6>
+    </ng-template>
+    <div id="chartdiv2" class="h-[450px]"></div>
+  </p-panel>
+
+  <p-panel class="mb-3">
+    <ng-template pTemplate="header">
+      <h6 class="font-bold text-center m-0">Top 10 | Itens Emprestados</h6>
+    </ng-template>
+    <div id="chartdiv4" class="h-[450px]"></div>
+  </p-panel>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <div>
+      <p-panel>
+        <ng-template pTemplate="header">
+          <h6 class="font-bold text-center m-0">Top 10 | Itens Adquiridos</h6>
+        </ng-template>
+        <div id="chartdivPie1" class="chart-pie"></div>
+      </p-panel>
+    </div>
+
+    <div>
+      <p-panel>
+        <ng-template pTemplate="header">
+          <h6 class="font-bold text-center m-0">Top 10 | Itens com Saídas</h6>
+        </ng-template>
+        <div id="chartdivPie2" class="chart-pie"></div>
+      </p-panel>
+    </div>
+  </div>
+</div>
 
 <p-dialog header="Filtro"
+          class="filtro-dialog"
           [(visible)]="dialodFiltroData"
           [style]="{minWidth: '400px'}"
           [modal]="true"
           [baseZIndex]="10000">
-
-  <form>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="form-group">
-          <label for="dtIni">Data Inicial</label>
-          <p-calendar name="dtIni"
-                      id="dtIni"
-                      appendTo="body"
-                      dataType="string"
-                      dateFormat="dd/mm/yy"
-                      [locale]="localePt"
-                      [(ngModel)]="dtIniFiltro"
-                      [style]="{width: '100%'}"
-                      inputStyleClass="form-control">
-          </p-calendar>
-        </div>
-      </div>
+  <form class="space-y-4">
+    <div>
+      <label for="dtIni" class="block mb-2 font-medium">Data Inicial</label>
+      <p-datePicker name="dtIni"
+                    id="dtIni"
+                    appendTo="body"
+                    dataType="string"
+                    dateFormat="dd/mm/yy"
+                    showIcon="true"
+                    class="w-full filtro-datepicker"
+                    [(ngModel)]="dtIniFiltro">
+      </p-datePicker>
     </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="form-group">
-          <label for="dtFim">Data Final</label>
-          <p-calendar name="dtFim"
-                      id="dtFim"
-                      appendTo="body"
-                      dataType="string"
-                      dateFormat="dd/mm/yy"
-                      [locale]="localePt"
-                      [(ngModel)]="dtFimFiltro"
-                      [style]="{width: '100%'}"
-                      inputStyleClass="form-control">
-          </p-calendar>
-        </div>
-      </div>
+    <div>
+      <label for="dtFim" class="block mb-2 font-medium">Data Final</label>
+      <p-datePicker name="dtFim"
+                    id="dtFim"
+                    appendTo="body"
+                    dataType="string"
+                    dateFormat="dd/mm/yy"
+                    showIcon="true"
+                    class="w-full filtro-datepicker"
+                    [(ngModel)]="dtFimFiltro">
+      </p-datePicker>
     </div>
-    <p-footer>
-      <div class="row">
-        <div class="col-md-12 d-flex justify-content-end">
-          <button type="button"
-                  class="mr-2 text-uppercase"
-                  (click)="dialodFiltroData = false"
-                  mat-raised-button>
-            Cancelar
-          </button>
-          <button type="submit"
-                  color="primary"
-                  class="text-uppercase"
-                  [disabled]="disableBtnFiltrar()"
-                  (click)="filtrar()"
-                  mat-raised-button>
-            Filtrar
-          </button>
-        </div>
-      </div>
-    </p-footer>
   </form>
+
+  <ng-template pTemplate="footer">
+    <div class="flex justify-end gap-2">
+      <p-button
+        label="Cancelar"
+        severity="secondary"
+        (onClick)="dialodFiltroData = false">
+      </p-button>
+      <p-button
+        label="Filtrar"
+        [disabled]="disableBtnFiltrar()"
+        (onClick)="filtrar()">
+      </p-button>
+    </div>
+  </ng-template>
 </p-dialog>

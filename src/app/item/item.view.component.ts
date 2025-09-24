@@ -11,9 +11,10 @@ import { environment } from 'src/environments/environment';
 import { LoginService } from '../login/login.service';
 
 @Component({
-  selector: 'app-view-item',
-  templateUrl: './item.view.component.html',
-  styleUrls: ['./item.view.component.css']
+    selector: 'app-view-item',
+    templateUrl: './item.view.component.html',
+    styleUrls: ['./item.view.component.css'],
+    standalone: false
 })
 export class ItemViewComponent implements OnInit {
   isAlunoOrProfessor = false;

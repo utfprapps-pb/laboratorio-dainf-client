@@ -6,9 +6,10 @@ import {SaidaItem} from './saidaItem';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-list-saida',
-  templateUrl: './saida.list.component.html',
-  styleUrls: ['./saida.list.component.css']
+    selector: 'app-list-saida',
+    templateUrl: './saida.list.component.html',
+    styleUrls: ['./saida.list.component.css'],
+    standalone: false
 })
 export class SaidaListComponent extends CrudListComponent<Saida, number> {
 

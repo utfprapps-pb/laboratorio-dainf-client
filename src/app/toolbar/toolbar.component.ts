@@ -7,9 +7,10 @@ import { Router } from "@angular/router";
 import { Usuario } from "../usuario/usuario";
 
 @Component({
-  selector: "app-toolbar",
-  templateUrl: "./toolbar.component.html",
-  styleUrls: ["./toolbar.component.css"],
+    selector: "app-toolbar",
+    templateUrl: "./toolbar.component.html",
+    styleUrls: ["./toolbar.component.css"],
+    standalone: false
 })
 export class ToolbarComponent implements OnInit {
   widthScreen: number;

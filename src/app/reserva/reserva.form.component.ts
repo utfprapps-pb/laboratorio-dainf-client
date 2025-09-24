@@ -16,9 +16,10 @@ import { environment } from "src/environments/environment";
 import Swal from "sweetalert2";
 
 @Component({
-  selector: "app-form-reserva",
-  templateUrl: "./reserva.form.component.html",
-  styleUrls: ["./reserva.form.component.css"],
+    selector: "app-form-reserva",
+    templateUrl: "./reserva.form.component.html",
+    styleUrls: ["./reserva.form.component.css"],
+    standalone: false
 })
 export class ReservaFormComponent extends CrudFormComponent<Reserva, number> {
   @ViewChild("table") table: MatTable<any>;

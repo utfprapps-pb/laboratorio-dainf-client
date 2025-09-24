@@ -4,9 +4,10 @@ import {Relatorio} from './relatorio';
 import {RelatorioService} from './relatorio.service';
 
 @Component({
-  selector: 'app-list-relatorio',
-  templateUrl: './relatorio.list.component.html',
-  styleUrls: ['./relatorio.list.component.css']
+    selector: 'app-list-relatorio',
+    templateUrl: './relatorio.list.component.html',
+    styleUrls: ['./relatorio.list.component.css'],
+    standalone: false
 })
 export class RelatorioListComponent extends CrudListComponent<Relatorio, number> {
 

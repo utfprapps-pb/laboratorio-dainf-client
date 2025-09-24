@@ -5,9 +5,10 @@ import {CrudListComponent} from '../framework/component/crud.list.component';
 import {Permissao} from './permissao';
 
 @Component({
-  selector: 'app-list-usuario',
-  templateUrl: './usuario.list.component.html',
-  styleUrls: ['./usuario.list.component.css']
+    selector: 'app-list-usuario',
+    templateUrl: './usuario.list.component.html',
+    styleUrls: ['./usuario.list.component.css'],
+    standalone: false
 })
 export class UsuarioListComponent extends CrudListComponent<Usuario, number> {
 

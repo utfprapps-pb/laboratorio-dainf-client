@@ -4,9 +4,7 @@ import { FormsModule } from "@angular/forms";
 import { AutoCompleteModule } from "primeng/autocomplete";
 import { CarouselModule } from "primeng/carousel";
 import { DialogModule } from "primeng/dialog";
-import { DropdownModule } from "primeng/dropdown";
 import { FileUploadModule } from "primeng/fileupload";
-import { InputTextareaModule } from "primeng/inputtextarea";
 import { InputTextModule } from "primeng/inputtext";
 import { TooltipModule } from "primeng/tooltip";
 import { ItemFormComponent } from "./item.form.component";
@@ -35,6 +33,7 @@ import { ItemViewComponent } from "./item.view.component";
 import { CardModule } from "primeng/card";
 import { DataViewModule } from 'primeng/dataview';
 import { TagModule } from 'primeng/tag';
+import {SelectModule} from "primeng/select";
 
 @NgModule({
   imports: [
@@ -51,7 +50,7 @@ import { TagModule } from 'primeng/tag';
     InputTextModule,
     TooltipModule,
     AutoCompleteModule,
-    DropdownModule,
+    SelectModule,
     ValidationModule,
     VoltarModule,
     CancelarModule,
@@ -65,7 +64,6 @@ import { TagModule } from 'primeng/tag';
     BottomSheetItemModule,
     FileUploadModule,
     CarouselModule,
-    InputTextareaModule,
     CardModule,
     TagModule,
     DataViewModule

@@ -7,9 +7,10 @@ import { SelectItem } from "primeng/api";
 import Swal from "sweetalert2";
 
 @Component({
-  selector: "app-edit-usuario",
-  templateUrl: "./usuario.edit.component.html",
-  styleUrls: ["./usuario.edit.component.css"],
+    selector: "app-edit-usuario",
+    templateUrl: "./usuario.edit.component.html",
+    styleUrls: ["./usuario.edit.component.css"],
+    standalone: false
 })
 export class UsuarioEditComponent extends CrudFormComponent<Usuario, number> {
   @ViewChild("form", { static: true }) frm: NgForm;

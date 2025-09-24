@@ -3,9 +3,10 @@ import {MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {LoginService} from '../../login/login.service';
 
 @Component({
-  selector: 'app-bottom-sheet-emprestimo',
-  templateUrl: './bottomSheet.component.html',
-  styleUrls: ['./bottomSheetEmprestimo.component.css']
+    selector: 'app-bottom-sheet-emprestimo',
+    templateUrl: './bottomSheet.component.html',
+    styleUrls: ['./bottomSheetEmprestimo.component.css'],
+    standalone: false
 })
 export class BottomSheetEmprestimoComponent {
 

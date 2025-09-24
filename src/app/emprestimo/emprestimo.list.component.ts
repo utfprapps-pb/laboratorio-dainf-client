@@ -4,7 +4,6 @@ import {Emprestimo} from './emprestimo';
 import {EmprestimoService} from './emprestimo.service';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {BottomSheetEmprestimoComponent} from './bottomScheetEmprestimo/bottomSheetEmprestimo.component';
-import {Calendar} from 'primeng/calendar';
 import {SelectItem} from 'primeng/api';
 import {DateUtil} from '../framework/util/dateUtil';
 import {pt} from '../framework/constantes/calendarPt';
@@ -12,15 +11,17 @@ import {EmprestimoFilter} from './emprestimo.filter';
 import {Usuario} from '../usuario/usuario';
 import {UsuarioService} from '../usuario/usuario.service';
 import Swal from 'sweetalert2';
+import {DatePicker} from "primeng/datepicker";
 
 @Component({
-  selector: 'app-list-emprestimo',
-  templateUrl: './emprestimo.list.component.html',
-  styleUrls: ['./emprestimo.list.component.css']
+    selector: 'app-list-emprestimo',
+    templateUrl: './emprestimo.list.component.html',
+    styleUrls: ['./emprestimo.list.component.css'],
+    standalone: false
 })
 export class EmprestimoListComponent extends CrudListComponent<Emprestimo, number> {
 
-  @ViewChild('novaData') novaData: Calendar;
+  @ViewChild('novaData') novaData: DatePicker;
   dialogFiltroEmprestimo = false;
   emprestimoFilter: EmprestimoFilter;
   statusDropdown: SelectItem[];

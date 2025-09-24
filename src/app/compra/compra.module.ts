@@ -5,7 +5,6 @@ import {CompraFormComponent} from './compra.form.component';
 import {CompraListComponent} from './compra.list.component';
 import {FormsModule} from '@angular/forms';
 import {AutoCompleteModule} from 'primeng/autocomplete';
-import {CalendarModule} from 'primeng/calendar';
 import {InputTextModule} from 'primeng/inputtext';
 import {TooltipModule} from 'primeng/tooltip';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -24,6 +23,7 @@ import {SalvarModule} from '../geral/salvar/salvar.module';
 import {CadastroRapidoModule} from '../geral/cadastroRapido/cadastroRapido.module';
 import {OnlyNumberModule} from '../framework/directives/onlyNumber/onlyNumber.module';
 import {MatSortModule} from '@angular/material/sort';
+import {DatePickerModule} from "primeng/datepicker";
 
 @NgModule({
   imports: [
@@ -40,7 +40,7 @@ import {MatSortModule} from '@angular/material/sort';
     InputTextModule,
     TooltipModule,
     AutoCompleteModule,
-    CalendarModule,
+    DatePickerModule,
     ValidationModule,
     NovoModule,
     VoltarModule,

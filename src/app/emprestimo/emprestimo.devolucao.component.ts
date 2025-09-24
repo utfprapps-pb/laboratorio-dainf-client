@@ -10,9 +10,10 @@ import {EmprestimoDevolucaoItem, StatusDevolucao} from './emprestimoDevolucaoIte
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-devolucao-emprestimo',
-  templateUrl: './emprestimo.devolucao.component.html',
-  styleUrls: ['./emprestimo.devolucao.component.css']
+    selector: 'app-devolucao-emprestimo',
+    templateUrl: './emprestimo.devolucao.component.html',
+    styleUrls: ['./emprestimo.devolucao.component.css'],
+    standalone: false
 })
 export class EmprestimoDevolucaoComponent extends CrudFormComponent<Emprestimo, number> {
 

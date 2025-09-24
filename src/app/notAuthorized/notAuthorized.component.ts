@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'app-notAuthorized',
-  templateUrl: './notAuthorized.component.html',
-  styleUrls: ['./notAuthorized.component.css']
+    selector: 'app-notAuthorized',
+    templateUrl: './notAuthorized.component.html',
+    styleUrls: ['./notAuthorized.component.css'],
+    standalone: false
 })
 export class NotAuthorizedComponent {
 

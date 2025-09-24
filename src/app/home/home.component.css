@@ -1,55 +1,98 @@
-.container-card {
-  max-width: 24%;
-  border-top: 4px solid;
+/* Estilos para os cards do dashboard */
+.dashboard-card {
   background-color: #FFFFFF;
   border-radius: 5px;
+  box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+  margin-bottom: 1rem;
 }
 
-.body-card {
-  margin: 10px 0 10px 0;
-  border-right: 1px solid #EEEEEE;
+.border-left-blue {
+  border-left: 4px solid #3B82F6;
 }
 
-.content-card {
-  font-size: 36px;
-  font-weight: bolder;
+.border-left-orange {
+  border-left: 4px solid #F97316;
 }
 
-.container-info {
-  height: 50px;
-  background-color: #FFFFFF;
+.border-left-red {
+  border-left: 4px solid #EF4444;
+}
+
+.border-left-green {
+  border-left: 4px solid #22C55E;
+}
+
+.card-content {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 25px;
-  border-radius: 5px;
+  padding: 1rem;
 }
 
-.font-size-18px {
-  font-size: 18px;
+.card-icon {
+  font-size: 3rem;
+  width: 30%;
+  text-align: center;
+  margin-right: 1rem;
 }
 
-.container-charts {
-  padding: 20px 0 5px 0;
-  background-color: #FFFFFF;
-  border-radius: 5px;
+.card-text {
+  width: 70%;
+  text-align: center;
 }
 
-.container-chart-col-6 {
-  flex: 0 0 49% !important;
+.card-text h6 {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #495057;
 }
 
-@media (max-width: 950px) {
-  .container-body {
-    flex-direction: column;
-  }
+.card-number {
+  margin: 0;
+  font-size: 2.25rem;
+  font-weight: bold;
+  line-height: 1.2;
+}
 
-  .container-chart-col-6 {
-    max-width: 100%;
-  }
+/* Estilos específicos para gráficos AmCharts (IDs) */
+#chartdiv2,
+#chartdiv4 {
+  width: 100%;
+  height: clamp(320px, 55vh, 450px);
+  background: #FFFFFF !important;
+}
 
-  .container-card {
-    max-width: 100%;
+/* Opção A: Altura dos gráficos de pizza totalmente controlada via TypeScript */
+.chart-pie {
+  width: 100%;
+  background: #FFFFFF !important;
+  position: relative; /* garante posicionamento correto de labels fallback */
+  height: clamp(320px, 65vh, 600px); /* altura fixa solicitada */
+}
 
-  }
+/* Removidos: aspect-ratio, min-height, max-height e media queries que alteravam .chart-pie */
+
+@media (max-width: 768px) {
+  .card-icon { font-size: 2.5rem; }
+  .card-number { font-size: 1.875rem; }
+  #chartdiv2,
+  #chartdiv4 { height: clamp(280px, 45vh, 350px); }
+  /* Nenhuma regra de altura fixa para .chart-pie aqui para não conflitar com dimensionamento dinâmico */
+}
+
+/* Estilos para o diálogo de filtro */
+.filtro-dialog .p-dialog-content {
+  background: #FFFFFF !important;
+  padding: 1.25rem !important;
+}
+
+.filtro-dialog .p-dialog-header {
+  background: #F1F5F9 !important;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.filtro-dialog .p-dialog-footer {
+  background: #F8FAFC !important;
+  border-top: 1px solid #E2E8F0;
+  padding: 0.75rem 1.25rem !important;
 }

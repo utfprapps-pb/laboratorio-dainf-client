@@ -1,0 +1,7 @@
+<div class="stat-card" [class.clickable]="clickable" [ngStyle]="gradientStyle" (click)="onClick()" (keydown)="onKeyDown($event)" [attr.role]="clickable ? 'button' : null" [attr.tabindex]="clickable ? '0' : null" [attr.aria-pressed]="clickable ? 'false' : null">
+  <i aria-hidden="true" [ngClass]="iconClasses" class="background-icon" [ngStyle]="{'color': accentColor}"></i>
+  <div class="stat-card-content">
+    <h6 class="stat-card-title">{{ title }}</h6>
+    <p class="stat-card-number" [ngStyle]="{'color': accentColor}">{{ safeValue }}</p>
+  </div>
+</div>

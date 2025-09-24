@@ -12,9 +12,10 @@ import {
 import { SocialUser } from "@abacritt/angularx-social-login";
 import { TokenDto } from "./token-dto";
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.css"],
+    selector: "app-login",
+    templateUrl: "./login.component.html",
+    styleUrls: ["./login.component.css"],
+    standalone: false
 })
 export class LoginComponent implements OnInit {
   usuario: Usuario;

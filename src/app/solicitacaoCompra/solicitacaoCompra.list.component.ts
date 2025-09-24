@@ -4,9 +4,10 @@ import {SolicitacaoCompra} from './solicitacaoCompra';
 import {SolicitacaoCompraService} from './solicitacaoCompra.service';
 
 @Component({
-  selector: 'app-list-solicitacao-compra',
-  templateUrl: './solicitacaoCompra.list.component.html',
-  styleUrls: ['./solicitacaoCompra.list.component.css']
+    selector: 'app-list-solicitacao-compra',
+    templateUrl: './solicitacaoCompra.list.component.html',
+    styleUrls: ['./solicitacaoCompra.list.component.css'],
+    standalone: false
 })
 export class SolicitacaoCompraListComponent extends CrudListComponent<SolicitacaoCompra, number> {
 

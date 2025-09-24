@@ -4,9 +4,10 @@ import {Cidade} from './cidade';
 import {CrudListComponent} from '../framework/component/crud.list.component';
 
 @Component({
-  selector: 'app-list-cidade',
-  templateUrl: './cidade.list.component.html',
-  styleUrls: ['./cidade.list.component.css']
+    selector: 'app-list-cidade',
+    templateUrl: './cidade.list.component.html',
+    styleUrls: ['./cidade.list.component.css'],
+    standalone: false
 })
 export class CidadeListComponent extends CrudListComponent<Cidade, number> {
 

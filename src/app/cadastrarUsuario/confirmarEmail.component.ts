@@ -6,9 +6,10 @@ import { CadastrarUsuarioService } from "./cadastrarUsuario.service";
 import { EmailConfirmacao } from "./emailConfirmacao";
 
 @Component({
-  selector: "app-confirmarvalidar-email",
-  templateUrl: "./confirmarEmail.component.html",
-  styleUrls: ["./confirmarEmail.component.css"],
+    selector: "app-confirmarvalidar-email",
+    templateUrl: "./confirmarEmail.component.html",
+    styleUrls: ["./confirmarEmail.component.css"],
+    standalone: false
 })
 export class ConfirmarEmailComponent implements OnInit {
   emailConfirmacao: EmailConfirmacao;

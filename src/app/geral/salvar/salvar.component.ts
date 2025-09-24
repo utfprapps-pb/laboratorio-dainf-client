@@ -1,9 +1,10 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
-  selector: 'app-salvar',
-  templateUrl: './salvar.component.html',
-  styleUrls: ['./salvar.component.css']
+    selector: 'app-salvar',
+    templateUrl: './salvar.component.html',
+    styleUrls: ['./salvar.component.css'],
+    standalone: false
 })
 export class SalvarComponent {
 

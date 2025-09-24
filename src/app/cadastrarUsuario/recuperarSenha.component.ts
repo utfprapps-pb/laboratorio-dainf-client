@@ -7,9 +7,10 @@ import { EmailConfirmacao } from "./emailConfirmacao";
 import { RecuperarSenha } from "./recuperarSenha";
 
 @Component({
-  selector: "app-recuperar-senha",
-  templateUrl: "./recuperarSenha.component.html",
-  styleUrls: ["./recuperarSenha.component.css"],
+    selector: "app-recuperar-senha",
+    templateUrl: "./recuperarSenha.component.html",
+    styleUrls: ["./recuperarSenha.component.css"],
+    standalone: false
 })
 export class RecuperarSenhaComponent implements OnInit {
   emailConfirmacao: EmailConfirmacao = new EmailConfirmacao();

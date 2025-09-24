@@ -4,9 +4,10 @@ import {PaisService} from './pais.service';
 import {CrudListComponent} from '../framework/component/crud.list.component';
 
 @Component({
-  selector: 'app-list-pais',
-  templateUrl: './pais.list.component.html',
-  styleUrls: ['./pais.list.component.css']
+    selector: 'app-list-pais',
+    templateUrl: './pais.list.component.html',
+    styleUrls: ['./pais.list.component.css'],
+    standalone: false
 })
 export class PaisListComponent extends CrudListComponent<Pais, number> {
 

@@ -6,9 +6,10 @@ import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {BottomSheetReservaComponent} from './bottomScheetReserva/bottomSheetReserva.component';
 
 @Component({
-  selector: 'app-list-reserva',
-  templateUrl: './reserva.list.component.html',
-  styleUrls: ['./reserva.list.component.css']
+    selector: 'app-list-reserva',
+    templateUrl: './reserva.list.component.html',
+    styleUrls: ['./reserva.list.component.css'],
+    standalone: false
 })
 export class ReservaListComponent extends CrudListComponent<Reserva, number> {
 

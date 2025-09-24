@@ -7,7 +7,6 @@ import {MatInputModule} from '@angular/material/input';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {VoltarModule} from '../geral/voltar/voltar.module';
-import {CalendarModule} from 'primeng/calendar';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {InputTextModule} from 'primeng/inputtext';
 import {CadastroRapidoModule} from '../geral/cadastroRapido/cadastroRapido.module';
@@ -20,6 +19,7 @@ import {SolicitacaoCompraListComponent} from './solicitacaoCompra.list.component
 import {ValidationService} from '../framework/validation/validation.service';
 import {SolicitacaoCompraService} from './solicitacaoCompra.service';
 import {MatSortModule} from '@angular/material/sort';
+import {DatePickerModule} from "primeng/datepicker";
 
 @NgModule({
   imports: [
@@ -32,7 +32,7 @@ import {MatSortModule} from '@angular/material/sort';
     MatSortModule,
     MatPaginatorModule,
     VoltarModule,
-    CalendarModule,
+    DatePickerModule,
     CadastroRapidoModule,
     AutoCompleteModule,
     MatIconModule,

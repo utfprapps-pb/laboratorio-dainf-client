@@ -1,38 +1,28 @@
-<section>
-  <div class="row" style="min-height: 100vh">
-
-      <div *ngIf="isAuthenticated" class="col-12">
-        <app-toolbar></app-toolbar>
-      </div>
-
-    <div
-      *ngIf="isAuthenticated"
-      class="col-2"
-      style="width: 250px; height: 100%; min-height: 100%"
-      id="sidenav"
-    >
+<section *ngIf="isAuthenticated; else publicLayout" class="layout-auth">
+  <app-toolbar></app-toolbar>
+  <div class="flex flex-row h-[calc(100vh-40px)] w-full overflow-hidden">
+    <aside id="sidenav" class="w-64 shrink-0 h-full overflow-y-auto border-r border-slate-200 bg-white">
       <app-sidenav></app-sidenav>
-    </div>
-    <div
-      class="col-10"
-      [ngClass]="isAuthenticated ? 'content row' : 'only-login'"
-      id="content"
-    >
-      <p-scrollPanel
-        [style]="{ width: '100%', height: 'calc(100vh - 40px)', verticalAlign: 'top' }"
-        styleClass="scrool-table-dash"
-      >
-        <router-outlet></router-outlet>
-        <app-loader></app-loader>
-      </p-scrollPanel>
-    </div>
+    </aside>
+    <main id="content" class="flex-1 h-full overflow-y-auto px-4 pb-6 pt-4 bg-slate-50">
+      <router-outlet></router-outlet>
+      <app-loader></app-loader>
+    </main>
   </div>
 </section>
+
+<ng-template #publicLayout>
+  <main id="content" class="only-login flex flex-col min-h-screen w-full overflow-y-auto">
+    <router-outlet></router-outlet>
+    <app-loader></app-loader>
+  </main>
+</ng-template>
+
 <p-toast></p-toast>
 <p-confirmDialog
   [closeOnEscape]="true"
   [closable]="true"
   [baseZIndex]="999"
   acceptLabel="Sim"
-  rejectLabel="Não"
-></p-confirmDialog>
+  rejectLabel="Não">
+</p-confirmDialog>

@@ -1,9 +1,10 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
-  selector: 'app-novo',
-  templateUrl: './novo.component.html',
-  styleUrls: ['./novo.component.css']
+    selector: 'app-novo',
+    templateUrl: './novo.component.html',
+    styleUrls: ['./novo.component.css'],
+    standalone: false
 })
 export class NovoComponent {
 

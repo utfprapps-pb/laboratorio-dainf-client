@@ -3,7 +3,9 @@
     <mat-card-title>
       <div class="d-flex align-items-center justify-content-between">
         <h4 class="m-0">Item</h4>
-        <app-novo *ngIf="!isAlunoOrProfessor" (onClick)="openForm()"></app-novo>
+        @if (!isAlunoOrProfessor) {
+          <app-novo (onClick)="openForm()"></app-novo>
+        }
       </div>
     </mat-card-title>
     <mat-card-content>
@@ -23,83 +25,97 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header>Imagem</mat-header-cell>
             <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">
               <img style="width: 100px" class=""
-                   [src]="row.imageItem.length > 0 ? minioUrl + row.imageItem[0].nameImage : ''"
-                   [alt]="">
-            </mat-cell>
-          </ng-container>
+                [src]="row.imageItem.length > 0 ? minioUrl + row.imageItem[0].nameImage : ''"
+                [alt]="">
+              </mat-cell>
+            </ng-container>
 
-          <ng-container matColumnDef="nome">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Descrição</mat-header-cell>
-            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{ row.patrimonio ? row.patrimonio + ' - ' : '' }} {{row.nome}}</mat-cell>
+            <ng-container matColumnDef="nome">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Descrição</mat-header-cell>
+              <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{ row.patrimonio ? row.patrimonio + ' - ' : '' }} {{row.nome}}</mat-cell>
+            </ng-container>
+          <ng-container matColumnDef="grupo">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Grupo</mat-header-cell>
+            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{row.grupo.descricao}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="localizacao">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Localização</mat-header-cell>
             <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{row.localizacao}}</mat-cell>
           </ng-container>
+            <ng-container matColumnDef="saldo">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Saldo</mat-header-cell>
+              <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{row.saldo}}</mat-cell>
+            </ng-container>
 
-          <ng-container matColumnDef="saldo">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Saldo</mat-header-cell>
-            <mat-cell *matCellDef="let row" (click)="openOptions(row.id)">{{row.saldo}}</mat-cell>
-          </ng-container>
+            <ng-container matColumnDef="actions">
+              <mat-header-cell *matHeaderCellDef> Opções </mat-header-cell>
+              <mat-cell *matCellDef="let row">
 
-          <ng-container matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef> Opções </mat-header-cell>
-            <mat-cell *matCellDef="let row">
+                @if (row.id!=1 && !isAlunoOrProfessor) {
+                  <button class="btn btn-outline-secondary rounded mr-2"
+                    type="button"
+                    pTooltip="Editar"
+                    (click)="edit(row.id)">
+                    <i class="fa fa-edit"></i>
+                  </button>
+                }
+                @if (row.id!=1 && !isAlunoOrProfessor) {
+                  <button class="btn btn-outline-primary rounded"
+                    type="button"
+                    pTooltip="Remover"
+                    (click)="delete(row.id)">
+                    <i class="fa fa-trash-o"></i>
+                  </button>
+                }
 
-              <button *ngIf="row.id!=1 && !isAlunoOrProfessor" class="btn btn-outline-secondary rounded mr-2"
-                      type="button"
-                      pTooltip="Editar"
-                      (click)="edit(row.id)">
-                <i class="fa fa-edit"></i>
-              </button>
-              <button *ngIf="row.id!=1 && !isAlunoOrProfessor" class="btn btn-outline-primary rounded"
-                      type="button"
-                      pTooltip="Remover"
-                      (click)="delete(row.id)">
-                <i class="fa fa-trash-o"></i>
-              </button>
+                @if (row.id!=1 && isAlunoOrProfessor) {
+                  <button class="btn btn-outline-secondary rounded mr-2"
+                    type="button"
+                    pTooltip="Visualizar"
+                    (click)="edit(row.id)">
+                    <i class="fa fa-eye"></i>
+                  </button>
+                }
+              </mat-cell>
+            </ng-container>
 
-              <button *ngIf="row.id!=1 && isAlunoOrProfessor" class="btn btn-outline-secondary rounded mr-2"
-                      type="button"
-                      pTooltip="Visualizar"
-                      (click)="edit(row.id)">
-                <i class="fa fa-eye"></i>
-              </button>
-            </mat-cell>
-          </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
 
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        </mat-table>
-
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]"
-                       [pageSize]="10"></mat-paginator>
+        <mat-paginator
+            [length]="totalElements"
+            [pageSize]="pageSize"
+            [pageIndex]="pageIndex"
+            [pageSizeOptions]="[5, 10, 25, 50, 100]"
+            (page)="onPageChange($event)">
+      </mat-paginator>
       </div>
     </mat-card-content>
   </mat-card>
 </div>
 
-<p-dialog header="Reservas do Item"
-          [modal]="true"
-          [(visible)]="dialogReservaitem"
-          [style]="{minWidth: '650px'}"
-          [baseZIndex]="10000">
+  <p-dialog header="Reservas do Item"
+    [modal]="true"
+    [(visible)]="dialogReservaitem"
+    [style]="{minWidth: '650px'}"
+    [baseZIndex]="10000">
 
-  <div class="example-container mat-elevation-z8">
-    <mat-table id="table-reserva" [dataSource]="reservasItem">
-      <ng-container matColumnDef="dataRetirada">
-        <mat-header-cell *matHeaderCellDef>Reservado para</mat-header-cell>
-        <mat-cell *matCellDef="let reserva"> {{reserva.dataRetirada}}</mat-cell>
-      </ng-container>
+    <div class="example-container mat-elevation-z8">
+      <mat-table id="table-reserva" [dataSource]="reservasItem">
+        <ng-container matColumnDef="dataRetirada">
+          <mat-header-cell *matHeaderCellDef>Reservado para</mat-header-cell>
+          <mat-cell *matCellDef="let reserva"> {{reserva.dataRetirada}}</mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="qtde">
-        <mat-header-cell *matHeaderCellDef>Qtde Reservada</mat-header-cell>
-        <mat-cell *matCellDef="let reserva"> {{reserva.reservaItem[0].qtde}}</mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="qtde">
+          <mat-header-cell *matHeaderCellDef>Qtde Reservada</mat-header-cell>
+          <mat-cell *matCellDef="let reserva"> {{reserva.reservaItem[0].qtde}}</mat-cell>
+        </ng-container>
 
-      <mat-header-row *matHeaderRowDef="displayedColumnsReserva; sticky: true"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumnsReserva;"></mat-row>
-    </mat-table>
-  </div>
-</p-dialog>
+        <mat-header-row *matHeaderRowDef="displayedColumnsReserva; sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumnsReserva;"></mat-row>
+      </mat-table>
+    </div>
+  </p-dialog>

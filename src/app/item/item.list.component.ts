@@ -10,9 +10,10 @@ import { Reserva } from "../reserva/reserva";
 import { environment } from "src/environments/environment";
 
 @Component({
-  selector: "app-list-item",
-  templateUrl: "./item.list.component.html",
-  styleUrls: ["./item.list.component.css"],
+    selector: "app-list-item",
+    templateUrl: "./item.list.component.html",
+    styleUrls: ["./item.list.component.css"],
+    standalone: false
 })
 export class ItemListComponent extends CrudListComponent<Item, number> {
   isAlunoOrProfessor = false;
@@ -30,7 +31,7 @@ export class ItemListComponent extends CrudListComponent<Item, number> {
     super(
       itemService,
       injector,
-      ["id", "imagem", "nome", "localizacao", "saldo", "actions"],
+      ["id", "imagem", "nome", "localizacao", "grupo","saldo", "actions"],
       "item/form"
     );
     this.minioUrl = environment.minio_url;

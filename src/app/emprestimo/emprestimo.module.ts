@@ -9,10 +9,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {AutoCompleteModule} from 'primeng/autocomplete';
-import {CalendarModule} from 'primeng/calendar';
 import {DialogModule} from 'primeng/dialog';
-import {DropdownModule} from 'primeng/dropdown';
-import {InputTextareaModule} from 'primeng/inputtextarea';
 import {InputTextModule} from 'primeng/inputtext';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
 import {TooltipModule} from 'primeng/tooltip';
@@ -34,6 +31,8 @@ import {EmprestimoDevolucaoComponent} from './emprestimo.devolucao.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatMenuModule} from '@angular/material/menu';
 import { CardModule } from 'primeng/card';
+import {DatePickerModule} from "primeng/datepicker";
+import {SelectModule} from "primeng/select";
 
 @NgModule({
   imports: [
@@ -48,11 +47,10 @@ import { CardModule } from 'primeng/card';
     MatSortModule,
     MatButtonModule,
     InputTextModule,
-    InputTextareaModule,
     TooltipModule,
     AutoCompleteModule,
-    CalendarModule,
-    DropdownModule,
+    DatePickerModule,
+    SelectModule,
     ValidationModule,
     NovoModule,
     VoltarModule,
